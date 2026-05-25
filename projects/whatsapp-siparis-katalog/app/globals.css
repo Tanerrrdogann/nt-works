@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background-color: #09090b; /* zinc-950 rengi */
+  color: #f4f4f5; /* zinc-100 rengi */
+}
+
+.catalog-slider-controls {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: 42px auto 42px;
+  align-items: center;
+  overflow: hidden;
+  min-width: 140px;
+  border: 1px solid rgba(220, 38, 38, 0.55);
+  background: rgba(9, 9, 11, 0.82);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(12px);
+}
+
+.catalog-slider-controls button {
+  height: 42px;
+  color: #fff;
+  background: rgba(220, 38, 38, 0.82);
+  border: 0;
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.catalog-slider-controls button:hover {
+  background: #dc2626;
+}
+
+.catalog-slider-controls span {
+  padding: 0 12px;
+  color: #f4f4f5;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-align: center;
+}

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-label="Timeline event preview">
+  <rect width="1200" height="720" fill="#e8efe4"/>
+  <text x="70" y="105" font-family="Avenir Next, Segoe UI, sans-serif" font-size="64" font-weight="800" fill="#17201b">Timeline Events</text>
+  <rect x="70" y="155" width="1060" height="92" rx="46" fill="#ffffff" opacity=".8"/>
+  <rect x="110" y="195" width="980" height="12" rx="6" fill="#d4dfd3"/>
+  <circle cx="220" cy="201" r="24" fill="#17201b"/>
+  <circle cx="505" cy="201" r="24" fill="#1d8f62"/>
+  <circle cx="860" cy="201" r="24" fill="#f7ae4a"/>
+  <rect x="70" y="295" width="620" height="310" rx="28" fill="#ffffff" opacity=".75"/>
+  <rect x="730" y="295" width="400" height="310" rx="28" fill="#17201b"/>
+  <rect x="760" y="330" width="340" height="210" rx="20" fill="#2a3b32"/>
+  <circle cx="930" cy="435" r="52" fill="#1d8f62"/>
+  <rect x="105" y="335" width="530" height="60" rx="18" fill="#f5f1e8"/>
+  <rect x="105" y="415" width="530" height="60" rx="18" fill="#f5f1e8"/>
+  <rect x="105" y="495" width="530" height="60" rx="18" fill="#f5f1e8"/>
+</svg>

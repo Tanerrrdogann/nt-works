@@ -1,0 +1,2 @@
+subjectAltName=DNS:localhost,DNS:host.docker.internal,DNS:api-gateway,DNS:auth-service,IP:127.0.0.1
+extendedKeyUsage=serverAuth,clientAuth

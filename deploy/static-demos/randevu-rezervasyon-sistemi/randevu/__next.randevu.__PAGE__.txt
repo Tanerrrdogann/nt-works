@@ -1,0 +1,6 @@
+1:"$Sreact.fragment"
+2:I[42365,["/randevu-rezervasyon-sistemi/_next/static/chunks/0823ukwcc0vr..js","/randevu-rezervasyon-sistemi/_next/static/chunks/0d3shmwh5_nmn.js","/randevu-rezervasyon-sistemi/_next/static/chunks/10a2ieygfksk9.js"],"default"]
+3:I[97367,["/randevu-rezervasyon-sistemi/_next/static/chunks/0823ukwcc0vr..js","/randevu-rezervasyon-sistemi/_next/static/chunks/0d3shmwh5_nmn.js"],"OutletBoundary"]
+4:"$Sreact.suspense"
+0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"pt-12 pb-24 bg-rose-50/50 min-h-screen","children":["$","div",null,{"className":"container mx-auto px-4 max-w-3xl","children":["$","$L2",null,{}]}]}],[["$","script","script-0",{"src":"/randevu-rezervasyon-sistemi/_next/static/chunks/10a2ieygfksk9.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"KCH6gjz7ffS_t8EaJijMo"}
+5:null

@@ -1,0 +1,21 @@
+export type Product = {
+  id: number;
+  name: string;
+  slug: string;
+  description: string;
+  price: number;
+  oldPrice?: number | null;
+  category: string;
+  categorySlug?: string;
+  imageUrl: string;
+  imageUrls?: string[];
+  stock: number;
+  active: boolean;
+  featured?: boolean;
+  badge?: string;
+  material: string;
+  delivery: string;
+  discountType?: "NONE" | "PERCENT" | "FIXED";
+  discountValue?: number | null;
+  discountMinQuantity?: number;
+};

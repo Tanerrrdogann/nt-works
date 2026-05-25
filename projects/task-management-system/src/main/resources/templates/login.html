@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="tr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Kullanıcı Girişi</title>
+  <link rel="stylesheet" th:href="@{/css/style.css(v='blackwhite-4')}" />
+</head>
+<body>
+<main class="login-page">
+  <section class="login-card">
+    <div class="hero-panel">
+      <div>
+        <p class="eyebrow">Task Management System</p>
+        <h2>Hoş Geldiniz</h2>
+        <p class="login-copy">Demo hesabı hazırdır. Devam Et butonuna basarak uygulamayı test edebilirsiniz.</p>
+      </div>
+    </div>
+
+    <div class="demo-limit-panel">
+      <strong>Demo inceleme modu</strong>
+      <ul>
+        <li>Demo hesabı hazır gelir; kullanıcı bilgileri değiştirilemez.</li>
+        <li>Sadece <strong>Devam Et</strong> butonuna basarak giriş yapılır.</li>
+        <li>Bu demoda e-posta gönderimi kapalıdır.</li>
+      </ul>
+    </div>
+
+    <form class="form-panel" th:action="@{/login}" method="post">
+      <div class="field">
+        <label for="firstName">Ad</label>
+        <input type="text" id="firstName" name="firstName" value="Demo" readonly required>
+      </div>
+      <div class="field">
+        <label for="lastName">Soyad</label>
+        <input type="text" id="lastName" name="lastName" value="Kullanıcı" readonly required>
+      </div>
+      <div class="field">
+        <label for="email">E-posta</label>
+        <input type="email" id="email" name="email" value="demo@ntworks.local" readonly required>
+      </div>
+      <button type="submit">Devam Et</button>
+    </form>
+  </section>
+</main>
+
+<script th:src="@{/js/ntworks-demo-session.js}"></script>
+</body>
+</html>

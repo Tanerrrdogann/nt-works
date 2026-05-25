@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="tr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Yeni Görev Ekle</title>
+  <link rel="stylesheet" th:href="@{/css/style.css(v='blackwhite-4')}">
+</head>
+<body>
+
+<main class="page-shell">
+  <section class="hero-panel form-hero">
+    <div>
+      <p class="eyebrow">Görev Kaydı</p>
+      <h1>Yeni Görev Ekle</h1>
+      <p class="hero-copy">Başlık, açıklama, öncelik ve teslim tarihini net gir; sistem rapor ve takip akışına hazırlar.</p>
+    </div>
+    <div class="hero-actions">
+      <a th:href="@{/tasks}" class="btn">Geri Dön</a>
+    </div>
+  </section>
+
+  <div th:if="${errorMessage}" class="alert alert-danger">
+    <p th:text="${errorMessage}"></p>
+  </div>
+
+  <p class="form-note">Yüksek öncelikli görevler için girişte belirttiğiniz e-posta adresinize hatırlatma gönderilir.</p>
+
+  <form class="form-panel" th:action="@{/tasks}" method="post">
+    <div class="field">
+      <label for="title">Başlık</label>
+      <input type="text" id="title" name="title" required>
+    </div>
+
+    <div class="field">
+      <label for="description">Açıklama</label>
+      <textarea id="description" name="description" rows="3" required></textarea>
+    </div>
+
+    <div class="field">
+      <label for="priorityLevel">Öncelik</label>
+      <select id="priorityLevel" name="priorityLevel" required>
+        <option value="Düşük">Düşük</option>
+        <option value="Orta">Orta</option>
+        <option value="Yüksek">Yüksek</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="dueDate">Teslim Tarihi</label>
+      <input type="datetime-local" id="dueDate" name="dueDate" required>
+    </div>
+
+    <div class="action-bar">
+      <button type="submit">Görev Ekle</button>
+      <a th:href="@{/tasks}" class="btn">Geri Dön</a>
+    </div>
+  </form>
+</main>
+
+<script th:src="@{/js/ntworks-demo-session.js}"></script>
+</body>
+</html>

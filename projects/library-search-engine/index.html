@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/library-search-engine/" />
+    <title>Kütüphane GUI | NT Works</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="content-card">
+        <h1 class="screen-title">Kütüphane Arama Motoru</h1>
+
+        <nav class="topbar" aria-label="Hızlı işlemler">
+          <div class="history-actions">
+            <button class="icon-btn history-btn" id="undoBtn" title="Geri al" aria-label="Geri al">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"/><path d="m11 6-6 6 6 6"/></svg>
+            </button>
+            <button class="icon-btn history-btn" id="redoBtn" title="İleri al" aria-label="İleri al">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+            </button>
+          </div>
+          <button class="reset-btn" id="resetDataBtn" type="button">Örnek veriye dön</button>
+        </nav>
+
+        <section class="search-pill" id="searchPill">
+          <button class="icon-btn" id="modeBtn" title="Mod seç" aria-label="Mod seç">
+            <svg class="gear-icon" viewBox="-2 -2 28 28" aria-hidden="true"><path d="M12 15.5A3.5 3.5 0 1 0 12 8a3.5 3.5 0 0 0 0 7.5Z"/><path d="M19.4 15a1.8 1.8 0 0 0 .36 2l.05.05a2.1 2.1 0 0 1-2.97 2.97l-.05-.05a1.8 1.8 0 0 0-2-.36 1.8 1.8 0 0 0-1.1 1.65V21a2.1 2.1 0 0 1-4.2 0v-.08a1.8 1.8 0 0 0-1.1-1.65 1.8 1.8 0 0 0-2 .36l-.05.05a2.1 2.1 0 0 1-2.97-2.97l.05-.05a1.8 1.8 0 0 0 .36-2A1.8 1.8 0 0 0 2.1 13H2a2.1 2.1 0 0 1 0-4.2h.08a1.8 1.8 0 0 0 1.65-1.1 1.8 1.8 0 0 0-.36-2l-.05-.05a2.1 2.1 0 0 1 2.97-2.97l.05.05a1.8 1.8 0 0 0 2 .36A1.8 1.8 0 0 0 9.5 1.4V1a2.1 2.1 0 0 1 4.2 0v.08a1.8 1.8 0 0 0 1.1 1.65 1.8 1.8 0 0 0 2-.36l.05-.05a2.1 2.1 0 0 1 2.97 2.97l-.05.05a1.8 1.8 0 0 0-.36 2A1.8 1.8 0 0 0 21.1 9H22a2.1 2.1 0 0 1 0 4.2h-.08A1.8 1.8 0 0 0 19.4 15Z"/></svg>
+          </button>
+
+          <div class="autocomplete normal-field" id="normalSearchWrap">
+            <input id="searchInput" type="text" placeholder="Kitap, Yazar, Etiket ara..." autocomplete="off" />
+            <div class="suggestions" id="searchSuggest"></div>
+          </div>
+
+          <div class="autocomplete bfs-field hidden" id="startWrap">
+            <input id="startBookInput" type="text" placeholder="Başlangıç Kitabı" autocomplete="off" />
+            <div class="suggestions" id="startSuggest"></div>
+          </div>
+          <span class="bfs-arrow hidden" id="bfsArrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+          </span>
+          <div class="autocomplete bfs-field hidden" id="targetWrap">
+            <input id="targetBookInput" type="text" placeholder="Hedef Kitap" autocomplete="off" />
+            <div class="suggestions" id="targetSuggest"></div>
+          </div>
+          <select class="round-select hidden" id="bfsCriteria">
+            <option value="author">Yazar</option>
+            <option value="year">Yıl</option>
+            <option value="tag">Etiket</option>
+            <option value="popularity">Puan</option>
+            <option value="title">Başlık</option>
+          </select>
+
+          <button class="filter-btn" id="filterBtn">Filtrele</button>
+          <button class="icon-btn search-btn" id="searchBtn" title="Ara" aria-label="Ara">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
+          </button>
+        </section>
+
+        <section class="book-list" id="bookList" aria-live="polite"></section>
+      </section>
+
+      <button class="fab" id="addBtn" title="Yeni kitap ekle" aria-label="Yeni kitap ekle">+</button>
+    </main>
+
+    <div class="menu-popover hidden" id="modeMenu">
+      <button data-mode="normal">Normal Arama / Listeleme</button>
+      <button data-mode="bfs">BFS (Bağlantı Bulma)</button>
+    </div>
+
+    <aside class="filter-overlay hidden" id="filterOverlay">
+      <button class="overlay-dismiss" id="overlayDismiss" aria-label="Filtreyi kapat"></button>
+      <section class="filter-panel">
+        <header class="filter-header">
+          <div>
+            <p class="filter-kicker">Arama Ayarları</p>
+            <h2>Filtrele</h2>
+          </div>
+          <button class="close-btn" id="filterClose" aria-label="Filtreyi kapat">×</button>
+        </header>
+
+        <form class="filter-form" id="filterForm">
+          <label class="wide-field">Yazar<input id="filterAuthor" type="text" placeholder="Yazar ara..." /></label>
+          <label class="wide-field">Etiket<input id="filterTag" type="text" placeholder="Etiket ara..." /></label>
+          <label>Yıl
+            <span class="split">
+              <input id="filterMinYear" type="number" min="0" max="2030" placeholder="Min" />
+              <input id="filterMaxYear" type="number" min="0" max="2030" placeholder="Max" />
+            </span>
+          </label>
+          <label>Puan
+            <span class="split">
+              <input id="filterMinScore" type="number" min="0" max="10" step="0.1" value="0" />
+              <input id="filterMaxScore" type="number" min="0" max="10" step="0.1" value="10" />
+            </span>
+          </label>
+          <div class="filter-divider">Sıralama motoru</div>
+          <label>Algoritma
+            <select id="filterAlgorithm">
+              <option value="merge"> Merge Sort</option>
+              <option value="quick"> Quick Sort</option>
+            </select>
+          </label>
+          <label>Sıralama
+            <select id="filterSort">
+              <option value="smart"> Akıllı Sıralama</option>
+              <option value="popularity"> Puana Göre</option>
+              <option value="year"> Yıla Göre</option>
+              <option value="author"> Yazara Göre</option>
+              <option value="title"> Başlığa Göre</option>
+            </select>
+          </label>
+          <label>Yön
+            <select id="filterDirection">
+              <option value="desc"> Azalan</option>
+              <option value="asc"> Artan </option>
+            </select>
+          </label>
+        </form>
+
+        <footer class="filter-actions">
+          <button id="applyFilterBtn">UYGULA</button>
+          <button id="resetFilterBtn">SIFIRLA</button>
+        </footer>
+      </section>
+    </aside>
+
+    <dialog class="book-dialog" id="bookDialog">
+      <form method="dialog" id="bookForm">
+        <h2 id="dialogTitle">Yeni Kitap Ekle</h2>
+        <label>Başlık:<input id="bookTitle" type="text" placeholder="Kitap adı giriniz..." /></label>
+        <label>Yazar:<input id="bookAuthor" type="text" placeholder="Yazar adı giriniz..." /></label>
+        <label>Yıl:<input id="bookYear" type="number" min="0" max="2030" value="2023" /></label>
+        <label>Etiketler:<input id="bookTags" type="text" placeholder="Virgülle ayırın (Örn: Roman, Bilim Kurgu)" /></label>
+        <label>Puan:<input id="bookScore" type="number" min="0" max="10" step="0.1" value="5" /></label>
+        <menu>
+          <button value="cancel" class="ghost-btn">VAZGEÇ</button>
+          <button id="saveBookBtn" value="default">KAYDET</button>
+        </menu>
+      </form>
+    </dialog>
+
+    <div class="context-menu hidden" id="cardMenu">
+      <button id="cardUpdateBtn">Güncelle</button>
+      <button id="cardDeleteBtn">Sil</button>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

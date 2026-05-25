@@ -1,0 +1,71 @@
+"use client";
+
+import Link from "next/link";
+import { Menu, X } from "lucide-react";
+import { useState } from "react";
+import { CartLink } from "@/components/CartLink";
+
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "/ecommerce-platform";
+const logoSrc = `${basePath}/logo.png`;
+
+const menuLinks = [
+  { href: "/products", label: "Ürünler" },
+  { href: "/order-status", label: "Sipariş Sorgula" },
+  { href: "/profile", label: "Profilim" },
+  { href: "/about", label: "Hakkımızda" },
+  { href: "/contact", label: "İletişim" },
+];
+
+export function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  return (
+    <header className="site-header">
+      <Link className="brand" href="/">
+        <img className="brand-logo" src={logoSrc} alt="Teddy Jewellry" />
+      </Link>
+
+      <nav className="nav-links" aria-label="Ana menü">
+        {menuLinks.map((link) => (
+          <Link key={link.href} href={link.href}>
+            {link.label}
+          </Link>
+        ))}
+      </nav>
+
+      <div className="header-actions">
+        <CartLink />
+        <button
+          className="menu-toggle"
+          type="button"
+          aria-label="Menüyü aç"
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen(true)}
+        >
+          <Menu size={23} />
+        </button>
+      </div>
+
+      {menuOpen ? (
+        <div className="mobile-menu-layer">
+          <button className="mobile-menu-backdrop" type="button" aria-label="Menüyü kapat" onClick={() => setMenuOpen(false)} />
+          <aside className="mobile-menu-panel" aria-label="Mobil menü">
+            <div className="mobile-menu-head">
+              <img src={logoSrc} alt="Teddy Jewellry" />
+              <button type="button" aria-label="Menüyü kapat" onClick={() => setMenuOpen(false)}>
+                <X size={22} />
+              </button>
+            </div>
+            <nav>
+              {menuLinks.map((link) => (
+                <Link key={link.href} href={link.href} onClick={() => setMenuOpen(false)}>
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+          </aside>
+        </div>
+      ) : null}
+    </header>
+  );
+}

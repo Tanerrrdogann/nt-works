@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <title>İsmail Taner Erdoğan - CV</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 0;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: #e5e7eb;
+        color: #111827;
+        font-family: "Inter", "Segoe UI", Arial, sans-serif;
+        font-size: 10.55px;
+        line-height: 1.35;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .page {
+        width: 210mm;
+        min-height: 297mm;
+        margin: 0 auto;
+        background: #ffffff;
+        display: grid;
+        grid-template-columns: 61mm 1fr;
+        box-shadow: 0 20px 50px rgba(15, 23, 42, 0.16);
+      }
+
+      .sidebar {
+        background: #0f172a;
+        color: #f8fafc;
+        padding: 19mm 7mm 8mm;
+        position: relative;
+      }
+
+      .sidebar::before {
+        content: "";
+        position: absolute;
+        inset: 0 0 auto;
+        height: 7mm;
+        background: #2563eb;
+      }
+
+      .main {
+        padding: 11mm 8mm 5mm;
+      }
+
+      .name {
+        font-size: 22px;
+        line-height: 1.05;
+        font-weight: 800;
+        letter-spacing: 0;
+        margin: 0 0 7px;
+      }
+
+      .role {
+        color: #bfdbfe;
+        font-size: 10.8px;
+        font-weight: 700;
+        line-height: 1.35;
+        margin-bottom: 11px;
+      }
+
+      .section {
+        margin-bottom: 8px;
+      }
+
+      .sidebar .section {
+        margin-bottom: 11px;
+      }
+
+      h2 {
+        margin: 0 0 7px;
+        font-size: 10px;
+        line-height: 1;
+        text-transform: uppercase;
+        letter-spacing: 1.6px;
+        color: #2563eb;
+        font-weight: 800;
+      }
+
+      .sidebar h2 {
+        color: #93c5fd;
+      }
+
+      .contact-item {
+        margin: 0 0 8px;
+        color: #dbeafe;
+        word-break: break-word;
+      }
+
+      .label {
+        display: block;
+        color: #94a3b8;
+        font-size: 8.5px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 1px;
+      }
+
+      .pill-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin-top: 7px;
+      }
+
+      .pill {
+        border: 1px solid rgba(147, 197, 253, 0.35);
+        border-radius: 999px;
+        padding: 3px 7px;
+        color: #e0f2fe;
+        background: rgba(37, 99, 235, 0.14);
+        font-size: 9px;
+        font-weight: 700;
+      }
+
+      .skill-group {
+        margin-bottom: 9px;
+      }
+
+      .skill-group strong {
+        display: block;
+        color: #ffffff;
+        font-size: 9.5px;
+        margin-bottom: 2px;
+      }
+
+      .skill-group span,
+      .muted {
+        color: #cbd5e1;
+      }
+
+      .profile {
+        background: #eff6ff;
+        border-left: 4px solid #2563eb;
+        padding: 6px 8px;
+        margin-bottom: 7px;
+        color: #1e293b;
+      }
+
+      .project {
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 8px 9px 7px;
+        margin-bottom: 7.5px;
+      }
+
+      .project-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        align-items: flex-start;
+        margin-bottom: 3px;
+      }
+
+      h3 {
+        margin: 0;
+        font-size: 12.6px;
+        line-height: 1.15;
+        color: #0f172a;
+      }
+
+      .repo {
+        white-space: nowrap;
+        color: #2563eb;
+        font-weight: 800;
+        font-size: 9px;
+        padding-top: 1px;
+      }
+
+      .summary {
+        margin: 0 0 4px;
+        color: #334155;
+      }
+
+      ul {
+        margin: 4px 0 0 14px;
+        padding: 0;
+      }
+
+      li {
+        margin-bottom: 2.4px;
+      }
+
+      .compact-list li {
+        margin-bottom: 1.4px;
+      }
+
+      .footer-note {
+        margin-top: 4px;
+        color: #64748b;
+        font-size: 9.4px;
+      }
+
+      @media print {
+        body {
+          background: #fff;
+        }
+
+        .page {
+          box-shadow: none;
+          margin: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <aside class="sidebar">
+        <h1 class="name">İsmail Taner Erdoğan</h1>
+        <div class="role">Bilgisayar Mühendisliği Öğrencisi<br />Backend & Full-Stack Developer</div>
+
+        <section class="section">
+          <h2>İletişim</h2>
+          <p class="contact-item">
+            <span class="label">E-posta</span>
+            <a href="mailto:ismailtanererdogan54@gmail.com">ismailtanererdogan54@gmail.com</a>
+          </p>
+          <p class="contact-item">
+            <span class="label">Telefon</span>
+            0551 195 55 66
+          </p>
+          <p class="contact-item">
+            <span class="label">Konum</span>
+            Türkiye
+          </p>
+          <p class="contact-item">
+            <span class="label">GitHub</span>
+            <a href="https://github.com/Tanerrrdogann">github.com/Tanerrrdogann</a>
+          </p>
+          <p class="contact-item">
+            <span class="label">LinkedIn</span>
+            <a href="https://www.linkedin.com/in/ismail-taner-erdo%C4%9Fan-28632232b">linkedin.com/in/ismail-taner-erdoğan-28632232b</a>
+          </p>
+        </section>
+
+        <section class="section">
+          <h2>Odak Alanları</h2>
+          <div class="pill-list">
+            <span class="pill">Backend</span>
+            <span class="pill">Full-Stack</span>
+            <span class="pill">REST API</span>
+            <span class="pill">Async Jobs</span>
+            <span class="pill">Video Analysis</span>
+            <span class="pill">Docker</span>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>Eğitim</h2>
+          <p class="contact-item">
+            <strong>İstanbul Medeniyet Üniversitesi</strong><br />
+            Bilgisayar Mühendisliği Lisans<br />
+            2024 - Devam ediyor<br />
+            2. sınıf öğrencisi
+          </p>
+        </section>
+
+        <section class="section">
+          <h2>Teknik Yetenekler</h2>
+          <div class="skill-group">
+            <strong>Backend</strong>
+            <span>Java, Spring Boot, Spring Security, FastAPI, REST API</span>
+          </div>
+          <div class="skill-group">
+            <strong>Frontend</strong>
+            <span>React, Vite, JavaScript, HTML, CSS, Thymeleaf</span>
+          </div>
+          <div class="skill-group">
+            <strong>Veri & Depolama</strong>
+            <span>PostgreSQL, H2, SQL, Redis, MinIO</span>
+          </div>
+          <div class="skill-group">
+            <strong>Async & Messaging</strong>
+            <span>RabbitMQ, Celery, job queue, retry/DLQ, background workers</span>
+          </div>
+          <div class="skill-group">
+            <strong>DevOps & Observability</strong>
+            <span>Docker Compose, GitHub Actions, Prometheus, Grafana, Loki, Tempo</span>
+          </div>
+          <div class="skill-group">
+            <strong>Medya & Yapay Zekâ</strong>
+            <span>OpenCV, ffmpeg, faster-whisper, Isolation Forest, LLM entegrasyonu</span>
+          </div>
+          <div class="skill-group">
+            <strong>Araçlar</strong>
+            <span>Git, GitHub, Maven, npm, Linux, Postman</span>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>Dil</h2>
+          <p class="contact-item"><strong>İngilizce:</strong> A2-B1, teknik okuma ve proje dokümantasyonu; konuşma becerisi gelişim aşamasında</p>
+        </section>
+      </aside>
+
+      <section class="main">
+        <section class="section">
+          <div class="profile">
+            İstanbul Medeniyet Üniversitesi Bilgisayar Mühendisliği 2. sınıf öğrencisiyim. Backend ve full-stack geliştirme odağında; Spring Boot, FastAPI, React, PostgreSQL, Redis, RabbitMQ/Celery ve Docker Compose ile çalıştırılabilir, dokümante edilmiş uygulamalar geliştiriyorum. Projelerimde API tasarımı, kimlik doğrulama, asenkron işlem akışları, dosya depolama, analiz panelleri, gözlemlenebilirlik ve ürünleştirilebilir GitHub sunumuna odaklanıyorum.
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>Projeler</h2>
+
+          <article class="project">
+            <div class="project-head">
+              <h3>Cloud Storage Platform</h3>
+              <a class="repo" href="https://github.com/Tanerrrdogann/cloud-storage-platform">Repo</a>
+            </div>
+            <p class="summary">Dağıtık bulut depolama ve gözlemlenebilirlik odaklı, Spring Boot tabanlı full-stack platform.</p>
+            <ul>
+              <li>Spring Boot, Spring Cloud Gateway, React, PostgreSQL, Redis, RabbitMQ, MinIO, Vault ve Docker Compose ile çok servisli mimari kurgulandı.</li>
+              <li>JWT/RBAC, rate limiting, circuit breaker, timeout/retry/fallback; async event flow, idempotent consumer, retry queue ve DLQ senaryoları uygulandı.</li>
+              <li>Encrypted object storage, hash-based deduplication, WAL-style recovery, replication, GC; Prometheus, Grafana, Tempo ve Loki ile observability eklendi.</li>
+            </ul>
+          </article>
+
+          <article class="project">
+            <div class="project-head">
+              <h3>Conversational AI Security Investigation Platform</h3>
+              <a class="repo" href="https://github.com/Tanerrrdogann/conversational-ai-security-investigation-platform">Repo</a>
+            </div>
+            <p class="summary">Güvenlik olaylarını analiz eden, risk skorlayan ve analistlere konuşmalı araştırma arayüzü sunan platform.</p>
+            <ul>
+              <li>Spring Boot platform API, FastAPI AI service ve React workspace ile event ingestion, normalization, alert, incident ve actor-risk akışları geliştirildi.</li>
+              <li>Isolation Forest tabanlı anomaly scoring, grounded AI chat workflow, OpenAI-compatible LLM entegrasyonu ve fallback cevap mantığı kurgulandı.</li>
+              <li>Event stream, alerts, incidents, actors, anomalies, rules, sources, scenario replay ve AI chat ekranlarıyla analist odaklı demo akışı hazırlandı.</li>
+            </ul>
+          </article>
+
+          <article class="project">
+            <div class="project-head">
+              <h3>Video Analytics Platform</h3>
+              <a class="repo" href="https://github.com/Tanerrrdogann/video-analytics-platform">Repo</a>
+            </div>
+            <p class="summary">MP4 videoları arka planda analiz eden; görüntü, ses ve konuşma verisini panelde sunan video intelligence platformu.</p>
+            <ul>
+              <li>FastAPI, Celery, Redis, PostgreSQL, React, OpenCV, ffmpeg, faster-whisper ve Docker Compose ile upload sonrası background job hattı kuruldu.</li>
+              <li>Motion detection, person/object candidates, high-activity windows, zone activity, confidence scores, snapshots ve timeline eventleri geliştirildi.</li>
+              <li>Audio activity/silence/loud peak analizi ve timestamped transcript çıktıları React dashboard içinde oynatma, filtreleme ve storage cleanup akışlarıyla sunuldu.</li>
+            </ul>
+          </article>
+
+          <article class="project">
+            <div class="project-head">
+              <h3>Virtual Computer Lab</h3>
+              <a class="repo" href="https://github.com/Tanerrrdogann/virtual-computer-lab">Repo</a>
+            </div>
+            <p class="summary">Bytecode, CPU yürütme, bellek, syscall ve temel OS davranışlarını modelleyen Java tabanlı sanal bilgisayar simülatörü.</p>
+            <ul>
+              <li>Custom .ntbin executable format, .nt source format, loader, byte-addressable memory, fetch-decode-execute CPU ve compiler akışı geliştirildi.</li>
+              <li>R0-R7 register yapısı, PC/SP/FLAGS, PCB table, Round Robin scheduler, syscalls, heap allocation, timer interrupt ve MMIO cihazları modellendi.</li>
+              <li>Terminal, file manager, code editor, system monitor, disassembler ve debug shell içeren NT_os desktop UI hazırlandı.</li>
+            </ul>
+          </article>
+
+          <article class="project">
+            <div class="project-head">
+              <h3>Task Management System</h3>
+              <a class="repo" href="https://github.com/Tanerrrdogann/task-management-system">Repo</a>
+            </div>
+            <p class="summary">Spring Boot tabanlı görev yönetimi, raporlama, e-posta hatırlatma ve PDF export özellikleri içeren iş uygulaması.</p>
+            <ul>
+              <li>Görev oluşturma, listeleme, arama, tamamlama, silme, priority/due date yönetimi ve high-priority e-mail reminder akışları geliştirildi.</li>
+              <li>Task list, daily report ve weekly report PDF çıktıları; Thymeleaf UI, REST endpoints, H2 persistence, demo data, logs, test ve Postman yapısı eklendi.</li>
+            </ul>
+          </article>
+
+          <article class="project">
+            <div class="project-head">
+              <h3>Library Search Engine</h3>
+              <a class="repo" href="https://github.com/Tanerrrdogann/library-search-engine">Repo</a>
+            </div>
+            <p class="summary">JavaScript ile geliştirilmiş, veri yapıları odaklı tarayıcı tabanlı kütüphane arama ve filtreleme uygulaması.</p>
+            <ul>
+              <li>Trie-backed prefix search, TF-IDF-style fallback, author/tag/year/score filtreleri ve smart relevance sıralaması geliştirildi.</li>
+              <li>Merge Sort / Quick Sort, BFS-style book connection search, undo/redo, CSV seed dataset ve localStorage persistence özellikleri uygulandı.</li>
+            </ul>
+          </article>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>

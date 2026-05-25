@@ -1,0 +1,13 @@
+target/
+build/
+dist/
+out/
+
+.codex
+.env
+.DS_Store
+*.log
+
+.idea/
+.vscode/
+*.iml

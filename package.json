@@ -1,0 +1,31 @@
+{
+  "name": "nt-works",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --webpack -H 127.0.0.1",
+    "dev:turbo": "next dev -H 127.0.0.1",
+    "build": "next build",
+    "build:ecommerce-demo": "npm --prefix projects/ecommerce-platform/frontend run build",
+    "build:static-demos": "./scripts/build-static-demos.sh",
+    "build:prod": "NTWORKS_DEMO_AUTOSTART=0 NTWORKS_STATIC_DEMOS=1 next build && npm run build:ecommerce-demo && npm run build:static-demos",
+    "start": "next start",
+    "start:prod": "NTWORKS_DEMO_AUTOSTART=0 NTWORKS_STATIC_DEMOS=1 next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "next": "16.2.4",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.4",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

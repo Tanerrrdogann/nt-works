@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Nisa Gökşen - CV</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 0;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: #ededed;
+        color: #202020;
+        font-family: "Aptos", "Segoe UI", Arial, sans-serif;
+        font-size: 9.9px;
+        line-height: 1.31;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .page {
+        width: 210mm;
+        height: 297mm;
+        margin: 0 auto;
+        background: #ffffff;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 18px 46px rgba(0, 0, 0, 0.18);
+      }
+
+      .masthead {
+        display: grid;
+        grid-template-columns: 1fr 72mm;
+        gap: 9mm;
+        padding: 8mm 10mm 6.5mm;
+        color: #fbfbfb;
+        background: linear-gradient(135deg, #141414 0%, #2a2a2a 100%);
+        border-bottom: 4px solid #efefef;
+      }
+
+      .name {
+        margin: 0 0 5.5px;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 25px;
+        line-height: 1;
+        font-weight: 700;
+        letter-spacing: 0;
+      }
+
+      .role {
+        font-size: 10.5px;
+        line-height: 1.25;
+        font-weight: 600;
+        color: #e1e1e1;
+      }
+
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4px 8px;
+        align-content: start;
+      }
+
+      .contact-item {
+        margin: 0;
+        color: #e8e8e8;
+        word-break: break-word;
+      }
+
+      .label {
+        display: block;
+        margin-bottom: 1px;
+        color: #bcbcbc;
+        font-size: 7.5px;
+        font-weight: 750;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      .content {
+        display: grid;
+        grid-template-columns: 1fr 56mm;
+        gap: 6mm;
+        flex: 1;
+        padding: 6.5mm 8mm 6mm 9mm;
+      }
+
+      .main {
+        display: flex;
+        min-height: 0;
+        flex-direction: column;
+      }
+
+      .section {
+        margin-bottom: 6px;
+      }
+
+      .main > .section:last-child {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        margin-bottom: 0;
+      }
+
+      .rail .section {
+        margin-bottom: 6px;
+      }
+
+      h2 {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin: 0 0 4px;
+        color: #262626;
+        font-size: 8.9px;
+        line-height: 1;
+        font-weight: 760;
+        letter-spacing: 1.65px;
+        text-transform: uppercase;
+      }
+
+      h2::after {
+        content: "";
+        height: 1px;
+        flex: 1;
+        background: #d4d4d4;
+      }
+
+      .profile {
+        margin: 0 0 7px;
+        padding: 7px 8px;
+        color: #2b2b2b;
+        background: #f7f7f7;
+        border: 1px solid #dddddd;
+        border-left: 3px solid #565656;
+        border-radius: 0 8px 8px 0;
+      }
+
+      .project {
+        padding: 7.4px 0 7.2px;
+        border-top: 1px solid #dcdcdc;
+      }
+
+      .project:last-child {
+        border-bottom: 1px solid #dcdcdc;
+      }
+
+      .project-head {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+        align-items: baseline;
+        margin-bottom: 3px;
+      }
+
+      h3 {
+        margin: 0;
+        color: #202020;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 12.05px;
+        line-height: 1.1;
+        font-weight: 700;
+      }
+
+      .repo {
+        color: #575757;
+        font-size: 8px;
+        font-weight: 760;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        white-space: nowrap;
+      }
+
+      .summary {
+        margin: 0 0 2px;
+        color: #3b3b3b;
+      }
+
+      ul {
+        margin: 2px 0 0 12px;
+        padding: 0;
+      }
+
+      li {
+        margin-bottom: 1.8px;
+      }
+
+      .rail {
+        padding-left: 5mm;
+        border-left: 1px solid #d6d6d6;
+      }
+
+      .rail-block {
+        padding: 5.5px 6.2px;
+        background: #fafafa;
+        border: 1px solid #dfdfdf;
+        border-radius: 8px;
+      }
+
+      .rail-block + .rail-block {
+        margin-top: 4px;
+      }
+
+      .rail p {
+        margin: 0;
+      }
+
+      .pill-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+
+      .pill {
+        padding: 2.4px 5.6px;
+        color: #272727;
+        background: #f7f7f7;
+        border: 1px solid #d6d6d6;
+        border-radius: 999px;
+        font-size: 8px;
+        font-weight: 720;
+      }
+
+      .skill-group {
+        margin-bottom: 4.5px;
+      }
+
+      .skill-group strong {
+        display: block;
+        margin-bottom: 2px;
+        color: #202020;
+        font-size: 8.7px;
+      }
+
+      .skill-group span,
+      .muted {
+        color: #4b4b4b;
+      }
+
+      @media print {
+        body {
+          background: #fff;
+        }
+
+        .page {
+          box-shadow: none;
+          margin: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header class="masthead">
+        <div>
+          <h1 class="name">Nisa Gökşen</h1>
+          <div class="role">Bilgisayar Mühendisliği Öğrencisi<br />Backend & Full-Stack Developer</div>
+        </div>
+
+        <section class="contact-grid" aria-label="İletişim">
+          <p class="contact-item">
+            <span class="label">E-posta</span>
+            <a href="mailto:nisagoksennn4@gmail.com">nisagoksennn4@gmail.com</a>
+          </p>
+          <p class="contact-item">
+            <span class="label">Telefon</span>
+            0541 603 56 39
+          </p>
+          <p class="contact-item">
+            <span class="label">Konum</span>
+            Türkiye
+          </p>
+          <p class="contact-item">
+            <span class="label">GitHub</span>
+            <a href="https://github.com/Nisagoksennn">github.com/Nisagoksennn</a>
+          </p>
+          <p class="contact-item">
+            <span class="label">LinkedIn</span>
+            <a href="https://www.linkedin.com/in/nisa-goksen-b64b85349">linkedin.com/in/nisa-goksen-b64b85349</a>
+          </p>
+        </section>
+      </header>
+
+      <div class="content">
+        <section class="main">
+          <section class="section">
+            <h2>Profil</h2>
+            <p class="profile">
+              İstanbul Medeniyet Üniversitesi Bilgisayar Mühendisliği 2. sınıf öğrencisiyim. Backend ve full-stack geliştirme odağında; Spring Boot, FastAPI, React, PostgreSQL, Redis, RabbitMQ/Celery ve Docker Compose ile çalıştırılabilir, dokümante edilmiş uygulamalar geliştiriyorum. Projelerimde API tasarımı, kimlik doğrulama, asenkron işlem akışları, dosya depolama, analiz panelleri, gözlemlenebilirlik ve ürünleştirilebilir GitHub sunumuna odaklanıyorum.
+            </p>
+          </section>
+
+          <section class="section">
+            <h2>Projeler</h2>
+
+            <article class="project">
+              <div class="project-head">
+                <h3>Cloud Storage Platform</h3>
+                <a class="repo" href="https://github.com/Nisagoksennn/cloud-storage-platform">Repo</a>
+              </div>
+              <p class="summary">Dağıtık bulut depolama ve gözlemlenebilirlik odaklı, Spring Boot tabanlı full-stack platform.</p>
+              <ul>
+                <li>Spring Boot, Spring Cloud Gateway, React, PostgreSQL, Redis, RabbitMQ, MinIO, Vault ve Docker Compose ile çok servisli mimari kurgulandı.</li>
+                <li>JWT/RBAC, rate limiting, circuit breaker, timeout/retry/fallback; async event flow, idempotent consumer, retry queue ve DLQ senaryoları uygulandı.</li>
+                <li>Encrypted object storage, hash-based deduplication, WAL-style recovery, replication, GC; Prometheus, Grafana, Tempo ve Loki ile observability eklendi.</li>
+              </ul>
+            </article>
+
+            <article class="project">
+              <div class="project-head">
+                <h3>Conversational AI Security Investigation Platform</h3>
+                <a class="repo" href="https://github.com/Nisagoksennn/conversational-ai-security-investigation-platform">Repo</a>
+              </div>
+              <p class="summary">Güvenlik olaylarını analiz eden, risk skorlayan ve analistlere konuşmalı araştırma arayüzü sunan platform.</p>
+              <ul>
+                <li>Spring Boot platform API, FastAPI AI service ve React workspace ile event ingestion, normalization, alert, incident ve actor-risk akışları geliştirildi.</li>
+                <li>Isolation Forest tabanlı anomaly scoring, grounded AI chat workflow, OpenAI-compatible LLM entegrasyonu ve fallback cevap mantığı kurgulandı.</li>
+                <li>Event stream, alerts, incidents, actors, anomalies, rules, sources, scenario replay ve AI chat ekranlarıyla analist odaklı demo akışı hazırlandı.</li>
+              </ul>
+            </article>
+
+            <article class="project">
+              <div class="project-head">
+                <h3>Video Analytics Platform</h3>
+                <a class="repo" href="https://github.com/Nisagoksennn/video-analytics-platform">Repo</a>
+              </div>
+              <p class="summary">MP4 videoları arka planda analiz eden; görüntü, ses ve konuşma verisini panelde sunan video intelligence platformu.</p>
+              <ul>
+                <li>FastAPI, Celery, Redis, PostgreSQL, React, OpenCV, ffmpeg, faster-whisper ve Docker Compose ile upload sonrası background job hattı kuruldu.</li>
+                <li>Motion detection, person/object candidates, high-activity windows, zone activity, confidence scores, snapshots ve timeline eventleri geliştirildi.</li>
+                <li>Audio activity/silence/loud peak analizi ve timestamped transcript çıktıları React dashboard içinde oynatma, filtreleme ve storage cleanup akışlarıyla sunuldu.</li>
+              </ul>
+            </article>
+
+            <article class="project">
+              <div class="project-head">
+                <h3>Virtual Computer Lab</h3>
+                <a class="repo" href="https://github.com/Nisagoksennn/virtual-computer-lab">Repo</a>
+              </div>
+              <p class="summary">Bytecode, CPU yürütme, bellek, syscall ve temel OS davranışlarını modelleyen Java tabanlı sanal bilgisayar simülatörü.</p>
+              <ul>
+                <li>Custom .ntbin executable format, .nt source format, loader, byte-addressable memory, fetch-decode-execute CPU ve compiler akışı geliştirildi.</li>
+                <li>R0-R7 register yapısı, PC/SP/FLAGS, PCB table, Round Robin scheduler, syscalls, heap allocation, timer interrupt ve MMIO cihazları modellendi.</li>
+                <li>Terminal, file manager, code editor, system monitor, disassembler ve debug shell içeren NT_os desktop UI hazırlandı.</li>
+              </ul>
+            </article>
+
+            <article class="project">
+              <div class="project-head">
+                <h3>Task Management System</h3>
+                <a class="repo" href="https://github.com/Nisagoksennn/task-management-system">Repo</a>
+              </div>
+              <p class="summary">Spring Boot tabanlı görev yönetimi, raporlama, e-posta hatırlatma ve PDF export özellikleri içeren iş uygulaması.</p>
+              <ul>
+                <li>Görev oluşturma, listeleme, arama, tamamlama, silme, priority/due date yönetimi ve high-priority e-mail reminder akışları geliştirildi.</li>
+                <li>Task list, daily report ve weekly report PDF çıktıları; Thymeleaf UI, REST endpoints, H2 persistence, demo data, logs, test ve Postman yapısı eklendi.</li>
+              </ul>
+            </article>
+
+            <article class="project">
+              <div class="project-head">
+                <h3>Library Search Engine</h3>
+                <a class="repo" href="https://github.com/Nisagoksennn/library-search-engine">Repo</a>
+              </div>
+              <p class="summary">JavaScript ile geliştirilmiş, veri yapıları odaklı tarayıcı tabanlı kütüphane arama ve filtreleme uygulaması.</p>
+              <ul>
+                <li>Trie-backed prefix search, TF-IDF-style fallback, author/tag/year/score filtreleri ve smart relevance sıralaması geliştirildi.</li>
+                <li>Merge Sort / Quick Sort, BFS-style book connection search, undo/redo, CSV seed dataset ve localStorage persistence özellikleri uygulandı.</li>
+              </ul>
+            </article>
+          </section>
+        </section>
+
+        <aside class="rail">
+          <section class="section">
+            <h2>Eğitim</h2>
+            <div class="rail-block">
+              <p>
+                <strong>İstanbul Medeniyet Üniversitesi</strong><br />
+                Bilgisayar Mühendisliği Lisans<br />
+                2024 - Devam ediyor<br />
+                2. sınıf öğrencisi
+              </p>
+            </div>
+          </section>
+
+          <section class="section">
+            <h2>Odak Alanları</h2>
+            <div class="pill-list">
+              <span class="pill">Backend</span>
+              <span class="pill">Full-Stack</span>
+              <span class="pill">REST API</span>
+              <span class="pill">Async Jobs</span>
+              <span class="pill">Video Analysis</span>
+              <span class="pill">Docker</span>
+            </div>
+          </section>
+
+          <section class="section">
+            <h2>Teknik Yetenekler</h2>
+            <div class="rail-block">
+              <div class="skill-group">
+                <strong>Backend</strong>
+                <span>Java, Spring Boot, Spring Security, FastAPI, REST API</span>
+              </div>
+              <div class="skill-group">
+                <strong>Frontend</strong>
+                <span>React, Vite, JavaScript, HTML, CSS, Thymeleaf</span>
+              </div>
+              <div class="skill-group">
+                <strong>Veri & Depolama</strong>
+                <span>PostgreSQL, H2, SQL, Redis, MinIO</span>
+              </div>
+              <div class="skill-group">
+                <strong>Async & Messaging</strong>
+                <span>RabbitMQ, Celery, job queue, retry/DLQ, background workers</span>
+              </div>
+              <div class="skill-group">
+                <strong>DevOps & Observability</strong>
+                <span>Docker Compose, GitHub Actions, Prometheus, Grafana, Loki, Tempo</span>
+              </div>
+              <div class="skill-group">
+                <strong>Medya & Yapay Zekâ</strong>
+                <span>OpenCV, ffmpeg, faster-whisper, Isolation Forest, LLM entegrasyonu</span>
+              </div>
+              <div class="skill-group">
+                <strong>Araçlar</strong>
+                <span>Git, GitHub, Maven, npm, Linux, Postman</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="section">
+            <h2>Dil</h2>
+            <div class="rail-block">
+              <p><strong>İngilizce:</strong> B2</p>
+            </div>
+          </section>
+        </aside>
+      </div>
+    </main>
+  </body>
+</html>

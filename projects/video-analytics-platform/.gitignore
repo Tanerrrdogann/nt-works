@@ -1,0 +1,34 @@
+# Local environment and machine-specific files
+.env
+.env.*
+!.env.example
+.codex
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+
+# Node / frontend build output
+node_modules/
+dist/
+build/
+npm-debug.log*
+
+# OS/editor noise
+.DS_Store
+.idea/
+.vscode/
+
+# Runtime storage artifacts
+storage/uploads/*
+storage/demo/*.mp4
+storage/snapshots/*
+storage/temp/*
+!storage/uploads/.gitkeep
+!storage/demo/.gitkeep
+!storage/snapshots/.gitkeep
+!storage/temp/.gitkeep

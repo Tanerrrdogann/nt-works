@@ -1,0 +1,22 @@
+print "NT_os Student System";
+print "Enter student name:";
+print input_string();
+print "Enter exam grade:";
+
+let grade = input_number();
+let grades = [50, 60, 70, 85, 100];
+let bonus = grades[1] / 10;
+let final_grade = grade + bonus;
+
+print "Final grade with bonus:";
+print final_grade;
+
+if (final_grade == 100) {
+  print "Perfect score";
+} else {
+  if (final_grade != 0) {
+    print "Record saved";
+  } else {
+    print "Missing grade";
+  }
+}

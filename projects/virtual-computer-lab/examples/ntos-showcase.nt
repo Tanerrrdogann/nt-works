@@ -1,0 +1,146 @@
+function add(a, b) {
+  return a + b;
+}
+
+function sub(a, b) {
+  return a - b;
+}
+
+function mul(a, b) {
+  return a * b;
+}
+
+function div(a, b) {
+  return a / b;
+}
+
+function square(x) {
+  return x * x;
+}
+
+function cube(x) {
+  return x * x * x;
+}
+
+function is_zero(x) {
+  if (x == 0) {
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
+function not_zero(x) {
+  if (x != 0) {
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
+function same(a, b) {
+  if (a == b) {
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
+function choose_if_zero(flag, yes_value, no_value) {
+  if (flag == 0) {
+    return yes_value;
+  } else {
+    return no_value;
+  }
+}
+
+function sum_down(n) {
+  let total = 0;
+  while (n != 0) {
+    total = total + n;
+    n = n - 1;
+  }
+  return total;
+}
+
+function factorial(n) {
+  let result = 1;
+  while (n != 0) {
+    result = result * n;
+    n = n - 1;
+  }
+  return result;
+}
+
+function fib(n) {
+  let a = 0;
+  let b = 1;
+  while (n != 0) {
+    let next = a + b;
+    a = b;
+    b = next;
+    n = n - 1;
+  }
+  return a;
+}
+
+function count_matches(target, a, b, c) {
+  let matches = 0;
+  if (a == target) {
+    matches = matches + 1;
+  }
+  if (b == target) {
+    matches = matches + 1;
+  }
+  if (c == target) {
+    matches = matches + 1;
+  }
+  return matches;
+}
+
+function countdown_score(start, step, bonus) {
+  let score = bonus;
+  while (start != 0) {
+    score = score + step;
+    start = start - 1;
+  }
+  return score;
+}
+
+let x = 20;
+let y = 6;
+let z = 3;
+let values = [4, 8, 15, 16];
+
+print "NT_os string output";
+print add(x, y);
+print sub(x, y);
+print mul(y, z);
+print div(x, z);
+print square(z);
+print cube(z);
+print is_zero(0);
+print not_zero(y);
+print same(add(10, 5), 15);
+print choose_if_zero(0, 77, 88);
+print choose_if_zero(1, 77, 88);
+print sum_down(5);
+print factorial(4);
+print fib(5);
+print count_matches(3, z, y, 3);
+print countdown_score(3, 7, 10);
+print values[2];
+
+let loop = 3;
+let acc = 0;
+while (loop != 0) {
+  acc = acc + square(loop);
+  loop = loop - 1;
+}
+print acc;
+
+if (acc != 0) {
+  print 999;
+} else {
+  print 111;
+}
