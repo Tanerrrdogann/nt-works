@@ -152,36 +152,36 @@ export default function ContactPage() {
           description={t("contact.description")}
         />
 
-        <div className="mx-auto grid max-w-6xl gap-4 sm:gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="mx-auto grid max-w-6xl min-w-0 gap-4 sm:gap-8 lg:grid-cols-[1.1fr_0.9fr]">
           <form
             onSubmit={handleSubmit}
-            className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:rounded-[2rem] sm:p-8"
+            className="min-w-0 rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:rounded-[2rem] sm:p-8"
           >
-            <div className="grid grid-cols-2 gap-3 sm:gap-5">
-              <label className="grid gap-2 text-sm font-semibold text-slate-700">
+            <div className="grid min-w-0 gap-3 sm:grid-cols-2 sm:gap-5">
+              <label className="grid min-w-0 gap-2 text-sm font-semibold text-slate-700">
                 {language === "tr" ? "Adın" : "Your name"}
                 <input
                   required
                   value={name}
                   onChange={(event) => setName(event.target.value)}
-                  className="rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-950 outline-none transition focus:border-slate-400 focus:bg-white sm:px-4 sm:py-3 sm:text-base"
+                  className="min-w-0 rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-950 outline-none transition focus:border-slate-400 focus:bg-white sm:px-4 sm:py-3 sm:text-base"
                   placeholder={language === "tr" ? "Adını yaz" : "Enter your name"}
                 />
               </label>
 
-              <label className="grid gap-2 text-sm font-semibold text-slate-700">
+              <label className="grid min-w-0 gap-2 text-sm font-semibold text-slate-700">
                 {language === "tr" ? "E-posta adresin" : "Your email"}
                 <input
                   required
                   type="email"
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
-                  className="rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-950 outline-none transition focus:border-slate-400 focus:bg-white sm:px-4 sm:py-3 sm:text-base"
+                  className="min-w-0 rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-950 outline-none transition focus:border-slate-400 focus:bg-white sm:px-4 sm:py-3 sm:text-base"
                   placeholder={language === "tr" ? "ornek@mail.com" : "name@example.com"}
                 />
               </label>
 
-              <label className="col-span-2 grid gap-2 text-sm font-semibold text-slate-700">
+              <label className="grid min-w-0 gap-2 text-sm font-semibold text-slate-700 sm:col-span-2">
                 {language === "tr" ? "İlgilendiğin proje türü" : "Project type"}
                 <select
                   value={projectType}
@@ -190,7 +190,7 @@ export default function ContactPage() {
                     setProjectType(nextProject);
                     setMessage(nextProject ? buildProjectRequestMessage(nextProject, language) : "");
                   }}
-                  className="rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-950 outline-none transition focus:border-slate-400 focus:bg-white sm:px-4 sm:py-3 sm:text-base"
+                  className="min-w-0 rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-950 outline-none transition focus:border-slate-400 focus:bg-white sm:px-4 sm:py-3 sm:text-base"
                 >
                   <option value="">{language === "tr" ? "Seç veya boş bırak" : "Select or leave blank"}</option>
                   {projectTypeOptions.map((option) => (
@@ -201,14 +201,14 @@ export default function ContactPage() {
                 </select>
               </label>
 
-              <label className="col-span-2 grid gap-2 text-sm font-semibold text-slate-700">
+              <label className="grid min-w-0 gap-2 text-sm font-semibold text-slate-700 sm:col-span-2">
                 {language === "tr" ? "Mesajın" : "Message"}
                 <textarea
                   required
                   value={message}
                   onChange={(event) => setMessage(event.target.value)}
                   rows={4}
-                  className="resize-none rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-950 outline-none transition focus:border-slate-400 focus:bg-white sm:px-4 sm:py-3 sm:text-base"
+                  className="min-w-0 resize-none rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-950 outline-none transition focus:border-slate-400 focus:bg-white sm:px-4 sm:py-3 sm:text-base"
                   placeholder={
                     language === "tr"
                       ? "İhtiyacını, örnek aldığın projeyi veya işletme türünü yazabilirsin."
@@ -239,8 +239,8 @@ export default function ContactPage() {
             )}
           </form>
 
-          <div className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:rounded-[2rem] sm:p-8">
-            <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-1">
+          <div className="min-w-0 rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:rounded-[2rem] sm:p-8">
+            <div className="grid min-w-0 grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-1">
               <a
                 href={`mailto:${CONTACT_EMAIL}`}
                 className="rounded-2xl border border-slate-200 bg-slate-50 p-3 transition hover:bg-white sm:p-5"

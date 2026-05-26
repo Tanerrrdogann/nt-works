@@ -85,9 +85,9 @@ export default function AboutPage() {
 
             <div className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:rounded-[2rem] sm:p-8">
               <h2 className="text-xl font-black text-slate-950 sm:text-2xl">{t("about.stack")}</h2>
-              <div className="mt-4 grid grid-cols-2 gap-2 sm:mt-5 sm:flex sm:flex-wrap">
+              <div className="mt-4 flex flex-wrap gap-2 sm:mt-5">
                 {techStack.map((tech) => (
-                  <Badge key={tech} className="justify-center px-2 text-[10px] sm:justify-start sm:px-3 sm:text-xs">{tech}</Badge>
+                  <Badge key={tech} className="px-3 text-xs">{tech}</Badge>
                 ))}
               </div>
             </div>

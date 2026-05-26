@@ -8,7 +8,7 @@ export default function Footer() {
   const { t } = useLanguage();
 
   return (
-    <footer className="border-t border-slate-200 py-10">
+    <footer className="relative z-10 border-t border-slate-200 bg-white/88 py-10 backdrop-blur">
       <Container className="flex flex-col justify-between gap-6 md:flex-row md:items-center">
         <div>
           <p className="font-bold text-slate-950">NT Web Çözümleri</p>
