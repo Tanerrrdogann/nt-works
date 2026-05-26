@@ -34,9 +34,9 @@ export default function DemoCenterPreview() {
   ];
 
   return (
-    <section className="py-20">
+    <section className="py-14 sm:py-20">
       <Container>
-        <div className="px-4 py-8 md:px-10 md:py-12">
+        <div className="px-0 py-6 sm:px-4 sm:py-8 md:px-10 md:py-12">
           <SectionTitle
             eyebrow={language === "tr" ? "Canlı Ürünler" : "Live Products"}
             title={
@@ -51,16 +51,16 @@ export default function DemoCenterPreview() {
             }
           />
 
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:gap-6">
             {cards.map((card) => (
               <div
                 key={card.title}
-                className="rounded-3xl border border-slate-200 bg-slate-50 p-6"
+                className="rounded-2xl border border-slate-200 bg-slate-50 p-3 sm:p-4 lg:rounded-3xl lg:p-6"
               >
-                <h3 className="font-bold text-slate-950">
+                <h3 className="text-sm font-bold leading-5 text-slate-950 sm:text-base sm:leading-6">
                   {language === "tr" ? card.titleTr : card.title}
                 </h3>
-                <p className="mt-3 text-sm leading-6 text-slate-600">
+                <p className="mt-2 text-xs leading-5 text-slate-600 sm:text-sm sm:leading-6 lg:mt-3">
                   {language === "tr" ? card.descriptionTr : card.description}
                 </p>
               </div>

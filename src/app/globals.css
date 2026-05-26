@@ -126,7 +126,7 @@ a {
   border-radius: 28px;
   box-shadow: 0 26px 90px rgba(15, 23, 42, 0.1);
   content: "";
-  inset: 40px max(18px, calc((100vw - 1280px) / 2)) 36px;
+  inset: 16px max(10px, calc((100vw - 1280px) / 2)) 16px;
   pointer-events: none;
   position: absolute;
   z-index: -1;
@@ -134,13 +134,23 @@ a {
 
 .site-shell-surface > section:nth-child(even)::before,
 .site-shell-surface > div:nth-child(even)::before {
-  inset: 40px max(18px, calc((100vw - 1280px) / 2)) 36px;
+  inset: 16px max(10px, calc((100vw - 1280px) / 2)) 16px;
   transform: none;
 }
 
 .site-shell-surface > section:nth-child(odd)::before,
 .site-shell-surface > div:nth-child(odd)::before {
   transform: none;
+}
+
+@media (min-width: 640px) {
+  .site-shell-surface > section::before,
+  .site-shell-surface > article::before,
+  .site-shell-surface > div::before,
+  .site-shell-surface > section:nth-child(even)::before,
+  .site-shell-surface > div:nth-child(even)::before {
+    inset: 40px max(18px, calc((100vw - 1280px) / 2)) 36px;
+  }
 }
 
 .interactive-button {

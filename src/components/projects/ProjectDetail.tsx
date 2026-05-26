@@ -203,62 +203,63 @@ export default function ProjectDetail({ project }: { project: Project }) {
   const bionlukUrl = getProjectBionlukUrl(project.slug);
 
   return (
-    <article className="py-16">
-      <div className={`mb-10 overflow-hidden rounded-[2rem] border bg-white p-6 shadow-sm sm:p-8 ${theme.border}`}>
-        <div className={`-mx-6 -mt-6 mb-6 h-1 bg-gradient-to-r sm:-mx-8 sm:-mt-8 ${theme.stripe}`} />
-        <div className="mb-5 flex flex-wrap items-center gap-3">
+    <article className="py-10 sm:py-16">
+      <div className={`mb-6 overflow-hidden rounded-3xl border bg-white p-4 shadow-sm sm:mb-10 sm:rounded-[2rem] sm:p-8 ${theme.border}`}>
+        <div className={`-mx-4 -mt-4 mb-4 h-1 bg-gradient-to-r sm:-mx-8 sm:-mt-8 sm:mb-6 ${theme.stripe}`} />
+        <div className="mb-4 flex flex-wrap items-center gap-2 sm:mb-5 sm:gap-3">
           <Badge>{category}</Badge>
-          <span className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-semibold ${theme.border} ${theme.bg} ${theme.text}`}>
-            <span className={`h-2 w-2 rounded-full ${theme.dot}`} />
+          <span className={`inline-flex items-center gap-1.5 rounded-full border px-2 py-1 text-[10px] font-semibold sm:gap-2 sm:px-3 sm:text-xs ${theme.border} ${theme.bg} ${theme.text}`}>
+            <span className={`h-1.5 w-1.5 rounded-full sm:h-2 sm:w-2 ${theme.dot}`} />
             {accentName}
           </span>
         </div>
 
-        <h1 className="max-w-4xl text-4xl font-black tracking-tight text-slate-950 sm:text-6xl">
+        <h1 className="max-w-4xl text-3xl font-black tracking-tight text-slate-950 sm:text-6xl">
           {title}
         </h1>
 
-        <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">
+        <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600 sm:mt-6 sm:text-lg sm:leading-8">
           {description}
         </p>
 
-        <div className="mt-8 flex flex-wrap gap-3">
+        <div className="mt-6 grid grid-cols-2 gap-2 sm:mt-8 sm:flex sm:flex-wrap sm:gap-3">
           {project.isDemoEnabled && (
             <Button
               href={project.demoUrl}
               variant="demo"
               target="_blank"
               rel="noreferrer"
+              className="h-10 min-h-10 px-3 text-xs sm:h-12 sm:min-h-12 sm:px-5 sm:text-sm"
             >
               {t("projects.openDemo")}
             </Button>
           )}
-          <Button href={`/contact?project=${project.slug}`} variant="secondary">
+          <Button href={`/contact?project=${project.slug}`} variant="secondary" className="h-10 min-h-10 px-3 text-xs sm:h-12 sm:min-h-12 sm:px-5 sm:text-sm">
             {language === "tr" ? "Benzerini İstiyorum" : "Request Similar"}
           </Button>
-          <Button href={bionlukUrl} target="_blank" rel="noreferrer">
+          <Button href={bionlukUrl} target="_blank" rel="noreferrer" className="h-10 min-h-10 px-3 text-xs sm:h-12 sm:min-h-12 sm:px-5 sm:text-sm">
             {language === "tr" ? "Bionluk'tan Satın Al" : "Buy on Bionluk"}
           </Button>
-          <Button href="/projects" variant="ghost">
+          <Button href="/projects" variant="ghost" className="h-10 min-h-10 px-3 text-xs sm:h-12 sm:min-h-12 sm:px-5 sm:text-sm">
             {t("projects.back")}
           </Button>
         </div>
       </div>
 
-      <div className="grid gap-8 lg:grid-cols-[1fr_420px]">
-        <div className="space-y-8">
+      <div className="grid gap-5 lg:grid-cols-[1fr_420px] lg:gap-8">
+        <div className="space-y-5 sm:space-y-8">
           <section className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
             <div className={`h-1 bg-gradient-to-r ${theme.stripe}`} />
-            <div className="p-6">
+            <div className="p-3 sm:p-6">
               <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
                 <div>
-                  <p className="text-xs font-black uppercase tracking-[0.18em] text-slate-500">
+                  <p className="text-[10px] font-black uppercase tracking-[0.16em] text-slate-500 sm:text-xs sm:tracking-[0.18em]">
                     {language === "tr" ? "Fiyatlandırma" : "Pricing"}
                   </p>
-                  <h2 className="mt-2 text-3xl font-black text-slate-950">
+                  <h2 className="mt-2 text-xl font-black text-slate-950 sm:text-3xl">
                     {language === "tr" ? "Bionluk paketleriyle aynı mantık" : "Same Package Logic as Bionluk"}
                   </h2>
-                  <p className="mt-3 max-w-3xl leading-7 text-slate-600">
+                  <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600 sm:mt-3 sm:text-base sm:leading-7">
                     {language === "tr"
                       ? "Canlı incelemede gördüğün sistem için düşük başlangıç fiyatlı üç paket. Kapsam netleşince aynı içerik Bionluk satın alma akışına da taşınabilir."
                       : "Three low-entry packages for the system shown in the live preview. Once scoped, the same package structure can be mirrored on Bionluk."}
@@ -267,7 +268,7 @@ export default function ProjectDetail({ project }: { project: Project }) {
                 <Badge>{language === "tr" ? "Başlayan fiyatlar" : "Starting prices"}</Badge>
               </div>
 
-              <div className="mt-6 grid gap-4 xl:grid-cols-3">
+              <div className="mt-4 grid grid-cols-3 gap-2 sm:mt-6 sm:gap-4 xl:grid-cols-3">
                 {pricing.map((item, index) => {
                   const packageName = language === "tr" ? item.nameTr : item.nameEn;
                   const packagePrice = language === "tr" ? item.priceTr : item.priceEn;
@@ -280,45 +281,45 @@ export default function ProjectDetail({ project }: { project: Project }) {
                   return (
                     <div
                       key={`${item.nameTr}-${item.priceTr}`}
-                      className={`relative flex min-h-[430px] flex-col rounded-3xl border p-5 ${
+                      className={`relative flex min-w-0 flex-col rounded-2xl border p-2 sm:p-4 xl:min-h-[430px] xl:rounded-3xl xl:p-5 ${
                         index === 1
                           ? `${theme.border} ${theme.bg}`
                           : "border-slate-200 bg-slate-50"
                       }`}
                     >
                       {packageBadge && (
-                        <span className={`mb-4 inline-flex w-fit rounded-full border px-3 py-1 text-xs font-black ${theme.border} ${theme.text} bg-white/80`}>
+                        <span className={`mb-2 inline-flex w-fit rounded-full border px-2 py-0.5 text-[9px] font-black sm:mb-4 sm:px-3 sm:py-1 sm:text-xs ${theme.border} ${theme.text} bg-white/80`}>
                           {packageBadge}
                         </span>
                       )}
-                      <div className="flex items-start justify-between gap-4">
-                        <div>
-                          <h3 className="text-xl font-black text-slate-950">{packageName}</h3>
-                          <p className="mt-2 text-sm leading-6 text-slate-600">{packageSummary}</p>
+                      <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+                        <div className="min-w-0">
+                          <h3 className="text-xs font-black leading-4 text-slate-950 sm:text-base sm:leading-6 xl:text-xl">{packageName}</h3>
+                          <p className="mt-1 line-clamp-2 text-[10px] leading-4 text-slate-600 sm:mt-2 sm:text-sm sm:leading-6 xl:line-clamp-none">{packageSummary}</p>
                         </div>
-                        <span className="rounded-2xl border border-slate-200 bg-white px-3 py-2 text-xs font-bold text-slate-600">
+                        <span className="w-fit rounded-xl border border-slate-200 bg-white px-2 py-1 text-[9px] font-bold leading-3 text-slate-600 sm:rounded-2xl sm:px-3 sm:py-2 sm:text-xs">
                           {packageDelivery}
                         </span>
                       </div>
-                      <p className="mt-6 text-4xl font-black tracking-tight text-slate-950">
+                      <p className="mt-3 text-base font-black tracking-tight text-slate-950 sm:mt-5 sm:text-2xl xl:mt-6 xl:text-4xl">
                         {packagePrice}
                       </p>
-                      <p className="mt-1 text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">
+                      <p className="mt-1 text-[9px] font-semibold uppercase tracking-[0.08em] text-slate-500 sm:text-xs sm:tracking-[0.12em]">
                         {language === "tr" ? "başlayan fiyat" : "starting price"}
                       </p>
-                      <ul className="mt-6 grid gap-3">
-                        {packageFeatures.map((feature) => (
-                          <li key={feature} className="flex gap-3 text-sm leading-6 text-slate-700">
-                            <span className={`mt-2 h-2 w-2 shrink-0 rounded-full ${theme.dot}`} />
+                      <ul className="mt-3 grid gap-1.5 sm:mt-5 sm:gap-2 xl:mt-6 xl:gap-3">
+                        {packageFeatures.map((feature, featureIndex) => (
+                          <li key={feature} className={`${featureIndex > 2 ? "hidden sm:flex" : "flex"} gap-1.5 text-[10px] leading-4 text-slate-700 sm:gap-3 sm:text-sm sm:leading-6`}>
+                            <span className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full sm:mt-2 sm:h-2 sm:w-2 ${theme.dot}`} />
                             <span>{feature}</span>
                           </li>
                         ))}
                       </ul>
-                      <div className="mt-auto pt-6">
-                        <Button href={bionlukUrl} target="_blank" rel="noreferrer" className="w-full">
+                      <div className="mt-auto pt-3 sm:pt-5 xl:pt-6">
+                        <Button href={bionlukUrl} target="_blank" rel="noreferrer" className="h-8 min-h-8 w-full px-1 text-[9px] sm:h-10 sm:min-h-10 sm:text-xs xl:h-12 xl:min-h-12 xl:px-5 xl:text-sm">
                           {language === "tr" ? "Bionluk'tan Satın Al" : "Buy on Bionluk"}
                         </Button>
-                        <Button href={contactHref} variant="secondary" className="mt-3 w-full">
+                        <Button href={contactHref} variant="secondary" className="mt-2 hidden w-full sm:inline-flex xl:mt-3">
                           {language === "tr" ? "Bu Paketi Sor" : "Ask About This Package"}
                         </Button>
                       </div>
@@ -332,28 +333,28 @@ export default function ProjectDetail({ project }: { project: Project }) {
           {detail && language === "tr" && (
             <section className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
               <div className={`h-1 bg-gradient-to-r ${theme.stripe}`} />
-              <div className="p-6">
-                <h2 className="text-3xl font-black text-slate-950">Bu projeden ne çıkar?</h2>
-                <div className="mt-5 grid gap-4 text-base leading-8 text-slate-600">
+              <div className="p-4 sm:p-6">
+                <h2 className="text-2xl font-black text-slate-950 sm:text-3xl">Bu projeden ne çıkar?</h2>
+                <div className="mt-4 grid gap-3 text-sm leading-6 text-slate-600 sm:mt-5 sm:gap-4 sm:text-base sm:leading-8">
                   {detail.overviewTr.map((paragraph) => (
                     <p key={paragraph}>{paragraph}</p>
                   ))}
                 </div>
-                <div className={`mt-6 rounded-2xl border p-5 ${theme.border} ${theme.bg}`}>
-                  <p className={`text-sm font-black uppercase tracking-[0.14em] ${theme.text}`}>
+                <div className={`mt-4 rounded-2xl border p-4 sm:mt-6 sm:p-5 ${theme.border} ${theme.bg}`}>
+                  <p className={`text-xs font-black uppercase tracking-[0.12em] sm:text-sm sm:tracking-[0.14em] ${theme.text}`}>
                     Canlı inceleme odağı
                   </p>
-                  <p className={`mt-3 leading-7 ${theme.softText}`}>{detail.proofTr}</p>
+                  <p className={`mt-2 text-sm leading-6 sm:mt-3 sm:text-base sm:leading-7 ${theme.softText}`}>{detail.proofTr}</p>
                 </div>
               </div>
             </section>
           )}
 
-          <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="text-2xl font-black text-slate-950">
+          <section className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
+            <h2 className="text-xl font-black text-slate-950 sm:text-2xl">
               {language === "tr" ? "Proje müşteriye nasıl anlatılır?" : "How This Project Is Presented"}
             </h2>
-            <div className="mt-5 grid gap-4 md:grid-cols-3">
+            <div className="mt-4 grid grid-cols-3 gap-2 sm:mt-5 sm:gap-4 md:grid-cols-3">
               {[
                 {
                   title: language === "tr" ? "İhtiyaç" : "Need",
@@ -374,31 +375,31 @@ export default function ProjectDetail({ project }: { project: Project }) {
                     : "The live demo speeds up the proposal conversation; once scoped, the system can be delivered with domain, hosting, admin and content setup."
                 }
               ].map((item) => (
-                <div key={item.title} className={`rounded-2xl border p-5 ${theme.border} ${theme.bg}`}>
-                  <p className={`font-black ${theme.text}`}>{item.title}</p>
-                  <p className={`mt-3 text-sm leading-6 ${theme.softText}`}>{item.text}</p>
+                <div key={item.title} className={`rounded-2xl border p-2 sm:p-5 ${theme.border} ${theme.bg}`}>
+                  <p className={`text-xs font-black sm:text-base ${theme.text}`}>{item.title}</p>
+                  <p className={`mt-1 line-clamp-4 text-[10px] leading-4 sm:mt-3 sm:line-clamp-none sm:text-sm sm:leading-6 ${theme.softText}`}>{item.text}</p>
                 </div>
               ))}
             </div>
           </section>
 
           {detail && language === "tr" && (
-            <section className="grid gap-6 lg:grid-cols-2">
-              <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-                <h2 className="text-2xl font-black text-slate-950">İşletmeye kazandırdıkları</h2>
-                <ul className="mt-5 grid gap-3">
+            <section className="grid gap-3 sm:gap-6 lg:grid-cols-2">
+              <div className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
+                <h2 className="text-xl font-black text-slate-950 sm:text-2xl">İşletmeye kazandırdıkları</h2>
+                <ul className="mt-4 grid grid-cols-2 gap-2 sm:mt-5 sm:gap-3">
                   {detail.outcomesTr.map((item) => (
-                    <li key={item} className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm leading-6 text-slate-700">
+                    <li key={item} className="rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs leading-5 text-slate-700 sm:px-4 sm:py-3 sm:text-sm sm:leading-6">
                       {item}
                     </li>
                   ))}
                 </ul>
               </div>
-              <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-                <h2 className="text-2xl font-black text-slate-950">Modül olarak düşünülebilecekler</h2>
-                <ul className="mt-5 grid gap-3">
+              <div className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
+                <h2 className="text-xl font-black text-slate-950 sm:text-2xl">Modül olarak düşünülebilecekler</h2>
+                <ul className="mt-4 grid grid-cols-2 gap-2 sm:mt-5 sm:gap-3">
                   {detail.modulesTr.map((item) => (
-                    <li key={item} className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm leading-6 text-slate-700">
+                    <li key={item} className="rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs leading-5 text-slate-700 sm:px-4 sm:py-3 sm:text-sm sm:leading-6">
                       {item}
                     </li>
                   ))}
@@ -408,24 +409,24 @@ export default function ProjectDetail({ project }: { project: Project }) {
           )}
 
           {benefit && (
-            <section className={`rounded-3xl border p-6 shadow-sm ${theme.border} ${theme.bg}`}>
-              <h2 className={`text-2xl font-bold ${theme.text}`}>
+            <section className={`rounded-3xl border p-4 shadow-sm sm:p-6 ${theme.border} ${theme.bg}`}>
+              <h2 className={`text-xl font-bold sm:text-2xl ${theme.text}`}>
                 {language === "tr" ? "İşletmeye faydası" : "Business Value"}
               </h2>
-              <p className={`mt-4 leading-7 ${theme.softText}`}>{benefit}</p>
+              <p className={`mt-3 text-sm leading-6 sm:mt-4 sm:text-base sm:leading-7 ${theme.softText}`}>{benefit}</p>
             </section>
           )}
 
           {audience && (
-            <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-              <h2 className="text-2xl font-bold text-slate-950">
+            <section className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
+              <h2 className="text-xl font-bold text-slate-950 sm:text-2xl">
                 {language === "tr" ? "Bu sistem kimler için uygun?" : "Who Is This For?"}
               </h2>
-              <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+              <ul className="mt-4 grid grid-cols-2 gap-2 sm:mt-5 sm:gap-3">
                 {audience.map((item) => (
                   <li
                     key={item}
-                    className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700"
+                    className="rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs leading-5 text-slate-700 sm:px-4 sm:py-3 sm:text-sm"
                   >
                     {item}
                   </li>
@@ -434,31 +435,33 @@ export default function ProjectDetail({ project }: { project: Project }) {
             </section>
           )}
 
-          <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="text-2xl font-bold text-slate-950">{t("projects.problem")}</h2>
-            <p className="mt-4 leading-7 text-slate-600">{problem}</p>
-          </section>
+          <section className="grid gap-3 sm:gap-6 lg:grid-cols-2">
+            <div className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
+              <h2 className="text-xl font-bold text-slate-950 sm:text-2xl">{t("projects.problem")}</h2>
+              <p className="mt-3 text-sm leading-6 text-slate-600 sm:mt-4 sm:text-base sm:leading-7">{problem}</p>
+            </div>
 
-          <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="text-2xl font-bold text-slate-950">{t("projects.solution")}</h2>
-            <p className="mt-4 leading-7 text-slate-600">{solution}</p>
+            <div className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
+              <h2 className="text-xl font-bold text-slate-950 sm:text-2xl">{t("projects.solution")}</h2>
+              <p className="mt-3 text-sm leading-6 text-slate-600 sm:mt-4 sm:text-base sm:leading-7">{solution}</p>
+            </div>
           </section>
 
           {originalScope && (
-            <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-              <h2 className="text-2xl font-bold text-slate-950">
+            <section className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
+              <h2 className="text-xl font-bold text-slate-950 sm:text-2xl">
                 {language === "tr" ? "Orijinal projede bulunan kapsam" : "Original Project Scope"}
               </h2>
-              <p className="mt-3 leading-7 text-slate-600">
+              <p className="mt-3 text-sm leading-6 text-slate-600 sm:text-base sm:leading-7">
                 {language === "tr"
                   ? "Bu bölüm GitHub/proje dokümanlarındaki gerçek ürün kapsamını özetler; canlı inceleme bunun tamamını açmak zorunda değildir."
                   : "This section summarizes the real product scope from the project documentation; the live preview does not need to expose every production-facing surface."}
               </p>
-              <ul className="mt-5 grid gap-3">
+              <ul className="mt-4 grid grid-cols-2 gap-2 sm:mt-5 sm:gap-3">
                 {originalScope.map((item) => (
                   <li
                     key={item}
-                    className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm leading-6 text-slate-700"
+                    className="rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs leading-5 text-slate-700 sm:px-4 sm:py-3 sm:text-sm sm:leading-6"
                   >
                     {item}
                   </li>
@@ -467,13 +470,13 @@ export default function ProjectDetail({ project }: { project: Project }) {
             </section>
           )}
 
-          <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="text-2xl font-bold text-slate-950">{t("projects.features")}</h2>
-            <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+          <section className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
+            <h2 className="text-xl font-bold text-slate-950 sm:text-2xl">{t("projects.features")}</h2>
+            <ul className="mt-4 grid grid-cols-2 gap-2 sm:mt-5 sm:gap-3">
               {features.map((feature) => (
                 <li
                   key={feature}
-                  className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700"
+                  className="rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs leading-5 text-slate-700 sm:px-4 sm:py-3 sm:text-sm"
                 >
                   {feature}
                 </li>
@@ -482,16 +485,16 @@ export default function ProjectDetail({ project }: { project: Project }) {
           </section>
 
           {screenshots.length > 0 && (
-            <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-              <h2 className="text-2xl font-bold text-slate-950">
+            <section className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
+              <h2 className="text-xl font-bold text-slate-950 sm:text-2xl">
                 {language === "tr" ? "Ekran görüntüleri" : "Screenshots"}
               </h2>
-              <p className="mt-3 leading-7 text-slate-600">
+              <p className="mt-3 text-sm leading-6 text-slate-600 sm:text-base sm:leading-7">
                 {language === "tr"
                   ? "Projelerin kendi dokümanlarında bulunan uygulama ekranları burada tanıtım için kullanılır."
                   : "Application screenshots from the project documentation are used here for clearer presentation."}
               </p>
-              <div className="mt-5 grid gap-4 md:grid-cols-2">
+              <div className="mt-4 grid grid-cols-2 gap-2 sm:mt-5 sm:gap-4 md:grid-cols-2">
                 {screenshots.map((screenshot) => (
                   <figure
                     key={screenshot.src}
@@ -504,7 +507,7 @@ export default function ProjectDetail({ project }: { project: Project }) {
                       height={506}
                       className="aspect-video w-full object-cover"
                     />
-                    <figcaption className="px-4 py-3 text-sm font-medium text-slate-700">
+                    <figcaption className="px-3 py-2 text-xs font-medium leading-5 text-slate-700 sm:px-4 sm:py-3 sm:text-sm">
                       {language === "tr" ? screenshot.altTr ?? screenshot.alt : screenshot.alt}
                     </figcaption>
                   </figure>
@@ -514,12 +517,12 @@ export default function ProjectDetail({ project }: { project: Project }) {
           )}
         </div>
 
-        <aside className="space-y-6">
+        <aside className="space-y-4 sm:space-y-6">
           {project.isDemoEnabled ? (
             <DemoAccessBox project={project} />
           ) : (
-            <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-              <h3 className="text-lg font-bold text-slate-950">
+            <div className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
+              <h3 className="text-base font-bold text-slate-950 sm:text-lg">
                 {language === "tr" ? "İnceleme durumu" : "Preview Status"}
               </h3>
               <p className="mt-3 text-sm leading-6 text-slate-600">
@@ -530,8 +533,8 @@ export default function ProjectDetail({ project }: { project: Project }) {
             </div>
           )}
 
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h3 className="text-lg font-bold text-slate-950">
+          <div className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
+            <h3 className="text-base font-bold text-slate-950 sm:text-lg">
               {t("projects.technicalInfo")}
             </h3>
 

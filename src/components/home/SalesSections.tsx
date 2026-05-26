@@ -74,7 +74,7 @@ export default function SalesSections() {
 
   return (
     <>
-      <section className="py-20">
+      <section className="py-14 sm:py-20">
         <Container>
           <SectionTitle
             eyebrow={language === "tr" ? "Neden NT Web Çözümleri?" : "Why NT Web Çözümleri?"}
@@ -90,13 +90,13 @@ export default function SalesSections() {
             }
           />
 
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 xl:grid-cols-4 xl:gap-6">
             {whyItems.map((item) => (
-              <div key={item.title} className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-                <h3 className="text-lg font-bold text-slate-950">
+              <div key={item.title} className="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm sm:p-4 xl:rounded-3xl xl:p-6">
+                <h3 className="text-sm font-bold leading-5 text-slate-950 sm:text-base sm:leading-6 xl:text-lg">
                   {language === "tr" ? item.titleTr : item.title}
                 </h3>
-                <p className="mt-3 text-sm leading-6 text-slate-600">
+                <p className="mt-2 text-xs leading-5 text-slate-600 sm:text-sm sm:leading-6 xl:mt-3">
                   {language === "tr" ? item.descriptionTr : item.description}
                 </p>
               </div>
@@ -105,7 +105,7 @@ export default function SalesSections() {
         </Container>
       </section>
 
-      <section className="py-20">
+      <section className="py-14 sm:py-20">
         <Container>
           <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
             <div>
@@ -123,17 +123,17 @@ export default function SalesSections() {
               </Button>
             </div>
 
-            <div className="grid gap-4">
+            <div className="grid gap-3 sm:gap-4">
               {processItems.map(([title, titleTr, description, descriptionTr], index) => (
-                <div key={title} className="flex gap-4 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-950 text-sm font-bold text-white">
+                <div key={title} className="flex gap-3 rounded-2xl border border-slate-200 bg-white p-3 shadow-sm sm:gap-4 sm:p-5 lg:rounded-3xl">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-950 text-xs font-bold text-white sm:h-9 sm:w-9 sm:text-sm">
                     {index + 1}
                   </span>
                   <div>
-                    <h3 className="font-bold text-slate-950">
+                    <h3 className="text-sm font-bold leading-5 text-slate-950 sm:text-base sm:leading-6">
                       {language === "tr" ? titleTr : title}
                     </h3>
-                    <p className="mt-1 text-sm leading-6 text-slate-600">
+                    <p className="mt-1 text-xs leading-5 text-slate-600 sm:text-sm sm:leading-6">
                       {language === "tr" ? descriptionTr : description}
                     </p>
                   </div>
@@ -144,7 +144,7 @@ export default function SalesSections() {
         </Container>
       </section>
 
-      <section className="py-20">
+      <section className="py-14 sm:py-20">
         <Container>
           <SectionTitle
             eyebrow={language === "tr" ? "Hizmet paketleri" : "Service Packages"}
@@ -156,18 +156,18 @@ export default function SalesSections() {
             }
           />
 
-          <div className="grid gap-6 lg:grid-cols-3">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:gap-6">
             {packages.map((pkg) => (
-              <div key={pkg.title} className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-                <h3 className="text-xl font-black text-slate-950">
+              <div key={pkg.title} className="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm sm:p-4 lg:rounded-3xl lg:p-6">
+                <h3 className="text-base font-black text-slate-950 sm:text-lg lg:text-xl">
                   {language === "tr" ? pkg.titleTr : pkg.title}
                 </h3>
-                <ul className="mt-5 space-y-3 text-sm leading-6 text-slate-600">
+                <ul className="mt-3 space-y-2 text-xs leading-5 text-slate-600 sm:text-sm sm:leading-6 lg:mt-5 lg:space-y-3">
                   {(language === "tr" ? pkg.itemsTr : pkg.items).map((item) => (
                     <li key={item}>- {item}</li>
                   ))}
                 </ul>
-                <p className="mt-6 rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-sm font-semibold text-emerald-800">
+                <p className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-xs font-semibold leading-5 text-emerald-800 sm:text-sm lg:mt-6 lg:rounded-2xl lg:p-4">
                   {language === "tr"
                     ? "Projeye göre fiyatlandırılır. Benzer sistem için teklif alın."
                     : "Priced by scope. Request a quote for a similar system."}

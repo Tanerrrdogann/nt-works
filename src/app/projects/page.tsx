@@ -10,7 +10,7 @@ export default function ProjectsPage() {
   const { t } = useLanguage();
 
   return (
-    <section className="py-16">
+    <section className="py-12 sm:py-16">
       <Container>
         <SectionTitle
           eyebrow={t("projects.eyebrow")}
@@ -18,7 +18,7 @@ export default function ProjectsPage() {
           description={t("projects.description")}
         />
 
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 xl:gap-6">
           {projects.map((project) => (
             <ProjectCard key={project.slug} project={project} />
           ))}
