@@ -203,8 +203,8 @@ export default function ProjectDetail({ project }: { project: Project }) {
   const bionlukUrl = getProjectBionlukUrl(project.slug);
 
   return (
-    <article className="py-10 sm:py-16">
-      <div className={`mb-6 overflow-hidden rounded-3xl border bg-white p-4 shadow-sm sm:mb-10 sm:rounded-[2rem] sm:p-8 ${theme.border}`}>
+    <article className="min-w-0 overflow-hidden py-10 sm:py-16">
+      <div className={`mb-6 min-w-0 overflow-hidden rounded-3xl border bg-white p-4 shadow-sm sm:mb-10 sm:rounded-[2rem] sm:p-8 ${theme.border}`}>
         <div className={`-mx-4 -mt-4 mb-4 h-1 bg-gradient-to-r sm:-mx-8 sm:-mt-8 sm:mb-6 ${theme.stripe}`} />
         <div className="mb-4 flex flex-wrap items-center gap-2 sm:mb-5 sm:gap-3">
           <Badge>{category}</Badge>
@@ -222,7 +222,7 @@ export default function ProjectDetail({ project }: { project: Project }) {
           {description}
         </p>
 
-        <div className="mt-6 grid grid-cols-2 gap-2 sm:mt-8 sm:flex sm:flex-wrap sm:gap-3">
+        <div className="mt-6 grid min-w-0 grid-cols-2 gap-2 sm:mt-8 sm:flex sm:flex-wrap sm:gap-3">
           {project.isDemoEnabled && (
             <Button
               href={project.demoUrl}
@@ -246,13 +246,13 @@ export default function ProjectDetail({ project }: { project: Project }) {
         </div>
       </div>
 
-      <div className="grid gap-5 lg:grid-cols-[1fr_420px] lg:gap-8">
-        <div className="space-y-5 sm:space-y-8">
-          <section className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+      <div className="grid min-w-0 gap-5 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-8">
+        <div className="min-w-0 space-y-5 sm:space-y-8">
+          <section className="min-w-0 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
             <div className={`h-1 bg-gradient-to-r ${theme.stripe}`} />
             <div className="p-3 sm:p-6">
-              <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-                <div>
+              <div className="flex min-w-0 flex-col gap-4 md:flex-row md:items-end md:justify-between">
+                <div className="min-w-0">
                   <p className="text-[10px] font-black uppercase tracking-[0.16em] text-slate-500 sm:text-xs sm:tracking-[0.18em]">
                     {language === "tr" ? "Fiyatlandırma" : "Pricing"}
                   </p>
@@ -268,7 +268,7 @@ export default function ProjectDetail({ project }: { project: Project }) {
                 <Badge>{language === "tr" ? "Başlayan fiyatlar" : "Starting prices"}</Badge>
               </div>
 
-              <div className="-mx-3 mt-4 flex snap-x gap-3 overflow-x-auto px-3 pb-2 [scrollbar-width:none] sm:mx-0 sm:mt-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:overflow-visible sm:px-0 sm:pb-0 sm:[scrollbar-width:auto] xl:grid-cols-3 [&::-webkit-scrollbar]:hidden sm:[&::-webkit-scrollbar]:block">
+              <div className="-mx-3 mt-4 flex max-w-[calc(100%+1.5rem)] snap-x gap-3 overflow-x-auto overscroll-x-contain px-3 pb-2 [scrollbar-width:none] sm:mx-0 sm:mt-6 sm:grid sm:max-w-none sm:grid-cols-3 sm:gap-4 sm:overflow-visible sm:px-0 sm:pb-0 sm:[scrollbar-width:auto] xl:grid-cols-3 [&::-webkit-scrollbar]:hidden sm:[&::-webkit-scrollbar]:block">
                 {pricing.map((item, index) => {
                   const packageName = language === "tr" ? item.nameTr : item.nameEn;
                   const packagePrice = language === "tr" ? item.priceTr : item.priceEn;
@@ -281,7 +281,7 @@ export default function ProjectDetail({ project }: { project: Project }) {
                   return (
                     <div
                       key={`${item.nameTr}-${item.priceTr}`}
-                      className={`relative flex min-w-[78%] snap-start flex-col rounded-2xl border p-3 sm:min-w-0 sm:p-4 xl:min-h-[430px] xl:rounded-3xl xl:p-5 ${
+                      className={`relative flex min-w-[78%] max-w-[78%] shrink-0 snap-start flex-col rounded-2xl border p-3 sm:min-w-0 sm:max-w-none sm:shrink sm:p-4 xl:min-h-[430px] xl:rounded-3xl xl:p-5 ${
                         index === 1
                           ? `${theme.border} ${theme.bg}`
                           : "border-slate-200 bg-slate-50"
@@ -517,7 +517,7 @@ export default function ProjectDetail({ project }: { project: Project }) {
           )}
         </div>
 
-        <aside className="space-y-4 sm:space-y-6">
+        <aside className="min-w-0 space-y-4 sm:space-y-6">
           {project.isDemoEnabled ? (
             <DemoAccessBox project={project} />
           ) : (
