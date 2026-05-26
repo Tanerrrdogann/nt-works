@@ -144,7 +144,7 @@ export default function ContactPage() {
   }
 
   return (
-    <section className="py-16">
+    <section className="py-12 sm:py-16">
       <Container>
         <SectionTitle
           eyebrow={t("contact.eyebrow")}
@@ -152,19 +152,19 @@ export default function ContactPage() {
           description={t("contact.description")}
         />
 
-        <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="mx-auto grid max-w-6xl gap-4 sm:gap-8 lg:grid-cols-[1.1fr_0.9fr]">
           <form
             onSubmit={handleSubmit}
-            className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm sm:p-8"
+            className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:rounded-[2rem] sm:p-8"
           >
-            <div className="grid gap-5">
+            <div className="grid grid-cols-2 gap-3 sm:gap-5">
               <label className="grid gap-2 text-sm font-semibold text-slate-700">
                 {language === "tr" ? "Adın" : "Your name"}
                 <input
                   required
                   value={name}
                   onChange={(event) => setName(event.target.value)}
-                  className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-950 outline-none transition focus:border-slate-400 focus:bg-white"
+                  className="rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-950 outline-none transition focus:border-slate-400 focus:bg-white sm:px-4 sm:py-3 sm:text-base"
                   placeholder={language === "tr" ? "Adını yaz" : "Enter your name"}
                 />
               </label>
@@ -176,12 +176,12 @@ export default function ContactPage() {
                   type="email"
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
-                  className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-950 outline-none transition focus:border-slate-400 focus:bg-white"
+                  className="rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-950 outline-none transition focus:border-slate-400 focus:bg-white sm:px-4 sm:py-3 sm:text-base"
                   placeholder={language === "tr" ? "ornek@mail.com" : "name@example.com"}
                 />
               </label>
 
-              <label className="grid gap-2 text-sm font-semibold text-slate-700">
+              <label className="col-span-2 grid gap-2 text-sm font-semibold text-slate-700">
                 {language === "tr" ? "İlgilendiğin proje türü" : "Project type"}
                 <select
                   value={projectType}
@@ -190,7 +190,7 @@ export default function ContactPage() {
                     setProjectType(nextProject);
                     setMessage(nextProject ? buildProjectRequestMessage(nextProject, language) : "");
                   }}
-                  className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-950 outline-none transition focus:border-slate-400 focus:bg-white"
+                  className="rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-950 outline-none transition focus:border-slate-400 focus:bg-white sm:px-4 sm:py-3 sm:text-base"
                 >
                   <option value="">{language === "tr" ? "Seç veya boş bırak" : "Select or leave blank"}</option>
                   {projectTypeOptions.map((option) => (
@@ -201,14 +201,14 @@ export default function ContactPage() {
                 </select>
               </label>
 
-              <label className="grid gap-2 text-sm font-semibold text-slate-700">
+              <label className="col-span-2 grid gap-2 text-sm font-semibold text-slate-700">
                 {language === "tr" ? "Mesajın" : "Message"}
                 <textarea
                   required
                   value={message}
                   onChange={(event) => setMessage(event.target.value)}
-                  rows={6}
-                  className="resize-none rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-950 outline-none transition focus:border-slate-400 focus:bg-white"
+                  rows={4}
+                  className="resize-none rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-950 outline-none transition focus:border-slate-400 focus:bg-white sm:px-4 sm:py-3 sm:text-base"
                   placeholder={
                     language === "tr"
                       ? "İhtiyacını, örnek aldığın projeyi veya işletme türünü yazabilirsin."
@@ -221,7 +221,7 @@ export default function ContactPage() {
             <button
               type="submit"
               disabled={submitState === "sending"}
-              className="mt-6 inline-flex items-center justify-center rounded-xl bg-slate-950 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800"
+              className="mt-4 inline-flex items-center justify-center rounded-xl bg-slate-950 px-4 py-2.5 text-xs font-semibold text-white shadow-sm transition hover:bg-slate-800 sm:mt-6 sm:px-5 sm:py-3 sm:text-sm"
             >
               {submitState === "sending" ? "Gönderiliyor..." : "Mesaj Gönder"}
             </button>
@@ -239,11 +239,11 @@ export default function ContactPage() {
             )}
           </form>
 
-          <div className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
-            <div className="grid gap-4">
+          <div className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:rounded-[2rem] sm:p-8">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-1">
               <a
                 href={`mailto:${CONTACT_EMAIL}`}
-                className="rounded-2xl border border-slate-200 bg-slate-50 p-5 transition hover:bg-white"
+                className="rounded-2xl border border-slate-200 bg-slate-50 p-3 transition hover:bg-white sm:p-5"
               >
                 <p className="text-sm text-slate-500">E-posta</p>
                 <p className="mt-1 break-words font-semibold text-slate-950">
@@ -255,7 +255,7 @@ export default function ContactPage() {
                 href={BIONLUK_PROFILE_URL}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-2xl border border-slate-200 bg-slate-50 p-5 transition hover:bg-white"
+                className="rounded-2xl border border-slate-200 bg-slate-50 p-3 transition hover:bg-white sm:p-5"
               >
                 <p className="text-sm text-slate-500">Bionluk</p>
                 <p className="mt-1 font-semibold text-slate-950">
@@ -267,7 +267,7 @@ export default function ContactPage() {
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-2xl border border-slate-200 bg-slate-50 p-5 transition hover:bg-white"
+                className="rounded-2xl border border-slate-200 bg-slate-50 p-3 transition hover:bg-white sm:p-5"
               >
                 <div className="flex items-center gap-3">
                   <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#25D366] text-white">
@@ -285,13 +285,13 @@ export default function ContactPage() {
               </a>
             </div>
 
-            <div className="mt-8 rounded-3xl border border-slate-200 bg-slate-50 p-6 text-slate-950">
-              <h2 className="text-2xl font-black">{t("contact.noteTitle")}</h2>
-              <p className="mt-3 text-slate-700">
+            <div className="mt-4 rounded-3xl border border-slate-200 bg-slate-50 p-4 text-slate-950 sm:mt-8 sm:p-6">
+              <h2 className="text-xl font-black sm:text-2xl">{t("contact.noteTitle")}</h2>
+              <p className="mt-3 text-sm leading-6 text-slate-700 sm:text-base">
                 {t("contact.noteDescription")}
               </p>
-              <div className="mt-5">
-                <Button href="/projects">
+              <div className="mt-4 sm:mt-5">
+                <Button href="/projects" className="h-10 min-h-10 px-4 text-xs sm:h-12 sm:min-h-12 sm:px-5 sm:text-sm">
                   {t("contact.viewProjects")}
                 </Button>
               </div>

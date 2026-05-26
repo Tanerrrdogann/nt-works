@@ -268,7 +268,7 @@ export default function ProjectDetail({ project }: { project: Project }) {
                 <Badge>{language === "tr" ? "Başlayan fiyatlar" : "Starting prices"}</Badge>
               </div>
 
-              <div className="mt-4 grid grid-cols-3 gap-2 sm:mt-6 sm:gap-4 xl:grid-cols-3">
+              <div className="-mx-3 mt-4 flex snap-x gap-3 overflow-x-auto px-3 pb-2 [scrollbar-width:none] sm:mx-0 sm:mt-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:overflow-visible sm:px-0 sm:pb-0 sm:[scrollbar-width:auto] xl:grid-cols-3 [&::-webkit-scrollbar]:hidden sm:[&::-webkit-scrollbar]:block">
                 {pricing.map((item, index) => {
                   const packageName = language === "tr" ? item.nameTr : item.nameEn;
                   const packagePrice = language === "tr" ? item.priceTr : item.priceEn;
@@ -281,7 +281,7 @@ export default function ProjectDetail({ project }: { project: Project }) {
                   return (
                     <div
                       key={`${item.nameTr}-${item.priceTr}`}
-                      className={`relative flex min-w-0 flex-col rounded-2xl border p-2 sm:p-4 xl:min-h-[430px] xl:rounded-3xl xl:p-5 ${
+                      className={`relative flex min-w-[78%] snap-start flex-col rounded-2xl border p-3 sm:min-w-0 sm:p-4 xl:min-h-[430px] xl:rounded-3xl xl:p-5 ${
                         index === 1
                           ? `${theme.border} ${theme.bg}`
                           : "border-slate-200 bg-slate-50"
@@ -295,28 +295,28 @@ export default function ProjectDetail({ project }: { project: Project }) {
                       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
                         <div className="min-w-0">
                           <h3 className="text-xs font-black leading-4 text-slate-950 sm:text-base sm:leading-6 xl:text-xl">{packageName}</h3>
-                          <p className="mt-1 line-clamp-2 text-[10px] leading-4 text-slate-600 sm:mt-2 sm:text-sm sm:leading-6 xl:line-clamp-none">{packageSummary}</p>
+                          <p className="mt-1 line-clamp-2 text-xs leading-5 text-slate-600 sm:mt-2 sm:text-sm sm:leading-6 xl:line-clamp-none">{packageSummary}</p>
                         </div>
                         <span className="w-fit rounded-xl border border-slate-200 bg-white px-2 py-1 text-[9px] font-bold leading-3 text-slate-600 sm:rounded-2xl sm:px-3 sm:py-2 sm:text-xs">
                           {packageDelivery}
                         </span>
                       </div>
-                      <p className="mt-3 text-base font-black tracking-tight text-slate-950 sm:mt-5 sm:text-2xl xl:mt-6 xl:text-4xl">
+                      <p className="mt-3 text-2xl font-black tracking-tight text-slate-950 sm:mt-5 sm:text-2xl xl:mt-6 xl:text-4xl">
                         {packagePrice}
                       </p>
                       <p className="mt-1 text-[9px] font-semibold uppercase tracking-[0.08em] text-slate-500 sm:text-xs sm:tracking-[0.12em]">
                         {language === "tr" ? "başlayan fiyat" : "starting price"}
                       </p>
-                      <ul className="mt-3 grid gap-1.5 sm:mt-5 sm:gap-2 xl:mt-6 xl:gap-3">
+                      <ul className="mt-3 grid gap-2 sm:mt-5 sm:gap-2 xl:mt-6 xl:gap-3">
                         {packageFeatures.map((feature, featureIndex) => (
-                          <li key={feature} className={`${featureIndex > 2 ? "hidden sm:flex" : "flex"} gap-1.5 text-[10px] leading-4 text-slate-700 sm:gap-3 sm:text-sm sm:leading-6`}>
+                          <li key={feature} className={`${featureIndex > 2 ? "hidden sm:flex" : "flex"} gap-2 text-xs leading-5 text-slate-700 sm:gap-3 sm:text-sm sm:leading-6`}>
                             <span className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full sm:mt-2 sm:h-2 sm:w-2 ${theme.dot}`} />
                             <span>{feature}</span>
                           </li>
                         ))}
                       </ul>
                       <div className="mt-auto pt-3 sm:pt-5 xl:pt-6">
-                        <Button href={bionlukUrl} target="_blank" rel="noreferrer" className="h-8 min-h-8 w-full px-1 text-[9px] sm:h-10 sm:min-h-10 sm:text-xs xl:h-12 xl:min-h-12 xl:px-5 xl:text-sm">
+                        <Button href={bionlukUrl} target="_blank" rel="noreferrer" className="h-9 min-h-9 w-full px-2 text-[10px] sm:h-10 sm:min-h-10 sm:text-xs xl:h-12 xl:min-h-12 xl:px-5 xl:text-sm">
                           {language === "tr" ? "Bionluk'tan Satın Al" : "Buy on Bionluk"}
                         </Button>
                         <Button href={contactHref} variant="secondary" className="mt-2 hidden w-full sm:inline-flex xl:mt-3">

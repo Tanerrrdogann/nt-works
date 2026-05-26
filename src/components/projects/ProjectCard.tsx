@@ -38,9 +38,9 @@ export default function ProjectCard({ project }: { project: Project }) {
           {shortDescription}
         </p>
 
-        <div className="mt-2.5 flex flex-wrap gap-1.5 sm:mt-4 sm:gap-2 xl:mt-5">
+        <div className="mt-2.5 hidden flex-wrap gap-1.5 sm:mt-4 sm:flex sm:gap-2 xl:mt-5">
           {project.techStack.slice(0, 4).map((tech, index) => (
-            <Badge key={tech} className={`${index > 1 ? "hidden sm:inline-flex" : ""} px-2 text-[10px] sm:px-3 sm:text-xs`}>
+            <Badge key={tech} className={`${index > 1 ? "hidden md:inline-flex" : ""} px-2 text-[10px] sm:px-3 sm:text-xs`}>
               {tech}
             </Badge>
           ))}
