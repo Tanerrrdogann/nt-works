@@ -240,7 +240,7 @@ export default function ContactPage() {
           </form>
 
           <div className="min-w-0 rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:rounded-[2rem] sm:p-8">
-            <div className="grid min-w-0 grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-1">
+            <div className="grid min-w-0 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-1">
               <a
                 href={`mailto:${CONTACT_EMAIL}`}
                 className="rounded-2xl border border-slate-200 bg-slate-50 p-3 transition hover:bg-white sm:p-5"
@@ -267,7 +267,7 @@ export default function ContactPage() {
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-2xl border border-slate-200 bg-slate-50 p-3 transition hover:bg-white sm:p-5"
+                className="rounded-2xl border border-slate-200 bg-slate-50 p-3 transition hover:bg-white sm:col-span-2 sm:p-5 lg:col-span-1"
               >
                 <div className="flex items-center gap-3">
                   <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#25D366] text-white">

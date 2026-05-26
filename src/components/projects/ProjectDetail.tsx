@@ -268,7 +268,7 @@ export default function ProjectDetail({ project }: { project: Project }) {
                 <Badge>{language === "tr" ? "Başlayan fiyatlar" : "Starting prices"}</Badge>
               </div>
 
-              <div className="-mx-3 mt-4 flex max-w-[calc(100%+1.5rem)] snap-x gap-3 overflow-x-auto overscroll-x-contain px-3 pb-2 [scrollbar-width:none] sm:mx-0 sm:mt-6 sm:grid sm:max-w-none sm:grid-cols-3 sm:gap-4 sm:overflow-visible sm:px-0 sm:pb-0 sm:[scrollbar-width:auto] xl:grid-cols-3 [&::-webkit-scrollbar]:hidden sm:[&::-webkit-scrollbar]:block">
+              <div className="-mx-3 mt-4 flex max-w-[calc(100%+1.5rem)] snap-x gap-3 overflow-x-auto overscroll-x-contain px-3 pb-2 [scrollbar-width:none] sm:mt-6 sm:gap-4 lg:-mx-6 lg:max-w-[calc(100%+3rem)] lg:px-6 [&::-webkit-scrollbar]:hidden">
                 {pricing.map((item, index) => {
                   const packageName = language === "tr" ? item.nameTr : item.nameEn;
                   const packagePrice = language === "tr" ? item.priceTr : item.priceEn;
@@ -281,7 +281,7 @@ export default function ProjectDetail({ project }: { project: Project }) {
                   return (
                     <div
                       key={`${item.nameTr}-${item.priceTr}`}
-                      className={`relative flex min-w-[78%] max-w-[78%] shrink-0 snap-start flex-col rounded-2xl border p-3 sm:min-w-0 sm:max-w-none sm:shrink sm:p-4 xl:min-h-[430px] xl:rounded-3xl xl:p-5 ${
+                      className={`relative flex min-w-[78%] max-w-[78%] shrink-0 snap-start flex-col rounded-2xl border p-3 sm:min-w-[46%] sm:max-w-[46%] sm:p-4 lg:min-w-[360px] lg:max-w-[360px] xl:min-h-[430px] xl:rounded-3xl xl:p-5 ${
                         index === 1
                           ? `${theme.border} ${theme.bg}`
                           : "border-slate-200 bg-slate-50"
