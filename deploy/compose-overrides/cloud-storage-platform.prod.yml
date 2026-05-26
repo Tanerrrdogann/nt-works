@@ -23,17 +23,17 @@ services:
   auth-service:
     mem_limit: 640m
     environment:
-      JAVA_TOOL_OPTIONS: "-XX:MaxRAMPercentage=60 -Xms128m -Xmx384m"
+      JAVA_TOOL_OPTIONS: "-Dserver.ssl.enabled=false -Dserver.ssl.client-auth=none -XX:MaxRAMPercentage=60 -Xms128m -Xmx384m"
 
   storage-service:
     mem_limit: 640m
     environment:
-      JAVA_TOOL_OPTIONS: "-XX:MaxRAMPercentage=60 -Xms128m -Xmx384m"
+      JAVA_TOOL_OPTIONS: "-Dserver.ssl.enabled=false -Dserver.ssl.client-auth=none -XX:MaxRAMPercentage=60 -Xms128m -Xmx384m"
 
   api-gateway:
     mem_limit: 512m
     environment:
-      JAVA_TOOL_OPTIONS: "-XX:MaxRAMPercentage=60 -Xms96m -Xmx256m"
+      JAVA_TOOL_OPTIONS: "-Dserver.ssl.enabled=false -Dserver.ssl.client-auth=none -Dspring.cloud.gateway.server.webflux.httpclient.ssl.use-insecure-trust-manager=true -XX:MaxRAMPercentage=60 -Xms96m -Xmx256m"
 
   frontend:
     mem_limit: 192m
