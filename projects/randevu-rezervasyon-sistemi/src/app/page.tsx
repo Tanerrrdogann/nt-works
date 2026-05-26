@@ -14,7 +14,7 @@ export default function Home() {
           <div className="inline-flex items-center gap-2 py-2 px-5 bg-white border border-rose-100 rounded-full text-rose-500 text-xs font-black uppercase tracking-[0.2em] mb-8 shadow-sm">
             <Sparkles size={14} fill="currentColor" /> Glow & Go Deneyimi
           </div>
-          <h1 className="text-5xl md:text-8xl font-black text-slate-900 mb-8 tracking-tighter leading-[0.9]">
+          <h1 className="text-4xl md:text-8xl font-black text-slate-900 mb-8 tracking-tighter leading-[0.9]">
             Güzellik Bir <br/> <span className="text-rose-500 italic">Ritüeldir.</span>
           </h1>
           <p className="text-lg md:text-xl text-slate-500 max-w-2xl mx-auto mb-12 leading-relaxed font-medium">
@@ -58,7 +58,7 @@ export default function Home() {
       <section className="py-24 bg-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-black text-slate-900 mb-12 uppercase tracking-tighter">Popüler Bakımlar</h2>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-8">
             {siteConfig.services.map((service) => (
               <ServiceCard key={service.slug} service={service} />
             ))}

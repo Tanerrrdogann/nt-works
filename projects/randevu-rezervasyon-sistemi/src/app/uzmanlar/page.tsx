@@ -9,7 +9,7 @@ export default function SpecialistsPage() {
           <h1 className="text-4xl font-bold text-slate-800 mb-4">Sihirli Ellere Teslim Olun</h1>
           <p className="text-rose-500 text-lg">Alanında profesyonel, size özel hissettirecek uzman kadromuzla tanışın.</p>
         </div>
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-8 max-w-5xl mx-auto">
           {siteConfig.specialists.map((specialist, i) => (
             <SpecialistCard key={i} specialist={specialist} />
           ))}

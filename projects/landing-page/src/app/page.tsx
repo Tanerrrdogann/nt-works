@@ -63,7 +63,7 @@ export default function Home() {
         />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_42%,rgba(255,255,255,.2),transparent_32%)]" />
         <div className="relative z-10 w-full max-w-5xl">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
             {siteConfig.panels.map((item) => (
               <a key={item.href} href={`${landingPath}${item.href}`} className="entry-card group">
                 <span className="entry-card-icon">

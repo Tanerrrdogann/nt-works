@@ -55,7 +55,7 @@ export default function SolutionsPage() {
       />
 
       <section className="mx-auto max-w-7xl px-5 py-16">
-        <div className="grid gap-px bg-white/14 lg:grid-cols-3">
+        <div className="grid grid-cols-2 gap-px bg-white/14 md:grid-cols-3">
           {solutionDetails.map((solution) => (
             <article key={solution.title} className="bg-[#0b1830]">
               <div
@@ -65,12 +65,12 @@ export default function SolutionsPage() {
               >
                 <div className="h-full w-full bg-[#071225]/18" />
               </div>
-              <div className="p-6">
-                <h2 className="text-3xl font-black text-white">{solution.title}</h2>
-                <p className="mt-4 leading-7 text-slate-300">{solution.fit}</p>
-                <div className="mt-6 grid gap-2">
+              <div className="p-3 md:p-6">
+                <h2 className="text-lg font-black text-white md:text-3xl">{solution.title}</h2>
+                <p className="mt-2 line-clamp-3 text-xs leading-5 text-slate-300 md:mt-4 md:text-base md:leading-7">{solution.fit}</p>
+                <div className="mt-3 grid gap-1 md:mt-6 md:gap-2">
                   {solution.modules.map((module) => (
-                    <p key={module} className="border-t border-white/12 pt-2 text-sm font-bold text-slate-400">
+                    <p key={module} className="border-t border-white/12 pt-2 text-[11px] font-bold text-slate-400 md:text-sm">
                       {module}
                     </p>
                   ))}

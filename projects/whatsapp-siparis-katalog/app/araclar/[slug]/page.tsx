@@ -14,9 +14,9 @@ export default async function VehicleDetail({ params }: { params: Promise<{ slug
   const moreImagesMessage = encodeURIComponent(`Merhaba, ${vehicle.title} aracı için daha fazla fotoğraf görmek istiyorum.`);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12 w-full">
+    <div className="max-w-7xl mx-auto px-3 sm:px-4 py-8 md:py-12 w-full">
       <div className="mb-8 border-b border-zinc-800 pb-6">
-        <h1 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter mb-4">{vehicle.title}</h1>
+        <h1 className="text-2xl md:text-5xl font-black text-white uppercase tracking-tighter mb-4">{vehicle.title}</h1>
         <div className="flex flex-wrap gap-3">
           {vehicle.tags.map(tag => (
             <span key={tag} className="bg-red-600 text-white px-3 py-1.5 rounded-sm text-xs font-bold uppercase tracking-wider">{tag}</span>
@@ -27,7 +27,7 @@ export default async function VehicleDetail({ params }: { params: Promise<{ slug
         </div>
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-10">
+      <div className="flex flex-col lg:flex-row gap-6 lg:gap-10">
         {/* Sol Alan: Görsel Galerisi & Detaylar */}
         <div className="flex-1 space-y-10">
           
@@ -50,14 +50,14 @@ export default async function VehicleDetail({ params }: { params: Promise<{ slug
             </div>
           </div>
 
-          <div className="bg-zinc-900 border border-zinc-800 rounded-sm p-8">
+          <div className="bg-zinc-900 border border-zinc-800 rounded-sm p-5 md:p-8">
             <h2 className="text-xl font-black uppercase tracking-widest text-white mb-6 border-b border-zinc-800 pb-4">Araç Açıklaması</h2>
             <p className="text-zinc-300 whitespace-pre-line leading-relaxed font-medium">{vehicle.description}</p>
           </div>
 
-          <div className="bg-zinc-900 border border-zinc-800 rounded-sm p-8">
+          <div className="bg-zinc-900 border border-zinc-800 rounded-sm p-5 md:p-8">
             <h2 className="text-xl font-black uppercase tracking-widest text-white mb-6 border-b border-zinc-800 pb-4">Donanım Listesi</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-y-4">
               {vehicle.features.map(feature => (
                 <div key={feature} className="flex items-center gap-3 text-sm text-zinc-300 font-bold uppercase tracking-wider">
                   <span className="w-2 h-2 bg-red-600 rounded-full"></span>
@@ -70,7 +70,7 @@ export default async function VehicleDetail({ params }: { params: Promise<{ slug
           <VehicleQuestionBox vehicleTitle={vehicle.title} whatsapp={siteConfig.company.whatsapp} />
 
           {/* SSS Akordeon - Native HTML details tag ile */}
-          <div className="bg-zinc-900 border border-zinc-800 rounded-sm p-8">
+          <div className="bg-zinc-900 border border-zinc-800 rounded-sm p-5 md:p-8">
             <h2 className="text-xl font-black uppercase tracking-widest text-white mb-6 border-b border-zinc-800 pb-4">Sık Sorulan Sorular</h2>
             <div className="space-y-4">
               <details className="group border border-zinc-800 bg-zinc-950 p-4 rounded-sm [&_summary::-webkit-details-marker]:hidden cursor-pointer">
@@ -94,8 +94,8 @@ export default async function VehicleDetail({ params }: { params: Promise<{ slug
 
         {/* Sağ Alan: Sticky Satış Kartı */}
         <div className="w-full lg:w-96 flex-shrink-0">
-          <div className="bg-zinc-900 border border-zinc-800 rounded-sm p-8 sticky top-28 shadow-2xl">
-            <div className="text-4xl font-black text-red-500 mb-8 tracking-tighter">{vehicle.price}</div>
+          <div className="bg-zinc-900 border border-zinc-800 rounded-sm p-5 md:p-8 sticky top-24 md:top-28 shadow-2xl">
+            <div className="text-3xl md:text-4xl font-black text-red-500 mb-6 md:mb-8 tracking-tighter">{vehicle.price}</div>
             
             <div className="space-y-4 text-sm border-b border-zinc-800 pb-8 mb-8">
               <div className="flex justify-between items-center"><span className="text-zinc-500 font-bold uppercase tracking-widest text-xs">Yıl</span><span className="font-black text-white">{vehicle.year}</span></div>

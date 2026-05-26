@@ -25,7 +25,7 @@ export default function AboutPage() {
       <section className="mx-auto max-w-7xl px-5 pb-16">
         <div className="rounded-[8px] bg-slate-950 p-8 text-white">
           <h2 className="text-3xl font-black">Değerlerimiz</h2>
-          <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3">
             {["Güvenilirlik", "Şeffaflık", "Sürekli gelişim", "Kaliteli yazılım", "Kullanıcı odaklılık", "Uzun vadeli iş ortaklığı"].map((item) => (
               <p key={item} className="rounded-[8px] border border-white/10 bg-white/5 px-4 py-4 font-bold text-slate-100">{item}</p>
             ))}

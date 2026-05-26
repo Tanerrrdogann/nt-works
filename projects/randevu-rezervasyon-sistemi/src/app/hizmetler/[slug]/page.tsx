@@ -17,17 +17,17 @@ export default async function ServiceDetail({ params }: { params: Promise<{ slug
       <div className="container mx-auto px-4 max-w-5xl">
         
         {/* Üst Başlık Alanı */}
-        <div className="bg-rose-50 rounded-[3rem] p-8 md:p-16 mb-12 text-center border border-rose-100 relative overflow-hidden">
+        <div className="bg-rose-50 rounded-[2rem] md:rounded-[3rem] p-6 md:p-16 mb-8 md:mb-12 text-center border border-rose-100 relative overflow-hidden">
           <div className="absolute -top-24 -right-24 w-64 h-64 bg-white rounded-full opacity-40 blur-3xl"></div>
           <span className="relative z-10 text-rose-500 font-bold tracking-widest uppercase text-sm mb-4 block flex items-center justify-center gap-2">
             <Sparkles size={16} /> {service.category}
           </span>
-          <h1 className="relative z-10 text-4xl md:text-6xl font-black text-slate-800 mb-6">{service.title}</h1>
-          <p className="relative z-10 text-lg md:text-xl text-slate-600 max-w-2xl mx-auto">{service.description}</p>
+          <h1 className="relative z-10 text-3xl md:text-6xl font-black text-slate-800 mb-6">{service.title}</h1>
+          <p className="relative z-10 text-base md:text-xl text-slate-600 max-w-2xl mx-auto">{service.description}</p>
         </div>
 
         {/* İçerik ve Sticky Kart Grid'i */}
-        <div className="grid lg:grid-cols-3 gap-12 items-start">
+        <div className="grid gap-6 lg:grid-cols-3 lg:gap-12 items-start">
           
           {/* Sol: Detaylar */}
           <div className="lg:col-span-2 space-y-12">
@@ -35,7 +35,7 @@ export default async function ServiceDetail({ params }: { params: Promise<{ slug
               <h3 className="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-3">
                 Uygulama Adımları
               </h3>
-              <ul className="space-y-4 bg-slate-50 p-8 rounded-3xl border border-slate-100">
+              <ul className="space-y-4 bg-slate-50 p-5 md:p-8 rounded-3xl border border-slate-100">
                 {service.process.map((step, i) => (
                   <li key={i} className="flex items-start gap-4">
                     <span className="flex-shrink-0 w-8 h-8 bg-rose-500 text-white rounded-full flex items-center justify-center font-bold text-sm shadow-md">
@@ -61,7 +61,7 @@ export default async function ServiceDetail({ params }: { params: Promise<{ slug
           </div>
 
           {/* Sağ: Sticky (Sabit) Randevu Kartı */}
-          <div className="sticky top-28 bg-white p-8 rounded-[2rem] shadow-xl shadow-rose-100 border border-rose-50">
+          <div className="sticky top-24 md:top-28 bg-white p-5 md:p-8 rounded-[2rem] shadow-xl shadow-rose-100 border border-rose-50">
             <h3 className="text-xl font-bold text-slate-800 mb-6 pb-6 border-b border-rose-50">Hizmet Özeti</h3>
             
             <div className="space-y-6 mb-8">

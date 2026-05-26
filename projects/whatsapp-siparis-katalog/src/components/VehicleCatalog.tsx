@@ -45,10 +45,10 @@ export default function VehicleCatalog() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12 w-full">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 border-b border-zinc-800 pb-6">
+    <div className="max-w-7xl mx-auto px-3 sm:px-4 py-8 md:py-12 w-full">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-7 md:mb-10 border-b border-zinc-800 pb-5 md:pb-6">
         <div>
-          <h1 className="text-4xl font-black text-white uppercase tracking-tighter">Stoktaki Araçlar</h1>
+          <h1 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tighter">Stoktaki Araçlar</h1>
           <p className="text-zinc-400 mt-2 uppercase tracking-wider text-sm font-medium">
             {filteredVehicles.length} / {siteConfig.vehicles.length} araç listeleniyor
           </p>
@@ -70,11 +70,11 @@ export default function VehicleCatalog() {
         </div>
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-10">
+      <div className="flex flex-col lg:flex-row gap-6 lg:gap-10">
         <div className="w-full lg:w-72 flex-shrink-0">
-          <div className="bg-zinc-900 border border-zinc-800 rounded-sm p-6 sticky top-28">
-            <h3 className="font-black text-white mb-6 uppercase tracking-wider text-lg border-b border-zinc-800 pb-4">Filtrele</h3>
-            <div className="space-y-6">
+          <div className="bg-zinc-900 border border-zinc-800 rounded-sm p-4 md:p-6 sticky top-24 md:top-28">
+            <h3 className="font-black text-white mb-4 md:mb-6 uppercase tracking-wider text-lg border-b border-zinc-800 pb-4">Filtrele</h3>
+            <div className="grid gap-4 sm:grid-cols-2 lg:block lg:space-y-6">
               <div>
                 <label className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-3 block">Marka</label>
                 <select className="w-full border-zinc-800 rounded-sm text-sm bg-zinc-950 text-white border p-3 outline-none focus:border-red-600" value={brand} onChange={(event) => setBrand(event.target.value)}>
@@ -110,7 +110,7 @@ export default function VehicleCatalog() {
                 </select>
               </div>
 
-              <button className="w-full bg-zinc-950 border border-zinc-800 text-white rounded-sm py-4 text-sm font-black uppercase tracking-wider mt-4 hover:border-red-600 transition-colors" type="button" onClick={resetFilters}>
+              <button className="w-full bg-zinc-950 border border-zinc-800 text-white rounded-sm py-3 md:py-4 text-sm font-black uppercase tracking-wider lg:mt-4 hover:border-red-600 transition-colors" type="button" onClick={resetFilters}>
                 Filtreleri Temizle
               </button>
             </div>
@@ -119,7 +119,7 @@ export default function VehicleCatalog() {
 
         <div className="flex-1">
           {filteredVehicles.length ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-6">
               {filteredVehicles.map((vehicle) => (
                 <VehicleCard key={vehicle.slug} vehicle={vehicle} />
               ))}

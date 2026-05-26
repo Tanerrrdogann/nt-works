@@ -10,18 +10,18 @@ export default function ServicesPage() {
         title="Kurumsal yazılım, web, mobil ve danışmanlık hizmetleri"
         description="İşletmenizin ihtiyacına göre kapsamı net, sürdürülebilir ve ölçeklenebilir dijital çözümler geliştiriyoruz."
       />
-      <section className="mx-auto grid max-w-7xl gap-4 px-5 py-16 md:grid-cols-2 xl:grid-cols-3">
+      <section className="mx-auto grid max-w-7xl grid-cols-2 gap-3 px-3 py-12 sm:px-5 md:grid-cols-3 md:gap-4 md:py-16">
         {siteConfig.services.map((service, index) => (
-          <article key={service.slug} className="rounded-[8px] border border-slate-200 bg-white p-6 shadow-sm">
-            <span className="grid h-12 w-12 place-items-center rounded-[8px] bg-slate-950 text-sm font-black text-slate-200">
+          <article key={service.slug} className="rounded-[8px] border border-slate-200 bg-white p-3 shadow-sm md:p-6">
+            <span className="grid h-9 w-9 place-items-center rounded-[8px] bg-slate-950 text-xs font-black text-slate-200 md:h-12 md:w-12 md:text-sm">
               {String(index + 1).padStart(2, "0")}
             </span>
-            <h2 className="mt-5 text-2xl font-black text-slate-950">{service.title}</h2>
-            <p className="mt-3 leading-7 text-slate-600">{service.description}</p>
-            <ul className="mt-5 space-y-2">
-              {service.bullets.map((item) => <li key={item} className="text-sm font-semibold text-slate-700">• {item}</li>)}
+            <h2 className="mt-3 text-sm font-black leading-5 text-slate-950 md:mt-5 md:text-2xl md:leading-8">{service.title}</h2>
+            <p className="mt-2 line-clamp-3 text-xs leading-5 text-slate-600 md:mt-3 md:text-base md:leading-7">{service.description}</p>
+            <ul className="mt-3 space-y-1 md:mt-5 md:space-y-2">
+              {service.bullets.map((item) => <li key={item} className="text-[11px] font-semibold text-slate-700 md:text-sm">• {item}</li>)}
             </ul>
-            <a href={`/kurumsal-web-sitesi/hizmetler/${service.slug}`} className="corporate-button mt-6 inline-flex text-sm font-black text-slate-700">Detaylı İncele</a>
+            <a href={`/kurumsal-web-sitesi/hizmetler/${service.slug}`} className="corporate-button mt-4 inline-flex text-xs font-black text-slate-700 md:mt-6 md:text-sm">Detaylı İncele</a>
           </article>
         ))}
       </section>

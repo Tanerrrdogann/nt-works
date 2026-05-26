@@ -27,11 +27,15 @@ export function Header() {
         <a href={proposalMailUrl} className="corporate-button hidden border border-slate-200 bg-slate-200 px-5 py-3 text-sm font-black text-black hover:border-white hover:bg-white md:inline-flex">
           Teklif Al
         </a>
-        <details className="relative xl:hidden">
-          <summary className="cursor-pointer border border-white/24 px-4 py-2 text-sm font-black">
-            Menü
+        <details className="group relative xl:hidden">
+          <summary className="flex h-11 w-11 cursor-pointer list-none items-center justify-center border border-white/24 text-white [&::-webkit-details-marker]:hidden">
+            <span className="grid gap-1.5">
+              <span className="block h-0.5 w-5 bg-current transition group-open:translate-y-2 group-open:rotate-45" />
+              <span className="block h-0.5 w-5 bg-current transition group-open:opacity-0" />
+              <span className="block h-0.5 w-5 bg-current transition group-open:-translate-y-2 group-open:-rotate-45" />
+            </span>
           </summary>
-          <div className="absolute right-0 mt-3 w-72 border border-white/14 bg-[#071225] p-2 shadow-xl">
+          <div className="absolute right-0 mt-3 w-[min(18rem,calc(100vw-2rem))] border border-white/14 bg-[#071225] p-2 shadow-xl">
             {siteConfig.nav.map(([label, href]) => (
               <a key={href} href={href} className="block px-4 py-3 text-sm font-bold text-slate-300 hover:bg-white/8 hover:text-white">
                 {label}

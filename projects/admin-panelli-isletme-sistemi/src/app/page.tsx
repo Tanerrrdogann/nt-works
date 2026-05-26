@@ -37,7 +37,7 @@ export default function DashboardPage() {
           { name: "stock", label: "Stok", placeholder: "12" },
         ]}
       />
-      <section className="grid border border-[#e6e9ed] bg-white md:grid-cols-2 xl:grid-cols-6">
+      <section className="grid grid-cols-2 border border-[#e6e9ed] bg-white md:grid-cols-3 xl:grid-cols-6">
         {crmConfig.stats.map((stat, index) => {
           const icons = [ReceiptText, Boxes, PackageCheck, AlertTriangle, ChartNoAxesCombined, CalendarClock];
           const Icon = icons[index];
@@ -47,13 +47,13 @@ export default function DashboardPage() {
 
       <section className="mt-5 grid gap-5 xl:grid-cols-[1fr_280px]">
         <div className="panel-card p-4">
-          <div className="mb-4 flex items-center justify-between border-b border-[#e6e9ed] pb-3">
+          <div className="mb-4 flex flex-col gap-3 border-b border-[#e6e9ed] pb-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <h2 className="text-2xl font-normal text-[#5a738e]">
-                Market Aktiviteleri <span className="text-base text-[#73879c]">satış ve stok hareketleri</span>
+              <h2 className="text-lg font-normal text-[#5a738e] sm:text-2xl">
+                Market Aktiviteleri <span className="block text-sm text-[#73879c] sm:inline sm:text-base">satış ve stok hareketleri</span>
               </h2>
             </div>
-            <span className="border border-[#d9dee4] bg-white px-3 py-2 text-sm font-bold text-[#73879c]">
+            <span className="w-fit border border-[#d9dee4] bg-white px-3 py-2 text-xs font-bold text-[#73879c] sm:text-sm">
               Bugün - Bu hafta
             </span>
           </div>
@@ -118,8 +118,8 @@ export default function DashboardPage() {
 
         <div className="panel-card p-5">
           <h2 className="border-b border-[#e6e9ed] pb-3 text-xl font-normal text-[#5a738e]">Kategori Dağılımı</h2>
-          <div className="mt-5 flex items-center gap-6">
-            <div className="h-36 w-36 rounded-full" style={{ background: buildCategoryGradient() }} />
+          <div className="mt-5 flex items-center gap-4 md:gap-6">
+            <div className="h-28 w-28 shrink-0 rounded-full md:h-36 md:w-36" style={{ background: buildCategoryGradient() }} />
             <div className="space-y-2 text-sm">
               {crmConfig.categorySummary.slice(0, 4).map((item) => (
                 <p key={item.name} className="font-bold text-[#73879c]">{item.name} %{item.percent}</p>

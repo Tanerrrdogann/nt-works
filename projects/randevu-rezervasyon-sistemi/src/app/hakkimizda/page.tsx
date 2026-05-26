@@ -23,11 +23,11 @@ export default function AboutPage() {
   return (
     <div className="pt-12 pb-24 bg-white min-h-screen">
       <div className="container mx-auto px-4">
-        <section className="max-w-5xl mx-auto text-center bg-rose-50/70 border border-rose-100 rounded-[3rem] p-8 md:p-14">
+        <section className="max-w-5xl mx-auto text-center bg-rose-50/70 border border-rose-100 rounded-[2rem] md:rounded-[3rem] p-6 md:p-14">
           <div className="inline-flex items-center gap-2 text-rose-500 font-black tracking-[0.2em] uppercase text-xs mb-5">
             <Sparkles size={16} fill="currentColor" /> Biz Kimiz?
           </div>
-          <h1 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tighter mb-6">
+          <h1 className="text-3xl md:text-6xl font-black text-slate-900 tracking-tighter mb-6">
             Güzellik, bakım ve randevu deneyimini tek akışta topluyoruz.
           </h1>
           <p className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
@@ -38,14 +38,14 @@ export default function AboutPage() {
           </p>
         </section>
 
-        <section className="max-w-6xl mx-auto grid md:grid-cols-3 gap-6 mt-12">
+        <section className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-6 mt-12">
           {values.map((item) => (
-            <div className="bg-white border border-rose-100 rounded-[2rem] p-7 shadow-sm shadow-rose-100/50" key={item.title}>
-              <div className="w-12 h-12 rounded-2xl bg-rose-100 text-rose-500 flex items-center justify-center mb-5">
+            <div className="bg-white border border-rose-100 rounded-2xl md:rounded-[2rem] p-4 md:p-7 shadow-sm shadow-rose-100/50" key={item.title}>
+              <div className="w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-rose-100 text-rose-500 flex items-center justify-center mb-3 md:mb-5">
                 {item.icon}
               </div>
-              <h2 className="text-xl font-black text-slate-800 mb-3">{item.title}</h2>
-              <p className="text-slate-500 leading-relaxed">{item.desc}</p>
+              <h2 className="text-sm md:text-xl font-black text-slate-800 mb-2 md:mb-3">{item.title}</h2>
+              <p className="text-xs md:text-base text-slate-500 leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </section>
@@ -68,12 +68,12 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="grid sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-3 md:gap-4">
             {siteConfig.process.map((item) => (
-              <div className="bg-rose-50 border border-rose-100 rounded-[2rem] p-6" key={item.step}>
-                <span className="text-rose-400 font-black tracking-widest text-sm">{item.step}</span>
-                <h3 className="text-lg font-black text-slate-800 mt-2 mb-2">{item.title}</h3>
-                <p className="text-slate-500 text-sm leading-relaxed">{item.desc}</p>
+              <div className="bg-rose-50 border border-rose-100 rounded-2xl md:rounded-[2rem] p-3 md:p-6" key={item.step}>
+                <span className="text-rose-400 font-black tracking-widest text-xs md:text-sm">{item.step}</span>
+                <h3 className="text-sm md:text-lg font-black text-slate-800 mt-2 mb-2">{item.title}</h3>
+                <p className="text-slate-500 text-xs md:text-sm leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>

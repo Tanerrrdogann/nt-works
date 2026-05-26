@@ -89,7 +89,7 @@ export function AppShell({ title, description, children, actionLabel = "Yeni Kay
         <div className={`flex min-w-0 flex-1 flex-col bg-[#f7f7f7] transition-[margin] duration-300 ${isSidebarCollapsed ? "lg:ml-[56px]" : "lg:ml-[230px]"}`}>
           {/* Topbar */}
           <header className="sticky top-0 z-20 border-b border-[#d9dee4] bg-[#ededed]">
-            <div className="flex h-[57px] items-center justify-between gap-4 px-4 lg:px-5">
+            <div className="flex h-[57px] items-center justify-between gap-2 px-3 lg:gap-4 lg:px-5">
               <div className="flex items-center gap-3">
                 <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2 -ml-2 text-[#5a738e] hover:bg-white lg:hidden">
                   {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -98,7 +98,7 @@ export function AppShell({ title, description, children, actionLabel = "Yeni Kay
                   <Menu size={28} />
                 </button>
                 <div className="min-w-0">
-                  <h1 className="truncate text-xl font-normal text-[#5a738e] tracking-tight">{title}</h1>
+                  <h1 className="truncate text-lg font-normal text-[#5a738e] tracking-tight sm:text-xl">{title}</h1>
                   {description && <p className="hidden text-xs font-medium text-[#73879c] md:block">{description}</p>}
                 </div>
               </div>
@@ -113,7 +113,7 @@ export function AppShell({ title, description, children, actionLabel = "Yeni Kay
                   <span className="absolute right-1 top-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#1abb9c] text-[10px] font-bold text-white">{crmConfig.notifications.length}</span>
                 </button>
                 {isNotificationsOpen ? (
-                  <div className="absolute right-0 top-11 z-50 w-[360px] border border-[#d9dee4] bg-white shadow-xl">
+                  <div className="absolute right-0 top-11 z-50 w-[min(360px,calc(100vw-1.5rem))] border border-[#d9dee4] bg-white shadow-xl">
                     <div className="flex items-center justify-between border-b border-[#e6e9ed] bg-[#f7f7f7] px-4 py-3">
                       <h3 className="font-bold text-[#5a738e]">Bildirimler</h3>
                       <button onClick={() => setIsNotificationsOpen(false)} className="text-xs font-bold text-[#1abb9c]">Kapat</button>
@@ -142,7 +142,7 @@ export function AppShell({ title, description, children, actionLabel = "Yeni Kay
             </div>
             {/* Mobile Nav Drawer */}
             {isMobileMenuOpen && (
-              <div className="absolute left-0 top-full z-50 flex w-full flex-col gap-1 border-b border-[#d9dee4] bg-white p-4 shadow-xl lg:hidden">
+              <div className="absolute left-0 top-full z-50 flex max-h-[calc(100vh-57px)] w-full flex-col gap-1 overflow-y-auto border-b border-[#d9dee4] bg-white p-3 shadow-xl lg:hidden">
                 {crmConfig.sidebarNav.map((item) => {
                   const isActive = pathname === item.href;
                   return (
@@ -154,7 +154,7 @@ export function AppShell({ title, description, children, actionLabel = "Yeni Kay
               </div>
             )}
           </header>
-          <main className="w-full flex-1 p-5 lg:p-5">{children}</main>
+          <main className="w-full min-w-0 flex-1 p-3 sm:p-4 lg:p-5">{children}</main>
         </div>
       </div>
     </div>

@@ -30,31 +30,31 @@ export default function ContactPage() {
           </p>
         </section>
 
-        <section className="max-w-6xl mx-auto grid md:grid-cols-4 gap-5 mb-10">
-          <a href={siteConfig.company.phoneLink} className="bg-white p-6 rounded-3xl shadow-sm border border-rose-100 hover:border-rose-300 transition-colors">
-            <Phone className="text-rose-500 mb-4" />
-            <h3 className="font-bold text-slate-800 mb-2">Telefon</h3>
-            <p className="text-slate-600">{siteConfig.company.phone}</p>
+        <section className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5 mb-10">
+          <a href={siteConfig.company.phoneLink} className="bg-white p-4 md:p-6 rounded-2xl md:rounded-3xl shadow-sm border border-rose-100 hover:border-rose-300 transition-colors">
+            <Phone className="text-rose-500 mb-3 md:mb-4" />
+            <h3 className="font-bold text-slate-800 mb-1 md:mb-2">Telefon</h3>
+            <p className="text-xs md:text-base text-slate-600">{siteConfig.company.phone}</p>
           </a>
-          <a href={siteConfig.company.whatsappLink} className="bg-rose-500 p-6 rounded-3xl shadow-lg shadow-rose-200 text-white hover:bg-rose-600 transition-colors">
-            <img src="/randevu-rezervasyon-sistemi/pink-whatsapp-logo.png" alt="WhatsApp" className="w-10 h-10 object-contain mb-4" />
-            <h3 className="font-bold mb-2">WhatsApp</h3>
-            <p className="text-white/85">{siteConfig.company.whatsapp}</p>
+          <a href={siteConfig.company.whatsappLink} className="bg-rose-500 p-4 md:p-6 rounded-2xl md:rounded-3xl shadow-lg shadow-rose-200 text-white hover:bg-rose-600 transition-colors">
+            <img src="/randevu-rezervasyon-sistemi/pink-whatsapp-logo.png" alt="WhatsApp" className="w-8 h-8 md:w-10 md:h-10 object-contain mb-3 md:mb-4" />
+            <h3 className="font-bold mb-1 md:mb-2">WhatsApp</h3>
+            <p className="text-xs md:text-base text-white/85">{siteConfig.company.whatsapp}</p>
           </a>
-          <a href={siteConfig.company.emailLink} className="bg-white p-6 rounded-3xl shadow-sm border border-rose-100 hover:border-rose-300 transition-colors">
-            <Mail className="text-rose-500 mb-4" />
-            <h3 className="font-bold text-slate-800 mb-2">E-posta</h3>
-            <p className="text-slate-600 break-all">{siteConfig.company.email}</p>
+          <a href={siteConfig.company.emailLink} className="bg-white p-4 md:p-6 rounded-2xl md:rounded-3xl shadow-sm border border-rose-100 hover:border-rose-300 transition-colors">
+            <Mail className="text-rose-500 mb-3 md:mb-4" />
+            <h3 className="font-bold text-slate-800 mb-1 md:mb-2">E-posta</h3>
+            <p className="text-xs md:text-base text-slate-600 break-all">{siteConfig.company.email}</p>
           </a>
-          <a href={siteConfig.company.mapLink} className="bg-white p-6 rounded-3xl shadow-sm border border-rose-100 hover:border-rose-300 transition-colors">
-            <MapPin className="text-rose-500 mb-4" />
-            <h3 className="font-bold text-slate-800 mb-2">Adres</h3>
-            <p className="text-slate-600">{siteConfig.company.address}</p>
+          <a href={siteConfig.company.mapLink} className="bg-white p-4 md:p-6 rounded-2xl md:rounded-3xl shadow-sm border border-rose-100 hover:border-rose-300 transition-colors">
+            <MapPin className="text-rose-500 mb-3 md:mb-4" />
+            <h3 className="font-bold text-slate-800 mb-1 md:mb-2">Adres</h3>
+            <p className="text-xs md:text-base text-slate-600">{siteConfig.company.address}</p>
           </a>
         </section>
 
         <section className="max-w-6xl mx-auto grid lg:grid-cols-[1.05fr_0.95fr] gap-8">
-          <div className="bg-white border border-rose-100 rounded-[2.5rem] p-8 md:p-10 shadow-sm">
+          <div className="bg-white border border-rose-100 rounded-[2rem] md:rounded-[2.5rem] p-5 md:p-10 shadow-sm">
             <h2 className="text-3xl font-black text-slate-800 mb-3">WhatsApp&apos;tan soru sor</h2>
             <p className="text-slate-500 mb-8">Mesajınızı hazırlayalım, gönder butonuyla WhatsApp konuşmasını açalım.</p>
             <form className="space-y-5" onSubmit={handleWhatsAppSubmit}>

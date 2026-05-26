@@ -9,7 +9,7 @@ export default function ServicesPage() {
           <h1 className="text-4xl font-bold text-slate-800 mb-4">Hizmetlerimiz</h1>
           <p className="text-rose-500 text-lg">Güzelliğinize güzellik katacak profesyonel bakım ritüellerimizi inceleyin.</p>
         </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-8">
           {siteConfig.services.map((service) => (
             <ServiceCard key={service.slug} service={service} />
           ))}

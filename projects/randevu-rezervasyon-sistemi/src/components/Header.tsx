@@ -9,13 +9,13 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-rose-100">
-      <div className="container mx-auto px-4 h-20 flex items-center justify-between">
+      <div className="container mx-auto px-4 h-16 md:h-20 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="w-10 h-10 bg-rose-500 rounded-xl flex items-center justify-center text-white rotate-3 group-hover:rotate-12 transition-transform shadow-lg shadow-rose-200">
-            <Sparkle size={24} fill="white" />
+          <div className="w-9 h-9 md:w-10 md:h-10 bg-rose-500 rounded-xl flex items-center justify-center text-white rotate-3 group-hover:rotate-12 transition-transform shadow-lg shadow-rose-200">
+            <Sparkle size={22} fill="white" />
           </div>
           <div className="flex flex-col">
-            <span className="text-xl font-black bg-gradient-to-r from-rose-600 to-pink-500 bg-clip-text text-transparent leading-none">
+            <span className="text-lg md:text-xl font-black bg-gradient-to-r from-rose-600 to-pink-500 bg-clip-text text-transparent leading-none">
               {siteConfig.company.name.split(' ')[0]}
             </span>
             <span className="text-[10px] text-rose-400 font-bold tracking-[0.2em] uppercase">Beauty Center</span>
@@ -39,20 +39,20 @@ export default function Header() {
         </div>
 
         {/* Mobile Toggle */}
-        <button onClick={() => setIsOpen(!isOpen)} className="md:hidden text-slate-800 p-2">
+        <button onClick={() => setIsOpen(!isOpen)} className="md:hidden text-slate-800 p-2" aria-label="Menüyü aç veya kapat">
           {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
 
       {/* Mobile Menu Overlay */}
       {isOpen && (
-        <div className="md:hidden absolute top-20 left-0 w-full bg-white border-b border-rose-100 p-6 flex flex-col gap-4 animate-in slide-in-from-top duration-300">
+        <div className="md:hidden absolute top-16 left-0 w-full bg-white border-b border-rose-100 p-4 flex flex-col gap-2 shadow-xl animate-in slide-in-from-top duration-300">
           {siteConfig.nav.map((item) => (
             <Link 
               key={item.href} 
               href={item.href} 
               onClick={() => setIsOpen(false)}
-              className="text-lg font-bold text-slate-700 hover:text-rose-500 py-2 border-b border-rose-50"
+              className="text-base font-bold text-slate-700 hover:text-rose-500 py-3 border-b border-rose-50"
             >
               {item.title}
             </Link>
@@ -60,7 +60,7 @@ export default function Header() {
           <Link 
             href="/randevu" 
             onClick={() => setIsOpen(false)}
-            className="bg-rose-500 text-white text-center py-4 rounded-2xl font-bold mt-4"
+            className="bg-rose-500 text-white text-center py-3 rounded-2xl font-bold mt-2"
           >
             HEMEN RANDEVU AL
           </Link>
