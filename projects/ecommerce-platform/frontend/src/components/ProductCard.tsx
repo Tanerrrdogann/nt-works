@@ -73,6 +73,13 @@ export function ProductCard({ product }: { product: Product }) {
             <button aria-label="Sonraki ürün fotoğrafı" onClick={() => moveImage(1)} type="button">›</button>
           </div>
         ) : null}
+        {gallery.length > 1 ? (
+          <div className="product-swipe-hint" aria-label={`${gallery.length} ürün görseli`}>
+            {gallery.map((url, index) => (
+              <span className={index === imageIndex ? "active" : ""} key={`${url}-dot-${index}`} />
+            ))}
+          </div>
+        ) : null}
         {product.badge ? <span className="product-badge">{product.badge}</span> : null}
       </div>
       <div className="product-card-body">

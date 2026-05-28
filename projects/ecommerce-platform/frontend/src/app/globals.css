@@ -490,6 +490,49 @@ h2 {
   text-align: center;
 }
 
+.product-swipe-hint {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  left: 12px;
+  z-index: 7;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  pointer-events: none;
+}
+
+.product-swipe-hint span {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 253, 249, 0.76);
+  box-shadow: 0 1px 5px rgba(31, 29, 30, 0.28);
+}
+
+.product-swipe-hint span.active {
+  width: 18px;
+  background: var(--white);
+}
+
+.product-swipe-hint::after {
+  content: "Kaydır";
+  margin-left: 4px;
+  padding: 4px 7px;
+  color: var(--plum);
+  background: rgba(255, 253, 249, 0.84);
+  border: 1px solid rgba(200, 169, 106, 0.34);
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+}
+
+.product-swipe-hint.detail {
+  bottom: 18px;
+}
+
 .mobile-menu-layer {
   position: fixed;
   inset: 0;
@@ -2323,6 +2366,43 @@ h2 {
 
   .product-slider-controls {
     display: none;
+  }
+
+  .product-swipe-hint {
+    display: flex;
+  }
+
+  .reviews-section {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    padding: 18px 14px;
+  }
+
+  .reviews-head {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .review-score {
+    justify-items: start;
+  }
+
+  .review-card,
+  .review-form,
+  .reviews-head > div {
+    min-width: 0;
+  }
+
+  .review-card > div {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .review-card p,
+  .reviews-head h2 {
+    overflow-wrap: anywhere;
   }
 
   .section-heading {

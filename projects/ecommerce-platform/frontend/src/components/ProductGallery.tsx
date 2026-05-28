@@ -83,6 +83,13 @@ export function ProductGallery({ product }: { product: Product }) {
         </div>
       ) : null}
       {gallery.length > 1 ? (
+        <div className="product-swipe-hint detail" aria-label={`${gallery.length} ürün görseli`}>
+          {gallery.map((url, index) => (
+            <span className={index === selectedIndex ? "active" : ""} key={`${url}-detail-dot-${index}`} />
+          ))}
+        </div>
+      ) : null}
+      {gallery.length > 1 ? (
         <div className="detail-gallery">
           {gallery.map((url, index) => (
             <button
