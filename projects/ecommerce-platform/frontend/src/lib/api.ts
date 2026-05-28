@@ -3,6 +3,7 @@ import type { AdminProduct, AdminProductPayload, LoginResponse } from "@/types/a
 import type {
   CustomerAuthResponse,
   CustomerCartItem,
+  CustomerPasswordResetResponse,
   CustomerProfile,
   CustomerProfilePayload,
   CustomerRegisterPayload,
@@ -143,6 +144,34 @@ export function customerLogin(email: string, password: string) {
   return request<CustomerAuthResponse>("/api/customer/auth/login", {
     method: "POST",
     body: JSON.stringify({ email, password }),
+  });
+}
+
+export function requestCustomerPasswordReset(email: string) {
+  return request<CustomerPasswordResetResponse>("/api/customer/auth/password-reset/request", {
+    method: "POST",
+    body: JSON.stringify({ email }),
+  });
+}
+
+export function confirmCustomerPasswordReset(token: string, password: string) {
+  return request<CustomerPasswordResetResponse>("/api/customer/auth/password-reset/confirm", {
+    method: "POST",
+    body: JSON.stringify({ token, password }),
+  });
+}
+
+export function refreshCustomerSession(refreshToken: string) {
+  return request<CustomerAuthResponse>("/api/customer/auth/refresh", {
+    method: "POST",
+    body: JSON.stringify({ refreshToken }),
+  });
+}
+
+export function logoutCustomer(refreshToken: string) {
+  return request<CustomerPasswordResetResponse>("/api/customer/auth/logout", {
+    method: "POST",
+    body: JSON.stringify({ refreshToken }),
   });
 }
 

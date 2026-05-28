@@ -7,6 +7,7 @@ import com.tanerworks.ecommerce.auth.LoginRequest;
 import com.tanerworks.ecommerce.order.OrderResponse;
 
 import jakarta.validation.Valid;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -26,13 +27,33 @@ public class CustomerController {
     }
 
     @PostMapping("/auth/register")
-    CustomerAuthResponse register(@Valid @RequestBody CustomerRegisterRequest request) {
-        return customerService.register(request);
+    CustomerAuthResponse register(@Valid @RequestBody CustomerRegisterRequest request, HttpServletRequest servletRequest) {
+        return customerService.register(request, clientIp(servletRequest));
     }
 
     @PostMapping("/auth/login")
-    CustomerAuthResponse login(@Valid @RequestBody LoginRequest request) {
-        return customerService.login(request);
+    CustomerAuthResponse login(@Valid @RequestBody LoginRequest request, HttpServletRequest servletRequest) {
+        return customerService.login(request, clientIp(servletRequest));
+    }
+
+    @PostMapping("/auth/refresh")
+    CustomerAuthResponse refresh(@Valid @RequestBody CustomerRefreshRequest request, HttpServletRequest servletRequest) {
+        return customerService.refresh(request, clientIp(servletRequest));
+    }
+
+    @PostMapping("/auth/logout")
+    CustomerPasswordResetResponse logout(@Valid @RequestBody CustomerLogoutRequest request) {
+        return customerService.logout(request);
+    }
+
+    @PostMapping("/auth/password-reset/request")
+    CustomerPasswordResetResponse requestPasswordReset(@Valid @RequestBody CustomerPasswordResetRequest request) {
+        return customerService.requestPasswordReset(request);
+    }
+
+    @PostMapping("/auth/password-reset/confirm")
+    CustomerPasswordResetResponse resetPassword(@Valid @RequestBody CustomerPasswordResetConfirmRequest request) {
+        return customerService.resetPassword(request);
     }
 
     @GetMapping("/me")
@@ -64,5 +85,13 @@ public class CustomerController {
     @GetMapping("/orders")
     List<OrderResponse> orders(Principal principal) {
         return customerService.orders(principal.getName());
+    }
+
+    private String clientIp(HttpServletRequest request) {
+        String forwardedFor = request.getHeader("X-Forwarded-For");
+        if (forwardedFor != null && !forwardedFor.isBlank()) {
+            return forwardedFor.split(",")[0].trim();
+        }
+        return request.getRemoteAddr();
     }
 }

@@ -40,6 +40,21 @@ public class CustomerUser {
     @Column(nullable = false)
     private String district = "";
 
+    @Column(unique = true)
+    private String passwordResetToken;
+
+    private Instant passwordResetExpiresAt;
+
+    @Column(nullable = false)
+    private int failedLoginAttempts = 0;
+
+    private Instant lockedUntil;
+
+    private Instant lastLoginAt;
+
+    @Column(nullable = false)
+    private String lastLoginIp = "";
+
     @Column(nullable = false, updatable = false)
     private Instant createdAt;
 
@@ -99,11 +114,55 @@ public class CustomerUser {
         return district;
     }
 
+    public String getPasswordResetToken() {
+        return passwordResetToken;
+    }
+
+    public Instant getPasswordResetExpiresAt() {
+        return passwordResetExpiresAt;
+    }
+
+    public boolean isLoginLocked() {
+        return lockedUntil != null && lockedUntil.isAfter(Instant.now());
+    }
+
     public void updateProfile(String name, String phone, String address, String city, String district) {
         this.name = name;
         this.phone = phone == null ? "" : phone;
         this.address = address == null ? "" : address;
         this.city = city == null ? "" : city;
         this.district = district == null ? "" : district;
+    }
+
+    public void startPasswordReset(String token, Instant expiresAt) {
+        this.passwordResetToken = token;
+        this.passwordResetExpiresAt = expiresAt;
+    }
+
+    public void changePassword(String passwordHash) {
+        this.passwordHash = passwordHash;
+        this.passwordResetToken = null;
+        this.passwordResetExpiresAt = null;
+        clearLoginLock();
+    }
+
+    public void recordFailedLogin(Instant lockedUntil) {
+        this.failedLoginAttempts += 1;
+        this.lockedUntil = lockedUntil;
+    }
+
+    public void clearLoginLock() {
+        this.failedLoginAttempts = 0;
+        this.lockedUntil = null;
+    }
+
+    public int getFailedLoginAttempts() {
+        return failedLoginAttempts;
+    }
+
+    public void recordSuccessfulLogin(String ip) {
+        clearLoginLock();
+        this.lastLoginAt = Instant.now();
+        this.lastLoginIp = ip == null ? "" : ip;
     }
 }

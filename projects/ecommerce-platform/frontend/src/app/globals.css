@@ -493,7 +493,7 @@ h2 {
 .mobile-menu-layer {
   position: fixed;
   inset: 0;
-  z-index: 50;
+  z-index: 90;
   display: grid;
   grid-template-columns: 1fr minmax(280px, 360px);
 }
@@ -1166,6 +1166,37 @@ h2 {
   box-shadow: 0 0 0 3px rgba(200, 169, 106, 0.18);
 }
 
+.password-field {
+  position: relative;
+  display: block;
+}
+
+.password-field input {
+  padding-right: 48px;
+}
+
+.password-field button {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  color: var(--muted);
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.password-field button:hover {
+  color: var(--plum);
+  background: rgba(90, 42, 58, 0.07);
+}
+
 .checkout-form .btn {
   grid-column: 1 / -1;
 }
@@ -1186,6 +1217,23 @@ h2 {
   border: 0;
   cursor: pointer;
   font-weight: 800;
+}
+
+.auth-success,
+.auth-reset-link {
+  margin: 0;
+  padding: 14px 16px;
+  color: var(--success);
+  background: rgba(52, 119, 75, 0.08);
+  border: 1px solid rgba(52, 119, 75, 0.18);
+  border-radius: var(--radius);
+  font-weight: 800;
+}
+
+.auth-reset-link a {
+  color: var(--plum);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .auth-required-card {
@@ -2192,9 +2240,9 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100vw;
-    max-width: 100vw;
-    overflow: hidden;
+    width: 100%;
+    max-width: 100%;
+    overflow: visible;
     gap: 14px;
     padding: 14px 16px;
   }
@@ -2208,11 +2256,7 @@ h2 {
   }
 
   .header-actions {
-    position: fixed !important;
-    top: 16px !important;
-    right: 16px !important;
-    left: auto !important;
-    z-index: 60;
+    position: static !important;
     margin-left: auto;
   }
 
@@ -2221,12 +2265,32 @@ h2 {
   }
 
   .hero {
-    width: 100vw;
-    max-width: 100vw;
-    padding-top: 28px;
+    justify-items: center;
+    width: 100%;
+    max-width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 28px 16px 40px;
+    text-align: center;
+  }
+
+  .hero-content {
+    order: 2;
+    display: grid;
+    justify-items: center;
+    width: 100%;
+    padding-top: 0;
+  }
+
+  .hero-media {
+    order: 1;
+    width: 100%;
+    justify-self: center;
   }
 
   .hero-content h1 {
+    margin-right: auto;
+    margin-left: auto;
     max-width: calc(100vw - 40px);
     font-size: 34px;
     line-height: 1.05;
@@ -2234,16 +2298,18 @@ h2 {
 
   .hero-content p,
   .hero-actions {
+    margin-right: auto;
+    margin-left: auto;
     max-width: calc(100vw - 40px);
   }
 
   .hero-actions {
+    align-items: center;
     flex-direction: column;
   }
 
   .hero-media,
   .hero-media img {
-    width: 100%;
     height: auto;
     min-height: 0;
   }
@@ -2253,6 +2319,10 @@ h2 {
     bottom: 12px;
     left: 12px;
     max-width: none;
+  }
+
+  .product-slider-controls {
+    display: none;
   }
 
   .section-heading {
@@ -2285,15 +2355,51 @@ h2 {
   }
 
   .mobile-menu-layer {
+    inset: 0;
+    z-index: 100;
     grid-template-columns: 1fr;
+    align-items: start;
+    padding: 74px 12px 12px;
   }
 
   .mobile-menu-backdrop {
-    display: none;
+    position: fixed;
+    inset: 0;
+    display: block;
+    background: rgba(31, 29, 30, 0.32);
+    backdrop-filter: blur(3px);
   }
 
   .mobile-menu-panel {
+    position: relative;
+    z-index: 1;
+    min-height: 0;
+    max-height: calc(100vh - 92px);
+    overflow-y: auto;
+    gap: 14px;
+    padding: 14px;
+    border: 1px solid var(--line);
     border-left: 0;
+    border-radius: 24px;
+    box-shadow: 0 24px 70px rgba(90, 42, 58, 0.2);
+  }
+
+  .mobile-menu-head {
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .mobile-menu-head img {
+    width: 104px;
+  }
+
+  .mobile-menu-panel nav {
+    gap: 8px;
+  }
+
+  .mobile-menu-panel nav a {
+    padding: 13px 14px;
+    border-radius: 16px;
   }
 
   .cart-item {

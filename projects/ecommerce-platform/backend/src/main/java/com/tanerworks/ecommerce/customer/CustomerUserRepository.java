@@ -8,4 +8,6 @@ public interface CustomerUserRepository extends JpaRepository<CustomerUser, Long
     boolean existsByEmail(String email);
 
     Optional<CustomerUser> findByEmail(String email);
+
+    Optional<CustomerUser> findByPasswordResetToken(String passwordResetToken);
 }

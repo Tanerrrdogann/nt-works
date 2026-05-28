@@ -3,6 +3,8 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import {
   customerLogin,
+  logoutCustomer,
+  refreshCustomerSession,
   customerRegister,
   getCustomerProfile as fetchCustomerProfile,
   updateCustomerProfile,
@@ -10,6 +12,7 @@ import {
 import {
   clearCustomerSession,
   getCustomerProfile,
+  getCustomerRefreshToken,
   getCustomerToken,
   saveCustomerSession,
 } from "@/lib/customerAuth";
@@ -33,24 +36,54 @@ const CustomerContext = createContext<CustomerContextValue | null>(null);
 
 export function CustomerProvider({ children }: { children: React.ReactNode }) {
   const [token, setToken] = useState("");
+  const [refreshToken, setRefreshToken] = useState("");
   const [profile, setProfile] = useState<CustomerProfile | null>(null);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const storedToken = getCustomerToken();
+    const storedRefreshToken = getCustomerRefreshToken();
     const storedProfile = getCustomerProfile();
 
-    if (storedToken && storedProfile) {
+    if (storedToken && storedRefreshToken && storedProfile) {
       setToken(storedToken);
+      setRefreshToken(storedRefreshToken);
       setProfile(storedProfile);
       fetchCustomerProfile(storedToken)
         .then((freshProfile) => {
           setProfile(freshProfile);
-          saveCustomerSession(storedToken, freshProfile);
+          saveCustomerSession(storedToken, storedRefreshToken, freshProfile);
+        })
+        .catch(async () => {
+          try {
+            const refreshed = await refreshCustomerSession(storedRefreshToken);
+            setToken(refreshed.token);
+            setRefreshToken(refreshed.refreshToken);
+            setProfile(refreshed.profile);
+            saveCustomerSession(refreshed.token, refreshed.refreshToken, refreshed.profile);
+          } catch {
+            clearCustomerSession();
+            setToken("");
+            setRefreshToken("");
+            setProfile(null);
+          }
+        })
+        .finally(() => setReady(true));
+      return;
+    }
+
+    if (storedRefreshToken) {
+      refreshCustomerSession(storedRefreshToken)
+        .then((refreshed) => {
+          setToken(refreshed.token);
+          setRefreshToken(refreshed.refreshToken);
+          setProfile(refreshed.profile);
+          saveCustomerSession(refreshed.token, refreshed.refreshToken, refreshed.profile);
         })
         .catch(() => {
           clearCustomerSession();
           setToken("");
+          setRefreshToken("");
           setProfile(null);
         })
         .finally(() => setReady(true));
@@ -62,15 +95,17 @@ export function CustomerProvider({ children }: { children: React.ReactNode }) {
 
   const login = useCallback(async (email: string, password: string) => {
     const response = await customerLogin(email, password);
-    saveCustomerSession(response.token, response.profile);
+    saveCustomerSession(response.token, response.refreshToken, response.profile);
     setToken(response.token);
+    setRefreshToken(response.refreshToken);
     setProfile(response.profile);
   }, []);
 
   const register = useCallback(async (payload: CustomerRegisterPayload) => {
     const response = await customerRegister(payload);
-    saveCustomerSession(response.token, response.profile);
+    saveCustomerSession(response.token, response.refreshToken, response.profile);
     setToken(response.token);
+    setRefreshToken(response.refreshToken);
     setProfile(response.profile);
   }, []);
 
@@ -79,17 +114,21 @@ export function CustomerProvider({ children }: { children: React.ReactNode }) {
       if (!token) return;
 
       const updated = await updateCustomerProfile(payload, token);
-      saveCustomerSession(token, updated);
+      saveCustomerSession(token, refreshToken, updated);
       setProfile(updated);
     },
-    [token],
+    [refreshToken, token],
   );
 
   const logout = useCallback(() => {
+    if (refreshToken) {
+      logoutCustomer(refreshToken).catch(() => undefined);
+    }
     clearCustomerSession();
     setToken("");
+    setRefreshToken("");
     setProfile(null);
-  }, []);
+  }, [refreshToken]);
 
   const value = useMemo(
     () => ({ token, profile, ready, login, register, updateProfile, logout }),

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { TouchEvent, useState } from "react";
 import { formatPrice, getProductDisplayPrice } from "@/lib/products";
 import { AddToCartButton } from "@/components/AddToCartButton";
 import { StarRating } from "@/components/StarRating";
@@ -40,14 +40,29 @@ export function ProductCard({ product }: { product: Product }) {
   const activeImage = gallery[imageIndex] ?? product.imageUrl;
   const reviews = initialProductReviews[product.slug] ?? [];
   const averageRating = getAverageRating(reviews);
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
 
   function moveImage(direction: -1 | 1) {
     setImageIndex((current) => (current + direction + gallery.length) % gallery.length);
   }
 
+  function handleTouchEnd(event: TouchEvent<HTMLDivElement>) {
+    if (touchStartX === null || gallery.length < 2) return;
+
+    const distance = event.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(distance) > 38) {
+      moveImage(distance < 0 ? 1 : -1);
+    }
+    setTouchStartX(null);
+  }
+
   return (
     <article className="product-card">
-      <div className="product-image-link">
+      <div
+        className="product-image-link"
+        onTouchEnd={handleTouchEnd}
+        onTouchStart={(event) => setTouchStartX(event.touches[0].clientX)}
+      >
         <Link href={`/products/${product.slug}`} aria-label={`${product.name} detayını aç`}>
           <img src={activeImage} alt={product.name} />
         </Link>

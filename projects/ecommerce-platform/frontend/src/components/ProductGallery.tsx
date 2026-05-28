@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { TouchEvent, useMemo, useState } from "react";
 import type { Product } from "@/types/product";
 
 const categoryGallery: Record<string, string[]> = {
@@ -50,14 +50,29 @@ function buildGallery(product: Product) {
 export function ProductGallery({ product }: { product: Product }) {
   const gallery = useMemo(() => buildGallery(product), [product]);
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
   const selectedImage = gallery[selectedIndex] ?? product.imageUrl;
 
   function moveImage(direction: -1 | 1) {
     setSelectedIndex((current) => (current + direction + gallery.length) % gallery.length);
   }
 
+  function handleTouchEnd(event: TouchEvent<HTMLDivElement>) {
+    if (touchStartX === null || gallery.length < 2) return;
+
+    const distance = event.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(distance) > 38) {
+      moveImage(distance < 0 ? 1 : -1);
+    }
+    setTouchStartX(null);
+  }
+
   return (
-    <div className="detail-image">
+    <div
+      className="detail-image"
+      onTouchEnd={handleTouchEnd}
+      onTouchStart={(event) => setTouchStartX(event.touches[0].clientX)}
+    >
       <img src={selectedImage} alt={product.name} />
       {product.badge ? <span className="product-badge">{product.badge}</span> : null}
       {gallery.length > 1 ? (

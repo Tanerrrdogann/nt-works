@@ -3,7 +3,7 @@
     "dev": "npm --prefix frontend run dev",
     "build": "npm --prefix frontend run build",
     "lint": "npm --prefix frontend run lint",
-    "backend:dev": "mvn -f backend/pom.xml spring-boot:run",
+    "backend:dev": "set -a; [ -f backend/.env ] && . backend/.env; set +a; mvn -f backend/pom.xml spring-boot:run",
     "backend:test": "mvn -f backend/pom.xml test"
   }
 }

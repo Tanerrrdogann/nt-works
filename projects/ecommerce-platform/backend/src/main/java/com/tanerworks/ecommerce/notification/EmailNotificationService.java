@@ -23,6 +23,7 @@ public class EmailNotificationService {
     private final JavaMailSender mailSender;
     private final boolean enabled;
     private final String username;
+    private final String password;
     private final String adminRecipient;
     private final String frontendBaseUrl;
 
@@ -30,12 +31,14 @@ public class EmailNotificationService {
             JavaMailSender mailSender,
             @Value("${app.mail.enabled}") boolean enabled,
             @Value("${spring.mail.username:}") String username,
+            @Value("${spring.mail.password:}") String password,
             @Value("${app.mail.admin-recipient:}") String adminRecipient,
             @Value("${app.frontend.base-url}") String frontendBaseUrl
     ) {
         this.mailSender = mailSender;
         this.enabled = enabled;
         this.username = username;
+        this.password = password;
         this.adminRecipient = adminRecipient;
         this.frontendBaseUrl = frontendBaseUrl;
     }
@@ -154,6 +157,23 @@ public class EmailNotificationService {
         );
     }
 
+    public boolean passwordResetRequested(String email, String resetUrl) {
+        return send(
+                email,
+                "Şifre sıfırlama bağlantınız",
+                """
+                Merhaba,
+
+                Teddy Jewellry hesabınız için şifre sıfırlama talebi aldık.
+                Yeni şifre belirlemek için aşağıdaki bağlantıyı kullanabilirsiniz:
+
+                %s
+
+                Bu bağlantı 30 dakika geçerlidir. Bu talebi siz oluşturmadıysanız bu e-postayı yok sayabilirsiniz.
+                """.formatted(resetUrl)
+        );
+    }
+
     private void sendAdmin(String subject, String body) {
         if (adminRecipient == null || adminRecipient.isBlank()) {
             return;
@@ -166,9 +186,9 @@ public class EmailNotificationService {
         send(order.getCustomerEmail(), subject, body);
     }
 
-    private void send(String to, String subject, String body) {
-        if (!enabled || username == null || username.isBlank() || to == null || to.isBlank()) {
-            return;
+    private boolean send(String to, String subject, String body) {
+        if (!enabled || username == null || username.isBlank() || password == null || password.isBlank() || to == null || to.isBlank()) {
+            return false;
         }
 
         try {
@@ -178,8 +198,10 @@ public class EmailNotificationService {
             message.setSubject(subject);
             message.setText(new String(body.getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8));
             mailSender.send(message);
+            return true;
         } catch (MailException exception) {
             log.warn("Mail gönderilemedi: {}", exception.getMessage());
+            return false;
         }
     }
 

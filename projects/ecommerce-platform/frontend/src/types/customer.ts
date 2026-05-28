@@ -12,6 +12,7 @@ export type CustomerProfile = {
 
 export type CustomerAuthResponse = {
   token: string;
+  refreshToken: string;
   profile: CustomerProfile;
 };
 
@@ -19,6 +20,10 @@ export type CustomerRegisterPayload = {
   name: string;
   email: string;
   password: string;
+};
+
+export type CustomerPasswordResetResponse = {
+  message: string;
 };
 
 export type CustomerCartItem = CartItem;
