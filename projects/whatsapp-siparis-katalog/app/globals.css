@@ -10,6 +10,15 @@ body {
   color: #f4f4f5; /* zinc-100 rengi */
 }
 
+.catalog-image-slider {
+  cursor: grab;
+  touch-action: pan-y;
+}
+
+.catalog-image-slider:active {
+  cursor: grabbing;
+}
+
 .catalog-slider-controls {
   position: absolute;
   right: 12px;

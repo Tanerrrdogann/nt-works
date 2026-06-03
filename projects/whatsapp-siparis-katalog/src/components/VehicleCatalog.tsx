@@ -16,6 +16,7 @@ export default function VehicleCatalog() {
   const [transmission, setTransmission] = useState("all");
   const [bodyType, setBodyType] = useState("all");
   const [sortBy, setSortBy] = useState<SortOption>("default");
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   const filteredVehicles = useMemo(() => {
     const next = siteConfig.vehicles.filter((vehicle) => {
@@ -54,23 +55,35 @@ export default function VehicleCatalog() {
           </p>
         </div>
 
-        <div className="mt-6 md:mt-0 w-full md:w-64">
-          <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2 block">Sıralama Seçenekleri</label>
-          <select
-            className="w-full border-zinc-800 rounded-sm text-sm bg-zinc-900 text-white border p-3 outline-none focus:border-red-600 uppercase tracking-wider"
-            value={sortBy}
-            onChange={(event) => setSortBy(event.target.value as SortOption)}
+        <div className="mt-6 md:mt-0 w-full md:w-auto flex flex-col sm:flex-row gap-3">
+          <button
+            className={`${filtersOpen ? "bg-red-600 border-red-600" : "bg-zinc-900 border-zinc-800"} min-w-40 border rounded-sm px-5 py-3 text-sm text-white font-black uppercase tracking-wider hover:border-red-600 transition-colors`}
+            type="button"
+            aria-expanded={filtersOpen}
+            onClick={() => setFiltersOpen((current) => !current)}
           >
-            <option value="default">Varsayılan</option>
-            <option value="price-asc">Fiyat: Düşükten Yükseğe</option>
-            <option value="price-desc">Fiyat: Yüksekten Düşüğe</option>
-            <option value="year-new">Yıl: Yeni</option>
-            <option value="km-low">Kilometre: Düşük</option>
-          </select>
+            {filtersOpen ? "Filtreleri Kapat" : "Filtrele"}
+          </button>
+
+          <div className="w-full sm:w-64">
+            <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2 block">Sıralama Seçenekleri</label>
+            <select
+              className="w-full border-zinc-800 rounded-sm text-sm bg-zinc-900 text-white border p-3 outline-none focus:border-red-600 uppercase tracking-wider"
+              value={sortBy}
+              onChange={(event) => setSortBy(event.target.value as SortOption)}
+            >
+              <option value="default">Varsayılan</option>
+              <option value="price-asc">Fiyat: Düşükten Yükseğe</option>
+              <option value="price-desc">Fiyat: Yüksekten Düşüğe</option>
+              <option value="year-new">Yıl: Yeni</option>
+              <option value="km-low">Kilometre: Düşük</option>
+            </select>
+          </div>
         </div>
       </div>
 
       <div className="flex flex-col lg:flex-row gap-6 lg:gap-10">
+        {filtersOpen ? (
         <div className="w-full lg:w-72 flex-shrink-0">
           <div className="bg-zinc-900 border border-zinc-800 rounded-sm p-4 md:p-6 sticky top-24 md:top-28">
             <h3 className="font-black text-white mb-4 md:mb-6 uppercase tracking-wider text-lg border-b border-zinc-800 pb-4">Filtrele</h3>
@@ -116,6 +129,7 @@ export default function VehicleCatalog() {
             </div>
           </div>
         </div>
+        ) : null}
 
         <div className="flex-1">
           {filteredVehicles.length ? (
