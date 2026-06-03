@@ -1,5 +1,5 @@
 import { siteConfig } from "../../../src/config/site.config";
-import VehicleImageSlider from "../../../src/components/VehicleImageSlider";
+import VehicleDetailGallery from "../../../src/components/VehicleDetailGallery";
 import VehicleQuestionBox from "../../../src/components/VehicleQuestionBox";
 import WhatsAppIcon from "../../../src/components/WhatsAppIcon";
 import { notFound } from "next/navigation";
@@ -12,7 +12,6 @@ export default async function VehicleDetail({ params }: { params: Promise<{ slug
   const { slug } = await params;
   const vehicle = siteConfig.vehicles.find(v => v.slug === slug);
   if (!vehicle) notFound();
-  const moreImagesMessage = encodeURIComponent(`Merhaba, ${vehicle.title} aracı için daha fazla fotoğraf görmek istiyorum.`);
 
   return (
     <div className="max-w-7xl mx-auto px-3 sm:px-4 py-8 md:py-12 w-full">
@@ -32,24 +31,11 @@ export default async function VehicleDetail({ params }: { params: Promise<{ slug
         {/* Sol Alan: Görsel Galerisi & Detaylar */}
         <div className="flex-1 space-y-10">
           
-          <div className="flex flex-col gap-3">
-            <VehicleImageSlider className="aspect-[16/9] border border-zinc-800 rounded-sm" images={vehicle.images} title={vehicle.title} />
-            <div className="grid grid-cols-4 gap-3">
-               {vehicle.images.slice(1, 5).map((image) => (
-                 <div key={image} className="aspect-video bg-zinc-900 border border-zinc-800 rounded-sm overflow-hidden hover:border-red-600 transition-colors">
-                   <img src={image} alt={`${vehicle.title} görseli`} className="w-full h-full object-cover" />
-                 </div>
-               ))}
-               <a
-                 href={`https://wa.me/${siteConfig.company.whatsapp}?text=${moreImagesMessage}`}
-                 target="_blank"
-                 rel="noreferrer"
-                 className="aspect-video bg-zinc-900 border border-zinc-800 rounded-sm flex items-center justify-center text-zinc-200 text-center text-xs font-black uppercase tracking-widest hover:border-red-600 hover:bg-zinc-800 transition-colors"
-               >
-                 Daha fazla fotoğraf iste
-               </a>
-            </div>
-          </div>
+          <VehicleDetailGallery
+            images={vehicle.images}
+            title={vehicle.title}
+            whatsapp={siteConfig.company.whatsapp}
+          />
 
           <div className="bg-zinc-900 border border-zinc-800 rounded-sm p-5 md:p-8">
             <h2 className="text-xl font-black uppercase tracking-widest text-white mb-6 border-b border-zinc-800 pb-4">Araç Açıklaması</h2>

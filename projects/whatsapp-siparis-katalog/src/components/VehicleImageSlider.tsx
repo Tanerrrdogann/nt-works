@@ -7,20 +7,27 @@ export default function VehicleImageSlider({
   images,
   title,
   detailHref,
+  activeIndex,
+  onIndexChange,
   className = "",
 }: {
   images: string[];
   title: string;
   detailHref?: string;
+  activeIndex?: number;
+  onIndexChange?: (index: number) => void;
   className?: string;
 }) {
   const router = useRouter();
-  const [index, setIndex] = useState(0);
+  const [internalIndex, setInternalIndex] = useState(0);
   const pointerStart = useRef<number | null>(null);
+  const index = activeIndex ?? internalIndex;
   const activeImage = images[index] ?? images[0];
 
   function move(direction: -1 | 1) {
-    setIndex((current) => (current + direction + images.length) % images.length);
+    const nextIndex = (index + direction + images.length) % images.length;
+    setInternalIndex(nextIndex);
+    onIndexChange?.(nextIndex);
   }
 
   function handlePointerDown(event: PointerEvent<HTMLDivElement>) {
@@ -65,7 +72,6 @@ export default function VehicleImageSlider({
       {images.length > 1 ? (
         <div className="catalog-slider-controls" aria-label="Fotoğraf değiştir" onPointerDown={(event) => event.stopPropagation()}>
           <button aria-label="Önceki fotoğraf" onClick={() => move(-1)} type="button">‹</button>
-          <span>{index + 1}/{images.length}</span>
           <button aria-label="Sonraki fotoğraf" onClick={() => move(1)} type="button">›</button>
         </div>
       ) : null}

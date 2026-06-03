@@ -1,7 +1,3 @@
-:HL["/whatsapp-siparis-katalog/_next/static/chunks/0dy5ejuladlxf.css","style"]
+:HL["/whatsapp-siparis-katalog/_next/static/chunks/0og2p91qcp9ii.css","style"]
 :HL["/whatsapp-siparis-katalog/whatsapp-red.png","image"]
-:HL["https://images.unsplash.com/photo-1606016159991-dfe4f2746ad5?auto=format&fit=crop&w=1200&q=85","image"]
-:HL["https://images.unsplash.com/photo-1616422285623-13ff0162193c?auto=format&fit=crop&w=1200&q=85","image"]
-:HL["https://images.unsplash.com/photo-1614200179396-2bdb77ebf81b?auto=format&fit=crop&w=1200&q=85","image"]
-:HL["https://images.unsplash.com/photo-1609521263047-f8f205293f24?auto=format&fit=crop&w=1200&q=85","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"araclar","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"mercedes-benz-c200-amg","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"mfN_TeLmq8IEc7WwaQsKY"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"araclar","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"mercedes-benz-c200-amg","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"3Py81DPS9mHPHg8L0IzoO"}

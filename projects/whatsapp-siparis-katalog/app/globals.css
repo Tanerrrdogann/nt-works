@@ -25,10 +25,9 @@ body {
   bottom: 12px;
   z-index: 20;
   display: grid;
-  grid-template-columns: 42px auto 42px;
+  grid-template-columns: repeat(2, 42px);
   align-items: center;
   overflow: hidden;
-  min-width: 140px;
   border: 1px solid rgba(220, 38, 38, 0.55);
   background: rgba(9, 9, 11, 0.82);
   box-shadow: 0 16px 32px rgba(0, 0, 0, 0.28);
@@ -48,15 +47,6 @@ body {
 
 .catalog-slider-controls button:hover {
   background: #dc2626;
-}
-
-.catalog-slider-controls span {
-  padding: 0 12px;
-  color: #f4f4f5;
-  font-size: 11px;
-  font-weight: 900;
-  letter-spacing: 0.14em;
-  text-align: center;
 }
 
 @media (max-width: 1023px) {
