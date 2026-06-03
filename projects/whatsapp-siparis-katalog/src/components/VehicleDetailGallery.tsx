@@ -37,7 +37,7 @@ export default function VehicleDetailGallery({
             onClick={() => setActiveIndex(index)}
             type="button"
           >
-            <img src={image} alt={`${title} görseli`} className="w-full h-full object-cover" />
+            <img src={image} alt={`${title} görseli`} className="w-full h-full object-contain object-center" />
           </button>
         ))}
 
