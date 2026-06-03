@@ -1,2 +1,2 @@
-:HL["/whatsapp-siparis-katalog/_next/static/chunks/177~udo00xipk.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"iletisim","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"GpQDuVT8bVqh4XuFJZghl"}
+:HL["/whatsapp-siparis-katalog/_next/static/chunks/08n883r4~3dde.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"iletisim","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"akUvKjPC4T7Bf1fsJTSEw"}

@@ -1,6 +1,6 @@
-:HL["/whatsapp-siparis-katalog/_next/static/chunks/177~udo00xipk.css","style"]
+:HL["/whatsapp-siparis-katalog/_next/static/chunks/08n883r4~3dde.css","style"]
 :HL["https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=1200&q=85","image"]
 :HL["https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=1200&q=85","image"]
 :HL["https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1200&q=85","image"]
 :HL["https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=1200&q=85","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"araclar","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"fiat-doblo-cargo","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"GpQDuVT8bVqh4XuFJZghl"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"araclar","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"fiat-doblo-cargo","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"akUvKjPC4T7Bf1fsJTSEw"}

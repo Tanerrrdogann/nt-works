@@ -6,27 +6,40 @@ import { useLanguage } from "@/i18n/LanguageProvider";
 
 export default function ContactCTA() {
   const { language } = useLanguage();
+  const isTr = language === "tr";
 
   return (
-    <section className="py-20">
+    <section className="py-12 sm:py-16 lg:py-20">
       <Container>
-        <div className="px-4 py-8 text-slate-950 md:px-10 md:py-12">
-          <div className="flex flex-col justify-between gap-8 md:flex-row md:items-center">
+        <div className="rounded-3xl border border-slate-200 bg-slate-950 p-5 text-center text-white shadow-sm sm:p-8 lg:p-10">
+          <div className="mx-auto grid max-w-5xl gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
             <div>
-              <h2 className="text-3xl font-black tracking-tight md:text-4xl">
-                {language === "tr"
-                  ? "İşletmen için çalışan bir sistem mi lazım?"
-                  : "Need a working system for your business?"}
+              <p className="text-xs font-black uppercase tracking-[0.22em] text-slate-400">
+                {isTr ? "Teklif ve İletişim" : "Quote and Contact"}
+              </p>
+
+              <h2 className="mt-3 text-3xl font-black leading-tight sm:text-4xl">
+                {isTr
+                  ? "Hangi sistemin uygun olduğunu bilmiyorsanız birlikte netleştirebiliriz."
+                  : "If you are not sure which system fits, we can clarify it together."}
               </h2>
-              <p className="mt-4 max-w-2xl text-zinc-700">
-                {language === "tr"
-                  ? "Tanıtım sitesi, admin paneli, e-ticaret, dosya yönetimi veya özel dashboard için proje talebi gönderebilirsin."
-                  : "Send a project request for a business website, admin panel, e-commerce system, file platform or custom dashboard."}
+
+              <p className="mx-auto mt-4 max-w-2xl text-base leading-8 text-slate-300">
+                {isTr
+                  ? "İşletmenizi, ihtiyacınızı ve beğendiğiniz canlı örneği yazmanız yeterli. Uygun yapı, kapsam, süre ve fiyat birlikte netleştirilebilir."
+                  : "Share your business, your need and the live example you liked. The suitable structure, scope, timeline and price can be clarified together."}
               </p>
             </div>
-            <Button href="/contact">
-              {language === "tr" ? "Projem İçin Teklif Al" : "Request a Quote"}
-            </Button>
+
+            <div className="mx-auto flex w-full max-w-md flex-col gap-3 sm:flex-row lg:flex-col">
+              <Button href="/contact" className="h-12 min-h-12 w-full justify-center px-6 text-sm">
+                {isTr ? "Projem İçin Teklif Al" : "Request a Quote"}
+              </Button>
+
+              <Button href="/projects" variant="secondary" className="h-12 min-h-12 w-full justify-center px-6 text-sm">
+                {isTr ? "Canlı Örnekleri İncele" : "View Live Examples"}
+              </Button>
+            </div>
           </div>
         </div>
       </Container>

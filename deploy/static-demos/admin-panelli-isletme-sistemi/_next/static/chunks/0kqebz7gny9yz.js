@@ -1,0 +1,71 @@
+(globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push(["object"==typeof document?document.currentScript:void 0,33521,e=>{"use strict";var t=e.i(43476),a=e.i(45483);e.s(["PriorityBadge",0,function({priority:e}){let l=a.crmConfig.priorityColors[e]??"bg-slate-100 text-slate-600 border-slate-200";return(0,t.jsx)("span",{className:`inline-flex rounded-full border px-2.5 py-1 text-xs font-semibold ${l}`,children:e})},"StatusBadge",0,function({status:e}){let l=a.crmConfig.statusColors[e]??"bg-slate-100 text-slate-600 border-slate-200";return(0,t.jsx)("span",{className:`inline-flex rounded-full border px-2.5 py-1 text-xs font-semibold ${l}`,children:e})}])},5373,e=>{"use strict";let t=(0,e.i(56420).default)("file-down",[["path",{d:"M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z",key:"1oefj6"}],["path",{d:"M14 2v5a1 1 0 0 0 1 1h5",key:"wfsgrz"}],["path",{d:"M12 18v-6",key:"17g6i2"}],["path",{d:"m9 15 3 3 3-3",key:"1npd3o"}]]);e.s(["FileDown",0,t],5373)},53138,e=>{"use strict";let t=(0,e.i(56420).default)("triangle-alert",[["path",{d:"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3",key:"wmoenq"}],["path",{d:"M12 9v4",key:"juzpu7"}],["path",{d:"M12 17h.01",key:"p32p05"}]]);e.s(["AlertTriangle",0,t],53138)},53345,e=>{"use strict";var t=e.i(43476),a=e.i(71645),l=e.i(49830),s=e.i(78859),r=e.i(33521),i=e.i(45483),d=e.i(53138),n=e.i(5373),o=e.i(79258);let c=(0,e.i(56420).default)("trending-up",[["path",{d:"M16 7h6v6",key:"box55l"}],["path",{d:"m22 7-8.5 8.5-5-5L2 17",key:"1t1m79"}]]);function m({label:e,value:a}){return(0,t.jsxs)("div",{className:"flex items-center justify-between rounded-2xl bg-slate-50 p-4",children:[(0,t.jsx)("span",{className:"text-sm font-bold text-slate-500",children:e}),(0,t.jsx)("span",{className:"font-black text-slate-950",children:a})]})}e.s(["default",0,function(){let[e,p]=(0,a.useState)(i.crmConfig.generatedReports),[x,h]=(0,a.useState)(!1),f=Math.max(...i.crmConfig.weeklySalesSeries.map(e=>e.sales)),b=Math.max(...i.crmConfig.weeklySalesSeries.map(e=>e.transactions)),u=[["Bugünkü satış",i.crmConfig.reports.todaySales],["Bu haftaki toplam satış",i.crmConfig.reports.weeklySales],["Bu ay tahmini ciro",i.crmConfig.reports.monthlyRevenue],["En aktif tedarikçi",i.crmConfig.reports.mostActiveSupplier]];function g(e="Detaylı Market Raporu"){let t=window.open("","_blank","width=1100,height=820");if(!t)return;let a=i.crmConfig.weeklySalesSeries.map(e=>`<tr><td>${e.day}</td><td>₺${e.sales.toLocaleString("tr-TR")}</td><td>${e.transactions}</td></tr>`).join(""),l=i.crmConfig.categorySummary.map(e=>`<tr><td>${e.name}</td><td>₺${e.value.toLocaleString("tr-TR")}</td><td>%${e.percent}</td></tr>`).join(""),s=i.crmConfig.products.filter(e=>["Azaldı","Kritik","Tükendi","SKT Yaklaşıyor"].includes(e.status)).map(e=>`<tr><td>${e.name}</td><td>${e.stock}</td><td>${e.minStock}</td><td>${e.status}</td><td>${e.expiryDate}</td></tr>`).join(""),r=i.crmConfig.cashSummary.map(([e,t])=>`<tr><td>${e}</td><td>${t}</td></tr>`).join(""),d=i.crmConfig.staffWorkload.map(e=>`<tr><td>${e.name}</td><td>${e.role}</td><td>${e.openTasks}</td><td>${e.completedTasks}</td><td>${e.shift}</td></tr>`).join("");t.document.write(`
+      <!doctype html>
+      <html lang="tr">
+        <head>
+          <meta charset="utf-8" />
+          <title>${e}</title>
+          <style>
+            * { box-sizing: border-box; }
+            body { margin: 0; padding: 32px; font-family: Arial, Helvetica, sans-serif; color: #2a3f54; background: #fff; }
+            .header { display: flex; justify-content: space-between; gap: 24px; border-bottom: 3px solid #1abb9c; padding-bottom: 18px; margin-bottom: 24px; }
+            h1 { margin: 0; font-size: 28px; color: #2a3f54; }
+            h2 { margin: 28px 0 12px; font-size: 18px; color: #5a738e; border-bottom: 1px solid #d9dee4; padding-bottom: 8px; }
+            .muted { color: #73879c; font-size: 13px; line-height: 1.6; }
+            .summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 18px 0 8px; }
+            .card { border: 1px solid #d9dee4; padding: 14px; }
+            .label { color: #73879c; font-size: 12px; font-weight: 700; }
+            .value { margin-top: 6px; font-size: 22px; font-weight: 800; color: #2a3f54; }
+            table { width: 100%; border-collapse: collapse; margin-bottom: 12px; page-break-inside: avoid; }
+            th { background: #2a3f54; color: #fff; text-align: left; font-size: 12px; padding: 9px; }
+            td { border: 1px solid #d9dee4; padding: 9px; font-size: 12px; }
+            .note { margin-top: 24px; padding: 12px; border-left: 4px solid #1abb9c; background: #f7f7f7; color: #5a738e; font-size: 12px; }
+            @media print { body { padding: 18px; } .no-print { display: none; } }
+          </style>
+        </head>
+        <body>
+          <div class="header">
+            <div>
+              <h1>${e}</h1>
+              <p class="muted">${i.crmConfig.company.appName} \xb7 ${i.crmConfig.company.branch}<br/>${i.crmConfig.company.location}</p>
+            </div>
+            <div class="muted">
+              Oluşturma: ${new Date().toLocaleDateString("tr-TR")}<br/>
+              Sorumlu: ${i.crmConfig.company.userName}<br/>
+              Para birimi: TL
+            </div>
+          </div>
+
+          <div class="summary">
+            <div class="card"><div class="label">Bug\xfcnk\xfc Satış</div><div class="value">${i.crmConfig.reports.todaySales}</div></div>
+            <div class="card"><div class="label">Haftalık Satış</div><div class="value">${i.crmConfig.reports.weeklySales}</div></div>
+            <div class="card"><div class="label">Aylık Ciro</div><div class="value">${i.crmConfig.reports.monthlyRevenue}</div></div>
+            <div class="card"><div class="label">Kritik Stok</div><div class="value">${i.crmConfig.reports.criticalStockCount}</div></div>
+          </div>
+
+          <h2>Kasa \xd6zeti</h2>
+          <table><thead><tr><th>Kalem</th><th>Tutar</th></tr></thead><tbody>${r}</tbody></table>
+
+          <h2>Haftalık Satış ve İşlem Sayısı</h2>
+          <table><thead><tr><th>G\xfcn</th><th>Satış</th><th>İşlem</th></tr></thead><tbody>${a}</tbody></table>
+
+          <h2>Kategori Performansı</h2>
+          <table><thead><tr><th>Kategori</th><th>Satış</th><th>Pay</th></tr></thead><tbody>${l}</tbody></table>
+
+          <h2>Stok Riskleri</h2>
+          <table><thead><tr><th>\xdcr\xfcn</th><th>Stok</th><th>Minimum</th><th>Durum</th><th>SKT</th></tr></thead><tbody>${s}</tbody></table>
+
+          <h2>Personel G\xf6rev Y\xfck\xfc</h2>
+          <table><thead><tr><th>Personel</th><th>Rol</th><th>A\xe7ık G\xf6rev</th><th>Tamamlanan</th><th>Vardiya</th></tr></thead><tbody>${d}</tbody></table>
+
+          <div class="note">
+            Bu rapor; satış, stok, kasa, tedarik ve personel g\xf6rev verilerinden hazırlanmıştır. Yazdır ekranında “PDF olarak kaydet” se\xe7eneğiyle PDF dosyası alınabilir.
+          </div>
+          <script>
+            window.onload = () => {
+              window.focus();
+              window.print();
+            };
+          </script>
+        </body>
+      </html>
+    `),t.document.close()}return(0,t.jsxs)(l.AppShell,{title:"Raporlar",description:"Kasa, stok, ciro ve tedarik performansı",actionLabel:"Detaylı PDF Raporu Al",onAction:()=>g(),children:[(0,t.jsx)(s.QuickCreateModal,{isOpen:x,title:"Rapor Oluştur",description:"Rapor türü, dönem ve sorumlu bilgisiyle yeni rapor hazırlayın.",submitLabel:"Raporu Oluştur",onClose:()=>h(!1),onCreate:function(e){p(t=>[{id:`rapor-${Date.now()}`,title:e.title||"Yeni Rapor",period:e.period||"Bugün",owner:e.owner||"Taner",status:"Hazır"},...t])},fields:[{name:"title",label:"Rapor Adı",placeholder:"Gün sonu kasa raporu"},{name:"period",label:"Dönem",placeholder:"Bugün / Bu hafta"},{name:"owner",label:"Sorumlu",placeholder:"Taner"}]}),(0,t.jsx)("section",{className:"grid gap-5 md:grid-cols-2 xl:grid-cols-4",children:u.map(([e,a])=>(0,t.jsxs)("div",{className:"rounded-3xl panel-card p-6",children:[(0,t.jsx)("p",{className:"text-sm font-black text-slate-500",children:e}),(0,t.jsx)("p",{className:"mt-3 text-3xl font-black text-slate-950",children:a})]},e))}),(0,t.jsxs)("section",{className:"mt-6 grid gap-6 lg:grid-cols-3",children:[(0,t.jsxs)("div",{className:"rounded-3xl panel-card p-6",children:[(0,t.jsx)(c,{className:"text-[#1abb9c]",size:30}),(0,t.jsx)("h2",{className:"mt-4 text-xl font-black text-slate-950",children:"Satış Performansı"}),(0,t.jsxs)("div",{className:"mt-5 space-y-4",children:[(0,t.jsx)(m,{label:"En çok satan ürün",value:i.crmConfig.reports.bestSeller}),(0,t.jsx)(m,{label:"En az satan ürün",value:i.crmConfig.reports.leastSeller}),(0,t.jsx)(m,{label:"En çok kâr bırakan",value:i.crmConfig.reports.mostProfitable})]})]}),(0,t.jsxs)("div",{className:"rounded-3xl panel-card p-6",children:[(0,t.jsx)(d.AlertTriangle,{className:"text-amber-600",size:30}),(0,t.jsx)("h2",{className:"mt-4 text-xl font-black text-slate-950",children:"Stok Riskleri"}),(0,t.jsxs)("div",{className:"mt-5 space-y-4",children:[(0,t.jsx)(m,{label:"Kritik stok sayısı",value:i.crmConfig.reports.criticalStockCount}),(0,t.jsx)(m,{label:"SKT riski olan ürün",value:i.crmConfig.reports.expiryRiskCount}),(0,t.jsx)(m,{label:"Tedarik bekleyen",value:"4 sipariş"})]})]}),(0,t.jsxs)("div",{className:"rounded-3xl panel-card p-6",children:[(0,t.jsx)(o.Package,{className:"text-[#1abb9c]",size:30}),(0,t.jsx)("h2",{className:"mt-4 text-xl font-black text-slate-950",children:"Personel Görev Yükü"}),(0,t.jsxs)("div",{className:"mt-5 space-y-4",children:[i.crmConfig.staffWorkload.slice(0,2).map(e=>(0,t.jsx)(m,{label:e.name,value:`${e.openTasks} a\xe7ık g\xf6rev`},e.name)),(0,t.jsx)(m,{label:"Tamamlama oranı",value:i.crmConfig.reports.taskCompletionRate})]})]})]}),(0,t.jsxs)("section",{className:"mt-6 grid gap-6 md:grid-cols-2",children:[(0,t.jsxs)("div",{className:"panel-card rounded-3xl p-8",children:[(0,t.jsx)("h3",{className:"text-lg font-extrabold text-slate-950",children:"Haftalık Satış Özeti"}),(0,t.jsx)("div",{className:"mt-6 flex h-44 items-end gap-2 rounded-2xl border border-slate-100 bg-slate-50 p-4",children:i.crmConfig.weeklySalesSeries.map(e=>(0,t.jsx)("div",{className:"relative flex-1 rounded-lg bg-[#1abb9c]",style:{height:`${e.sales/f*100}%`},children:(0,t.jsxs)("span",{className:"absolute -top-6 w-full text-center text-[10px] font-black text-[#169f85]",children:["₺",Math.round(e.sales/1e3),"k"]})},e.day))})]}),(0,t.jsxs)("div",{className:"panel-card rounded-3xl p-8",children:[(0,t.jsx)("h3",{className:"text-lg font-extrabold text-slate-950",children:"Günlük İşlem Sayısı"}),(0,t.jsx)("div",{className:"mt-6 flex h-44 items-end gap-2 rounded-2xl border border-slate-100 bg-slate-50 p-4",children:i.crmConfig.weeklySalesSeries.map(e=>(0,t.jsx)("div",{className:"relative flex-1 rounded-lg bg-[#5a738e]",style:{height:`${e.transactions/b*100}%`},children:(0,t.jsx)("span",{className:"absolute -top-6 w-full text-center text-[10px] font-black text-[#5a738e]",children:e.transactions})},e.day))})]})]}),(0,t.jsxs)("section",{className:"mt-6 rounded-3xl panel-card p-6",children:[(0,t.jsxs)("div",{className:"flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between",children:[(0,t.jsx)("h3",{className:"text-lg font-extrabold text-slate-950",children:"Oluşturulan Raporlar"}),(0,t.jsx)("button",{onClick:()=>h(!0),className:"inline-flex items-center justify-center gap-2 bg-[#5a738e] px-4 py-2 text-sm font-black text-white transition hover:bg-[#2a3f54]",children:"Rapor Oluştur"})]}),(0,t.jsx)("div",{className:"mt-5 table-scroll",children:(0,t.jsxs)("table",{className:"w-full min-w-[760px] text-left text-sm font-medium",children:[(0,t.jsx)("thead",{children:(0,t.jsxs)("tr",{className:"border-b border-slate-200 text-xs uppercase tracking-wider text-slate-500",children:[(0,t.jsx)("th",{className:"py-3",children:"Rapor"}),(0,t.jsx)("th",{children:"Dönem"}),(0,t.jsx)("th",{children:"Sorumlu"}),(0,t.jsx)("th",{children:"Durum"}),(0,t.jsx)("th",{className:"text-right",children:"Aksiyon"})]})}),(0,t.jsx)("tbody",{children:e.map(e=>(0,t.jsxs)("tr",{className:"border-b border-slate-100 last:border-0",children:[(0,t.jsx)("td",{className:"py-4 font-black text-slate-950",children:e.title}),(0,t.jsx)("td",{children:e.period}),(0,t.jsx)("td",{children:e.owner}),(0,t.jsx)("td",{children:(0,t.jsx)(r.StatusBadge,{status:e.status})}),(0,t.jsx)("td",{className:"text-right",children:(0,t.jsxs)("button",{onClick:()=>g(e.title),className:"inline-flex items-center gap-2 bg-[#1abb9c] px-3 py-1.5 text-xs font-black text-white",children:[(0,t.jsx)(n.FileDown,{size:14})," PDF Al"]})})]},e.id))})]})})]})]})}],53345)}]);

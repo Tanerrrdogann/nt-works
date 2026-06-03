@@ -1,0 +1,185 @@
+"use client";
+
+import Container from "@/components/layout/Container";
+import SectionTitle from "@/components/ui/SectionTitle";
+import Button from "@/components/ui/Button";
+import { serviceCombinations, services } from "@/data/services";
+import { useLanguage } from "@/i18n/LanguageProvider";
+
+export default function ServicesPage() {
+  const { t, language } = useLanguage();
+  const isTr = language === "tr";
+
+  return (
+    <section className="py-8 sm:py-12 lg:py-16">
+      <Container>
+        <SectionTitle
+          eyebrow={t("services.eyebrow")}
+          title={
+            isTr
+              ? "İşletmenize Göre Uyarlanabilir Web Sitesi ve Yazılım Hizmetleri"
+              : "Adaptable Website and Software Services for Your Business"
+          }
+          description={
+            isTr
+              ? "Canlı örnek altyapılar; sektörünüze, içeriklerinize ve işleyişinize göre birleştirilebilir, sadeleştirilebilir veya geliştirilebilir."
+              : "Live demo infrastructures can be combined, simplified or extended according to your industry, content and business workflow."
+          }
+        />
+
+        <div className="grid gap-4 sm:gap-5 lg:grid-cols-2 xl:grid-cols-3 xl:gap-6">
+          {services.map((service) => {
+            const title = isTr ? service.titleTr : service.title;
+            const description = isTr ? service.descriptionTr : service.description;
+            const examples = isTr ? service.examplesTr : service.examples;
+            const infrastructure = isTr ? service.infrastructureTr : service.infrastructure;
+
+            return (
+              <article
+                key={service.title}
+                className="flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:shadow-md sm:rounded-3xl sm:p-5 lg:p-6 xl:hover:-translate-y-1"
+              >
+                <div className="mb-3 inline-flex w-fit rounded-full bg-slate-100 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500 sm:mb-4 sm:px-3 sm:text-[11px]">
+                  {isTr ? "Uyarlanabilir Hizmet" : "Adaptable Service"}
+                </div>
+
+                <h2 className="text-lg font-black leading-6 text-slate-950 sm:text-xl sm:leading-7 lg:text-2xl">
+                  {title}
+                </h2>
+
+                <p className="mt-2 text-sm leading-6 text-slate-600 sm:mt-3 sm:leading-6">
+                  {description}
+                </p>
+
+                <div className="mt-4 sm:mt-5">
+                  <h3 className="text-sm font-black text-slate-950">
+                    {isTr ? "Yapılabilecek işler" : "Possible use cases"}
+                  </h3>
+
+                  <ul className="mt-2 grid gap-2 text-sm leading-5 text-slate-600 sm:mt-3">
+                    {examples.slice(0, 4).map((item) => (
+                      <li key={item} className="flex gap-2">
+                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+
+                    {examples.length > 4 && (
+                      <li className="rounded-xl bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-500 sm:text-sm">
+                        {isTr
+                          ? `+${examples.length - 4} farklı kullanım alanı daha`
+                          : `+${examples.length - 4} more use cases`}
+                      </li>
+                    )}
+                  </ul>
+                </div>
+
+                <div className="mt-4 sm:mt-5">
+                  <h3 className="text-sm font-black text-slate-950">
+                    {isTr ? "Kullanılabilecek altyapılar" : "Possible infrastructure"}
+                  </h3>
+
+                  <div className="mt-2 flex flex-wrap gap-1.5 sm:mt-3 sm:gap-2">
+                    {infrastructure.slice(0, 6).map((item) => (
+                      <span
+                        key={item}
+                        className="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-[11px] font-semibold leading-4 text-slate-600 sm:px-3 sm:text-xs"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mt-auto pt-5 sm:pt-6">
+                  <Button
+                    href="/contact"
+                    className="h-10 min-h-10 w-full justify-center px-4 text-xs sm:h-11 sm:min-h-11 sm:text-sm"
+                  >
+                    {isTr ? "Bu Hizmet İçin Fiyat Al" : "Get a Quote for This Service"}
+                  </Button>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+
+        <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:mt-8 sm:rounded-3xl sm:p-6 lg:mt-12 lg:p-8">
+          <div className="max-w-3xl">
+            <p className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-500 sm:text-xs">
+              {isTr ? "Modüler Yapı" : "Modular Structure"}
+            </p>
+
+            <h2 className="mt-2 text-xl font-black leading-7 text-slate-950 sm:mt-3 sm:text-2xl sm:leading-8 lg:text-3xl">
+              {isTr
+                ? "Sistemler ihtiyaca göre birleşebilir"
+                : "Systems can be combined according to the need"}
+            </h2>
+
+            <p className="mt-2 text-sm leading-6 text-slate-600 sm:mt-3 sm:text-base sm:leading-7">
+              {isTr
+                ? "Tek bir hazır kalıba bağlı kalmak zorunda değilsiniz. Katalog, randevu, WhatsApp yönlendirme, ödeme altyapısı ve admin panel gibi parçalar işletmenizin ihtiyacına göre aynı sistemde birleştirilebilir."
+                : "You do not have to choose a fixed template only. Catalog, appointment, WhatsApp direction, payment flow and admin panel modules can be combined in the same system according to your business needs."}
+            </p>
+          </div>
+
+          <div className="mt-5 grid gap-3 sm:mt-6 sm:grid-cols-2 xl:grid-cols-4">
+            {serviceCombinations.map((item) => (
+              <div
+                key={item.title}
+                className="rounded-2xl border border-slate-200 bg-slate-50 p-4"
+              >
+                <h3 className="text-sm font-black text-slate-950">
+                  {isTr ? item.titleTr : item.title}
+                </h3>
+
+                <p className="mt-2 text-xs leading-5 text-slate-600 sm:text-sm sm:leading-6">
+                  {isTr ? item.descriptionTr : item.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-950 p-4 text-white shadow-sm sm:mt-8 sm:rounded-3xl sm:p-6 lg:mt-12 lg:p-8">
+          <div className="grid gap-5 lg:grid-cols-[1.4fr_0.6fr] lg:items-center lg:gap-8">
+            <div>
+              <p className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-400 sm:text-xs">
+                {isTr ? "Fiyatlandırma" : "Pricing"}
+              </p>
+
+              <h2 className="mt-2 text-xl font-black leading-7 sm:mt-3 sm:text-2xl sm:leading-8 lg:text-3xl">
+                {isTr
+                  ? "Fiyat, projenin kapsamına göre netleştirilir"
+                  : "Pricing is clarified according to project scope"}
+              </h2>
+
+              <p className="mt-2 text-sm leading-6 text-slate-300 sm:mt-3 sm:text-base sm:leading-7">
+                {isTr
+                  ? "Sayfa sayısı, admin panel ihtiyacı, ödeme entegrasyonu, ürün/randevu yönetimi, özel tasarım, teslim süresi ve destek kapsamı fiyatı etkiler. İhtiyacınızı yazarsanız uygun çözüm, tahmini süre ve fiyat bilgisi paylaşılabilir."
+                  : "Number of pages, admin panel need, payment integration, product/appointment management, custom design, delivery time and support scope affect the price. Share your need to receive a suitable solution, estimated timeline and pricing information."}
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
+              <Button
+                href="/contact"
+                className="h-11 min-h-11 w-full justify-center px-5 text-sm"
+              >
+                {isTr ? "Fiyat Almak İstiyorum" : "I Want to Get a Quote"}
+              </Button>
+
+              <Button
+                href="/projects"
+                variant="secondary"
+                className="h-11 min-h-11 w-full justify-center px-5 text-sm"
+              >
+                {isTr ? "Canlı Örnekleri İncele" : "View Live Demos"}
+              </Button>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </section>
+  );
+}

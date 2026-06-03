@@ -12,6 +12,7 @@ const CONTACT_EMAIL = "ismailtanererdogan54@gmail.com";
 const WHATSAPP_URL = "https://wa.me/905511955566";
 const WEB3FORMS_ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY ?? "";
 const projectTypeOptions = [
+  { value: "emin-degilim", labelTr: "Emin değilim, uygun çözümü önerin", labelEn: "Not sure, suggest the right solution" },
   { value: "kurumsal-web-sitesi", labelTr: "Kurumsal web sitesi", labelEn: "Business website" },
   { value: "ecommerce-platform", labelTr: "E-ticaret sistemi", labelEn: "E-commerce system" },
   { value: "whatsapp-siparis-katalog", labelTr: "Ürün katalog / WhatsApp sipariş", labelEn: "Product catalog / WhatsApp order" },
@@ -34,6 +35,12 @@ function buildMailToUrl(subject: string, body: string) {
 }
 
 function buildProjectRequestMessage(projectSlug: string, language: "en" | "tr", packageName = "") {
+  if (projectSlug === "emin-degilim") {
+    return language === "tr"
+      ? "Merhaba, işletmem için web sitesi / katalog / randevu / e-ticaret / admin panel seçeneklerinden hangisinin daha uygun olduğunu bilmiyorum. İhtiyacımı anlatıp uygun çözümü birlikte netleştirmek istiyorum."
+      : "Hello, I am not sure whether a website, catalog, appointment system, e-commerce system or admin panel would be the right solution for my business. I would like to describe my need and clarify the suitable solution together.";
+  }
+
   const project = projects.find((item) => item.slug === projectSlug);
 
   if (!project) {
@@ -73,6 +80,7 @@ export default function ContactPage() {
   const initialPackage = getInitialPackage();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [projectType, setProjectType] = useState(initialProject);
   const [message, setMessage] = useState(() =>
     initialProject ? buildProjectRequestMessage(initialProject, language, initialPackage) : ""
@@ -93,6 +101,7 @@ export default function ContactPage() {
     const body = [
       `Ad: ${name || "-"}`,
       `E-posta: ${email || "-"}`,
+      `Telefon / WhatsApp: ${phone || "-"}`,
       `Proje türü: ${projectType ? getProjectTypeLabel(projectType, language) : "-"}`,
       "",
       "Mesaj:",
@@ -119,6 +128,7 @@ export default function ContactPage() {
           subject,
           from_name: name || "NT Web Çözümleri formu",
           email: email || CONTACT_EMAIL,
+          phone: phone || "-",
           to: CONTACT_EMAIL,
           project_type: projectType ? getProjectTypeLabel(projectType, language) : "-",
           message: body
@@ -135,6 +145,7 @@ export default function ContactPage() {
       setSubmitMessage("Mesajın gönderildi. En kısa sürede dönüş yapacağız.");
       setName("");
       setEmail("");
+      setPhone("");
       setProjectType("");
       setMessage("");
     } catch {
@@ -144,7 +155,7 @@ export default function ContactPage() {
   }
 
   return (
-    <section className="py-12 sm:py-16">
+    <section className="py-10 sm:py-12 lg:py-16">
       <Container>
         <SectionTitle
           eyebrow={t("contact.eyebrow")}
@@ -152,10 +163,10 @@ export default function ContactPage() {
           description={t("contact.description")}
         />
 
-        <div className="mx-auto grid max-w-6xl min-w-0 gap-4 sm:gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="mx-auto grid max-w-6xl min-w-0 items-stretch gap-6 lg:grid-cols-[1.08fr_0.92fr]">
           <form
             onSubmit={handleSubmit}
-            className="min-w-0 rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:rounded-[2rem] sm:p-8"
+            className="flex h-full min-w-0 flex-col rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:rounded-[2rem] sm:p-8"
           >
             <div className="grid min-w-0 gap-3 sm:grid-cols-2 sm:gap-5">
               <label className="grid min-w-0 gap-2 text-sm font-semibold text-slate-700">
@@ -182,6 +193,16 @@ export default function ContactPage() {
               </label>
 
               <label className="grid min-w-0 gap-2 text-sm font-semibold text-slate-700 sm:col-span-2">
+                {language === "tr" ? "Telefon / WhatsApp (opsiyonel)" : "Phone / WhatsApp (optional)"}
+                <input
+                  value={phone}
+                  onChange={(event) => setPhone(event.target.value)}
+                  className="min-w-0 rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-950 outline-none transition focus:border-slate-400 focus:bg-white sm:px-4 sm:py-3 sm:text-base"
+                  placeholder={language === "tr" ? "Dönüş için telefon numaranı yazabilirsin" : "You can enter your phone number for contact"}
+                />
+              </label>
+
+              <label className="grid min-w-0 gap-2 text-sm font-semibold text-slate-700 sm:col-span-2">
                 {language === "tr" ? "İlgilendiğin proje türü" : "Project type"}
                 <select
                   value={projectType}
@@ -192,7 +213,7 @@ export default function ContactPage() {
                   }}
                   className="min-w-0 rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-950 outline-none transition focus:border-slate-400 focus:bg-white sm:px-4 sm:py-3 sm:text-base"
                 >
-                  <option value="">{language === "tr" ? "Seç veya boş bırak" : "Select or leave blank"}</option>
+                  <option value="">{language === "tr" ? "Proje türü seç" : "Select project type"}</option>
                   {projectTypeOptions.map((option) => (
                     <option key={option.value} value={option.value}>
                       {language === "tr" ? option.labelTr : option.labelEn}
@@ -211,20 +232,24 @@ export default function ContactPage() {
                   className="min-w-0 resize-none rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-950 outline-none transition focus:border-slate-400 focus:bg-white sm:px-4 sm:py-3 sm:text-base"
                   placeholder={
                     language === "tr"
-                      ? "İhtiyacını, örnek aldığın projeyi veya işletme türünü yazabilirsin."
-                      : "Describe the need, reference project or business type."
+                      ? "İşletme türünü, beğendiğin canlı örneği, istediğin özellikleri ve varsa bütçe/süre beklentini yazabilirsin."
+                      : "Describe your business type, the live example you liked, desired features and any budget/timeline expectation."
                   }
                 />
               </label>
             </div>
 
-            <button
-              type="submit"
+            <div className="mt-auto">
+              <button
+                type="submit"
               disabled={submitState === "sending"}
-              className="mt-4 inline-flex items-center justify-center rounded-xl bg-slate-950 px-4 py-2.5 text-xs font-semibold text-white shadow-sm transition hover:bg-slate-800 sm:mt-6 sm:px-5 sm:py-3 sm:text-sm"
+              className="mt-5 inline-flex h-12 min-h-12 w-full items-center justify-center rounded-2xl bg-slate-950 px-5 text-sm font-black text-white shadow-sm transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-70 sm:mt-6"
             >
-              {submitState === "sending" ? "Gönderiliyor..." : "Mesaj Gönder"}
-            </button>
+              {submitState === "sending"
+                ? language === "tr" ? "Gönderiliyor..." : "Sending..."
+                : language === "tr" ? "Proje Talebimi Gönder" : "Send Project Request"}
+              </button>
+            </div>
 
             {submitMessage && (
               <p
@@ -239,7 +264,7 @@ export default function ContactPage() {
             )}
           </form>
 
-          <div className="min-w-0 rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:rounded-[2rem] sm:p-8">
+          <div className="flex h-full min-w-0 flex-col rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:rounded-[2rem] sm:p-8">
             <div className="grid min-w-0 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-1">
               <a
                 href={`mailto:${CONTACT_EMAIL}`}
@@ -259,7 +284,7 @@ export default function ContactPage() {
               >
                 <p className="text-sm text-slate-500">Bionluk</p>
                 <p className="mt-1 font-semibold text-slate-950">
-                  {language === "tr" ? "Bionluk üzerinden satın al" : "Buy through Bionluk"}
+                  {language === "tr" ? "Bionluk üzerinden güvenli ilerle" : "Continue securely through Bionluk"}
                 </p>
               </a>
 
@@ -285,13 +310,13 @@ export default function ContactPage() {
               </a>
             </div>
 
-            <div className="mt-4 rounded-3xl border border-slate-200 bg-slate-50 p-4 text-slate-950 sm:mt-8 sm:p-6">
+            <div className="mt-auto rounded-3xl border border-slate-200 bg-slate-50 p-4 text-slate-950 sm:mt-8 sm:p-6">
               <h2 className="text-xl font-black sm:text-2xl">{t("contact.noteTitle")}</h2>
               <p className="mt-3 text-sm leading-6 text-slate-700 sm:text-base">
                 {t("contact.noteDescription")}
               </p>
               <div className="mt-4 sm:mt-5">
-                <Button href="/projects" className="h-10 min-h-10 px-4 text-xs sm:h-12 sm:min-h-12 sm:px-5 sm:text-sm">
+                <Button href="/projects" className="h-12 min-h-12 w-full justify-center px-5 text-sm sm:w-auto">
                   {t("contact.viewProjects")}
                 </Button>
               </div>

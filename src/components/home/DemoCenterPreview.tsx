@@ -2,69 +2,82 @@
 
 import Container from "@/components/layout/Container";
 import SectionTitle from "@/components/ui/SectionTitle";
+import Button from "@/components/ui/Button";
 import { useLanguage } from "@/i18n/LanguageProvider";
 
 export default function DemoCenterPreview() {
   const { language } = useLanguage();
+  const isTr = language === "tr";
+
   const cards = [
     {
-      title: "Try the product",
-      titleTr: "Ürünü deneyin",
+      title: "Canlı inceleme",
+      titleEn: "Live review",
       description:
-        "Open the live preview, browse the sample screens and see how the system feels before requesting a similar one.",
-      descriptionTr:
-        "Canlı incelemeyi açıp örnek ekranları gezebilir, benzerini talep etmeden önce sistemin nasıl çalıştığını görebilirsiniz."
+        "Sadece görsel değil, telefonunuzdan gezebileceğiniz çalışan örnek sistemleri inceleyebilirsiniz.",
+      descriptionEn:
+        "You can review working sample systems from your phone, not only static visuals."
     },
     {
-      title: "Clear examples",
-      titleTr: "Net örnekler",
+      title: "İşletmeye göre uyarlama",
+      titleEn: "Business adaptation",
       description:
-        "Each product page explains what the system includes, who it is useful for and what can be customized.",
-      descriptionTr:
-        "Her ürün sayfası sistemin neleri içerdiğini, kimler için uygun olduğunu ve hangi noktaların özelleştirilebileceğini anlatır."
+        "Renkler, metinler, sayfalar, ürünler, formlar ve panel bölümleri ihtiyaca göre düzenlenebilir.",
+      descriptionEn:
+        "Colors, texts, pages, products, forms and panel sections can be adjusted according to the need."
     },
     {
-      title: "Request similar",
-      titleTr: "Benzerini talep edin",
+      title: "Güvenli karar süreci",
+      titleEn: "Safer decision process",
       description:
-        "After reviewing a product, visitors can request a similar website, e-commerce system or custom panel.",
-      descriptionTr:
-        "Ürünü inceledikten sonra benzer bir web sitesi, e-ticaret sistemi veya özel panel için teklif talep edebilirsiniz."
+        "Benzer yapıyı istemeden önce nasıl çalıştığını görebilir, kapsamı daha net konuşabilirsiniz.",
+      descriptionEn:
+        "Before requesting a similar structure, you can see how it works and discuss scope more clearly."
     }
   ];
 
   return (
-    <section className="py-14 sm:py-20">
+    <section className="py-12 sm:py-16 lg:py-20">
       <Container>
-        <div className="px-0 py-6 sm:px-4 sm:py-8 md:px-10 md:py-12">
+        <div className="rounded-3xl border border-slate-200 bg-white p-5 text-center shadow-sm sm:p-8 lg:p-10">
           <SectionTitle
-            eyebrow={language === "tr" ? "Canlı Ürünler" : "Live Products"}
+            eyebrow={isTr ? "Canlı Örnek Mantığı" : "Live Example Approach"}
             title={
-              language === "tr"
-                ? "Ürünlerimizi canlı olarak deneyebilirsiniz"
-                : "You can try our products live"
+              isTr
+                ? "Önce çalışan örneği görün, sonra işletmenize uyarlayalım"
+                : "See the working example first, then adapt it to your business"
             }
             description={
-              language === "tr"
-                ? "E-ticaret, dosya yönetimi, görev takibi, AI/log analizi ve video analiz gibi örnek sistemleri inceleyebilir; işletmeniz için benzerini talep edebilirsiniz."
-                : "You can review sample systems such as e-commerce, file management, task tracking, AI/log analysis and video analysis, then request a similar solution for your business."
+              isTr
+                ? "Canlı örnekler, teklif vermeden önce ihtiyacın daha net konuşulmasını sağlar. Böylece müşteri ne alacağını daha iyi görür."
+                : "Live examples make it easier to discuss the need before quoting. This helps the client understand what they will receive."
             }
           />
 
-          <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:gap-6">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
             {cards.map((card) => (
               <div
                 key={card.title}
-                className="rounded-2xl border border-slate-200 bg-slate-50 p-3 sm:p-4 lg:rounded-3xl lg:p-6"
+                className="rounded-2xl border border-slate-200 bg-slate-50 p-5 text-center"
               >
-                <h3 className="text-sm font-bold leading-5 text-slate-950 sm:text-base sm:leading-6">
-                  {language === "tr" ? card.titleTr : card.title}
+                <h3 className="text-lg font-black leading-6 text-slate-950">
+                  {isTr ? card.title : card.titleEn}
                 </h3>
-                <p className="mt-2 text-xs leading-5 text-slate-600 sm:text-sm sm:leading-6 lg:mt-3">
-                  {language === "tr" ? card.descriptionTr : card.description}
+
+                <p className="mt-3 text-sm leading-7 text-slate-600">
+                  {isTr ? card.description : card.descriptionEn}
                 </p>
               </div>
             ))}
+          </div>
+
+          <div className="mt-7 grid grid-cols-1 gap-3 sm:flex sm:justify-center">
+            <Button href="/projects" className="h-12 min-h-12 justify-center px-6 text-sm">
+              {isTr ? "Canlı Örnekleri İncele" : "View Live Examples"}
+            </Button>
+            <Button href="/about" variant="secondary" className="h-12 min-h-12 justify-center px-6 text-sm">
+              {isTr ? "Yaklaşımımızı Oku" : "Read Our Approach"}
+            </Button>
           </div>
         </div>
       </Container>

@@ -25,7 +25,7 @@ const detailCopy: Record<
       "Bir işletme bu yapıyı kullandığında ziyaretçi ilk ekranda ne sunduğunu, hangi alanlarda çalıştığını ve nasıl iletişime geçeceğini hızlıca anlar. Bu yüzden kurumsal site aynı zamanda satışa hazırlayan bir dijital vitrin gibi çalışır."
     ],
     outcomesTr: ["Daha profesyonel ilk izlenim", "Hizmetleri daha net anlatan sayfa yapısı", "Mobilde düzgün çalışan kurumsal görünüm", "Teklif talebine yönlendiren aksiyonlar", "İleride blog, proje ve hizmet sayfası eklemeye uygun altyapı"],
-    modulesTr: ["Ana sayfa ve değer önerisi", "Hizmet detay sayfaları", "Çözümler ve sektör anlatımı", "Projeler / referans mantığı", "İletişim ve teklif talep akışı", "SEO uyumlu sayfa başlıkları"],
+    modulesTr: ["Ana sayfa ve değer önerisi", "Hizmet detay sayfaları", "Çözümler ve sektör anlatımı", "Canlı örnekler / referans mantığı", "İletişim ve teklif talep akışı", "SEO uyumlu sayfa başlıkları"],
     proofTr: "Canlı incelemede ziyaretçi gerçek sayfa akışını, hizmet anlatımlarını, görsel yerleşimi ve iletişim mantığını görebilir."
   },
   "ecommerce-platform": {
@@ -222,6 +222,17 @@ export default function ProjectDetail({ project }: { project: Project }) {
           {description}
         </p>
 
+        <div className={`mt-5 max-w-4xl rounded-2xl border p-4 text-sm leading-7 sm:p-5 sm:text-base ${theme.border} ${theme.bg}`}>
+          <p className={`font-black ${theme.text}`}>
+            {language === "tr" ? "Uyarlanabilir canlı örnek notu" : "Adaptable live example note"}
+          </p>
+          <p className={`mt-2 ${theme.softText}`}>
+            {language === "tr"
+              ? "Bu çalışma gerçek müşteri işi gibi gösterilen bir referans değildir. İşletmenize göre benzeri hazırlanabilecek, canlı incelenebilir örnek sistemdir."
+              : "This work is not presented as a real client reference. It is a live reviewable sample system that can be adapted for a similar business need."}
+          </p>
+        </div>
+
         <div className="mt-6 grid min-w-0 grid-cols-2 gap-2 sm:mt-8 sm:flex sm:flex-wrap sm:gap-3">
           {project.isDemoEnabled && (
             <Button
@@ -238,7 +249,7 @@ export default function ProjectDetail({ project }: { project: Project }) {
             {language === "tr" ? "Benzerini İstiyorum" : "Request Similar"}
           </Button>
           <Button href={bionlukUrl} target="_blank" rel="noreferrer" className="h-10 min-h-10 px-3 text-xs sm:h-12 sm:min-h-12 sm:px-5 sm:text-sm">
-            {language === "tr" ? "Bionluk'tan Satın Al" : "Buy on Bionluk"}
+            {language === "tr" ? "Bionluk ile Güvenli İlerle" : "Use Bionluk Securely"}
           </Button>
           <Button href="/projects" variant="ghost" className="h-10 min-h-10 px-3 text-xs sm:h-12 sm:min-h-12 sm:px-5 sm:text-sm">
             {t("projects.back")}
@@ -261,8 +272,8 @@ export default function ProjectDetail({ project }: { project: Project }) {
                   </h2>
                   <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600 sm:mt-3 sm:text-base sm:leading-7">
                     {language === "tr"
-                      ? "Canlı incelemede gördüğün sistem için düşük başlangıç fiyatlı üç paket. Kapsam netleşince aynı içerik Bionluk satın alma akışına da taşınabilir."
-                      : "Three low-entry packages for the system shown in the live preview. Once scoped, the same package structure can be mirrored on Bionluk."}
+                      ? "Canlı incelemede gördüğünüz örnek için kapsam, sayfa sayısı, admin panel ve özel istekler netleştirilir. İsterseniz aynı yapı Bionluk üzerinden güvenli teklif veya sipariş akışına taşınabilir."
+                      : "For the live example you review, scope, page count, admin panel and custom requests are clarified. If preferred, the same structure can continue through Bionluk as a secure offer or order flow."}
                   </p>
                 </div>
                 <Badge>{language === "tr" ? "Başlayan fiyatlar" : "Starting prices"}</Badge>
@@ -317,7 +328,7 @@ export default function ProjectDetail({ project }: { project: Project }) {
                       </ul>
                       <div className="mt-auto pt-3 sm:pt-5 xl:pt-6">
                         <Button href={bionlukUrl} target="_blank" rel="noreferrer" className="h-9 min-h-9 w-full px-2 text-[10px] sm:h-10 sm:min-h-10 sm:text-xs xl:h-12 xl:min-h-12 xl:px-5 xl:text-sm">
-                          {language === "tr" ? "Bionluk'tan Satın Al" : "Buy on Bionluk"}
+                          {language === "tr" ? "Bionluk ile Güvenli İlerle" : "Use Bionluk Securely"}
                         </Button>
                         <Button href={contactHref} variant="secondary" className="mt-2 hidden w-full sm:inline-flex xl:mt-3">
                           {language === "tr" ? "Bu Paketi Sor" : "Ask About This Package"}
@@ -334,7 +345,7 @@ export default function ProjectDetail({ project }: { project: Project }) {
             <section className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
               <div className={`h-1 bg-gradient-to-r ${theme.stripe}`} />
               <div className="p-4 sm:p-6">
-                <h2 className="text-2xl font-black text-slate-950 sm:text-3xl">Bu projeden ne çıkar?</h2>
+                <h2 className="text-2xl font-black text-slate-950 sm:text-3xl">Bu canlı örnek neyi gösterir?</h2>
                 <div className="mt-4 grid gap-3 text-sm leading-6 text-slate-600 sm:mt-5 sm:gap-4 sm:text-base sm:leading-8">
                   {detail.overviewTr.map((paragraph) => (
                     <p key={paragraph}>{paragraph}</p>
@@ -352,15 +363,15 @@ export default function ProjectDetail({ project }: { project: Project }) {
 
           <section className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
             <h2 className="text-xl font-black text-slate-950 sm:text-2xl">
-              {language === "tr" ? "Proje müşteriye nasıl anlatılır?" : "How This Project Is Presented"}
+              {language === "tr" ? "Bu canlı örnek nasıl uyarlanır?" : "How This Live Example Can Be Adapted"}
             </h2>
             <div className="mt-4 grid grid-cols-3 gap-2 sm:mt-5 sm:gap-4 md:grid-cols-3">
               {[
                 {
                   title: language === "tr" ? "İhtiyaç" : "Need",
                   text: language === "tr"
-                    ? `${title}, ${category.toLocaleLowerCase("tr-TR")} ihtiyacını somut ekranlarla anlatmak için hazırlanır. Müşteri yalnızca teknik özellik görmez; hangi işini kolaylaştıracağını da okur.`
-                    : `${title} presents the ${category.toLowerCase()} need through concrete screens, so the client understands both the feature set and the business value.`
+                    ? `${title}, ${category.toLocaleLowerCase("tr-TR")} ihtiyacını canlı ekranlarla anlatmak için hazırlanır. Müşteri yalnızca teknik özellik görmez; sistemin kendi işletmesine nasıl uyarlanabileceğini de anlar.`
+                    : `${title} presents the ${category.toLowerCase()} need through live screens, so the client understands both the feature set and how it can be adapted to their business.`
                 },
                 {
                   title: language === "tr" ? "Uyarlama" : "Adaptation",
@@ -371,7 +382,7 @@ export default function ProjectDetail({ project }: { project: Project }) {
                 {
                   title: language === "tr" ? "Teslim" : "Delivery",
                   text: language === "tr"
-                    ? "Canlı demo, teklif öncesi konuşmayı hızlandırır; kapsam netleşince aynı yapı domain, hosting, yönetim paneli ve içerik düzeniyle teslim edilebilir."
+                    ? "Canlı örnek, teklif öncesi konuşmayı hızlandırır; kapsam netleşince benzer yapı domain, hosting, yönetim paneli ve içerik düzeniyle işletmeye özel teslim edilebilir."
                     : "The live demo speeds up the proposal conversation; once scoped, the system can be delivered with domain, hosting, admin and content setup."
                 }
               ].map((item) => (
@@ -411,7 +422,7 @@ export default function ProjectDetail({ project }: { project: Project }) {
           {benefit && (
             <section className={`rounded-3xl border p-4 shadow-sm sm:p-6 ${theme.border} ${theme.bg}`}>
               <h2 className={`text-xl font-bold sm:text-2xl ${theme.text}`}>
-                {language === "tr" ? "İşletmeye faydası" : "Business Value"}
+                {language === "tr" ? "İşletmeye nasıl fayda sağlar?" : "Business Value"}
               </h2>
               <p className={`mt-3 text-sm leading-6 sm:mt-4 sm:text-base sm:leading-7 ${theme.softText}`}>{benefit}</p>
             </section>
@@ -420,7 +431,7 @@ export default function ProjectDetail({ project }: { project: Project }) {
           {audience && (
             <section className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
               <h2 className="text-xl font-bold text-slate-950 sm:text-2xl">
-                {language === "tr" ? "Bu sistem kimler için uygun?" : "Who Is This For?"}
+                {language === "tr" ? "Bu örnek kimler için uygun?" : "Who Is This Example For?"}
               </h2>
               <ul className="mt-4 grid grid-cols-2 gap-2 sm:mt-5 sm:gap-3">
                 {audience.map((item) => (

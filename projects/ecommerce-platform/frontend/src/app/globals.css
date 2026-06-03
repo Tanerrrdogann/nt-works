@@ -516,19 +516,6 @@ h2 {
   background: var(--white);
 }
 
-.product-swipe-hint::after {
-  content: "Kaydır";
-  margin-left: 4px;
-  padding: 4px 7px;
-  color: var(--plum);
-  background: rgba(255, 253, 249, 0.84);
-  border: 1px solid rgba(200, 169, 106, 0.34);
-  border-radius: 999px;
-  font-size: 10px;
-  font-weight: 900;
-  letter-spacing: 0.02em;
-}
-
 .product-swipe-hint.detail {
   bottom: 18px;
 }
@@ -791,15 +778,20 @@ h2 {
 }
 
 .detail-image {
-  position: relative;
   overflow: hidden;
-  background: var(--rose);
+  background: var(--white);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
 }
 
-.detail-image img {
+.detail-main-image {
+  position: relative;
+  overflow: hidden;
+  background: var(--rose);
+}
+
+.detail-main-image > img {
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
@@ -1976,19 +1968,27 @@ h2 {
 
 .detail-gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
+  grid-auto-flow: column;
+  grid-auto-columns: clamp(78px, 18vw, 96px);
+  grid-template-columns: none;
   gap: 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
   padding: 10px;
   background: var(--white);
+  scroll-snap-type: x proximity;
+  scrollbar-color: var(--champagne) rgba(200, 169, 106, 0.14);
 }
 
 .detail-gallery button {
+  aspect-ratio: 1 / 1;
   padding: 0;
   overflow: hidden;
   background: transparent;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   cursor: pointer;
+  scroll-snap-align: start;
 }
 
 .detail-gallery button.active {
@@ -1998,6 +1998,7 @@ h2 {
 
 .detail-gallery img {
   width: 100%;
+  height: 100%;
   aspect-ratio: 1;
   object-fit: cover;
   display: block;
@@ -2327,8 +2328,16 @@ h2 {
 
   .hero-media {
     order: 1;
+    display: grid;
+    gap: 12px;
     width: 100%;
     justify-self: center;
+    overflow: visible;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    aspect-ratio: auto;
   }
 
   .hero-content h1 {
@@ -2351,17 +2360,38 @@ h2 {
     flex-direction: column;
   }
 
-  .hero-media,
   .hero-media img {
+    width: 100%;
     height: auto;
     min-height: 0;
+    border: 1px solid rgba(200, 169, 106, 0.38);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
   }
 
   .hero-note {
-    right: 12px;
-    bottom: 12px;
-    left: 12px;
+    position: static;
+    width: 100%;
     max-width: none;
+    margin: 0;
+    padding: 18px 16px;
+    background: rgba(255, 253, 249, 0.96);
+    border: 1px solid rgba(200, 169, 106, 0.4);
+    border-radius: var(--radius);
+    box-shadow: none;
+    backdrop-filter: none;
+    text-align: center;
+  }
+
+  .hero-note strong {
+    font-size: 18px;
+    line-height: 1.2;
+  }
+
+  .hero-note span {
+    margin-top: 8px;
+    font-size: 15px;
+    line-height: 1.45;
   }
 
   .product-slider-controls {
@@ -2519,5 +2549,29 @@ h2 {
 
   .admin-stats {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Product rating count mobile wrap fix */
+.rating-row {
+  flex-wrap: wrap;
+}
+
+.rating-row > span:last-child {
+  white-space: nowrap;
+}
+
+.product-card .rating-row.compact {
+  row-gap: 4px;
+}
+
+@media (max-width: 720px) {
+  .product-card .rating-row.compact {
+    gap: 5px;
+    line-height: 1.25;
+  }
+
+  .product-card .rating-row.compact > span:last-child {
+    white-space: nowrap;
   }
 }

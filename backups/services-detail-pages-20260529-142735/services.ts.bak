@@ -1,0 +1,305 @@
+export const services = [
+  {
+    title: "Promotional & Corporate Websites",
+    titleTr: "Tanıtım ve Kurumsal Web Siteleri",
+    description:
+      "Professional websites for companies, personal brands, service providers and businesses that want to present themselves clearly online.",
+    descriptionTr:
+      "Firmanızı, hizmetlerinizi, hakkınızda bilgileri, görsellerinizi ve iletişim yönlendirmelerinizi profesyonel bir web sitesinde toplamak için hazırlanır.",
+    examples: [
+      "Corporate website",
+      "Landing page",
+      "Personal brand / CV website",
+      "Service business website",
+      "Law office website",
+      "Accounting / financial advisor website",
+      "Personal trainer website",
+      "Organization / wedding company website",
+      "Construction project presentation website"
+    ],
+    examplesTr: [
+      "Kurumsal tanıtım sitesi",
+      "Landing page / tek sayfalık satış sayfası",
+      "Kişisel marka / CV sitesi",
+      "Hizmet veren işletme sitesi",
+      "Avukat / hukuk bürosu sitesi",
+      "Muhasebe / mali müşavir sitesi",
+      "Spor hocası / personal trainer sitesi",
+      "Organizasyon / düğün firması sitesi",
+      "İnşaat projesi tanıtım sitesi"
+    ],
+    infrastructure: [
+      "Marketing site template",
+      "Landing page",
+      "Contact form",
+      "WhatsApp direction",
+      "FAQ section",
+      "Offer request form"
+    ],
+    infrastructureTr: [
+      "Marketing site altyapısı",
+      "Landing page",
+      "İletişim formu",
+      "WhatsApp yönlendirme",
+      "SSS alanı",
+      "Teklif alma formu"
+    ]
+  },
+  {
+    title: "Product Catalog & WhatsApp Order Systems",
+    titleTr: "Ürün Katalog ve WhatsApp Sipariş Sistemleri",
+    description:
+      "Catalog-style websites that organize products, menus, vehicles or listings and direct visitors to WhatsApp or contact channels.",
+    descriptionTr:
+      "Ürünlerinizi, menünüzü, araçlarınızı veya ilanlarınızı düzenli şekilde sergileyip müşteriyi WhatsApp ya da iletişim kanalına yönlendiren sistemlerdir.",
+    examples: [
+      "Product catalog website",
+      "WhatsApp order store",
+      "QR menu website",
+      "Restaurant website without online payment",
+      "Car gallery listing website",
+      "Real estate listing website",
+      "Rent a car website",
+      "Boutique / cosmetics / wholesale catalog"
+    ],
+    examplesTr: [
+      "Ürün katalog sitesi",
+      "WhatsApp siparişli mağaza",
+      "QR menü sitesi",
+      "Online siparişsiz restoran sitesi",
+      "Oto galeri araç listeleme sitesi",
+      "Emlak ilan sitesi",
+      "Rent a Car sitesi",
+      "Butik / kozmetik / toptancı katalog sitesi"
+    ],
+    infrastructure: [
+      "Catalog template",
+      "Category structure",
+      "Product detail page",
+      "Filtering",
+      "WhatsApp order button",
+      "Gallery",
+      "Admin panel can be added"
+    ],
+    infrastructureTr: [
+      "Catalog / Product altyapısı",
+      "Kategori yapısı",
+      "Ürün detay sayfası",
+      "Filtreleme",
+      "WhatsApp sipariş butonu",
+      "Galeri",
+      "Admin panel eklenebilir"
+    ]
+  },
+  {
+    title: "E-Commerce & Online Sales Systems",
+    titleTr: "E-Ticaret ve Satış Sistemleri",
+    description:
+      "Sales systems with product management, cart, checkout, order tracking, optional payment integration and admin panel.",
+    descriptionTr:
+      "Ürün yönetimi, sepet, ödeme akışı, sipariş kaydı ve admin panel üzerinden yönetim ihtiyacı olan işletmeler için hazırlanır.",
+    examples: [
+      "E-commerce website without online payment",
+      "Online payment e-commerce MVP",
+      "Digital product sales website",
+      "Order management system",
+      "Admin-managed online store",
+      "Boutique, jewelry, cosmetics or textile store"
+    ],
+    examplesTr: [
+      "Sepetli ama ödemesiz e-ticaret sitesi",
+      "Online ödemeli e-ticaret MVP",
+      "Dijital ürün satış sitesi",
+      "Sipariş panelli satış sistemi",
+      "Admin panelli mağaza",
+      "Butik, takı, kozmetik veya tekstil satış sitesi"
+    ],
+    infrastructure: [
+      "E-commerce template",
+      "Product management",
+      "Cart",
+      "Checkout",
+      "Payment integration",
+      "Order panel",
+      "Stock tracking"
+    ],
+    infrastructureTr: [
+      "E-Commerce altyapısı",
+      "Ürün yönetimi",
+      "Sepet",
+      "Checkout",
+      "Ödeme entegrasyonu",
+      "Sipariş paneli",
+      "Stok takibi"
+    ]
+  },
+  {
+    title: "Appointment & Reservation Systems",
+    titleTr: "Randevu ve Rezervasyon Sistemleri",
+    description:
+      "Systems for businesses that receive appointment, booking, date, time, service or reservation requests.",
+    descriptionTr:
+      "Telefon, DM ve WhatsApp üzerinden dağınık gelen randevu veya rezervasyon taleplerini daha düzenli takip edebilmek için hazırlanır.",
+    examples: [
+      "Appointment system",
+      "Reservation system",
+      "Football field / gym booking panel",
+      "Hotel / pension reservation website",
+      "Beauty center website with appointment",
+      "Doctor / dentist website with appointment",
+      "Vehicle inspection appointment system",
+      "Course registration / lesson request system"
+    ],
+    examplesTr: [
+      "Randevu alma sistemi",
+      "Rezervasyon sistemi",
+      "Halı saha / spor salonu rezervasyon paneli",
+      "Otel / pansiyon rezervasyon sitesi",
+      "Güzellik merkezi sitesi + randevu",
+      "Diş kliniği / doktor sitesi + randevu",
+      "Araç ekspertiz randevu sistemi",
+      "Kurs kayıt / ders talep sistemi"
+    ],
+    infrastructure: [
+      "Reservation template",
+      "Date and time selection",
+      "Service selection",
+      "Customer form",
+      "Admin tracking",
+      "Email notification",
+      "WhatsApp direction"
+    ],
+    infrastructureTr: [
+      "Reservation altyapısı",
+      "Tarih / saat seçimi",
+      "Hizmet seçimi",
+      "Müşteri formu",
+      "Admin takip ekranı",
+      "E-posta bildirimi",
+      "WhatsApp yönlendirme"
+    ]
+  },
+  {
+    title: "Admin Panel & Business Management Systems",
+    titleTr: "Admin Panel ve İşletme Yönetim Sistemleri",
+    description:
+      "Custom dashboards for businesses that want to manage customers, stock, orders, tasks, offers or internal processes from one place.",
+    descriptionTr:
+      "Excel, WhatsApp, not defteri ve dağınık mesajlar arasında kalan işleri tek panelde toplamak için hazırlanır.",
+    examples: [
+      "Small business CRM panel",
+      "Stock tracking system",
+      "Service / technical support tracking system",
+      "Task management panel",
+      "Offer / pre-invoice management system",
+      "Logistics / shipping offer request system",
+      "Order tracking panel",
+      "Personnel / customer / task management"
+    ],
+    examplesTr: [
+      "Küçük işletme CRM paneli",
+      "Stok takip sistemi",
+      "Servis / teknik destek takip sistemi",
+      "İş takip / görev yönetim paneli",
+      "Teklif / fatura öncesi yönetim sistemi",
+      "Lojistik / nakliye teklif alma sitesi",
+      "Sipariş takip paneli",
+      "Personel / müşteri / görev yönetimi"
+    ],
+    infrastructure: [
+      "Admin dashboard template",
+      "User roles",
+      "Customer records",
+      "Stock management",
+      "Task tracking",
+      "Reports",
+      "Filters",
+      "Activity history"
+    ],
+    infrastructureTr: [
+      "Admin Dashboard altyapısı",
+      "Kullanıcı rolleri",
+      "Müşteri kayıtları",
+      "Stok yönetimi",
+      "Görev takibi",
+      "Raporlama",
+      "Filtreleme",
+      "İşlem geçmişi"
+    ]
+  },
+  {
+    title: "Custom Software & Premium Systems",
+    titleTr: "Özel Yazılım ve Premium Sistemler",
+    description:
+      "Advanced full-stack systems for projects that need more than a standard website, including dashboards, file management, reporting or special workflows.",
+    descriptionTr:
+      "Standart web sitesinden daha fazlasına ihtiyaç duyan, özel panel, kullanıcı yönetimi, raporlama veya teknik iş akışı isteyen projeler için hazırlanır.",
+    examples: [
+      "Cloud file management platform",
+      "AI error / log analysis panel",
+      "Video analytics platform",
+      "Virtual computer / education simulator",
+      "Custom dashboard",
+      "Custom reporting system",
+      "Company-specific panel",
+      "Industry-specific software"
+    ],
+    examplesTr: [
+      "Cloud dosya yönetim platformu",
+      "AI hata / log analiz paneli",
+      "Video analiz platformu",
+      "Virtual Computer / eğitim simülatörü",
+      "Özel dashboard",
+      "Özel raporlama sistemi",
+      "Kuruma özel panel",
+      "Sektöre özel yazılım"
+    ],
+    infrastructure: [
+      "Spring Boot",
+      "React / Next.js",
+      "PostgreSQL",
+      "Docker",
+      "REST API",
+      "User roles",
+      "Dashboard",
+      "Reporting"
+    ],
+    infrastructureTr: [
+      "Spring Boot",
+      "React / Next.js",
+      "PostgreSQL",
+      "Docker",
+      "REST API",
+      "Kullanıcı rolleri",
+      "Dashboard",
+      "Raporlama"
+    ]
+  }
+];
+
+export const serviceCombinations = [
+  {
+    title: "Cafe / Restaurant",
+    titleTr: "Kafe / Restoran",
+    description: "Landing page + QR menu + WhatsApp + reservation + optional admin panel",
+    descriptionTr: "Landing page + QR menü + WhatsApp + rezervasyon + isteğe bağlı admin panel"
+  },
+  {
+    title: "Boutique / Product Sales",
+    titleTr: "Butik / Ürün Satışı",
+    description: "Catalog + WhatsApp order + product management + optional payment flow",
+    descriptionTr: "Katalog + WhatsApp sipariş + ürün yönetimi + isteğe bağlı ödeme akışı"
+  },
+  {
+    title: "Beauty Center / Clinic",
+    titleTr: "Güzellik Merkezi / Klinik",
+    description: "Promotional website + appointment system + customer tracking panel",
+    descriptionTr: "Tanıtım sitesi + randevu sistemi + müşteri takip paneli"
+  },
+  {
+    title: "Rent a Car / Vehicle Listing",
+    titleTr: "Rent a Car / Araç Listeleme",
+    description: "Vehicle catalog + reservation request + contact direction + admin panel",
+    descriptionTr: "Araç katalog + rezervasyon talebi + iletişim yönlendirme + admin panel"
+  }
+];

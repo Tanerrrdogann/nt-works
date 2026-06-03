@@ -14,7 +14,7 @@ type Dictionary = Record<string, string>;
 
 const dictionaries: Record<Language, Dictionary> = {
   en: {
-    "nav.projects": "Projects",
+    "nav.projects": "Live Examples",
     "nav.services": "Services",
     "nav.about": "About",
     "nav.contact": "Contact",
@@ -22,10 +22,10 @@ const dictionaries: Record<Language, Dictionary> = {
     "brand.subtitle": "Web sitesi, e-ticaret ve özel yazılım çözümleri",
 
     "hero.badge": "NT Web Çözümleri",
-    "hero.title": "Web sitesi, e-ticaret ve özel yazılım çözümleri",
+    "hero.title": "Canlı örneklerle incelenebilir web sitesi ve özel sistemler",
     "hero.description":
       "We build usable, mobile-friendly and manageable web systems for businesses, startups and individual brands.",
-    "hero.projects": "View Projects",
+    "hero.projects": "View Live Examples",
     "hero.contact": "Request a Quote",
     "hero.stat.projects": "Completed projects",
     "hero.stat.fullstack": "Frontend + backend",
@@ -34,16 +34,16 @@ const dictionaries: Record<Language, Dictionary> = {
     "hero.preparing": "Ready",
     "hero.demoDisabled": "Preview unavailable",
 
-    "projects.eyebrow": "Projects",
-    "projects.title": "Projects and Live Reviews",
+    "projects.eyebrow": "Live Examples",
+    "projects.title": "Live Reviewable Example Systems",
     "projects.description":
-      "Review sample systems we have built and request a similar website, e-commerce system or custom software for your business.",
-    "projects.featuredTitle": "Projects and Live Reviews",
+      "Review adaptable live examples and request a similar website, e-commerce system or custom software for your business.",
+    "projects.featuredTitle": "Live Reviewable Example Systems",
     "projects.featuredDescription":
-      "Review sample systems we have built and request a similar website, e-commerce system or custom software for your business.",
+      "Review adaptable live examples and request a similar website, e-commerce system or custom software for your business.",
     "projects.details": "Details",
-    "projects.openDemo": "View Live Preview",
-    "projects.back": "Back to Projects",
+    "projects.openDemo": "View Live Example",
+    "projects.back": "Back to Live Examples",
     "projects.problem": "Business Problem",
     "projects.solution": "Solution",
     "projects.features": "Core Features",
@@ -109,22 +109,22 @@ const dictionaries: Record<Language, Dictionary> = {
     "about.stack": "Stack",
 
     "contact.eyebrow": "Contact",
-    "contact.title": "Let’s build something usable",
+    "contact.title": "Let’s clarify the right system for your business",
     "contact.description":
-      "Use this page as the first contact point for website, e-commerce and custom software requests.",
+      "If you liked a live example or are not sure what you need, you can start with a short message.",
     "contact.github": "Add your GitHub profile link",
     "contact.linkedin": "Add your LinkedIn profile link",
-    "contact.noteTitle": "Project request note",
+    "contact.noteTitle": "If you are not sure what to write",
     "contact.noteDescription":
-      "Share the business need, the system type and any reference project. I will use this to prepare a clearer project quote.",
-    "contact.viewProjects": "View Projects",
+      "Share your business type, the live example you liked, desired features and any budget/timeline expectation. The right structure can be clarified together.",
+    "contact.viewProjects": "View Live Examples",
 
     "footer.description":
       "Web sitesi, e-ticaret ve özel yazılım çözümleri."
   },
 
   tr: {
-    "nav.projects": "Projeler",
+    "nav.projects": "Canlı Örnekler",
     "nav.services": "Hizmetler",
     "nav.about": "Hakkımda",
     "nav.contact": "İletişim",
@@ -132,28 +132,28 @@ const dictionaries: Record<Language, Dictionary> = {
     "brand.subtitle": "Web sitesi, e-ticaret ve özel yazılım çözümleri",
 
     "hero.badge": "NT Web Çözümleri",
-    "hero.title": "Web sitesi, e-ticaret ve özel yazılım çözümleri",
+    "hero.title": "Canlı örneklerle incelenebilir web sitesi ve özel sistemler",
     "hero.description":
-      "İşletmeler, girişimler ve bireysel markalar için kullanılabilir, mobil uyumlu ve yönetilebilir web sistemleri geliştiriyoruz.",
-    "hero.projects": "Projeleri Gör",
+      "İşletmeniz için kurumsal web sitesi, katalog, randevu, e-ticaret, admin panel ve özel yazılım çözümleri hazırlıyoruz.",
+    "hero.projects": "Canlı Örnekleri İncele",
     "hero.contact": "Teklif Al",
-    "hero.stat.projects": "Tamamlanan proje",
+    "hero.stat.projects": "Canlı örnek sistem",
     "hero.stat.fullstack": "Frontend + backend",
-    "hero.stat.demo": "Hazır sistemler",
+    "hero.stat.demo": "Uyarlanabilir yapılar",
     "hero.demoStatus": "Proje Durumu",
     "hero.preparing": "Hazır",
     "hero.demoDisabled": "İnceleme kapalı",
 
-    "projects.eyebrow": "Projeler",
-    "projects.title": "Projeler ve Canlı İncelemeler",
+    "projects.eyebrow": "Canlı Örnekler",
+    "projects.title": "Canlı İnceleyebileceğiniz Örnek Sistemler",
     "projects.description":
-      "Geliştirdiğimiz örnek sistemleri inceleyebilir, işletmeniz için benzer bir web sitesi, e-ticaret sistemi veya özel yazılım talep edebilirsiniz.",
-    "projects.featuredTitle": "Projeler ve Canlı İncelemeler",
+      "Bu sayfadaki çalışmalar gerçek müşteri işi gibi gösterilmez; farklı sektörlere uyarlanabilecek canlı örnek sistemlerdir.",
+    "projects.featuredTitle": "Canlı İnceleyebileceğiniz Örnek Sistemler",
     "projects.featuredDescription":
-      "Geliştirdiğimiz örnek sistemleri inceleyebilir, işletmeniz için benzer bir web sitesi, e-ticaret sistemi veya özel yazılım talep edebilirsiniz.",
+      "Canlı örnekleri inceleyin, beğendiğiniz yapının benzerini işletmenize göre uyarlayalım.",
     "projects.details": "Detaylar",
-    "projects.openDemo": "Canlı İncele",
-    "projects.back": "Projelere Dön",
+    "projects.openDemo": "Canlı Örneği İncele",
+    "projects.back": "Canlı Örneklere Dön",
     "projects.problem": "İşletme problemi",
     "projects.solution": "Çözüm",
     "projects.features": "Temel Özellikler",
@@ -219,15 +219,15 @@ const dictionaries: Record<Language, Dictionary> = {
     "about.stack": "Teknoloji",
 
     "contact.eyebrow": "İletişim",
-    "contact.title": "İşletmen için kullanılabilir bir sistem kuralım",
+    "contact.title": "İşletmen için uygun sistemi birlikte netleştirelim",
     "contact.description":
-      "Bu sayfa web sitesi, e-ticaret ve özel yazılım talepleri için ilk iletişim noktasıdır.",
+      "Canlı örneklerden birini beğendiyseniz veya neye ihtiyacınız olduğunu bilmiyorsanız, kısa bir mesajla başlayabilirsiniz.",
     "contact.github": "GitHub profil linkini ekle",
     "contact.linkedin": "LinkedIn profil linkini ekle",
-    "contact.noteTitle": "Proje talep notu",
+    "contact.noteTitle": "Ne yazacağınızı bilmiyorsanız",
     "contact.noteDescription":
-      "İş ihtiyacını, istediğin sistem türünü ve örnek aldığın projeyi yaz. Buna göre daha net teklif hazırlanabilir.",
-    "contact.viewProjects": "Projeleri Gör",
+      "İşletme türünüzü, beğendiğiniz canlı örneği, istediğiniz özellikleri ve varsa bütçe/süre beklentinizi yazmanız yeterli. Uygun yapı birlikte netleştirilebilir.",
+    "contact.viewProjects": "Canlı Örnekleri İncele",
 
     "footer.description":
       "Web sitesi, e-ticaret ve özel yazılım çözümleri."

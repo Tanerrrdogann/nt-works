@@ -68,27 +68,29 @@ export function ProductGallery({ product }: { product: Product }) {
   }
 
   return (
-    <div
-      className="detail-image"
-      onTouchEnd={handleTouchEnd}
-      onTouchStart={(event) => setTouchStartX(event.touches[0].clientX)}
-    >
-      <img src={selectedImage} alt={product.name} />
-      {product.badge ? <span className="product-badge">{product.badge}</span> : null}
-      {gallery.length > 1 ? (
-        <div className="product-slider-controls detail" aria-label="Ürün fotoğrafı değiştir">
-          <button aria-label="Önceki ürün fotoğrafı" onClick={() => moveImage(-1)} type="button">‹</button>
-          <span>{selectedIndex + 1}/{gallery.length}</span>
-          <button aria-label="Sonraki ürün fotoğrafı" onClick={() => moveImage(1)} type="button">›</button>
-        </div>
-      ) : null}
-      {gallery.length > 1 ? (
-        <div className="product-swipe-hint detail" aria-label={`${gallery.length} ürün görseli`}>
-          {gallery.map((url, index) => (
-            <span className={index === selectedIndex ? "active" : ""} key={`${url}-detail-dot-${index}`} />
-          ))}
-        </div>
-      ) : null}
+    <div className="detail-image">
+      <div
+        className="detail-main-image"
+        onTouchEnd={handleTouchEnd}
+        onTouchStart={(event) => setTouchStartX(event.touches[0].clientX)}
+      >
+        <img src={selectedImage} alt={product.name} />
+        {product.badge ? <span className="product-badge">{product.badge}</span> : null}
+        {gallery.length > 1 ? (
+          <div className="product-slider-controls detail" aria-label="Ürün fotoğrafı değiştir">
+            <button aria-label="Önceki ürün fotoğrafı" onClick={() => moveImage(-1)} type="button">‹</button>
+            <span>{selectedIndex + 1}/{gallery.length}</span>
+            <button aria-label="Sonraki ürün fotoğrafı" onClick={() => moveImage(1)} type="button">›</button>
+          </div>
+        ) : null}
+        {gallery.length > 1 ? (
+          <div className="product-swipe-hint detail" aria-label={`${gallery.length} ürün görseli`}>
+            {gallery.map((url, index) => (
+              <span className={index === selectedIndex ? "active" : ""} key={`${url}-detail-dot-${index}`} />
+            ))}
+          </div>
+        ) : null}
+      </div>
       {gallery.length > 1 ? (
         <div className="detail-gallery">
           {gallery.map((url, index) => (
