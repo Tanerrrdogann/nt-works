@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import WhatsAppIcon from "./WhatsAppIcon";
 
 export default function VehicleQuestionBox({
   vehicleTitle,
@@ -31,7 +32,8 @@ export default function VehicleQuestionBox({
             value={message}
           />
         </label>
-        <button className="w-full bg-red-600 text-white rounded-sm py-4 font-black uppercase tracking-widest hover:bg-red-700 transition-colors" type="submit">
+        <button className="w-full flex items-center justify-center gap-3 bg-red-600 text-white rounded-sm py-4 font-black uppercase tracking-widest hover:bg-red-700 transition-colors" type="submit">
+          <WhatsAppIcon className="w-7 h-7 object-contain" />
           WhatsApp&apos;tan Gönder
         </button>
       </form>

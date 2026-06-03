@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { siteConfig } from "../config/site.config";
+import WhatsAppIcon from "./WhatsAppIcon";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -23,7 +24,8 @@ export default function Header() {
           </nav>
           
           <div className="hidden md:flex">
-            <a href={`https://wa.me/${siteConfig.company.whatsapp}`} target="_blank" rel="noreferrer" className="bg-red-600 text-white px-6 py-2.5 rounded-sm text-sm font-bold uppercase tracking-wider hover:bg-red-700 transition-colors">
+            <a href={`https://wa.me/${siteConfig.company.whatsapp}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-zinc-300 text-sm font-bold uppercase tracking-wider hover:text-white transition-colors">
+              <WhatsAppIcon className="w-8 h-8 object-contain" />
               İletişime Geç
             </a>
           </div>
@@ -45,7 +47,8 @@ export default function Header() {
                 {item.label}
               </Link>
             ))}
-            <a href={`https://wa.me/${siteConfig.company.whatsapp}`} className="block w-full text-center mt-3 bg-red-600 text-white px-3 py-3 text-sm font-bold uppercase tracking-wider rounded-sm">
+            <a href={`https://wa.me/${siteConfig.company.whatsapp}`} className="flex items-center gap-3 w-full mt-3 text-white px-3 py-3 text-sm font-bold uppercase tracking-wider">
+              <WhatsAppIcon className="w-8 h-8 object-contain" />
               WhatsApp Destek
             </a>
           </div>

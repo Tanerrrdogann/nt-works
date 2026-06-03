@@ -1,6 +1,7 @@
 import { siteConfig } from "../../../src/config/site.config";
 import VehicleImageSlider from "../../../src/components/VehicleImageSlider";
 import VehicleQuestionBox from "../../../src/components/VehicleQuestionBox";
+import WhatsAppIcon from "../../../src/components/WhatsAppIcon";
 import { notFound } from "next/navigation";
 
 export function generateStaticParams() {
@@ -107,6 +108,7 @@ export default async function VehicleDetail({ params }: { params: Promise<{ slug
 
             <div className="space-y-4">
               <a href={`https://wa.me/${siteConfig.company.whatsapp}?text=Merhaba, ${vehicle.title} aracı için bilgi almak istiyorum.`} target="_blank" rel="noreferrer" className="w-full flex items-center justify-center gap-2 bg-red-600 text-white rounded-sm py-4 font-black uppercase tracking-widest hover:bg-red-700 transition-colors">
+                <WhatsAppIcon className="w-7 h-7 object-contain" />
                 WhatsApp İle Sor
               </a>
               <a href={`tel:${siteConfig.company.phone}`} className="w-full flex items-center justify-center gap-2 bg-zinc-950 border border-zinc-800 text-white rounded-sm py-4 font-black uppercase tracking-widest hover:border-red-600 transition-colors">

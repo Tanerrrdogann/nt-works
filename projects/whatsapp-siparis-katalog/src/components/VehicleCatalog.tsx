@@ -57,7 +57,7 @@ export default function VehicleCatalog() {
 
         <div className="mt-6 md:mt-0 w-full md:w-auto flex flex-col sm:flex-row gap-3">
           <button
-            className={`${filtersOpen ? "bg-red-600 border-red-600" : "bg-zinc-900 border-zinc-800"} min-w-40 border rounded-sm px-5 py-3 text-sm text-white font-black uppercase tracking-wider hover:border-red-600 transition-colors`}
+            className={`${filtersOpen ? "bg-red-600 border-red-600" : "bg-zinc-900 border-zinc-800"} lg:hidden min-w-40 border rounded-sm px-5 py-3 text-sm text-white font-black uppercase tracking-wider hover:border-red-600 transition-colors`}
             type="button"
             aria-expanded={filtersOpen}
             onClick={() => setFiltersOpen((current) => !current)}
@@ -83,8 +83,7 @@ export default function VehicleCatalog() {
       </div>
 
       <div className="flex flex-col lg:flex-row gap-6 lg:gap-10">
-        {filtersOpen ? (
-        <div className="w-full lg:w-72 flex-shrink-0">
+        <div className={`${filtersOpen ? "block" : "hidden"} lg:block w-full lg:w-72 flex-shrink-0`}>
           <div className="bg-zinc-900 border border-zinc-800 rounded-sm p-4 md:p-6 sticky top-24 md:top-28">
             <h3 className="font-black text-white mb-4 md:mb-6 uppercase tracking-wider text-lg border-b border-zinc-800 pb-4">Filtrele</h3>
             <div className="grid gap-4 sm:grid-cols-2 lg:block lg:space-y-6">
@@ -129,7 +128,6 @@ export default function VehicleCatalog() {
             </div>
           </div>
         </div>
-        ) : null}
 
         <div className="flex-1">
           {filteredVehicles.length ? (

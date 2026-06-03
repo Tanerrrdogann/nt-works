@@ -1,2 +1,3 @@
-:HL["/whatsapp-siparis-katalog/_next/static/chunks/10hdg00t686e1.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}},"staleTime":300,"buildId":"WcWTGM54TC1nm6VRFf2Aj"}
+:HL["/whatsapp-siparis-katalog/_next/static/chunks/0hi-hi3jggirq.css","style"]
+:HL["/whatsapp-siparis-katalog/whatsapp-red.png","image"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}},"staleTime":300,"buildId":"YSmheiY8opahlIm43JPGr"}

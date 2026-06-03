@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { siteConfig } from "../../src/config/site.config";
+import WhatsAppIcon from "../../src/components/WhatsAppIcon";
 
 export default function Contact() {
   const [name, setName] = useState("");
@@ -57,7 +58,8 @@ export default function Contact() {
               <label className="block text-xs font-black text-zinc-500 uppercase tracking-widest mb-2">MESAJINIZ</label>
               <textarea name="message" rows={4} required value={message} onChange={(event) => setMessage(event.target.value)} className="w-full border-zinc-800 rounded-sm border p-4 bg-zinc-950 text-white focus:border-red-600 focus:outline-none transition-colors uppercase placeholder-zinc-700" placeholder="SİZE NASIL YARDIMCI OLABİLİRİZ?"></textarea>
             </div>
-            <button type="submit" className="w-full bg-red-600 text-white font-black py-4 rounded-sm uppercase tracking-widest hover:bg-red-700 transition-colors">
+            <button type="submit" className="w-full flex items-center justify-center gap-3 bg-red-600 text-white font-black py-4 rounded-sm uppercase tracking-widest hover:bg-red-700 transition-colors">
+              <WhatsAppIcon className="w-7 h-7 object-contain" />
               WhatsApp&apos;tan Gönder
             </button>
           </form>

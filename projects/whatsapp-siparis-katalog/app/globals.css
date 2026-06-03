@@ -58,3 +58,9 @@ body {
   letter-spacing: 0.14em;
   text-align: center;
 }
+
+@media (max-width: 1023px) {
+  .catalog-slider-controls {
+    display: none;
+  }
+}
