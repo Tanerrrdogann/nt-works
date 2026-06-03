@@ -1,16 +1,20 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { PointerEvent, useRef, useState } from "react";
 
 export default function VehicleImageSlider({
   images,
   title,
+  detailHref,
   className = "",
 }: {
   images: string[];
   title: string;
+  detailHref?: string;
   className?: string;
 }) {
+  const router = useRouter();
   const [index, setIndex] = useState(0);
   const pointerStart = useRef<number | null>(null);
   const activeImage = images[index] ?? images[0];
@@ -30,7 +34,13 @@ export default function VehicleImageSlider({
     const distance = event.clientX - pointerStart.current;
     pointerStart.current = null;
 
-    if (Math.abs(distance) < 35) return;
+    if (Math.abs(distance) < 35) {
+      if (detailHref && window.matchMedia("(max-width: 1023px)").matches) {
+        router.push(detailHref);
+      }
+      return;
+    }
+
     move(distance > 0 ? -1 : 1);
   }
 
