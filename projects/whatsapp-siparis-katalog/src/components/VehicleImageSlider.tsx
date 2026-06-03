@@ -70,10 +70,22 @@ export default function VehicleImageSlider({
     >
       <img src={activeImage} alt={title} className="w-full h-full object-cover select-none" draggable={false} />
       {images.length > 1 ? (
-        <div className="catalog-slider-controls" aria-label="Fotoğraf değiştir" onPointerDown={(event) => event.stopPropagation()}>
-          <button aria-label="Önceki fotoğraf" onClick={() => move(-1)} type="button">‹</button>
-          <button aria-label="Sonraki fotoğraf" onClick={() => move(1)} type="button">›</button>
-        </div>
+        <>
+          <button
+            aria-label="Önceki fotoğraf"
+            className="catalog-slider-zone catalog-slider-zone-left"
+            onClick={() => move(-1)}
+            onPointerDown={(event) => event.stopPropagation()}
+            type="button"
+          />
+          <button
+            aria-label="Sonraki fotoğraf"
+            className="catalog-slider-zone catalog-slider-zone-right"
+            onClick={() => move(1)}
+            onPointerDown={(event) => event.stopPropagation()}
+            type="button"
+          />
+        </>
       ) : null}
     </div>
   );

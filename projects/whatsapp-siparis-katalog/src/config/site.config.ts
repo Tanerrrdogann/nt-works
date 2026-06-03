@@ -106,8 +106,30 @@ const stableCarPhotoSets: Record<string, string[]> = {
   ],
 };
 
+const vehiclePhotoSlugs: Record<string, string> = {
+  "porsche,macan": "porsche-macan-20",
+  "bmw,320i,msport": "bmw-320i-m-sport",
+  "mercedes,c200,amg": "mercedes-benz-c200-amg",
+  "ford,mustang,ecoboost": "ford-mustang-23-ecoboost",
+  "audi,a3,sline": "audi-a3-s-line",
+  "volkswagen,passat,elegance": "volkswagen-passat-15-tsi-elegance",
+  "volvo,xc90": "volvo-xc90-t8",
+  "peugeot,3008,gt": "peugeot-3008-16-puretech-gt",
+  "renault,clio": "renault-clio-icon",
+  "toyota,corolla,hybrid": "toyota-corolla-hybrid",
+  "tesla,model-y,white": "tesla-model-y-long-range",
+  "hyundai,tucson": "hyundai-tucson-dizel",
+  "fiat,doblo,cargo": "fiat-doblo-cargo",
+  "honda,civic,elegance": "honda-civic-elegance",
+};
+
 function carPhotos(query: string) {
-  return stableCarPhotoSets[query] ?? stableCarPhotoSets.compact;
+  const slug = vehiclePhotoSlugs[query];
+  if (!slug) return stableCarPhotoSets[query] ?? stableCarPhotoSets.compact;
+
+  return [1, 2, 3].map(
+    (index) => `/whatsapp-siparis-katalog/vehicles/${slug}/${index}.jpg`,
+  );
 }
 
 export const siteConfig = {
