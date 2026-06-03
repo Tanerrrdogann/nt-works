@@ -23,6 +23,10 @@
 # misc
 .DS_Store
 *.pem
+*.bak
+*.bak.*
+*.fixbak.*
+/backups/
 /.agents
 /.codex
 AGENTS.md
