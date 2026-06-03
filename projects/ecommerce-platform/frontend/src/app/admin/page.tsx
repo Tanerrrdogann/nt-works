@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { Clock3, CreditCard, Package, Plus, ReceiptText, ShoppingBag } from "lucide-react";
 import { AdminShell } from "@/components/admin/AdminShell";
 import { useAdminGuard } from "@/components/admin/useAdminGuard";
 import { getAdminOrders, getAdminProducts } from "@/lib/api";
@@ -39,18 +40,50 @@ export default function AdminDashboardPage() {
       <div className="admin-heading">
         <p className="eyebrow">Dashboard</p>
         <h1>Genel Bakış</h1>
+        <p>Mağazanın ürün, sipariş ve ödeme durumunu tek ekrandan takip et.</p>
       </div>
       {error ? <p className="inline-error">{error}</p> : null}
       <div className="admin-stats">
-        <div><span>Ürün</span><strong>{products.length}</strong></div>
-        <div><span>Sipariş</span><strong>{orders.length}</strong></div>
-        <div><span>Ödenmiş</span><strong>{paidOrders}</strong></div>
-        <div><span>Bekleyen</span><strong>{pendingOrders}</strong></div>
-        <div><span>Ciro</span><strong>{formatPrice(revenue)}</strong></div>
+        <div>
+          <Package size={20} />
+          <span>Toplam ürün</span>
+          <strong>{products.length}</strong>
+          <small>Mağazada kayıtlı ürünler</small>
+        </div>
+        <div>
+          <ShoppingBag size={20} />
+          <span>Toplam sipariş</span>
+          <strong>{orders.length}</strong>
+          <small>Tüm zamanlardaki siparişler</small>
+        </div>
+        <div>
+          <ReceiptText size={20} />
+          <span>Ödenmiş sipariş</span>
+          <strong>{paidOrders}</strong>
+          <small>Ödemesi tamamlananlar</small>
+        </div>
+        <div>
+          <Clock3 size={20} />
+          <span>Ödeme bekleyen</span>
+          <strong>{pendingOrders}</strong>
+          <small>Henüz ödeme alınmayanlar</small>
+        </div>
+        <div className="admin-stat-revenue">
+          <CreditCard size={20} />
+          <span>Toplam ciro</span>
+          <strong>{formatPrice(revenue)}</strong>
+          <small>Ödenmiş siparişlerden</small>
+        </div>
       </div>
       <div className="admin-actions">
-        <Link className="btn" href="/admin/products/new">Ürün Ekle</Link>
-        <Link className="btn btn-ghost" href="/admin/orders">Siparişleri Gör</Link>
+        <Link className="btn" href="/admin/products/new">
+          <Plus size={17} />
+          Ürün Ekle
+        </Link>
+        <Link className="btn btn-ghost" href="/admin/orders">
+          <ReceiptText size={17} />
+          Siparişleri Gör
+        </Link>
       </div>
     </AdminShell>
   );
