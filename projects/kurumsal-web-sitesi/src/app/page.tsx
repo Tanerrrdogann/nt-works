@@ -96,11 +96,11 @@ export default function Home() {
       </section>
 
       <section className="relative z-10 border-y border-white/14 bg-[#0b1830]/72 backdrop-blur-[1px]">
-        <div className="mx-auto grid max-w-7xl divide-y divide-white/14 px-5 md:grid-cols-4 md:divide-x md:divide-y-0">
+        <div className="mx-auto grid max-w-7xl grid-cols-2 divide-x divide-y divide-white/14 px-5 md:grid-cols-4 md:divide-y-0">
           {siteConfig.stats.map(([value, label]) => (
-            <article key={value} className="py-8 md:px-6">
-              <p className="text-3xl font-black text-slate-200">{value}</p>
-              <p className="mt-3 text-sm font-semibold leading-6 text-slate-400">{label}</p>
+            <article key={value} className="px-3 py-6 md:px-6 md:py-8">
+              <p className="text-2xl font-black text-slate-200 md:text-3xl">{value}</p>
+              <p className="mt-3 text-xs font-semibold leading-5 text-slate-400 md:text-sm md:leading-6">{label}</p>
             </article>
           ))}
         </div>
@@ -177,7 +177,7 @@ export default function Home() {
             title="Kurumsal site sadece vitrin değil, karar ve güven alanıdır."
             description="Ziyaretçinin ilk bakışta yetkinlik görmesi için hizmet anlatımı; ekip, dashboard, süreç ve iletişim kanıtlarıyla desteklenir."
           />
-          <div className="grid gap-px bg-white/14 lg:grid-cols-3">
+          <div className="grid grid-cols-2 gap-px bg-white/14 lg:grid-cols-3">
             {[
               [
                 "Yönetilebilir operasyon",
@@ -203,9 +203,9 @@ export default function Home() {
                 >
                   <div className="h-full w-full bg-[#071225]/20" />
                 </div>
-                <div className="p-6">
-                  <h3 className="text-2xl font-black text-white">{title}</h3>
-                  <p className="mt-4 leading-7 text-slate-300">{description}</p>
+                <div className="p-4 md:p-6">
+                  <h3 className="text-lg font-black text-white md:text-2xl">{title}</h3>
+                  <p className="mt-3 text-sm leading-6 text-slate-300 md:mt-4 md:text-base md:leading-7">{description}</p>
                 </div>
               </article>
             ))}
@@ -219,12 +219,12 @@ export default function Home() {
           title="Aynı kalıbı herkese satmayız. Süreci sektöre göre okuruz."
           description="E-ticaret, eğitim, sağlık, lojistik, üretim ve hizmet sektörleri için kullanıcı, operasyon ve veri akışı farklıdır. Çözüm de buna göre tasarlanır."
         />
-          <div className="grid border border-white/14 bg-[#071225]/76 backdrop-blur md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-2 border border-white/14 bg-[#071225]/76 backdrop-blur md:grid-cols-2 lg:grid-cols-3">
           {siteConfig.solutions.map(([title, description]) => (
-            <article key={title} className="min-h-64 border-b border-white/14 p-6 md:border-r lg:[&:nth-child(3n)]:border-r-0">
-              <h3 className="text-2xl font-black text-white">{title}</h3>
-              <p className="mt-4 leading-7 text-slate-400">{description}</p>
-              <a href="/kurumsal-web-sitesi/cozumler" className="corporate-button mt-7 inline-flex text-sm font-black text-slate-200">
+            <article key={title} className="min-h-52 border-b border-r border-white/14 p-4 md:min-h-64 md:p-6 lg:[&:nth-child(3n)]:border-r-0">
+              <h3 className="text-xl font-black text-white md:text-2xl">{title}</h3>
+              <p className="mt-3 text-sm leading-6 text-slate-400 md:mt-4 md:text-base md:leading-7">{description}</p>
+              <a href="/kurumsal-web-sitesi/cozumler" className="corporate-button mt-5 inline-flex text-xs font-black text-slate-200 md:mt-7 md:text-sm">
                 Çözümü İncele
               </a>
             </article>
@@ -257,13 +257,13 @@ export default function Home() {
           title="Teknoloji tercihi moda değil, sürdürülebilirlik kararıdır."
           description="Projelerde ihtiyaç, ekip, güvenlik, bakım ve ölçeklenme hedeflerine göre araç seçeriz."
         />
-        <div className="grid gap-px bg-white/14 lg:grid-cols-5">
+        <div className="grid grid-cols-2 gap-px bg-white/14 lg:grid-cols-5">
           {siteConfig.technologies.map(([category, items]) => (
-            <article key={category} className="bg-[#071225] p-6">
-              <h3 className="text-xl font-black text-white">{category}</h3>
-              <div className="mt-5 grid gap-3">
+            <article key={category} className="bg-[#071225] p-4 md:p-6">
+              <h3 className="text-lg font-black text-white md:text-xl">{category}</h3>
+              <div className="mt-4 grid gap-2 md:mt-5 md:gap-3">
                 {items.map((item) => (
-                  <p key={item} className="border-t border-white/14 pt-3 text-sm font-bold text-slate-400">{item}</p>
+                  <p key={item} className="border-t border-white/14 pt-2 text-xs font-bold text-slate-400 md:pt-3 md:text-sm">{item}</p>
                 ))}
               </div>
             </article>
@@ -278,24 +278,24 @@ export default function Home() {
               Somut sistem örnekleri, teknik kapasiteyi daha hızlı anlatır.
             </h2>
           </div>
-          <div className="grid gap-px bg-slate-300 md:grid-cols-2">
+          <div className="grid grid-cols-2 gap-px bg-slate-300 md:grid-cols-2">
             {siteConfig.projects.map((project) => (
-              <article key={project.title} className="bg-white p-7">
+              <article key={project.title} className="bg-white p-4 md:p-7">
                 <div
                   aria-label={project.title}
-                  className="image-zoom -mx-7 -mt-7 mb-7 aspect-[16/9] overflow-hidden border-b border-black/18 bg-cover bg-center bg-no-repeat"
+                  className="image-zoom -mx-4 -mt-4 mb-4 aspect-[16/9] overflow-hidden border-b border-black/18 bg-cover bg-center bg-no-repeat md:-mx-7 md:-mt-7 md:mb-7"
                   style={{ backgroundImage: `url('${project.image}')` }}
                 >
                   <div className="h-full w-full bg-[#071225]/10" />
                 </div>
-                <h3 className="text-3xl font-black text-black">{project.title}</h3>
-                <p className="mt-4 leading-8 text-slate-700">{project.description}</p>
-                <div className="mt-5 flex flex-wrap gap-2">
+                <h3 className="text-xl font-black text-black md:text-3xl">{project.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-slate-700 md:mt-4 md:text-base md:leading-8">{project.description}</p>
+                <div className="mt-4 flex flex-wrap gap-2 md:mt-5">
                   {project.tech.map((item) => (
                     <span key={item} className="bg-[#071225] px-3 py-2 text-xs font-black text-white">{item}</span>
                   ))}
                 </div>
-                <a href="/kurumsal-web-sitesi/projeler" className="corporate-button mt-7 inline-flex text-sm font-black text-slate-700">
+                <a href="/kurumsal-web-sitesi/projeler" className="corporate-button mt-5 inline-flex text-xs font-black text-slate-700 md:mt-7 md:text-sm">
                   Projeyi İncele
                 </a>
               </article>
@@ -310,11 +310,11 @@ export default function Home() {
           title="Kalıp değil, karar kalitesi sunarız."
           description="Kurumsal müşteri için iyi web sitesi sadece şık ekran değildir; satış, operasyon, güven ve bakım kararlarının aynı yerde çözülmesidir."
         />
-        <div className="grid gap-px bg-white/14 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-2 gap-px bg-white/14 md:grid-cols-2 lg:grid-cols-3">
           {siteConfig.reasons.map(([title, description]) => (
-            <article key={title} className="bg-[#071225] p-6">
-              <h3 className="text-2xl font-black text-white">{title}</h3>
-              <p className="mt-4 leading-7 text-slate-400">{description}</p>
+            <article key={title} className="bg-[#071225] p-4 md:p-6">
+              <h3 className="text-lg font-black text-white md:text-2xl">{title}</h3>
+              <p className="mt-3 text-sm leading-6 text-slate-400 md:mt-4 md:text-base md:leading-7">{description}</p>
             </article>
           ))}
         </div>

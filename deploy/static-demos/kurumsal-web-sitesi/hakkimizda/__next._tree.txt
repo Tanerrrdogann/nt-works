@@ -1,2 +1,2 @@
-:HL["/kurumsal-web-sitesi/_next/static/chunks/0vi004fd63d3m.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"hakkimizda","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"na7hKYqAykjQlisJLiHre"}
+:HL["/kurumsal-web-sitesi/_next/static/chunks/0ip4i4r2i6bgq.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"hakkimizda","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"5BHROZaGaJxVN9Z45194K"}

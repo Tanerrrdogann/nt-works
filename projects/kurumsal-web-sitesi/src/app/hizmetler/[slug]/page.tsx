@@ -39,16 +39,16 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
             </a>
           </aside>
           <div className="grid gap-5">
-            <div className="grid gap-5 md:grid-cols-3">
+            <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-5">
               {[
                 ["01", "Analiz", "İhtiyaç, hedef ve mevcut süreç okunur."],
                 ["02", "Tasarım", "Ekranlar ve kullanıcı akışı netleşir."],
                 ["03", "Yayın", "Test, teslim ve destek planı yapılır."],
               ].map(([step, title, text]) => (
-                <article key={step} className="border border-slate-200 bg-slate-50 p-5">
-                  <p className="text-3xl font-black text-slate-300">{step}</p>
-                  <h2 className="mt-3 text-xl font-black text-slate-950">{title}</h2>
-                  <p className="mt-2 leading-7 text-slate-600">{text}</p>
+                <article key={step} className="border border-slate-200 bg-slate-50 p-4 md:p-5">
+                  <p className="text-2xl font-black text-slate-300 md:text-3xl">{step}</p>
+                  <h2 className="mt-3 text-lg font-black text-slate-950 md:text-xl">{title}</h2>
+                  <p className="mt-2 text-sm leading-6 text-slate-600 md:text-base md:leading-7">{text}</p>
                 </article>
               ))}
             </div>
@@ -68,7 +68,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                 <p className="text-sm font-black uppercase tracking-[0.16em] text-slate-400">Teslim çıktısı</p>
                 <h2 className="mt-3 text-3xl font-black">Net çalışan, yönetilebilir ve geliştirilebilir bir yapı.</h2>
               </div>
-              <div className="grid gap-3">
+              <div className="grid grid-cols-2 gap-3 md:grid-cols-1">
                 {["Teknik kurulum", "Mobil/tablet uyum", "Performans kontrolü", "Yayın sonrası geliştirme planı"].map((item) => (
                   <p key={item} className="border border-white/14 bg-white/5 px-4 py-3 text-sm font-bold text-slate-200">
                     {item}
@@ -89,12 +89,12 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
             Tüm Hizmetler
           </a>
         </div>
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
           {relatedServices.map((item) => (
-            <a key={item.slug} href={`/kurumsal-web-sitesi/hizmetler/${item.slug}`} className="border border-slate-200 bg-white p-5 transition hover:-translate-y-1 hover:shadow-xl">
+            <a key={item.slug} href={`/kurumsal-web-sitesi/hizmetler/${item.slug}`} className="border border-slate-200 bg-white p-4 transition hover:-translate-y-1 hover:shadow-xl md:p-5">
               <span className="text-2xl font-black text-slate-300">{item.icon}</span>
-              <h3 className="mt-4 text-xl font-black text-slate-950">{item.title}</h3>
-              <p className="mt-3 line-clamp-2 leading-7 text-slate-600">{item.description}</p>
+              <h3 className="mt-3 text-lg font-black text-slate-950 md:mt-4 md:text-xl">{item.title}</h3>
+              <p className="mt-2 line-clamp-2 text-sm leading-6 text-slate-600 md:mt-3 md:text-base md:leading-7">{item.description}</p>
             </a>
           ))}
         </div>

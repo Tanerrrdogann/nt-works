@@ -50,13 +50,13 @@ export default function ContactPage() {
               </p>
             </div>
           </div>
-          <div className="grid gap-3 sm:grid-cols-2">
+          <div className="grid grid-cols-2 gap-3">
             {mailActions.map(([label, value, href], index) => (
-              <a key={label} href={href} className="reveal-card block border border-slate-200 bg-white p-5 transition hover:-translate-y-1 hover:shadow-xl">
+              <a key={label} href={href} className="reveal-card block border border-slate-200 bg-white p-4 transition hover:-translate-y-1 hover:shadow-xl md:p-5">
                 <p className="text-sm font-black text-slate-400">{String(index + 1).padStart(2, "0")}</p>
-                <p className="mt-3 text-xl font-black text-slate-950">{label}</p>
-                <p className="mt-3 leading-7 text-slate-600">{value}</p>
-                <p className="mt-4 text-sm font-black text-slate-900">{siteConfig.brand.email}</p>
+                <p className="mt-3 text-lg font-black text-slate-950 md:text-xl">{label}</p>
+                <p className="mt-2 text-sm leading-6 text-slate-600 md:mt-3 md:text-base md:leading-7">{value}</p>
+                <p className="mt-3 break-words text-xs font-black text-slate-900 md:mt-4 md:text-sm">{siteConfig.brand.email}</p>
               </a>
             ))}
           </div>
@@ -96,17 +96,17 @@ export default function ContactPage() {
         </div>
       </section>
       <section className="bg-[#071225] text-white">
-        <div className="mx-auto grid max-w-7xl gap-px bg-white/14 px-5 py-14 md:grid-cols-4">
+        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-px bg-white/14 px-5 py-14 md:grid-cols-4">
           {[
             ["01", "İhtiyaç", "Ne yapılacak ve kimin için yapılacak?"],
             ["02", "Kapsam", "Hangi ekranlar, entegrasyonlar ve teslimler var?"],
             ["03", "Takvim", "Öncelikler ve yayın planı nasıl ilerleyecek?"],
             ["04", "Teklif", "Net kapsamla gerçekçi teklif hazırlanır."],
           ].map(([step, title, text]) => (
-            <article key={step} className="bg-[#071225] p-6">
-              <p className="text-3xl font-black text-slate-500">{step}</p>
-              <h3 className="mt-3 text-xl font-black">{title}</h3>
-              <p className="mt-3 leading-7 text-slate-400">{text}</p>
+            <article key={step} className="bg-[#071225] p-4 md:p-6">
+              <p className="text-2xl font-black text-slate-500 md:text-3xl">{step}</p>
+              <h3 className="mt-3 text-lg font-black md:text-xl">{title}</h3>
+              <p className="mt-2 text-sm leading-6 text-slate-400 md:mt-3 md:text-base md:leading-7">{text}</p>
             </article>
           ))}
         </div>

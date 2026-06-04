@@ -86,16 +86,16 @@ export default function SolutionsPage() {
           <div>
             <h2 className="text-4xl font-black leading-tight sm:text-6xl">Çözüm önce iş akışını anlamakla başlar.</h2>
           </div>
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid grid-cols-2 gap-3 md:gap-4">
             {[
               ["Analiz", "Mevcut süreci, kullanıcı rollerini ve hedeflenen çıktıyı netleştiririz."],
               ["Tasarım", "İşletme sahibinin ve son kullanıcının rahat anlayacağı ekranlar kurarız."],
               ["Geliştirme", "Web, panel, otomasyon ve entegrasyon katmanlarını ihtiyaca göre geliştiririz."],
               ["Destek", "Yayın sonrası bakım, iyileştirme ve yeni özellik planlamasını sürdürürüz."],
             ].map(([title, text]) => (
-              <article key={title} className="rounded-[8px] border border-slate-200 bg-slate-50 p-5">
-                <h3 className="text-xl font-black text-slate-950">{title}</h3>
-                <p className="mt-3 leading-7 text-slate-600">{text}</p>
+              <article key={title} className="rounded-[8px] border border-slate-200 bg-slate-50 p-4 md:p-5">
+                <h3 className="text-lg font-black text-slate-950 md:text-xl">{title}</h3>
+                <p className="mt-2 text-sm leading-6 text-slate-600 md:mt-3 md:text-base md:leading-7">{text}</p>
               </article>
             ))}
           </div>
