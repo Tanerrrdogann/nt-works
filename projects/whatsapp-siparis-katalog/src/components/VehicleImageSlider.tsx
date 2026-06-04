@@ -20,6 +20,7 @@ export default function VehicleImageSlider({
 }) {
   const router = useRouter();
   const [internalIndex, setInternalIndex] = useState(0);
+  const [dragOffset, setDragOffset] = useState(0);
   const pointerStart = useRef<number | null>(null);
   const index = activeIndex ?? internalIndex;
   const activeImage = images[index] ?? images[0];
@@ -32,7 +33,15 @@ export default function VehicleImageSlider({
 
   function handlePointerDown(event: PointerEvent<HTMLDivElement>) {
     pointerStart.current = event.clientX;
+    setDragOffset(0);
     event.currentTarget.setPointerCapture(event.pointerId);
+  }
+
+  function handlePointerMove(event: PointerEvent<HTMLDivElement>) {
+    if (pointerStart.current === null || images.length < 2) return;
+
+    const distance = event.clientX - pointerStart.current;
+    setDragOffset(distance);
   }
 
   function handlePointerUp(event: PointerEvent<HTMLDivElement>) {
@@ -40,6 +49,7 @@ export default function VehicleImageSlider({
 
     const distance = event.clientX - pointerStart.current;
     pointerStart.current = null;
+    setDragOffset(0);
 
     if (Math.abs(distance) < 35) {
       if (detailHref && window.matchMedia("(max-width: 1023px)").matches) {
@@ -63,12 +73,24 @@ export default function VehicleImageSlider({
     <div
       className={`${className} catalog-image-slider bg-zinc-950 relative overflow-hidden`}
       onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
       onPointerCancel={() => {
         pointerStart.current = null;
+        setDragOffset(0);
       }}
     >
-      <img src={activeImage} alt={title} className="absolute inset-0 h-full w-full object-contain object-center select-none" draggable={false} />
+      <div
+        className="catalog-slider-track"
+        style={{
+          transform: `translate3d(calc(${-index * 100}% + ${dragOffset}px), 0, 0)`,
+          transition: pointerStart.current === null ? "transform 0.26s ease" : "none",
+        }}
+      >
+        {images.map((image, imageIndex) => (
+          <img src={image} alt={`${title} görseli ${imageIndex + 1}`} draggable={false} key={`${image}-${imageIndex}`} />
+        ))}
+      </div>
       {images.length > 1 ? (
         <>
           <button

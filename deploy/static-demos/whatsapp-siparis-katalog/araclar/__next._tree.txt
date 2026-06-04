@@ -1,3 +1,3 @@
-:HL["/whatsapp-siparis-katalog/_next/static/chunks/0~_t9w8lihoxf.css","style"]
+:HL["/whatsapp-siparis-katalog/_next/static/chunks/0~30-4.w_u1ct.css","style"]
 :HL["/whatsapp-siparis-katalog/whatsapp-red.png","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"araclar","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"Hyk39LaOwOpmbwn_L3v9W"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"araclar","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"SaTOLf6cAZUw9hKu9rg1R"}
