@@ -7,6 +7,11 @@ const whatsappUrl = `https://wa.me/${siteConfig.brand.whatsapp}?text=${encodeURI
   siteConfig.contact.whatsappMessage,
 )}`;
 
+const displayHours = [
+  ["Hafta içi", "09.00 - 22.00"],
+  ["Hafta sonu", "10.00 - 23.00"],
+];
+
 const menuImages: Record<string, string> = {
   Espresso: "https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?auto=format&fit=crop&w=420&q=80",
   Americano: "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=420&q=80",
@@ -41,19 +46,31 @@ const menuImages: Record<string, string> = {
 };
 
 function ContactIcon({ type }: { type: "whatsapp" | "instagram" | "location" }) {
+  const imageClass = "h-full w-full object-contain";
+
   if (type === "whatsapp") {
-    return <img src="/landing-page/whatsapp-icon.png" alt="" className="h-7 w-7 object-contain" />;
+    return (
+      <span className="grid h-9 w-9 place-items-center md:h-10 md:w-10">
+        <img src="/landing-page/whatsapp-icon.png" alt="" className={`${imageClass} scale-125`} />
+      </span>
+    );
   }
 
   if (type === "instagram") {
-    return <img src="/landing-page/instagram-icon.png" alt="" className="h-7 w-7 object-contain" />;
+    return (
+      <span className="grid h-9 w-9 place-items-center md:h-10 md:w-10">
+        <img src="/landing-page/instagram-icon.png" alt="" className={imageClass} />
+      </span>
+    );
   }
 
   return (
-    <svg viewBox="0 0 24 24" fill="none" className="h-7 w-7 text-[#9a7442]" aria-hidden="true">
-      <path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11Z" stroke="currentColor" strokeWidth="2" />
-      <circle cx="12" cy="10" r="2.4" stroke="currentColor" strokeWidth="2" />
-    </svg>
+    <span className="grid h-9 w-9 place-items-center md:h-10 md:w-10">
+      <svg viewBox="0 0 24 24" fill="none" className="h-full w-full text-[#9a7442]" aria-hidden="true">
+        <path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11Z" stroke="currentColor" strokeWidth="2" />
+        <circle cx="12" cy="10" r="2.4" stroke="currentColor" strokeWidth="2" />
+      </svg>
+    </span>
   );
 }
 
@@ -61,25 +78,33 @@ function FloatingNav() {
   const [activeSection, setActiveSection] = useState(siteConfig.panels[0].href.slice(1));
 
   useEffect(() => {
-    const sections = siteConfig.panels
-      .map((item) => document.getElementById(item.href.slice(1)))
-      .filter((section): section is HTMLElement => Boolean(section));
+    let frame = 0;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    function updateActiveSection() {
+      const marker = window.scrollY + window.innerHeight * 0.42;
+      const nextSection =
+        siteConfig.panels
+          .map((item) => document.getElementById(item.href.slice(1)))
+          .filter((section): section is HTMLElement => Boolean(section))
+          .reduce((active, section) => (section.offsetTop <= marker ? section.id : active), siteConfig.panels[0].href.slice(1));
 
-        if (visible?.target.id) {
-          setActiveSection(visible.target.id);
-        }
-      },
-      { rootMargin: "-35% 0px -45% 0px", threshold: [0.15, 0.35, 0.55] },
-    );
+      setActiveSection(nextSection);
+    }
 
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+    function handleScroll() {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(updateActiveSection);
+    }
+
+    updateActiveSection();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
+
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
   }, []);
 
   return (
@@ -89,6 +114,7 @@ function FloatingNav() {
           <a
             key={item.href}
             href={item.href}
+            onClick={() => setActiveSection(item.href.slice(1))}
             className={`rounded-full px-1.5 py-2.5 text-center text-[10px] font-black leading-none text-white/88 transition hover:bg-white/26 hover:text-white sm:px-3 sm:py-3 sm:text-xs ${
               activeSection === item.href.slice(1) ? "bg-white/34 text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,.28)]" : ""
             }`}
@@ -192,15 +218,15 @@ export default function LandingPage() {
             <div className="p-5 md:p-10">
             <SectionTitle label="İletişim" title={siteConfig.contact.title} text={siteConfig.contact.description} />
             <div className="grid grid-cols-3 gap-2 md:gap-3">
-              <a href={whatsappUrl} target="_blank" rel="noreferrer" className="grid min-h-20 content-center justify-items-center gap-2 rounded-[22px] bg-stone-950 p-3 text-white transition hover:-translate-y-1 md:min-h-28 md:content-between md:justify-items-start md:p-5">
+              <a href={whatsappUrl} target="_blank" rel="noreferrer" className="grid min-h-24 content-center justify-items-center gap-2 rounded-[22px] bg-stone-950 p-3 text-white transition hover:-translate-y-1 md:min-h-28 md:content-between md:justify-items-start md:p-5">
                 <ContactIcon type="whatsapp" />
                 <strong className="text-xs font-black md:text-lg">WhatsApp</strong>
               </a>
-              <a href={siteConfig.brand.mapsLink} target="_blank" rel="noreferrer" className="grid min-h-20 content-center justify-items-center gap-2 rounded-[22px] border border-stone-300 bg-white/58 p-3 text-stone-950 transition hover:-translate-y-1 hover:bg-white/72 md:min-h-28 md:content-between md:justify-items-start md:p-5">
+              <a href={siteConfig.brand.mapsLink} target="_blank" rel="noreferrer" className="grid min-h-24 content-center justify-items-center gap-2 rounded-[22px] border border-stone-300 bg-white/58 p-3 text-stone-950 transition hover:-translate-y-1 hover:bg-white/72 md:min-h-28 md:content-between md:justify-items-start md:p-5">
                 <ContactIcon type="location" />
                 <strong className="text-xs font-black md:text-lg">Konum</strong>
               </a>
-              <a href={siteConfig.brand.instagramLink} target="_blank" rel="noreferrer" className="grid min-h-20 content-center justify-items-center gap-2 rounded-[22px] border border-stone-300 bg-white/58 p-3 text-stone-950 transition hover:-translate-y-1 hover:bg-white/72 md:min-h-28 md:content-between md:justify-items-start md:p-5">
+              <a href={siteConfig.brand.instagramLink} target="_blank" rel="noreferrer" className="grid min-h-24 content-center justify-items-center gap-2 rounded-[22px] border border-stone-300 bg-white/58 p-3 text-stone-950 transition hover:-translate-y-1 hover:bg-white/72 md:min-h-28 md:content-between md:justify-items-start md:p-5">
                 <ContactIcon type="instagram" />
                 <strong className="text-xs font-black md:text-lg">Instagram</strong>
               </a>
@@ -208,15 +234,14 @@ export default function LandingPage() {
 
             <div className="mt-4 rounded-[24px] border border-stone-300 bg-white/46 p-4 md:hidden">
               <p className="text-xs font-black uppercase tracking-[0.18em] text-stone-500">Saatler</p>
-              <div className="mt-3 grid grid-cols-3 gap-2 text-center text-[11px] font-bold text-stone-700">
-                {siteConfig.hours.slice(0, 3).map(([day, hour]) => (
-                  <div key={day}>
-                    <span className="block text-stone-950">{day.slice(0, 3)}</span>
-                    <span>{hour}</span>
+              <div className="mt-3 grid grid-cols-2 gap-2 text-sm font-bold text-stone-700">
+                {displayHours.map(([label, hour]) => (
+                  <div key={label} className="rounded-[18px] bg-white/58 p-3">
+                    <span className="block text-xs uppercase tracking-[0.12em] text-stone-500">{label}</span>
+                    <span className="mt-1 block text-stone-950">{hour}</span>
                   </div>
                 ))}
               </div>
-              <p className="mt-3 text-[10px] font-black uppercase tracking-[0.12em] text-stone-500">Hafta sonu 10.00’dan itibaren</p>
             </div>
 
             <div className="mt-6 hidden gap-3 md:mt-8 md:grid md:grid-cols-2 md:gap-4">
@@ -232,15 +257,14 @@ export default function LandingPage() {
               </div>
               <div className="rounded-[24px] border border-stone-300 bg-white/46 p-4 md:rounded-[28px] md:p-5">
                 <p className="text-xs font-black uppercase tracking-[0.18em] text-stone-500">Saatler</p>
-                <div className="mt-3 divide-y divide-stone-200">
-                  {siteConfig.hours.slice(0, 3).map(([day, hour]) => (
-                    <div key={day} className="grid gap-1 py-2 text-xs font-bold text-stone-700 md:flex md:justify-between md:text-sm">
-                      <span>{day}</span>
+                <div className="mt-3 grid gap-3">
+                  {displayHours.map(([label, hour]) => (
+                    <div key={label} className="rounded-[18px] bg-white/58 p-3 text-sm font-bold text-stone-700">
+                      <span className="block text-xs uppercase tracking-[0.12em] text-stone-500">{label}</span>
                       <span>{hour}</span>
                     </div>
                   ))}
                 </div>
-                <p className="mt-3 text-[10px] font-black uppercase tracking-[0.12em] text-stone-500 md:text-xs">Hafta sonu 10.00’dan itibaren</p>
               </div>
             </div>
           </div>
