@@ -1,4 +1,4 @@
-import { Footer, Header, MobileBar } from "@/components/SiteShell";
+import { Header } from "@/components/SiteShell";
 import { siteConfig } from "@/config/site";
 
 const proposalMailUrl = `${siteConfig.brand.emailLink}&body=${encodeURIComponent(
@@ -23,21 +23,16 @@ function SharpTitle({
 
 export default function Home() {
   return (
-    <main className="relative isolate min-h-screen overflow-hidden pb-20 text-white md:pb-0">
+    <main className="relative isolate min-h-screen overflow-hidden text-white">
       <Header />
-      <div className="home-split-background" aria-hidden="true">
-        <span className="home-split-divider" />
-      </div>
+      <div className="home-split-background" aria-hidden="true" />
 
       <section className="relative z-10 overflow-hidden bg-[#071225]/72 backdrop-blur-[1px]">
         <div className="absolute inset-x-0 top-0 h-px bg-slate-300/70" />
-        <div className="absolute left-0 top-0 h-full w-px bg-white/18" />
-        <div className="absolute right-[12%] top-0 hidden h-full w-px bg-white/10 lg:block" />
         <div className="absolute bottom-0 left-0 right-0 h-px bg-white/16" />
 
         <div className="pointer-events-none absolute inset-0 opacity-45">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(148,163,184,0.18),transparent_30%),linear-gradient(135deg,rgba(15,23,42,0.95),rgba(7,18,37,0.82))]" />
-          <div className="absolute left-1/2 top-0 h-full w-px bg-white/18" />
           <div className="absolute right-0 top-1/3 h-px w-1/2 bg-white/12" />
         </div>
 
@@ -62,7 +57,7 @@ export default function Home() {
             </div>
           </div>
 
-          <aside className="reveal-card flex flex-col justify-end gap-5 border-l border-white/16 pt-8 lg:pl-8">
+          <aside className="reveal-card flex flex-col justify-end gap-5 pt-8 lg:pl-8">
             <div
               aria-label="Modern yazılım ekibi çalışma ortamı"
               className="image-zoom aspect-[4/5] overflow-hidden border border-white/16 bg-cover bg-center bg-no-repeat"
@@ -391,9 +386,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      <Footer />
-      <MobileBar />
     </main>
   );
 }
