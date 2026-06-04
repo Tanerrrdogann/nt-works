@@ -63,16 +63,17 @@ summary::-webkit-details-marker {
 .entry-card {
   position: relative;
   display: grid;
-  min-height: 184px;
+  aspect-ratio: 1 / 1;
+  min-height: 0;
   align-content: space-between;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.36);
   border-radius: 30px;
   padding: 24px;
   color: rgba(255, 255, 255, 0.94);
   background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.1)),
-    rgba(26, 23, 20, 0.18);
+    linear-gradient(145deg, rgba(122, 75, 44, 0.9), rgba(91, 54, 34, 0.82)),
+    rgba(78, 49, 32, 0.86);
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
   backdrop-filter: blur(20px);
   transition:
@@ -94,8 +95,8 @@ summary::-webkit-details-marker {
   transform: translateY(-6px);
   border-color: rgba(255, 255, 255, 0.72);
   background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0.16)),
-    rgba(26, 23, 20, 0.12);
+    linear-gradient(145deg, rgba(145, 91, 56, 0.96), rgba(104, 64, 41, 0.9)),
+    rgba(78, 49, 32, 0.9);
 }
 
 .entry-card-icon {
@@ -168,13 +169,8 @@ summary::-webkit-details-marker {
   }
 
   .entry-card {
-    min-height: 136px;
-    border-color: rgba(255, 255, 255, 0.36);
     border-radius: 24px;
     padding: 20px 16px;
-    background:
-      linear-gradient(145deg, rgba(122, 75, 44, 0.9), rgba(91, 54, 34, 0.82)),
-      rgba(78, 49, 32, 0.86);
   }
 
   .entry-card::before {
@@ -202,7 +198,6 @@ summary::-webkit-details-marker {
 
 @media (min-width: 641px) and (max-width: 900px) {
   .entry-card {
-    min-height: 142px;
     border-radius: 24px;
   }
 
