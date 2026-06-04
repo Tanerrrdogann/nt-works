@@ -209,6 +209,24 @@ export default function Home() {
                 </div>
               </article>
             ))}
+            <article className="reveal-card bg-[#0b1830] lg:hidden">
+              <div
+                aria-label="Net proje kapsamı"
+                className="image-zoom aspect-[16/10] bg-cover bg-center bg-no-repeat"
+                style={{
+                  backgroundImage:
+                    "url('https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1000&q=80')",
+                }}
+              >
+                <div className="h-full w-full bg-[#071225]/22" />
+              </div>
+              <div className="p-4">
+                <h3 className="text-lg font-black text-white">Net proje kapsamı</h3>
+                <p className="mt-3 text-sm leading-6 text-slate-300">
+                  Hedef, ekran ve teslim adımları baştan görünür olur.
+                </p>
+              </div>
+            </article>
           </div>
         </div>
       </section>
@@ -268,6 +286,14 @@ export default function Home() {
               </div>
             </article>
           ))}
+          <article className="bg-[#071225] p-4 lg:hidden">
+            <h3 className="text-lg font-black text-white">Kalite</h3>
+            <div className="mt-4 grid gap-2">
+              {["Test senaryoları", "Mobil kontrol", "Performans takibi", "Yayın desteği"].map((item) => (
+                <p key={item} className="border-t border-white/14 pt-2 text-xs font-bold text-slate-400">{item}</p>
+              ))}
+            </div>
+          </article>
         </div>
       </section>
 

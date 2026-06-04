@@ -1,2 +1,2 @@
-:HL["/kurumsal-web-sitesi/_next/static/chunks/0ip4i4r2i6bgq.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"hizmetler","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"teknik-danismanlik","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"5BHROZaGaJxVN9Z45194K"}
+:HL["/kurumsal-web-sitesi/_next/static/chunks/0q~jf_~-pn3vx.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"hizmetler","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"teknik-danismanlik","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"WBgL0SksW2d1SPwf9Fwhj"}
