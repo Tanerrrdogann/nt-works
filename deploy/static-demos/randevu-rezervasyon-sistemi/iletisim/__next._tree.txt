@@ -1,3 +1,3 @@
-:HL["/randevu-rezervasyon-sistemi/_next/static/chunks/0~z1s-weylyo1.css","style"]
+:HL["/randevu-rezervasyon-sistemi/_next/static/chunks/0pnat4s.vd88x.css","style"]
 :HL["/randevu-rezervasyon-sistemi/pink-whatsapp-logo.png","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"iletisim","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"RpFfESwVM8K15yJVhy87m"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"iletisim","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"qJFwB3YeggsIgnBgnuSCt"}
