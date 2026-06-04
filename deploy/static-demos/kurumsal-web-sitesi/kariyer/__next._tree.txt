@@ -1,2 +1,3 @@
-:HL["/kurumsal-web-sitesi/_next/static/chunks/0q~jf_~-pn3vx.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"kariyer","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"WBgL0SksW2d1SPwf9Fwhj"}
+:HL["/kurumsal-web-sitesi/_next/static/chunks/107-mw_pi73tx.css","style"]
+:HL["/kurumsal-web-sitesi/novacore-logo.png","image"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"kariyer","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"SMpCCY94BhlcS1E3GEfpp"}
