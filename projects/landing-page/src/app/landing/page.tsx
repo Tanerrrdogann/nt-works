@@ -50,7 +50,7 @@ function ContactIcon({ type }: { type: "whatsapp" | "instagram" | "location" }) 
 
   if (type === "whatsapp") {
     return (
-      <span className="grid h-9 w-9 place-items-center md:h-10 md:w-10">
+      <span className="grid h-10 w-10 place-items-center md:h-10 md:w-10">
         <img src="/landing-page/whatsapp-icon.png" alt="" className={`${imageClass} scale-125`} />
       </span>
     );
@@ -58,14 +58,14 @@ function ContactIcon({ type }: { type: "whatsapp" | "instagram" | "location" }) 
 
   if (type === "instagram") {
     return (
-      <span className="grid h-9 w-9 place-items-center md:h-10 md:w-10">
+      <span className="grid h-10 w-10 place-items-center md:h-10 md:w-10">
         <img src="/landing-page/instagram-icon.png" alt="" className={imageClass} />
       </span>
     );
   }
 
   return (
-    <span className="grid h-9 w-9 place-items-center md:h-10 md:w-10">
+    <span className="grid h-11 w-11 place-items-center md:h-11 md:w-11">
       <svg viewBox="0 0 24 24" fill="none" className="h-full w-full text-[#9a7442]" aria-hidden="true">
         <path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11Z" stroke="currentColor" strokeWidth="2" />
         <circle cx="12" cy="10" r="2.4" stroke="currentColor" strokeWidth="2" />
@@ -218,17 +218,17 @@ export default function LandingPage() {
             <div className="p-5 md:p-10">
             <SectionTitle label="İletişim" title={siteConfig.contact.title} text={siteConfig.contact.description} />
             <div className="grid grid-cols-3 gap-2 md:gap-3">
-              <a href={whatsappUrl} target="_blank" rel="noreferrer" className="grid min-h-24 content-center justify-items-center gap-2 rounded-[22px] bg-stone-950 p-3 text-white transition hover:-translate-y-1 md:min-h-28 md:content-between md:justify-items-start md:p-5">
+              <a href={whatsappUrl} target="_blank" rel="noreferrer" className="grid min-h-24 content-center justify-items-center gap-2 rounded-[22px] border border-stone-300 bg-white/58 p-3 text-stone-950 transition hover:-translate-y-1 hover:bg-white/72 md:min-h-28 md:content-between md:justify-items-start md:p-5">
                 <ContactIcon type="whatsapp" />
-                <strong className="text-xs font-black md:text-lg">WhatsApp</strong>
+                <strong className="hidden text-xs font-black md:block md:text-lg">WhatsApp</strong>
               </a>
               <a href={siteConfig.brand.mapsLink} target="_blank" rel="noreferrer" className="grid min-h-24 content-center justify-items-center gap-2 rounded-[22px] border border-stone-300 bg-white/58 p-3 text-stone-950 transition hover:-translate-y-1 hover:bg-white/72 md:min-h-28 md:content-between md:justify-items-start md:p-5">
                 <ContactIcon type="location" />
-                <strong className="text-xs font-black md:text-lg">Konum</strong>
+                <strong className="hidden text-xs font-black md:block md:text-lg">Konum</strong>
               </a>
               <a href={siteConfig.brand.instagramLink} target="_blank" rel="noreferrer" className="grid min-h-24 content-center justify-items-center gap-2 rounded-[22px] border border-stone-300 bg-white/58 p-3 text-stone-950 transition hover:-translate-y-1 hover:bg-white/72 md:min-h-28 md:content-between md:justify-items-start md:p-5">
                 <ContactIcon type="instagram" />
-                <strong className="text-xs font-black md:text-lg">Instagram</strong>
+                <strong className="hidden text-xs font-black md:block md:text-lg">Instagram</strong>
               </a>
             </div>
 
