@@ -7,7 +7,7 @@ export default function VehicleCard({ vehicle }: { vehicle: typeof siteConfig.ve
     <div className="bg-zinc-900 border border-zinc-800 rounded-sm overflow-hidden group flex flex-col hover:border-red-600/50 transition-colors">
       <div className="aspect-[4/3] bg-zinc-950 relative overflow-hidden">
         <VehicleImageSlider
-          className="absolute inset-0"
+          className="h-full w-full"
           detailHref={`/araclar/${vehicle.slug}`}
           images={vehicle.images}
           title={vehicle.title}
