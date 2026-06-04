@@ -24,6 +24,7 @@ export default function AppointmentForm() {
 
   const [weekOffset, setWeekOffset] = useState(0);
   const [mounted, setMounted] = useState(false);
+  const [mobilePicker, setMobilePicker] = useState<"date" | "time" | null>(null);
 
   // Client-side render'ın tamamlandığını anlamak için (Linter hatasını çözen asenkron yöntem)
   useEffect(() => {
@@ -73,15 +74,15 @@ export default function AppointmentForm() {
   const currentWeekDays = availableDays.slice(weekOffset * 7, (weekOffset + 1) * 7);
 
   return (
-    <div className="bg-white p-6 md:p-10 rounded-[2.5rem] shadow-2xl shadow-rose-100 border border-rose-50 relative overflow-hidden">
+    <div className="bg-white p-4 md:p-10 rounded-[1.75rem] md:rounded-[2.5rem] shadow-2xl shadow-rose-100 border border-rose-50 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-32 h-32 bg-rose-50 rounded-full -mr-16 -mt-16 opacity-50 blur-2xl"></div>
       
-      <div className="text-center mb-10 relative z-10">
-        <h2 className="text-3xl font-bold text-slate-800 mb-2">Güzellik Randevusu</h2>
+      <div className="text-center mb-6 md:mb-10 relative z-10">
+        <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-2">Güzellik Randevusu</h2>
         <div className="h-1 w-20 bg-rose-300 mx-auto rounded-full"></div>
       </div>
 
-      <div className="space-y-8 relative z-10">
+      <div className="space-y-5 md:space-y-8 relative z-10">
         {/* Ad & Telefon */}
         <div className="grid md:grid-cols-2 gap-4">
           <div className="relative group">
@@ -118,8 +119,104 @@ export default function AppointmentForm() {
           </select>
         </div>
 
+        {/* Mobil Tarih & Saat Kartı */}
+        <div className="md:hidden rounded-3xl border border-rose-100 bg-rose-50/50 p-4">
+          <p className="text-sm font-bold text-slate-800 mb-3">Randevu zamanı</p>
+          <div className="grid grid-cols-2 gap-3">
+            <button
+              type="button"
+              onClick={() => setMobilePicker(mobilePicker === "date" ? null : "date")}
+              className={`rounded-2xl border p-3 text-left transition-all ${formData.date ? "border-rose-300 bg-white text-rose-700" : "border-rose-100 bg-white text-slate-500"}`}
+            >
+              <span className="block text-[11px] font-black uppercase text-slate-400">Tarih</span>
+              <span className="mt-1 block text-sm font-black">{formData.date || "Tarih seç"}</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setMobilePicker(mobilePicker === "time" ? null : "time")}
+              className={`rounded-2xl border p-3 text-left transition-all ${formData.time ? "border-rose-300 bg-white text-rose-700" : "border-rose-100 bg-white text-slate-500"}`}
+            >
+              <span className="block text-[11px] font-black uppercase text-slate-400">Saat</span>
+              <span className="mt-1 block text-sm font-black">{formData.time || "Saat seç"}</span>
+            </button>
+          </div>
+
+          {mobilePicker === "date" && (
+            <div className="mt-4 rounded-3xl border border-rose-100 bg-white p-3 shadow-lg shadow-rose-100">
+              <div className="mb-3 flex items-center justify-between">
+                <p className="text-sm font-black text-slate-700">Tarih seç</p>
+                <div className="flex items-center gap-2 rounded-full bg-rose-50 px-2 py-1">
+                  <button
+                    type="button"
+                    onClick={() => setWeekOffset(Math.max(0, weekOffset - 1))}
+                    disabled={weekOffset === 0}
+                    className="p-1 text-rose-500 disabled:opacity-30"
+                  >
+                    <ChevronLeft size={16} />
+                  </button>
+                  <span className="w-16 text-center text-[11px] font-black text-rose-700">
+                    {weekOffset === 0 ? "Bu Hafta" : `${weekOffset + 1}. Hafta`}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setWeekOffset(Math.min(3, weekOffset + 1))}
+                    disabled={weekOffset === 3 || currentWeekDays.length === 0}
+                    className="p-1 text-rose-500 disabled:opacity-30"
+                  >
+                    <ChevronRight size={16} />
+                  </button>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                {currentWeekDays.map((day) => (
+                  <button
+                    type="button"
+                    key={day.dateString}
+                    disabled={day.isSunday || day.isFull}
+                    onClick={() => {
+                      setFormData({ ...formData, date: day.dateString });
+                      setMobilePicker(null);
+                    }}
+                    className={`
+                      rounded-2xl border px-3 py-3 text-left transition-all
+                      ${day.isSunday ? "bg-slate-50 border-slate-100 opacity-40" : ""}
+                      ${day.isFull ? "bg-rose-600 text-white border-rose-600 opacity-70" : ""}
+                      ${!day.isSunday && !day.isFull ? "bg-rose-50 border-rose-100 text-rose-700" : ""}
+                      ${formData.date === day.dateString ? "ring-2 ring-rose-200 bg-rose-500 text-white border-rose-500" : ""}
+                    `}
+                  >
+                    <span className="block text-[10px] uppercase font-bold opacity-70">{day.dayName}</span>
+                    <span className="mt-1 block text-lg font-black leading-none">{day.dayNumber} {day.monthName}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {mobilePicker === "time" && (
+            <div className="mt-4 rounded-3xl border border-rose-100 bg-white p-3 shadow-lg shadow-rose-100">
+              <p className="mb-3 text-sm font-black text-slate-700">Saat seç</p>
+              <div className="grid grid-cols-3 gap-2">
+                {siteConfig.appointmentSlots.map((slot) => (
+                  <button
+                    type="button"
+                    key={slot}
+                    onClick={() => {
+                      setFormData({ ...formData, time: slot });
+                      setMobilePicker(null);
+                    }}
+                    className={`rounded-2xl border py-3 text-sm font-black transition-all ${formData.time === slot ? "bg-rose-500 text-white border-rose-500" : "bg-rose-50 border-rose-100 text-rose-600"}`}
+                  >
+                    {slot}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
         {/* Gelişmiş Haftalık Takvim Bölümü */}
-        <div>
+        <div className="hidden md:block">
           <div className="flex items-center justify-between mb-4">
             <label className="flex items-center gap-2 text-sm font-semibold text-slate-600 ml-2">
               <Calendar size={18} className="text-rose-500" /> Tarih Seçimi
@@ -156,6 +253,7 @@ export default function AppointmentForm() {
             <div className="grid grid-cols-7 gap-2">
               {currentWeekDays.map((day) => (
                 <button
+                  type="button"
                   key={day.dateString}
                   disabled={day.isSunday || day.isFull}
                   onClick={() => setFormData({...formData, date: day.dateString})}
@@ -182,13 +280,14 @@ export default function AppointmentForm() {
         </div>
 
         {/* Saat Seçimi */}
-        <div>
+        <div className="hidden md:block">
           <label className="flex items-center gap-2 text-sm font-semibold text-slate-600 mb-4 ml-2">
             <Clock size={18} className="text-rose-500" /> Uygun Saatler
           </label>
           <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
             {siteConfig.appointmentSlots.map((slot) => (
               <button
+                type="button"
                 key={slot}
                 onClick={() => setFormData({...formData, time: slot})}
                 className={`
@@ -215,11 +314,12 @@ export default function AppointmentForm() {
            )}
           
           <button 
+            type="button"
             disabled={!formData.name || !formData.date || !formData.time}
             onClick={handleWhatsApp}
             className="group w-full bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white font-bold text-lg py-5 rounded-[1.5rem] shadow-xl shadow-rose-200 transition-all transform hover:-translate-y-1 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
           >
-            Randevu Başvurusunu Tamamla
+            Randevuyu Oluştur
             <CheckCircle2 className="group-hover:scale-125 transition-transform" />
           </button>
           <p className="text-center text-[11px] text-slate-400 mt-4 italic">Randevunuz WhatsApp üzerinden onaylandıktan sonra kesinleşecektir.</p>

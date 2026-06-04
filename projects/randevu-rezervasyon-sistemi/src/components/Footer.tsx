@@ -4,8 +4,8 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <footer className="bg-rose-50 pt-16 pb-24 md:pb-8 border-t border-rose-100">
-      <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
-        <div>
+      <div className="container mx-auto px-4 grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 text-center md:text-left">
+        <div className="col-span-2 md:col-span-1">
           <h3 className="text-xl font-bold text-rose-800 mb-4">{siteConfig.company.name}</h3>
           <p className="text-rose-600/80 mb-6 italic">&quot;{siteConfig.company.slogan}&quot;</p>
           <p className="text-sm text-rose-500">Işıltınızı ortaya çıkarmak için buradayız.</p>
