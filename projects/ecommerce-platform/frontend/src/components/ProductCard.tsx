@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { TouchEvent, useState } from "react";
+import { TouchEvent, useRef, useState } from "react";
 import { formatPrice, getProductDisplayPrice } from "@/lib/products";
 import { AddToCartButton } from "@/components/AddToCartButton";
 import { StarRating } from "@/components/StarRating";
@@ -37,13 +37,31 @@ export function ProductCard({ product }: { product: Product }) {
   const fallbackImages = cardFallbackImages[product.categorySlug ?? "kolye"] ?? cardFallbackImages.kolye;
   const gallery = Array.from(new Set([product.imageUrl, ...(product.imageUrls ?? []), ...fallbackImages].filter(Boolean))).slice(0, 5);
   const [imageIndex, setImageIndex] = useState(0);
-  const activeImage = gallery[imageIndex] ?? product.imageUrl;
   const reviews = initialProductReviews[product.slug] ?? [];
   const averageRating = getAverageRating(reviews);
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
+  const [dragOffset, setDragOffset] = useState(0);
+  const didDragRef = useRef(false);
 
   function moveImage(direction: -1 | 1) {
+    if (gallery.length < 2) return;
     setImageIndex((current) => (current + direction + gallery.length) % gallery.length);
+  }
+
+  function handleTouchStart(event: TouchEvent<HTMLDivElement>) {
+    setTouchStartX(event.touches[0].clientX);
+    setDragOffset(0);
+    didDragRef.current = false;
+  }
+
+  function handleTouchMove(event: TouchEvent<HTMLDivElement>) {
+    if (touchStartX === null || gallery.length < 2) return;
+
+    const distance = event.touches[0].clientX - touchStartX;
+    setDragOffset(distance);
+    if (Math.abs(distance) > 8) {
+      didDragRef.current = true;
+    }
   }
 
   function handleTouchEnd(event: TouchEvent<HTMLDivElement>) {
@@ -54,6 +72,7 @@ export function ProductCard({ product }: { product: Product }) {
       moveImage(distance < 0 ? 1 : -1);
     }
     setTouchStartX(null);
+    setDragOffset(0);
   }
 
   return (
@@ -61,16 +80,34 @@ export function ProductCard({ product }: { product: Product }) {
       <div
         className="product-image-link"
         onTouchEnd={handleTouchEnd}
-        onTouchStart={(event) => setTouchStartX(event.touches[0].clientX)}
+        onTouchMove={handleTouchMove}
+        onTouchStart={handleTouchStart}
       >
-        <Link href={`/products/${product.slug}`} aria-label={`${product.name} detayını aç`}>
-          <img src={activeImage} alt={product.name} />
+        <Link
+          href={`/products/${product.slug}`}
+          aria-label={`${product.name} detayını aç`}
+          onClick={(event) => {
+            if (didDragRef.current) {
+              event.preventDefault();
+            }
+          }}
+        >
+          <div
+            className="product-slider-track"
+            style={{
+              transform: `translate3d(calc(${-imageIndex * 100}% + ${dragOffset}px), 0, 0)`,
+              transition: touchStartX === null ? "transform 0.26s ease" : "none",
+            }}
+          >
+            {gallery.map((image, index) => (
+              <img src={image} alt={`${product.name} görseli ${index + 1}`} key={`${image}-${index}`} />
+            ))}
+          </div>
         </Link>
         {gallery.length > 1 ? (
-          <div className="product-slider-controls" aria-label="Ürün fotoğrafı değiştir">
-            <button aria-label="Önceki ürün fotoğrafı" onClick={() => moveImage(-1)} type="button">‹</button>
-            <span>{imageIndex + 1}/{gallery.length}</span>
-            <button aria-label="Sonraki ürün fotoğrafı" onClick={() => moveImage(1)} type="button">›</button>
+          <div className="product-slider-zones" aria-label="Ürün fotoğrafı değiştir">
+            <button aria-label="Önceki ürün fotoğrafı" onClick={() => moveImage(-1)} type="button" />
+            <button aria-label="Sonraki ürün fotoğrafı" onClick={() => moveImage(1)} type="button" />
           </div>
         ) : null}
         {gallery.length > 1 ? (

@@ -51,10 +51,23 @@ export function ProductGallery({ product }: { product: Product }) {
   const gallery = useMemo(() => buildGallery(product), [product]);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
+  const [dragOffset, setDragOffset] = useState(0);
   const selectedImage = gallery[selectedIndex] ?? product.imageUrl;
 
   function moveImage(direction: -1 | 1) {
+    if (gallery.length < 2) return;
     setSelectedIndex((current) => (current + direction + gallery.length) % gallery.length);
+  }
+
+  function handleTouchStart(event: TouchEvent<HTMLDivElement>) {
+    setTouchStartX(event.touches[0].clientX);
+    setDragOffset(0);
+  }
+
+  function handleTouchMove(event: TouchEvent<HTMLDivElement>) {
+    if (touchStartX === null || gallery.length < 2) return;
+
+    setDragOffset(event.touches[0].clientX - touchStartX);
   }
 
   function handleTouchEnd(event: TouchEvent<HTMLDivElement>) {
@@ -65,6 +78,7 @@ export function ProductGallery({ product }: { product: Product }) {
       moveImage(distance < 0 ? 1 : -1);
     }
     setTouchStartX(null);
+    setDragOffset(0);
   }
 
   return (
@@ -72,15 +86,25 @@ export function ProductGallery({ product }: { product: Product }) {
       <div
         className="detail-main-image"
         onTouchEnd={handleTouchEnd}
-        onTouchStart={(event) => setTouchStartX(event.touches[0].clientX)}
+        onTouchMove={handleTouchMove}
+        onTouchStart={handleTouchStart}
       >
-        <img src={selectedImage} alt={product.name} />
+        <div
+          className="product-slider-track"
+          style={{
+            transform: `translate3d(calc(${-selectedIndex * 100}% + ${dragOffset}px), 0, 0)`,
+            transition: touchStartX === null ? "transform 0.26s ease" : "none",
+          }}
+        >
+          {gallery.map((image, index) => (
+            <img src={image} alt={`${product.name} görseli ${index + 1}`} key={`${image}-${index}`} />
+          ))}
+        </div>
         {product.badge ? <span className="product-badge">{product.badge}</span> : null}
         {gallery.length > 1 ? (
-          <div className="product-slider-controls detail" aria-label="Ürün fotoğrafı değiştir">
-            <button aria-label="Önceki ürün fotoğrafı" onClick={() => moveImage(-1)} type="button">‹</button>
-            <span>{selectedIndex + 1}/{gallery.length}</span>
-            <button aria-label="Sonraki ürün fotoğrafı" onClick={() => moveImage(1)} type="button">›</button>
+          <div className="product-slider-zones" aria-label="Ürün fotoğrafı değiştir">
+            <button aria-label="Önceki ürün fotoğrafı" onClick={() => moveImage(-1)} type="button" />
+            <button aria-label="Sonraki ürün fotoğrafı" onClick={() => moveImage(1)} type="button" />
           </div>
         ) : null}
         {gallery.length > 1 ? (
