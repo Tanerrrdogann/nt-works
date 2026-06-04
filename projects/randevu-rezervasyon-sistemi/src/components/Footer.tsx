@@ -4,13 +4,13 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <footer className="bg-rose-50 pt-16 pb-24 md:pb-8 border-t border-rose-100">
-      <div className="container mx-auto px-4 grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 text-center md:text-left">
+      <div className="container mx-auto px-4 grid grid-cols-[0.85fr_1.35fr] md:grid-cols-3 gap-x-5 gap-y-8 md:gap-12 text-center md:text-left">
         <div className="col-span-2 md:col-span-1">
           <h3 className="text-xl font-bold text-rose-800 mb-4">{siteConfig.company.name}</h3>
           <p className="text-rose-600/80 mb-6 italic">&quot;{siteConfig.company.slogan}&quot;</p>
           <p className="text-sm text-rose-500">Işıltınızı ortaya çıkarmak için buradayız.</p>
         </div>
-        <div>
+        <div className="text-left md:text-left">
           <h3 className="text-lg font-semibold text-rose-800 mb-4">Hızlı Menü</h3>
           <ul className="space-y-3">
             {siteConfig.nav.map((item) => (
@@ -22,7 +22,7 @@ export default function Footer() {
             ))}
           </ul>
         </div>
-        <div>
+        <div className="text-left md:text-left">
           <h3 className="text-lg font-semibold text-rose-800 mb-4">Bize Ulaşın</h3>
           <ul className="space-y-3 text-rose-600">
             <li>📍 {siteConfig.company.address}</li>
