@@ -9,8 +9,8 @@ export function Header() {
     <header className="sticky top-0 z-50 border-b border-white/14 bg-[#071225]/92 text-white backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4">
         <a href="/kurumsal-web-sitesi" className="flex items-center gap-3">
-          <span className="grid h-12 w-12 place-items-center overflow-hidden border border-white/14 bg-[#061126] shadow-[0_0_24px_rgba(148,163,184,0.18)] transition duration-200 hover:border-white/30 md:h-14 md:w-14">
-            <img src="/kurumsal-web-sitesi/novacore-logo.png" alt="NovaCore logo" className="h-full w-full object-cover" />
+          <span className="grid h-12 w-12 place-items-center md:h-14 md:w-14">
+            <img src="/kurumsal-web-sitesi/novacore-logo.png" alt="NovaCore logo" className="h-full w-full object-contain" />
           </span>
           <span>
             <span className="block text-base font-black text-white">{siteConfig.brand.name}</span>
@@ -57,8 +57,8 @@ export function Footer() {
       <div className="mx-auto grid max-w-7xl gap-8 px-5 py-10 md:grid-cols-4">
         <div>
           <div className="flex items-center gap-3">
-            <span className="grid h-12 w-12 place-items-center overflow-hidden border border-white/14 bg-[#061126]">
-              <img src="/kurumsal-web-sitesi/novacore-logo.png" alt="NovaCore logo" className="h-full w-full object-cover" />
+            <span className="grid h-12 w-12 place-items-center">
+              <img src="/kurumsal-web-sitesi/novacore-logo.png" alt="NovaCore logo" className="h-full w-full object-contain" />
             </span>
             <p className="text-xl font-black text-white">{siteConfig.brand.name}</p>
           </div>
