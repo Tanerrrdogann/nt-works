@@ -1,16 +1,16 @@
 export const siteConfig = {
   brand: {
-    name: "Velora Coffee",
+    name: "Velora Kafe",
     shortName: "VC",
-    slogan: "Coffee, kitchen and slow moments.",
+    slogan: "Kahve, mutfak ve sakin molalar.",
     description:
       "Kadıköy’de kahve, tatlı, sıcak mutfak ve sakin çalışma molası için modern buluşma noktası.",
     phone: "+90 555 010 34 34",
     phoneLink: "tel:+905550103434",
     whatsapp: "905550103434",
-    email: "hello@veloracoffee.com",
-    emailLink: "mailto:hello@veloracoffee.com",
-    instagram: "@veloracoffee",
+    email: "merhaba@velorakafe.com",
+    emailLink: "mailto:merhaba@velorakafe.com",
+    instagram: "@velorakafe",
     instagramLink: "https://www.instagram.com/",
     address: "Caferağa Mahallesi, Kadıköy / İstanbul",
     mapsLink: "https://www.google.com/maps/search/?api=1&query=Cafera%C4%9Fa%20Mahallesi%20Kad%C4%B1k%C3%B6y%20%C4%B0stanbul",
@@ -26,9 +26,9 @@ export const siteConfig = {
   ],
 
   hero: {
-    title: "Kahve, mutfak ve sakin bir mola için tek sayfa.",
+    title: "Kahve, mutfak ve sakin bir mola için tek sayfa",
     description:
-      "Velora Coffee; özel kahveler, gün boyu sıcak mutfak, tatlılar ve laptop dostu atmosferiyle şehir içinde kısa ama iyi hissettiren bir durak sunar.",
+      "Velora Kafe; özel kahveler, gün boyu sıcak mutfak, tatlılar ve çalışmaya uygun atmosferiyle şehir içinde iyi hissettiren bir durak sunar.",
     image:
       "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1600&q=85",
     entryImage:
@@ -38,15 +38,15 @@ export const siteConfig = {
   },
 
   about: {
-    title: "Velora Coffee hakkında",
+    title: "Velora Kafe hakkında",
     image:
       "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=85",
     text:
-      "Velora Coffee, günün ritmini yavaşlatmak isteyenler için tasarlanmış modern bir coffee & kitchen alanıdır. Sabah kahvesinden öğle molasına, çalışma saatinden akşam tatlısına kadar sade, kaliteli ve ulaşılabilir bir deneyim sunar.",
+      "Velora Kafe, günün ritmini yavaşlatmak isteyenler için tasarlanmış modern bir kafe ve mutfak alanıdır. Sabah kahvesinden öğle molasına, çalışma saatinden akşam tatlısına kadar sade, kaliteli ve ulaşılabilir bir deneyim sunar.",
     notes: [
       "Günlük taze kahve ve tatlı üretimi",
       "Sıcak mutfak, sandviç ve makarna seçenekleri",
-      "Laptopla çalışmaya uygun sakin masa düzeni",
+      "Bilgisayarla çalışmaya uygun sakin masa düzeni",
       "Kadıköy merkezde kolay ulaşılabilir konum",
     ],
   },
@@ -59,18 +59,18 @@ export const siteConfig = {
         ["Americano", "Espresso ve sıcak su dengesi.", "₺95"],
         ["Latte", "Yumuşak içimli espresso ve süt.", "₺115"],
         ["Cappuccino", "Yoğun köpük, güçlü kahve aroması.", "₺115"],
-        ["Flat White", "Daha yoğun espresso, kadifemsi süt.", "₺125"],
+        ["Yoğun Sütlü Kahve", "Daha yoğun espresso, kadifemsi süt.", "₺125"],
         ["Mocha", "Espresso, süt ve çikolata.", "₺135"],
       ],
     },
     {
       category: "Soğuk Kahveler",
       items: [
-        ["Iced Americano", "Soğuk, ferah ve net kahve tadı.", "₺105"],
-        ["Iced Latte", "Buzlu süt ve espresso dengesi.", "₺125"],
-        ["Cold Brew", "Uzun demleme, düşük asidite.", "₺135"],
-        ["Espresso Tonic", "Tonik ve espresso ile ferah içim.", "₺145"],
-        ["Caramel Frappe", "Karamel, buz ve kahve karışımı.", "₺150"],
+        ["Soğuk Americano", "Soğuk, ferah ve net kahve tadı.", "₺105"],
+        ["Soğuk Latte", "Buzlu süt ve espresso dengesi.", "₺125"],
+        ["Soğuk Demleme", "Uzun demleme, düşük asidite.", "₺135"],
+        ["Tonikli Espresso", "Tonik ve espresso ile ferah içim.", "₺145"],
+        ["Karamelli Frappe", "Karamel, buz ve kahve karışımı.", "₺150"],
       ],
     },
     {
@@ -80,13 +80,13 @@ export const siteConfig = {
         ["Avokado Tost", "Ekşi maya, avokado ve baharat.", "₺210"],
         ["Hindi Füme Sandviç", "Günlük hazırlanmış doyurucu sandviç.", "₺185"],
         ["Mozzarella Tost", "Pesto, mozzarella ve domates.", "₺170"],
-        ["Granola Bowl", "Yoğurt, granola, meyve ve bal.", "₺165"],
+        ["Granola Kasesi", "Yoğurt, granola, meyve ve bal.", "₺165"],
       ],
     },
     {
       category: "Sıcak Mutfak",
       items: [
-        ["Margherita Pizza", "Domates sos, mozzarella ve fesleğen.", "₺260"],
+        ["Margarita Pizza", "Domates sos, mozzarella ve fesleğen.", "₺260"],
         ["Füme Etli Pizza", "Füme et, mozzarella ve roka.", "₺320"],
         ["Pesto Makarna", "Pesto sos, parmesan ve ceviz.", "₺245"],
         ["Kremalı Tavuklu Makarna", "Tavuk, krema ve mantar.", "₺285"],
@@ -96,20 +96,20 @@ export const siteConfig = {
     {
       category: "Tatlılar",
       items: [
-        ["San Sebastian Cheesecake", "Kremamsı dokusu ve özel sos.", "₺185"],
+        ["San Sebastian Tatlısı", "Kremamsı dokusu ve özel sos.", "₺185"],
         ["Brownie", "Yoğun çikolatalı, kahveyle uyumlu.", "₺145"],
-        ["Limonlu Cheesecake", "Hafif ve ferah tatlı seçeneği.", "₺165"],
+        ["Limonlu Tatlı", "Hafif ve ferah tatlı seçeneği.", "₺165"],
         ["Tiramisu", "Kahve aromalı klasik tatlı.", "₺175"],
-        ["Cookie Plate", "Günlük kurabiye tabağı.", "₺130"],
+        ["Kurabiye Tabağı", "Günlük kurabiye tabağı.", "₺130"],
       ],
     },
     {
       category: "İçecekler",
       items: [
         ["Ev Yapımı Limonata", "Taze limon ve nane.", "₺110"],
-        ["Berry Iced Tea", "Kırmızı meyveli soğuk çay.", "₺115"],
+        ["Meyveli Soğuk Çay", "Kırmızı meyveli soğuk çay.", "₺115"],
         ["Portakal Suyu", "Taze sıkım.", "₺130"],
-        ["Soda & Lime", "Ferahlık isteyenlere.", "₺75"],
+        ["Limonlu Soda", "Ferahlık isteyenlere.", "₺75"],
       ],
     },
   ],
@@ -136,6 +136,6 @@ export const siteConfig = {
     description:
       "Yer durumu, grup rezervasyonu, menü veya paket servis hakkında hızlıca bilgi alabilirsiniz.",
     whatsappMessage:
-      "Merhaba, Velora Coffee için rezervasyon / bilgi almak istiyorum.",
+      "Merhaba, Velora Kafe için rezervasyon ve bilgi almak istiyorum.",
   },
 };
