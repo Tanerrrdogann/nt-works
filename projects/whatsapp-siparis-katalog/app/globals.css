@@ -11,6 +11,9 @@ body {
 }
 
 .catalog-image-slider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: grab;
   touch-action: pan-y;
 }

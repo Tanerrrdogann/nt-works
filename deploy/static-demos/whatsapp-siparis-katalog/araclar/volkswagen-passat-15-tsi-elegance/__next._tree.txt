@@ -1,3 +1,3 @@
-:HL["/whatsapp-siparis-katalog/_next/static/chunks/0lrn.x-wh47~v.css","style"]
+:HL["/whatsapp-siparis-katalog/_next/static/chunks/117iy_pa6c6ni.css","style"]
 :HL["/whatsapp-siparis-katalog/whatsapp-red.png","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"araclar","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"volkswagen-passat-15-tsi-elegance","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"fFFgr6GAfJII_ejoDZ2rq"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"araclar","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"volkswagen-passat-15-tsi-elegance","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"ssPCOJ1BRTWR-SB0CzjKV"}

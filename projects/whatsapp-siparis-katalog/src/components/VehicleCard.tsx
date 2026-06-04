@@ -17,7 +17,6 @@ export default function VehicleCard({ vehicle }: { vehicle: typeof siteConfig.ve
             Öne Çıkan
           </span>
         )}
-        <div className="absolute bottom-0 w-full h-1/2 bg-gradient-to-t from-zinc-900 to-transparent"></div>
       </div>
       
       <div className="p-3 md:p-5 flex-grow flex flex-col border-t border-zinc-800 z-10 relative">
