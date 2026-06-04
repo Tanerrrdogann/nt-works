@@ -258,23 +258,23 @@ summary::-webkit-details-marker {
 
   .home-split-background::before {
     background-image:
-      linear-gradient(180deg, rgba(7, 18, 37, 0.26), rgba(7, 18, 37, 0.78)),
+      linear-gradient(180deg, rgba(7, 18, 37, 0.18), rgba(7, 18, 37, 0.72)),
       url("https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=85");
-    background-position: center top;
+    background-position: 42% 24%;
     background-size: cover;
-    clip-path: polygon(0 0, 100% 0, 100% 28%, 0 42%);
+    clip-path: polygon(0 0, 100% 0, 100% 28%, 0 41%);
     height: 100%;
-    opacity: 0.86;
+    opacity: 0.9;
     width: 100%;
   }
 
   .home-split-background::after {
     background-image:
-      linear-gradient(180deg, rgba(7, 18, 37, 0.44), rgba(7, 18, 37, 0.88)),
+      linear-gradient(180deg, rgba(7, 18, 37, 0.5), rgba(7, 18, 37, 0.88)),
       url("https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=85");
-    background-position: center bottom;
+    background-position: 48% 68%;
     background-size: cover;
-    clip-path: polygon(0 63%, 100% 49%, 100% 100%, 0 100%);
+    clip-path: polygon(0 64%, 100% 75%, 100% 100%, 0 100%);
     opacity: 0.95;
   }
 
@@ -287,14 +287,19 @@ summary::-webkit-details-marker {
       linear-gradient(
         168deg,
         transparent 0%,
-        transparent 27.9%,
-        rgba(226, 232, 240, 0.34) 28.1%,
-        rgba(226, 232, 240, 0.34) 28.58%,
-        transparent 28.78%,
-        transparent 61.6%,
-        rgba(226, 232, 240, 0.28) 61.82%,
-        rgba(226, 232, 240, 0.28) 62.28%,
-        transparent 62.48%,
+        transparent 28.1%,
+        rgba(226, 232, 240, 0.36) 28.34%,
+        rgba(226, 232, 240, 0.36) 28.82%,
+        transparent 29.08%,
+        transparent 100%
+      ),
+      linear-gradient(
+        78deg,
+        transparent 0%,
+        transparent 65.4%,
+        rgba(226, 232, 240, 0.32) 65.65%,
+        rgba(226, 232, 240, 0.32) 66.12%,
+        transparent 66.38%,
         transparent 100%
       ),
       radial-gradient(circle at 72% 20%, rgba(226, 232, 240, 0.22), transparent 24%),

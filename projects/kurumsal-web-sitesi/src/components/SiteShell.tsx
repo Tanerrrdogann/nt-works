@@ -10,7 +10,7 @@ export function Header() {
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4">
         <a href="/kurumsal-web-sitesi" className="flex items-center gap-3">
           <span className="grid h-12 w-12 place-items-center md:h-14 md:w-14">
-            <img src="/kurumsal-web-sitesi/novacore-logo.png" alt="NovaCore logo" className="h-full w-full object-contain" />
+            <img src="/kurumsal-web-sitesi/novacore-logo-transparent.png" alt="NovaCore logo" className="h-full w-full object-contain" />
           </span>
           <span>
             <span className="block text-base font-black text-white">{siteConfig.brand.name}</span>
@@ -58,7 +58,7 @@ export function Footer() {
         <div>
           <div className="flex items-center gap-3">
             <span className="grid h-12 w-12 place-items-center">
-              <img src="/kurumsal-web-sitesi/novacore-logo.png" alt="NovaCore logo" className="h-full w-full object-contain" />
+              <img src="/kurumsal-web-sitesi/novacore-logo-transparent.png" alt="NovaCore logo" className="h-full w-full object-contain" />
             </span>
             <p className="text-xl font-black text-white">{siteConfig.brand.name}</p>
           </div>
