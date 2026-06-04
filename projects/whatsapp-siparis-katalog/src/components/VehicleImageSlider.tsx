@@ -68,7 +68,9 @@ export default function VehicleImageSlider({
         pointerStart.current = null;
       }}
     >
-      <img src={activeImage} alt={title} className="max-w-full max-h-full w-auto h-auto object-contain object-center select-none" draggable={false} />
+      <div className="absolute inset-0 flex items-center justify-center">
+        <img src={activeImage} alt={title} className="block max-w-full max-h-full w-auto h-auto object-contain object-center select-none" draggable={false} />
+      </div>
       {images.length > 1 ? (
         <>
           <button
