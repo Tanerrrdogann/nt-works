@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { siteConfig } from "@/config/site";
 
 const whatsappUrl = `https://wa.me/${siteConfig.brand.whatsapp}?text=${encodeURIComponent(
@@ -9,45 +12,45 @@ const menuImages: Record<string, string> = {
   Americano: "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=420&q=80",
   Latte: "https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?auto=format&fit=crop&w=420&q=80",
   Cappuccino: "https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&w=420&q=80",
-  "Yoğun Sütlü Kahve": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=420&q=80",
+  "Flat White": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=420&q=80",
   Mocha: "https://images.unsplash.com/photo-1579888071069-c107a6f79d82?auto=format&fit=crop&w=420&q=80",
-  "Soğuk Americano": "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=420&q=80",
-  "Soğuk Latte": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=420&q=80",
-  "Soğuk Demleme": "https://images.unsplash.com/photo-1517959105821-eaf2591984ca?auto=format&fit=crop&w=420&q=80",
-  "Tonikli Espresso": "https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=420&q=80",
-  "Karamelli Frappe": "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=420&q=80",
+  "Iced Americano": "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=420&q=80",
+  "Iced Latte": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=420&q=80",
+  "Cold Brew": "https://images.unsplash.com/photo-1517959105821-eaf2591984ca?auto=format&fit=crop&w=420&q=80",
+  "Espresso Tonic": "https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=420&q=80",
+  "Caramel Frappe": "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=420&q=80",
   Kruvasan: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=420&q=80",
   "Avokado Tost": "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=420&q=80",
   "Hindi Füme Sandviç": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=420&q=80",
   "Mozzarella Tost": "https://images.unsplash.com/photo-1528736235302-52922df5c122?auto=format&fit=crop&w=420&q=80",
-  "Granola Kasesi": "https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?auto=format&fit=crop&w=420&q=80",
-  "Margarita Pizza": "https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?auto=format&fit=crop&w=420&q=80",
+  "Granola Bowl": "https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?auto=format&fit=crop&w=420&q=80",
+  "Margherita Pizza": "https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?auto=format&fit=crop&w=420&q=80",
   "Füme Etli Pizza": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=420&q=80",
   "Pesto Makarna": "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=420&q=80",
   "Kremalı Tavuklu Makarna": "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&w=420&q=80",
   "Sezar Salata": "https://images.unsplash.com/photo-1550304943-4f24f54ddde9?auto=format&fit=crop&w=420&q=80",
-  "San Sebastian Tatlısı": "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=420&q=80",
+  "San Sebastian Cheesecake": "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=420&q=80",
   Brownie: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=420&q=80",
-  "Limonlu Tatlı": "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=420&q=80",
+  "Limonlu Cheesecake": "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=420&q=80",
   Tiramisu: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&w=420&q=80",
-  "Kurabiye Tabağı": "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=420&q=80",
+  "Cookie Plate": "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=420&q=80",
   "Ev Yapımı Limonata": "https://images.unsplash.com/photo-1621263764928-df1444c5e859?auto=format&fit=crop&w=420&q=80",
-  "Meyveli Soğuk Çay": "https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=420&q=80",
+  "Berry Iced Tea": "https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=420&q=80",
   "Portakal Suyu": "https://images.unsplash.com/photo-1613478223719-2ab802602423?auto=format&fit=crop&w=420&q=80",
-  "Limonlu Soda": "https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=420&q=80",
+  "Soda & Lime": "https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=420&q=80",
 };
 
 function ContactIcon({ type }: { type: "whatsapp" | "instagram" | "location" }) {
   if (type === "whatsapp") {
-    return <img src="/landing-page/whatsapp-icon.png" alt="" className="h-8 w-8 object-contain" />;
+    return <img src="/landing-page/whatsapp-icon.png" alt="" className="h-7 w-7 object-contain" />;
   }
 
   if (type === "instagram") {
-    return <img src="/landing-page/instagram-icon.png" alt="" className="h-8 w-8 object-contain" />;
+    return <img src="/landing-page/instagram-icon.png" alt="" className="h-7 w-7 object-contain" />;
   }
 
   return (
-    <svg viewBox="0 0 24 24" fill="none" className="h-8 w-8 text-[#9a7442]" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" className="h-7 w-7 text-[#9a7442]" aria-hidden="true">
       <path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11Z" stroke="currentColor" strokeWidth="2" />
       <circle cx="12" cy="10" r="2.4" stroke="currentColor" strokeWidth="2" />
     </svg>
@@ -55,14 +58,40 @@ function ContactIcon({ type }: { type: "whatsapp" | "instagram" | "location" }) 
 }
 
 function FloatingNav() {
+  const [activeSection, setActiveSection] = useState(siteConfig.panels[0].href.slice(1));
+
+  useEffect(() => {
+    const sections = siteConfig.panels
+      .map((item) => document.getElementById(item.href.slice(1)))
+      .filter((section): section is HTMLElement => Boolean(section));
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (visible?.target.id) {
+          setActiveSection(visible.target.id);
+        }
+      },
+      { rootMargin: "-35% 0px -45% 0px", threshold: [0.15, 0.35, 0.55] },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <nav className="fixed left-1/2 top-3 z-50 w-[calc(100%-16px)] max-w-[520px] -translate-x-1/2 rounded-full border border-white/35 bg-white/18 p-1 shadow-2xl backdrop-blur-2xl md:top-5">
-      <div className="grid grid-cols-4 gap-1">
+    <nav className="fixed left-1/2 top-3 z-50 w-[calc(100%-16px)] max-w-[360px] -translate-x-1/2 rounded-full border border-white/35 bg-white/18 p-1 shadow-2xl backdrop-blur-2xl md:top-5 md:max-w-[520px]">
+      <div className="grid grid-cols-4 gap-0.5 md:gap-1">
         {siteConfig.panels.map((item) => (
           <a
             key={item.href}
             href={item.href}
-            className="rounded-full px-1.5 py-2.5 text-center text-[10px] font-black leading-none text-white/88 transition hover:bg-white/26 hover:text-white sm:px-3 sm:py-3 sm:text-xs"
+            className={`rounded-full px-1.5 py-2.5 text-center text-[10px] font-black leading-none text-white/88 transition hover:bg-white/26 hover:text-white sm:px-3 sm:py-3 sm:text-xs ${
+              activeSection === item.href.slice(1) ? "bg-white/34 text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,.28)]" : ""
+            }`}
           >
             {item.label}
           </a>
@@ -162,22 +191,35 @@ export default function LandingPage() {
           <div className="grid gap-0 lg:grid-cols-[0.92fr_1.08fr]">
             <div className="p-5 md:p-10">
             <SectionTitle label="İletişim" title={siteConfig.contact.title} text={siteConfig.contact.description} />
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-              <a href={whatsappUrl} target="_blank" rel="noreferrer" className="grid min-h-24 content-between rounded-[24px] bg-stone-950 p-4 text-white transition hover:-translate-y-1 md:min-h-28 md:p-5">
+            <div className="grid grid-cols-3 gap-2 md:gap-3">
+              <a href={whatsappUrl} target="_blank" rel="noreferrer" className="grid min-h-20 content-center justify-items-center gap-2 rounded-[22px] bg-stone-950 p-3 text-white transition hover:-translate-y-1 md:min-h-28 md:content-between md:justify-items-start md:p-5">
                 <ContactIcon type="whatsapp" />
-                <strong className="text-sm font-black md:text-lg">WhatsApp</strong>
+                <strong className="text-xs font-black md:text-lg">WhatsApp</strong>
               </a>
-              <a href={siteConfig.brand.mapsLink} target="_blank" rel="noreferrer" className="grid min-h-24 content-between rounded-[24px] border border-stone-300 bg-white/48 p-4 text-stone-950 transition hover:-translate-y-1 hover:bg-white/72 md:min-h-28 md:p-5">
+              <a href={siteConfig.brand.mapsLink} target="_blank" rel="noreferrer" className="grid min-h-20 content-center justify-items-center gap-2 rounded-[22px] border border-stone-300 bg-white/58 p-3 text-stone-950 transition hover:-translate-y-1 hover:bg-white/72 md:min-h-28 md:content-between md:justify-items-start md:p-5">
                 <ContactIcon type="location" />
-                <strong className="text-sm font-black md:text-lg">Konum</strong>
+                <strong className="text-xs font-black md:text-lg">Konum</strong>
               </a>
-              <a href={siteConfig.brand.instagramLink} target="_blank" rel="noreferrer" className="grid min-h-24 content-between rounded-[24px] border border-stone-300 bg-white/48 p-4 text-stone-950 transition hover:-translate-y-1 hover:bg-white/72 md:min-h-28 md:p-5">
+              <a href={siteConfig.brand.instagramLink} target="_blank" rel="noreferrer" className="grid min-h-20 content-center justify-items-center gap-2 rounded-[22px] border border-stone-300 bg-white/58 p-3 text-stone-950 transition hover:-translate-y-1 hover:bg-white/72 md:min-h-28 md:content-between md:justify-items-start md:p-5">
                 <ContactIcon type="instagram" />
-                <strong className="text-sm font-black md:text-lg">Instagram</strong>
+                <strong className="text-xs font-black md:text-lg">Instagram</strong>
               </a>
             </div>
 
-            <div className="mt-6 grid grid-cols-2 gap-3 md:mt-8 md:gap-4">
+            <div className="mt-4 rounded-[24px] border border-stone-300 bg-white/46 p-4 md:hidden">
+              <p className="text-xs font-black uppercase tracking-[0.18em] text-stone-500">Saatler</p>
+              <div className="mt-3 grid grid-cols-3 gap-2 text-center text-[11px] font-bold text-stone-700">
+                {siteConfig.hours.slice(0, 3).map(([day, hour]) => (
+                  <div key={day}>
+                    <span className="block text-stone-950">{day.slice(0, 3)}</span>
+                    <span>{hour}</span>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-3 text-[10px] font-black uppercase tracking-[0.12em] text-stone-500">Hafta sonu 10.00’dan itibaren</p>
+            </div>
+
+            <div className="mt-6 hidden gap-3 md:mt-8 md:grid md:grid-cols-2 md:gap-4">
               <div className="rounded-[24px] border border-stone-300 bg-white/46 p-4 md:rounded-[28px] md:p-5">
                 <p className="text-xs font-black uppercase tracking-[0.18em] text-stone-500">Adres</p>
                 <p className="mt-3 text-sm font-black leading-6 text-stone-950 md:text-lg md:leading-7">{siteConfig.brand.address}</p>
