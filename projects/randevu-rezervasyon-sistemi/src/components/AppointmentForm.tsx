@@ -25,6 +25,7 @@ export default function AppointmentForm() {
   const [weekOffset, setWeekOffset] = useState(0);
   const [mounted, setMounted] = useState(false);
   const [mobilePicker, setMobilePicker] = useState<"date" | "time" | null>(null);
+  const [submitted, setSubmitted] = useState(false);
 
   // Client-side render'ın tamamlandığını anlamak için (Linter hatasını çözen asenkron yöntem)
   useEffect(() => {
@@ -59,16 +60,8 @@ export default function AppointmentForm() {
     return days;
   });
 
-  const handleWhatsApp = () => {
-    const message = `Merhaba, randevu başvurusu yapmak istiyorum:%0A%0A` +
-      `🌸 *Hizmet:* ${formData.service}%0A` +
-      `👩‍⚕️ *Uzman:* ${formData.specialist}%0A` +
-      `📅 *Tarih:* ${formData.date}%0A` +
-      `⏰ *Saat:* ${formData.time}%0A%0A` +
-      `👤 *İsim:* ${formData.name}%0A` +
-      `📞 *Telefon:* ${formData.phone}`;
-    
-    window.open(`${siteConfig.company.whatsappLink}?text=${message}`, '_blank');
+  const handleAppointmentSubmit = () => {
+    setSubmitted(true);
   };
 
   const currentWeekDays = availableDays.slice(weekOffset * 7, (weekOffset + 1) * 7);
@@ -88,14 +81,20 @@ export default function AppointmentForm() {
           <div className="relative group">
             <span className="absolute left-4 top-1/2 -translate-y-1/2 text-rose-300 group-focus-within:text-rose-500 transition-colors"><User size={20} /></span>
             <input 
-              onChange={(e) => setFormData({...formData, name: e.target.value})}
+              onChange={(e) => {
+                setSubmitted(false);
+                setFormData({...formData, name: e.target.value});
+              }}
               type="text" className="w-full pl-12 pr-4 py-4 rounded-2xl border border-rose-100 focus:border-rose-400 focus:ring-4 focus:ring-rose-50 outline-none transition-all bg-rose-50/20" placeholder="Adınız Soyadınız" 
             />
           </div>
           <div className="relative group">
             <span className="absolute left-4 top-1/2 -translate-y-1/2 text-rose-300 group-focus-within:text-rose-500 transition-colors">📞</span>
             <input 
-              onChange={(e) => setFormData({...formData, phone: e.target.value})}
+              onChange={(e) => {
+                setSubmitted(false);
+                setFormData({...formData, phone: e.target.value});
+              }}
               type="tel" className="w-full pl-12 pr-4 py-4 rounded-2xl border border-rose-100 focus:border-rose-400 focus:ring-4 focus:ring-rose-50 outline-none transition-all bg-rose-50/20" placeholder="Telefon Numaranız" 
             />
           </div>
@@ -104,14 +103,20 @@ export default function AppointmentForm() {
         {/* Hizmet & Uzman */}
         <div className="grid md:grid-cols-2 gap-4">
           <select 
-            onChange={(e) => setFormData({...formData, service: e.target.value})}
+            onChange={(e) => {
+              setSubmitted(false);
+              setFormData({...formData, service: e.target.value});
+            }}
             className="w-full px-4 py-4 rounded-2xl border border-rose-100 focus:border-rose-400 outline-none bg-rose-50/20 text-slate-700"
           >
             <option value="">Hizmet Seçiniz</option>
             {siteConfig.services.map(s => <option key={s.slug} value={s.title}>{s.title}</option>)}
           </select>
           <select 
-            onChange={(e) => setFormData({...formData, specialist: e.target.value})}
+            onChange={(e) => {
+              setSubmitted(false);
+              setFormData({...formData, specialist: e.target.value});
+            }}
             className="w-full px-4 py-4 rounded-2xl border border-rose-100 focus:border-rose-400 outline-none bg-rose-50/20 text-slate-700"
           >
             <option value="">Uzman Seçiniz</option>
@@ -174,6 +179,7 @@ export default function AppointmentForm() {
                     key={day.dateString}
                     disabled={day.isSunday || day.isFull}
                     onClick={() => {
+                      setSubmitted(false);
                       setFormData({ ...formData, date: day.dateString });
                       setMobilePicker(null);
                     }}
@@ -202,6 +208,7 @@ export default function AppointmentForm() {
                     type="button"
                     key={slot}
                     onClick={() => {
+                      setSubmitted(false);
                       setFormData({ ...formData, time: slot });
                       setMobilePicker(null);
                     }}
@@ -256,7 +263,10 @@ export default function AppointmentForm() {
                   type="button"
                   key={day.dateString}
                   disabled={day.isSunday || day.isFull}
-                  onClick={() => setFormData({...formData, date: day.dateString})}
+                  onClick={() => {
+                    setSubmitted(false);
+                    setFormData({...formData, date: day.dateString});
+                  }}
                   className={`
                     flex flex-col items-center justify-center py-3 px-1 rounded-2xl transition-all border
                     ${day.isSunday ? 'bg-slate-50 border-slate-100 opacity-40 cursor-not-allowed' : ''}
@@ -289,7 +299,10 @@ export default function AppointmentForm() {
               <button
                 type="button"
                 key={slot}
-                onClick={() => setFormData({...formData, time: slot})}
+                onClick={() => {
+                  setSubmitted(false);
+                  setFormData({...formData, time: slot});
+                }}
                 className={`
                   py-2 rounded-xl text-sm font-semibold border transition-all
                   ${formData.time === slot ? 'bg-rose-500 text-white border-rose-500 shadow-md' : 'bg-white border-rose-100 text-rose-500 hover:bg-rose-50'}
@@ -316,13 +329,15 @@ export default function AppointmentForm() {
           <button 
             type="button"
             disabled={!formData.name || !formData.date || !formData.time}
-            onClick={handleWhatsApp}
+            onClick={handleAppointmentSubmit}
             className="group w-full bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white font-bold text-lg py-5 rounded-[1.5rem] shadow-xl shadow-rose-200 transition-all transform hover:-translate-y-1 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
           >
-            Randevuyu Oluştur
+            {submitted ? "Randevu Oluşturuldu" : "Randevuyu Oluştur"}
             <CheckCircle2 className="group-hover:scale-125 transition-transform" />
           </button>
-          <p className="text-center text-[11px] text-slate-400 mt-4 italic">Randevunuz WhatsApp üzerinden onaylandıktan sonra kesinleşecektir.</p>
+          <p className={`text-center text-[11px] mt-4 italic ${submitted ? "text-rose-500 font-bold" : "text-slate-400"}`}>
+            {submitted ? "Randevunuz oluşturuldu. En kısa sürede sizinle iletişime geçilecektir." : "Randevunuz WhatsApp üzerinden onaylandıktan sonra kesinleşecektir."}
+          </p>
         </div>
       </div>
     </div>

@@ -23,7 +23,7 @@ export default function Footer() {
           </ul>
         </div>
         <div className="justify-self-center text-left md:justify-self-auto">
-          <h3 className="text-lg font-semibold text-rose-800 mb-4">Bize Ulaşın</h3>
+          <h3 className="text-lg font-semibold text-rose-800 mb-4 text-center md:text-left">Bize Ulaşın</h3>
           <ul className="space-y-3 text-rose-600">
             <li>📍 {siteConfig.company.address}</li>
             <li>📞 <a href={siteConfig.company.phoneLink} className="hover:text-rose-500">{siteConfig.company.phone}</a></li>

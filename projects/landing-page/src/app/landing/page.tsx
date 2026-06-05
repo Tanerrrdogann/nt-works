@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { type CSSProperties, useEffect, useState } from "react";
 import { siteConfig } from "@/config/site";
 
 const whatsappUrl = `https://wa.me/${siteConfig.brand.whatsapp}?text=${encodeURIComponent(
@@ -46,27 +46,35 @@ const menuImages: Record<string, string> = {
 };
 
 function ContactIcon({ type }: { type: "whatsapp" | "instagram" | "location" }) {
-  const imageClass = "h-full w-full object-contain";
+  const iconMasks = {
+    whatsapp: "/landing-page/whatsapp-icon.png",
+    instagram: "/landing-page/instagram-icon.png",
+  };
+
+  const maskStyle = (src: string): CSSProperties => ({
+    WebkitMask: `url(${src}) center / contain no-repeat`,
+    mask: `url(${src}) center / contain no-repeat`,
+  });
 
   if (type === "whatsapp") {
     return (
-      <span className="grid h-10 w-10 place-items-center md:h-10 md:w-10">
-        <img src="/landing-page/whatsapp-icon.png" alt="" className={`${imageClass} scale-125`} />
+      <span className="grid h-10 w-10 place-items-center text-current md:h-10 md:w-10" aria-hidden="true">
+        <span className="block h-9 w-9 bg-current" style={maskStyle(iconMasks.whatsapp)} />
       </span>
     );
   }
 
   if (type === "instagram") {
     return (
-      <span className="grid h-10 w-10 place-items-center md:h-10 md:w-10">
-        <img src="/landing-page/instagram-icon.png" alt="" className={imageClass} />
+      <span className="grid h-10 w-10 place-items-center text-current md:h-10 md:w-10" aria-hidden="true">
+        <span className="block h-9 w-9 bg-current" style={maskStyle(iconMasks.instagram)} />
       </span>
     );
   }
 
   return (
     <span className="grid h-11 w-11 place-items-center md:h-11 md:w-11">
-      <svg viewBox="0 0 24 24" fill="none" className="h-full w-full text-[#9a7442]" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" className="h-9 w-9 text-current" aria-hidden="true">
         <path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11Z" stroke="currentColor" strokeWidth="2" />
         <circle cx="12" cy="10" r="2.4" stroke="currentColor" strokeWidth="2" />
       </svg>
