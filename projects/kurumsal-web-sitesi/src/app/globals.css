@@ -260,11 +260,11 @@ summary::-webkit-details-marker {
     background-image:
       linear-gradient(180deg, rgba(7, 18, 37, 0.16), rgba(7, 18, 37, 0.76)),
       url("https://images.unsplash.com/photo-1497366412874-3415097a27e7?auto=format&fit=crop&w=1200&q=85");
-    background-position: 50% 42%;
-    background-size: 150% auto;
+    background-position: -3px -3px;
+    background-size: 558px auto;
     clip-path: polygon(0 0, 100% 0, 100% 24%, 0 34%);
     height: 100%;
-    opacity: 0.92;
+    opacity: 0.94;
     width: 100%;
   }
 
@@ -272,8 +272,8 @@ summary::-webkit-details-marker {
     background-image:
       linear-gradient(180deg, rgba(7, 18, 37, 0.46), rgba(7, 18, 37, 0.92)),
       url("https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1200&q=85");
-    background-position: 52% 58%;
-    background-size: 142% auto;
+    background-position: 1px 489px;
+    background-size: 586px auto;
     clip-path: polygon(0 73%, 100% 54%, 100% 100%, 0 100%);
     opacity: 0.95;
   }
