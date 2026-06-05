@@ -9,7 +9,7 @@ export function Header() {
     <header className="sticky top-0 z-50 border-b border-white/14 bg-[#071225]/92 text-white backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4">
         <a href="/kurumsal-web-sitesi" className="flex items-center gap-3">
-          <span className="grid h-12 w-12 place-items-center md:h-14 md:w-14">
+          <span className="grid h-14 w-14 place-items-center md:h-16 md:w-16">
             <img src="/kurumsal-web-sitesi/novacore-logo-transparent.png" alt="NovaCore logo" className="h-full w-full object-contain" />
           </span>
           <span>
@@ -57,7 +57,7 @@ export function Footer() {
       <div className="mx-auto grid max-w-7xl gap-8 px-5 py-10 md:grid-cols-4">
         <div>
           <div className="flex items-center gap-3">
-            <span className="grid h-12 w-12 place-items-center">
+            <span className="grid h-14 w-14 place-items-center md:h-16 md:w-16">
               <img src="/kurumsal-web-sitesi/novacore-logo-transparent.png" alt="NovaCore logo" className="h-full w-full object-contain" />
             </span>
             <p className="text-xl font-black text-white">{siteConfig.brand.name}</p>
