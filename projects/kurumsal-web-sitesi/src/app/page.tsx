@@ -25,7 +25,11 @@ export default function Home() {
   return (
     <main className="relative isolate min-h-screen overflow-hidden text-white">
       <Header />
-      <div className="home-split-background" aria-hidden="true" />
+      <div className="home-split-background" aria-hidden="true">
+        <span className="home-split-mobile-middle" />
+        <span className="home-split-mobile-line home-split-mobile-line-top" />
+        <span className="home-split-mobile-line home-split-mobile-line-bottom" />
+      </div>
 
       <section className="relative z-10 overflow-hidden bg-[#071225]/72 backdrop-blur-[1px]">
         <div className="absolute inset-x-0 top-0 h-px bg-slate-300/70" />
