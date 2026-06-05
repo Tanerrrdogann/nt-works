@@ -35,6 +35,7 @@ const iconMap = {
 };
 
 const logoSrc = "/admin-panelli-isletme-sistemi/minta-market-logo.png";
+const basePath = "/admin-panelli-isletme-sistemi";
 
 export function AppShell({ title, description, children, actionLabel = "Yeni Kayıt", onAction }: AppShellProps) {
   const pathname = usePathname();
@@ -42,6 +43,13 @@ export function AppShell({ title, description, children, actionLabel = "Yeni Kay
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isGenericActionOpen, setIsGenericActionOpen] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
+
+  const cleanPath = pathname.replace(basePath, "").replace(/\/$/, "") || "/";
+
+  function isActivePath(href: string) {
+    if (href === "/") return cleanPath === "/";
+    return cleanPath === href || cleanPath.startsWith(`${href}/`);
+  }
 
   return (
     <div className="min-h-screen bg-[#f7f7f7] text-[#52677f] font-medium">
@@ -73,11 +81,43 @@ export function AppShell({ title, description, children, actionLabel = "Yeni Kay
 
           <nav className="flex-1">
             {crmConfig.sidebarNav.map((item) => {
-              const isActive = pathname === item.href;
+              const isActive = isActivePath(item.href);
               return (
-                <Link key={item.key} href={item.href} title={item.label} className={`group relative flex h-11 items-center gap-3 overflow-hidden border-t border-[#31495f] px-2 text-sm font-medium text-white transition ${isActive ? "bg-[#1abb9c]" : "hover:bg-[#334a60]"}`}>
+                <Link key={item.key} href={item.href} title={item.label} aria-current={isActive ? "page" : undefined} className={`group relative flex h-11 items-center gap-3 overflow-hidden border-t border-[#31495f] px-2 text-sm font-medium text-white transition ${isActive ? "bg-[#1abb9c]" : "hover:bg-[#334a60]"}`}>
                   <span className="grid h-10 w-10 shrink-0 place-items-center text-white/95">{iconMap[item.key as keyof typeof iconMap]}</span>
                   <span className={`whitespace-nowrap transition-all duration-300 ${isSidebarCollapsed ? "w-0 opacity-0" : "w-[150px] opacity-100"}`}>{item.label}</span>
+                  {isActive ? <span className="absolute right-0 top-0 h-full w-1 bg-white/80" /> : null}
+                </Link>
+              );
+            })}
+          </nav>
+        </aside>
+
+        {/* Mobile Sidebar */}
+        <aside className={`fixed left-0 top-0 z-50 flex h-screen w-[230px] flex-col bg-[#2a3f54] shadow-2xl shadow-slate-950/30 transition-transform duration-300 lg:hidden ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"}`}>
+          <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="flex h-[68px] items-center gap-3 overflow-hidden border-b border-[#233646] px-2 text-white transition hover:bg-[#24384b]">
+            <span className="grid h-10 w-10 shrink-0 place-items-center overflow-hidden bg-[#1abb9c] shadow-[inset_0_0_0_1px_rgba(255,255,255,.22)]">
+              <Image src={logoSrc} alt="Minta Market" width={40} height={40} unoptimized className="h-full w-full object-cover" />
+            </span>
+            <span className="overflow-hidden whitespace-nowrap">
+              <span className="block text-[18px] font-black leading-tight tracking-tight">Minta Market</span>
+              <span className="mt-0.5 block text-[10px] font-black uppercase tracking-[0.28em] text-[#1abb9c]">Yönetim Paneli</span>
+            </span>
+          </Link>
+
+          <nav className="flex-1 overflow-y-auto">
+            {crmConfig.sidebarNav.map((item) => {
+              const isActive = isActivePath(item.href);
+              return (
+                <Link
+                  key={item.key}
+                  href={item.href}
+                  aria-current={isActive ? "page" : undefined}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`group relative flex h-11 items-center gap-3 overflow-hidden border-t border-[#31495f] px-2 text-sm font-medium text-white transition ${isActive ? "bg-[#1abb9c]" : "hover:bg-[#334a60]"}`}
+                >
+                  <span className="grid h-10 w-10 shrink-0 place-items-center text-white/95">{iconMap[item.key as keyof typeof iconMap]}</span>
+                  <span className="whitespace-nowrap">{item.label}</span>
                   {isActive ? <span className="absolute right-0 top-0 h-full w-1 bg-white/80" /> : null}
                 </Link>
               );
@@ -140,19 +180,6 @@ export function AppShell({ title, description, children, actionLabel = "Yeni Kay
                 </button>
               </div>
             </div>
-            {/* Mobile Nav Drawer */}
-            {isMobileMenuOpen && (
-              <div className="absolute left-0 top-full z-50 flex max-h-[calc(100vh-57px)] w-full flex-col gap-1 overflow-y-auto border-b border-[#d9dee4] bg-white p-3 shadow-xl lg:hidden">
-                {crmConfig.sidebarNav.map((item) => {
-                  const isActive = pathname === item.href;
-                  return (
-                    <Link key={item.key} href={item.href} onClick={() => setIsMobileMenuOpen(false)} className={`flex items-center gap-3 px-4 py-3 text-sm font-semibold ${isActive ? "bg-[#1abb9c] text-white" : "text-[#5a738e] hover:bg-slate-50"}`}>
-                      {iconMap[item.key as keyof typeof iconMap]} {item.label}
-                    </Link>
-                  );
-                })}
-              </div>
-            )}
           </header>
           <main className="w-full min-w-0 flex-1 p-3 sm:p-4 lg:p-5">{children}</main>
         </div>
