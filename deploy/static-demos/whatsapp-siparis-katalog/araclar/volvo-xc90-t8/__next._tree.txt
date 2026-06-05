@@ -1,3 +1,3 @@
-:HL["/whatsapp-siparis-katalog/_next/static/chunks/1440f1jifdtkx.css","style"]
+:HL["/whatsapp-siparis-katalog/_next/static/chunks/0nc6~fju17-9u.css","style"]
 :HL["/whatsapp-siparis-katalog/whatsapp-red.png","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"araclar","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"volvo-xc90-t8","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"ufflID9QcV0vrZ4uE5CcI"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"araclar","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"volvo-xc90-t8","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"SRU-_FxQoSbF2tYHYzvdB"}

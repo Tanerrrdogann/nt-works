@@ -29,14 +29,14 @@ export default function Contact() {
         <div className="grid grid-cols-2 gap-3 md:block md:space-y-6">
           <div className="bg-zinc-900 border border-zinc-800 rounded-sm p-4 md:p-8 hover:border-red-600/50 transition-colors">
             <h3 className="text-xs font-black text-zinc-500 uppercase tracking-widest mb-2">TELEFON</h3>
-            <a href={`tel:${siteConfig.company.phone}`} className="text-sm md:text-xl font-bold text-white tracking-widest hover:text-red-500 transition-colors">{siteConfig.company.phone}</a>
+            <a href={`tel:${siteConfig.company.phone}`} className="text-[11px] sm:text-xs md:text-xl font-bold text-white tracking-wider md:tracking-widest hover:text-red-500 transition-colors">{siteConfig.company.phone}</a>
           </div>
           <div className="bg-zinc-900 border border-zinc-800 rounded-sm p-4 md:p-8 hover:border-red-600/50 transition-colors">
             <h3 className="flex items-center gap-2 text-xs font-black text-zinc-500 uppercase tracking-widest mb-2">
               <WhatsAppIcon className="w-7 h-7 object-contain" />
               WHATSAPP
             </h3>
-            <a href={`https://wa.me/${siteConfig.company.whatsapp}`} target="_blank" rel="noreferrer" className="text-sm md:text-xl font-bold text-white tracking-widest hover:text-red-500 transition-colors">{siteConfig.company.phone}</a>
+            <a href={`https://wa.me/${siteConfig.company.whatsapp}`} target="_blank" rel="noreferrer" className="text-[11px] sm:text-xs md:text-xl font-bold text-white tracking-wider md:tracking-widest hover:text-red-500 transition-colors">{siteConfig.company.phone}</a>
           </div>
           <div className="col-span-2 bg-zinc-900 border border-zinc-800 rounded-sm p-4 md:p-8 hover:border-red-600/50 transition-colors">
             <h3 className="text-xs font-black text-zinc-500 uppercase tracking-widest mb-2">ADRES</h3>
