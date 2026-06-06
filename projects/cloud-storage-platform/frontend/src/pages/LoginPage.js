@@ -22,21 +22,17 @@ function LoginPage() {
 
     
 
-    const handleLogin = async (credentials) => {
-        const explicitCredentials = credentials && credentials.usernameOrEmail ? credentials : null;
-        const loginPayload = explicitCredentials || {
-            usernameOrEmail: user.trim(),
-            password: pass
-        };
-
+    const handleLogin = async () => {
         try {
-            localStorage.clear();
-            const res = await API.post('/auth/login', loginPayload);
+            const res = await API.post('/auth/login', {
+                usernameOrEmail: user,
+                password: pass
+            });
         
             localStorage.setItem("accessToken", res.data.accessToken);
             localStorage.setItem("refreshToken", res.data.refreshToken);
             localStorage.setItem("role", res.data.role); 
-            localStorage.setItem("username", loginPayload.usernameOrEmail);
+            localStorage.setItem("username", user);
 
             const role = res.data.role;
             if (role === "ROLE_ADMIN") {
@@ -90,10 +86,6 @@ function LoginPage() {
                                 onClick={() => {
                                     setUser(account.username);
                                     setPass(account.password);
-                                    handleLogin({
-                                        usernameOrEmail: account.username,
-                                        password: account.password
-                                    });
                                 }}
                             >
                                 {account.label}
@@ -102,7 +94,7 @@ function LoginPage() {
                     </div>
                 )}
 
-                <button onClick={() => handleLogin()} style={styles.button}>
+                <button onClick={handleLogin} style={styles.button}>
                     Sign in
                 </button>
                 

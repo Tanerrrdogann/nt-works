@@ -7,13 +7,10 @@ import com.authsystem.authservice.security.RateLimitService;
 import com.authsystem.authservice.service.AuthService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -24,9 +21,6 @@ public class ModeratorController {
 
     private final AuthService authService;
     private final RateLimitService rateLimitService;
-
-    @Value("${app.demo.read-only:false}")
-    private boolean demoReadOnly;
 
     public ModeratorController(AuthService authService, RateLimitService rateLimitService) {
         this.authService = authService;
@@ -44,7 +38,6 @@ public class ModeratorController {
     @PreAuthorize("hasRole('MODERATOR')")
     @GetMapping("/suspend")
     public ResponseEntity<String> suspendUser(@RequestParam Long userId, @RequestParam int days, HttpServletRequest request) {
-        rejectDemoMutation();
         checkRateLimit(request, "MOD_ACTION");
 
         String modEmail = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -53,12 +46,6 @@ public class ModeratorController {
 
         String result = authService.suspenUser(userId, days, modEmail, request.getRemoteAddr());
         return ResponseEntity.ok(result);
-    }
-
-    private void rejectDemoMutation() {
-        if (demoReadOnly) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Demo mode is read-only. Restarting the demo restores the same sample accounts.");
-        }
     }
 
     @PreAuthorize("hasAnyRole('MODERATOR', 'ADMIN')")

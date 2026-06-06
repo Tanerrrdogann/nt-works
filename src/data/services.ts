@@ -1,4 +1,17 @@
-export const services = [
+import { ServiceType } from "@/types";
+
+type RawService = {
+  slug: string;
+  titleTr: string;
+  shortTr: string;
+  descriptionTr: string;
+  infrastructureTr?: string[];
+  examplesTr?: string[];
+  detailTr?: string[];
+  [key: string]: unknown;
+};
+
+const ntWorksServices = [
   {
     slug: "tanitim-kurumsal-web-siteleri",
     title: "Promotional & Corporate Websites",
@@ -355,31 +368,17 @@ export const services = [
       "The scope is clarified at the beginning. Required modules, user roles, database, API, reporting and live preview process are planned according to the project."
     ]
   }
-];
+] satisfies RawService[];
 
-export const serviceCombinations = [
-  {
-    title: "Cafe / Restaurant",
-    titleTr: "Kafe / Restoran",
-    description: "Landing page + QR menu + WhatsApp + reservation + optional admin panel",
-    descriptionTr: "Landing page + QR menü + WhatsApp + rezervasyon + isteğe bağlı admin panel"
-  },
-  {
-    title: "Boutique / Product Sales",
-    titleTr: "Butik / Ürün Satışı",
-    description: "Catalog + WhatsApp order + product management + optional payment flow",
-    descriptionTr: "Katalog + WhatsApp sipariş + ürün yönetimi + isteğe bağlı ödeme akışı"
-  },
-  {
-    title: "Beauty Center / Clinic",
-    titleTr: "Güzellik Merkezi / Klinik",
-    description: "Promotional website + appointment system + customer tracking panel",
-    descriptionTr: "Tanıtım sitesi + randevu sistemi + müşteri takip paneli"
-  },
-  {
-    title: "Rent a Car / Vehicle Listing",
-    titleTr: "Rent a Car / Araç Listeleme",
-    description: "Vehicle catalog + reservation request + contact direction + admin panel",
-    descriptionTr: "Araç katalog + rezervasyon talebi + iletişim yönlendirme + admin panel"
-  }
-];
+export const servicesData: ServiceType[] = ntWorksServices.map((service, index) => ({
+  id: service.slug ?? `service-${index + 1}`,
+  slug: service.slug,
+  title: service.titleTr,
+  shortDesc: service.shortTr,
+  longDesc: service.descriptionTr,
+  detail: service.detailTr ?? [],
+  features: service.infrastructureTr ?? [],
+  examples: service.examplesTr ?? [],
+  infrastructure: service.infrastructureTr ?? [],
+  combinations: service.examplesTr ?? [],
+}));

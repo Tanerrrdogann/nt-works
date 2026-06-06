@@ -18,6 +18,7 @@ import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 import reactor.core.publisher.Mono;
 
 import java.time.Duration;
+import java.util.List;
 
 @SpringBootApplication
 public class ApiGatewayApplication {
@@ -98,12 +99,12 @@ public class ApiGatewayApplication {
     public CorsWebFilter corsWebFilter() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("http://localhost:3000");
-        config.addAllowedOrigin("http://127.0.0.1:3000");
-        config.addAllowedOrigin("http://localhost:3001");
-        config.addAllowedOrigin("http://localhost:8088");
-        config.addAllowedOrigin("http://localhost:4101");
-        config.addAllowedOrigin("http://127.0.0.1:4101");
+        config.setAllowedOriginPatterns(List.of(
+                "http://localhost:*",
+                "http://127.0.0.1:*",
+                "https://ntwebcozumleri.com.tr",
+                "https://www.ntwebcozumleri.com.tr"
+        ));
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
 

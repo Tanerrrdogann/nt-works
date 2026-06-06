@@ -142,6 +142,7 @@ services:
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://auth-db:5432/authdb
       SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: ${AUTH_DB_PASSWORD:-123456}
       SPRING_CLOUD_VAULT_URI: http://vault:8200
       VAULT_TOKEN: ${VAULT_TOKEN:-dev-root-token-change-me}
       SPRING_DATA_REDIS_HOST: redis

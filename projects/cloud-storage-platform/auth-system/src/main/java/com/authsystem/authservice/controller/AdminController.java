@@ -6,13 +6,10 @@ import com.authsystem.authservice.enums.Role;
 import com.authsystem.authservice.service.AuthService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -22,9 +19,6 @@ import java.util.List;
 public class AdminController {
 
     private final AuthService authService;
-
-    @Value("${app.demo.read-only:false}")
-    private boolean demoReadOnly;
 
     public AdminController(AuthService authService) {
         this.authService = authService;
@@ -46,8 +40,6 @@ public class AdminController {
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/permanent-delete")
     public ResponseEntity<String> deleteUser(@RequestParam Long userId, HttpServletRequest request) {
-        rejectDemoMutation();
-
         String adminEmail = SecurityContextHolder.getContext().getAuthentication().getName();
         log.info("ST_LOG | ACTION:ADMIN_DELETE_START | ADMIN:{} | TARGET_USER_ID:{} | IP:{}", adminEmail, userId, request.getRemoteAddr());
         
@@ -58,8 +50,6 @@ public class AdminController {
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/suspend")
     public ResponseEntity<String> suspendUser(@RequestParam Long userId, @RequestParam int days, HttpServletRequest request) {
-        rejectDemoMutation();
-
         String adminEmail = SecurityContextHolder.getContext().getAuthentication().getName();
         log.info("ST_LOG | ACTION:ADMIN_SUSPEND_START | ADMIN:{} | TARGET_USER_ID:{} | DAYS:{} | IP:{}", adminEmail, userId, days, request.getRemoteAddr());
         
@@ -70,18 +60,10 @@ public class AdminController {
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/change-role")
     public ResponseEntity<String> changeRole(@RequestParam Long userId, @RequestParam Role newRole, HttpServletRequest request) {
-        rejectDemoMutation();
-
         String adminEmail = SecurityContextHolder.getContext().getAuthentication().getName();
         log.info("ST_LOG | ACTION:ADMIN_ROLE_CHANGE_START | ADMIN:{} | TARGET_USER_ID:{} | NEW_ROLE:{} | IP:{}", adminEmail, userId, newRole, request.getRemoteAddr());
         
         String result = authService.uptadeUserRole(userId, newRole, adminEmail, request.getRemoteAddr());
         return ResponseEntity.ok(result);
-    }
-
-    private void rejectDemoMutation() {
-        if (demoReadOnly) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Demo mode is read-only. Restarting the demo restores the same sample accounts.");
-        }
     }
 }

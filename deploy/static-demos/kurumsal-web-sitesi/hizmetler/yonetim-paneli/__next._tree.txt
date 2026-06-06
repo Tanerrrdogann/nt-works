@@ -1,3 +1,3 @@
-:HL["/kurumsal-web-sitesi/_next/static/chunks/07p4z3v0v1.fb.css","style"]
+:HL["/kurumsal-web-sitesi/_next/static/css/fd9ff65ecc3c2fc5.css","style"]
 :HL["/kurumsal-web-sitesi/novacore-logo-transparent.png","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"hizmetler","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"yonetim-paneli","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"6BcFWubQX9NC0kO7pXsgI"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"hizmetler","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"yonetim-paneli","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"172_rwiqlTxaUO4opRm1e"}

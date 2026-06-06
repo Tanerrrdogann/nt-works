@@ -1,54 +1,87 @@
-"use client";
+import { projectsData } from "@/data/projects";
+import { getBionlukLink } from "@/data/bionluk-links";
+import Link from "next/link";
+import type { Metadata } from "next";
+import { breadcrumbJsonLd, itemListJsonLd, pageMetadata } from "@/lib/seo";
+import JsonLd from "@/components/seo/JsonLd";
+import { PageReveal, RevealItem } from "@/components/animations/PageReveal";
+import type { ProjectType } from "@/types";
 
-import Container from "@/components/layout/Container";
-import ProjectCard from "@/components/projects/ProjectCard";
-import { projects } from "@/data/projects";
-import { useLanguage } from "@/i18n/LanguageProvider";
+type ProjectWithDemo = ProjectType & {
+  demoUrl?: string;
+  isDemoEnabled?: boolean;
+};
 
-export default function ProjectsPage() {
-  const { language } = useLanguage();
-  const isTr = language === "tr";
+export const metadata: Metadata = pageMetadata({
+  title: "Canlı Örnekler",
+  description: "Canlı inceleyebileceğiniz uyarlanabilir web sitesi, e-ticaret, admin panel, randevu ve özel yazılım örnekleri.",
+  path: "/projects",
+});
 
+export default function Projects() {
   return (
-    <section className="py-10 sm:py-12 lg:py-16">
-      <Container>
-        <div className="mb-8 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:mb-10 sm:p-8 lg:p-10">
-          <p className="text-xs font-black uppercase tracking-[0.22em] text-slate-500">
-            {isTr ? "Canlı Örnekler" : "Live Examples"}
-          </p>
+    <>
+    <JsonLd data={[
+      breadcrumbJsonLd([
+        { name: "Ana Sayfa", path: "/" },
+        { name: "Canlı Örnekler", path: "/projects" },
+      ]),
+      itemListJsonLd({
+        name: "NT Web Çözümleri canlı örnekleri",
+        description: "Uyarlanabilir web sitesi, e-ticaret, katalog, randevu, admin panel ve özel yazılım canlı örnekleri.",
+        items: projectsData.map((project) => ({
+          name: project.title,
+          description: project.shortDesc,
+          path: `/projects/${project.slug}`,
+        })),
+      }),
+    ]} />
+    <PageReveal className="content-page pt-32 pb-24 px-6 text-white max-w-7xl mx-auto">
+      <div className="mb-12 md:mb-20">
+        <h1 className="text-4xl md:text-6xl font-medium tracking-tight mb-6">Canlı Örnekler ve <br/><span className="text-gray-500">Uyarlanabilir Sistem Kapsamları</span></h1>
+        <p className="mobile-compact-text text-base md:text-xl text-gray-400 max-w-3xl">Canlı inceleyebileceğiniz uyarlanabilir web sitesi ve yazılım örnekleri. Her örnek farklı işletmelere göre yeniden düzenlenebilir.</p>
+      </div>
 
-          <h1 className="mt-3 max-w-4xl text-3xl font-black leading-tight text-slate-950 sm:text-4xl lg:text-5xl">
-            {isTr
-              ? "Canlı inceleyebileceğiniz uyarlanabilir web sitesi ve yazılım örnekleri"
-              : "Adaptable website and software examples you can review live"}
-          </h1>
+      <div className="grid grid-cols-2 md:grid-cols-2 gap-3 md:gap-8">
+        {projectsData.map((proj) => {
+          const project = proj as ProjectWithDemo;
+          const demoEnabled = project.isDemoEnabled !== false && Boolean(project.demoUrl);
 
-          <p className="mt-4 max-w-3xl text-base leading-8 text-slate-600 sm:text-lg sm:leading-8">
-            {isTr
-              ? "Bu sayfadaki çalışmalar gerçek müşteri işi gibi gösterilmez. Farklı sektörlere uyarlanabilecek örnek sistemlerdir. Beğendiğiniz yapının benzeri işletmenizin içerikleri, renkleri, ürünleri ve ihtiyaçlarına göre hazırlanabilir."
-              : "The works on this page are not presented as real client projects. They are sample systems that can be adapted to different industries. A similar structure can be prepared according to your business content, colors, products and needs."}
-          </p>
-
-          <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
-            {[
-              [isTr ? "Canlı inceleme" : "Live review", isTr ? "Sadece ekran görüntüsü değil, çalışan örnekler." : "Working examples, not only screenshots."],
-              [isTr ? "Uyarlanabilir yapı" : "Adaptable structure", isTr ? "Renk, içerik, sayfa ve modüller değişebilir." : "Colors, content, pages and modules can change."],
-              [isTr ? "Güvenli ilerleme" : "Secure process", isTr ? "İsterseniz Bionluk üzerinden teklif/sipariş." : "Bionluk order/offer option if preferred."]
-            ].map(([title, text]) => (
-              <div key={title} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                <h2 className="text-sm font-black text-slate-950">{title}</h2>
-                <p className="mt-2 text-sm leading-6 text-slate-600">{text}</p>
+          return (
+          <RevealItem key={project.slug} className="project-showcase-card mobile-compact-card group relative overflow-hidden bg-[rgba(9,26,49,0.92)] border border-white/10 p-4 md:p-8 flex flex-col justify-between">
+            <div className="relative z-10">
+              <span className="text-gray-500 text-[10px] md:text-xs font-mono uppercase tracking-widest mb-2 md:mb-3 block">{project.category}</span>
+              <h2 className="text-base md:text-2xl font-medium mb-3 md:mb-4">{project.title}</h2>
+              <p className="text-gray-400 mb-4 md:mb-8 text-xs md:text-sm leading-5">{project.shortDesc}</p>
+              
+              <div className="mobile-hide-detail mb-6 pb-6 border-b border-white/10">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-2">Çözülen Problem</h4>
+                <p className="text-gray-400 text-sm line-clamp-2">{project.problem}</p>
               </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-4 xl:gap-6">
-          {projects.map((project) => (
-            <ProjectCard key={project.slug} project={project} />
-          ))}
-        </div>
-      </Container>
-    </section>
+            </div>
+            
+            <div className="mobile-actions relative z-10 flex flex-wrap gap-2 md:gap-4 mt-auto">
+              <Link href={`/projects/${project.slug}`} className="shimmer-button bg-white text-black px-3 md:px-6 py-2 md:py-2.5 rounded-sm text-xs md:text-sm font-bold transition-colors">
+                Detayları İncele
+              </Link>
+              {demoEnabled ? (
+                <Link href={project.demoUrl!} target="_blank" rel="noreferrer" className="border border-white/20 text-white px-3 md:px-6 py-2 md:py-2.5 rounded-sm text-xs md:text-sm font-medium hover:bg-white/10 transition-colors">
+                  Canlı İncele
+                </Link>
+              ) : (
+              <button type="button" disabled className="border border-white/15 text-gray-500 px-3 md:px-6 py-2 md:py-2.5 rounded-sm text-xs md:text-sm font-medium cursor-not-allowed opacity-75">
+                Canlı İncele
+              </button>
+              )}
+              <Link href={getBionlukLink(project.slug)} target="_blank" className="border border-white/20 text-white px-3 md:px-6 py-2 md:py-2.5 rounded-sm text-xs md:text-sm font-medium hover:bg-white/10 transition-colors project-secondary-action">
+                Bionluk Üzerinden İlerle
+              </Link>
+            </div>
+          </RevealItem>
+          );
+        })}
+      </div>
+    </PageReveal>
+    </>
   );
 }

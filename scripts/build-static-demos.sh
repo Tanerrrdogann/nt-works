@@ -21,7 +21,7 @@ for entry in "${DEMOS[@]}"; do
   project_dir="$ROOT_DIR/$project"
 
   echo "==> Building static demo: $slug"
-  (cd "$project_dir" && NTWORKS_STATIC_EXPORT=1 npm run build)
+  (cd "$project_dir" && NTWORKS_STATIC_EXPORT=1 ./node_modules/.bin/next build --webpack)
 
   if [ ! -d "$project_dir/out" ]; then
     echo "Static export output not found for $slug: $project_dir/out" >&2

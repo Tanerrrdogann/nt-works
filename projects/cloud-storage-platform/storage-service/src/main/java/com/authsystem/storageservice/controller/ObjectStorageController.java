@@ -16,7 +16,6 @@ import com.authsystem.storageservice.exception.ObjectOperationConflictException;
 import com.authsystem.storageservice.service.StorageEngineService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -36,9 +35,6 @@ public class ObjectStorageController {
 
     private final StorageEngineService storageEngineService;
 
-    @Value("${app.demo.read-only:false}")
-    private boolean demoReadOnly;
-
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<StoredObjectResponse> upload(
             @RequestParam(required = false) String ownerId,
@@ -47,7 +43,6 @@ public class ObjectStorageController {
             @RequestHeader(value = "X-Authenticated-User", required = false) String authenticatedUser,
             @RequestHeader(value = "X-Authenticated-Role", required = false) String authenticatedRole
     ) {
-        rejectDemoMutation();
         StoredObjectResponse response = storageEngineService.upload(
                 resolveOwnerId(ownerId, authenticatedUser, authenticatedRole),
                 objectKey,
@@ -69,7 +64,6 @@ public class ObjectStorageController {
             @RequestHeader(value = "X-Authenticated-User", required = false) String authenticatedUser,
             @RequestHeader(value = "X-Authenticated-Role", required = false) String authenticatedRole
     ) {
-        rejectDemoMutation();
         StoredObjectResponse response = storageEngineService.createFolder(
                 resolveOwnerId(request.ownerId(), authenticatedUser, authenticatedRole),
                 request.folderKey()
@@ -83,7 +77,6 @@ public class ObjectStorageController {
             @RequestHeader(value = "X-Authenticated-User", required = false) String authenticatedUser,
             @RequestHeader(value = "X-Authenticated-Role", required = false) String authenticatedRole
     ) {
-        rejectDemoMutation();
         try {
             StoredObjectResponse response = storageEngineService.moveObject(
                     resolveOwnerId(request.ownerId(), authenticatedUser, authenticatedRole),
@@ -104,7 +97,6 @@ public class ObjectStorageController {
             @RequestHeader(value = "X-Authenticated-User", required = false) String authenticatedUser,
             @RequestHeader(value = "X-Authenticated-Role", required = false) String authenticatedRole
     ) {
-        rejectDemoMutation();
         try {
             StoredObjectResponse response = storageEngineService.copyObject(
                     resolveOwnerId(request.ownerId(), authenticatedUser, authenticatedRole),
@@ -213,7 +205,6 @@ public class ObjectStorageController {
             @RequestHeader(value = "X-Authenticated-User", required = false) String authenticatedUser,
             @RequestHeader(value = "X-Authenticated-Role", required = false) String authenticatedRole
     ) {
-        rejectDemoMutation();
         storageEngineService.delete(resolveOwnerId(ownerId, authenticatedUser, authenticatedRole), objectKey);
         return ResponseEntity.noContent().build();
     }
@@ -226,7 +217,6 @@ public class ObjectStorageController {
             @RequestHeader(value = "X-Authenticated-User", required = false) String authenticatedUser,
             @RequestHeader(value = "X-Authenticated-Role", required = false) String authenticatedRole
     ) {
-        rejectDemoMutation();
         storageEngineService.deleteFolder(
                 resolveOwnerId(ownerId, authenticatedUser, authenticatedRole),
                 folderKey,
@@ -254,12 +244,6 @@ public class ObjectStorageController {
     private void requireAdmin(String authenticatedRole) {
         if (!"ROLE_ADMIN".equals(authenticatedRole)) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Admin role required");
-        }
-    }
-
-    private void rejectDemoMutation() {
-        if (demoReadOnly) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Demo mode is read-only. Restarting the demo restores the same sample files.");
         }
     }
 

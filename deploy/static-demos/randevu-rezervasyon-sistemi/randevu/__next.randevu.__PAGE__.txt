@@ -1,6 +1,6 @@
 1:"$Sreact.fragment"
-2:I[42365,["/randevu-rezervasyon-sistemi/_next/static/chunks/0bipsmef-adoy.js","/randevu-rezervasyon-sistemi/_next/static/chunks/0d3shmwh5_nmn.js","/randevu-rezervasyon-sistemi/_next/static/chunks/0x6~1o-so_k9k.js"],"default"]
-3:I[97367,["/randevu-rezervasyon-sistemi/_next/static/chunks/0bipsmef-adoy.js","/randevu-rezervasyon-sistemi/_next/static/chunks/0d3shmwh5_nmn.js"],"OutletBoundary"]
+2:I[6156,["640","static/chunks/640-f136aed2f48c322c.js","156","static/chunks/156-50dffc3ac10c9cc3.js","310","static/chunks/app/randevu/page-c1bccc6a5c516785.js"],"default"]
+3:I[484,[],"OutletBoundary"]
 4:"$Sreact.suspense"
-0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"pt-12 pb-24 bg-rose-50/50 min-h-screen","children":["$","div",null,{"className":"container mx-auto px-4 max-w-3xl","children":["$","$L2",null,{}]}]}],[["$","script","script-0",{"src":"/randevu-rezervasyon-sistemi/_next/static/chunks/0x6~1o-so_k9k.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"zxb6ELNFfIBxJOzEpR63d"}
+0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"pt-12 pb-24 bg-rose-50/50 min-h-screen","children":["$","div",null,{"className":"container mx-auto px-4 max-w-3xl","children":["$","$L2",null,{}]}]}],null,["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"4MQPFASZtJUmxDFwXV_Rc"}
 5:null

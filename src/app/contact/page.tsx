@@ -1,115 +1,56 @@
 "use client";
-
-import { FormEvent, useMemo, useState } from "react";
-import Container from "@/components/layout/Container";
-import SectionTitle from "@/components/ui/SectionTitle";
-import Button from "@/components/ui/Button";
-import { useLanguage } from "@/i18n/LanguageProvider";
-import { projects } from "@/data/projects";
-import { BIONLUK_PROFILE_URL } from "@/data/bionluk-links";
+import { useState, Suspense } from "react";
+import { Send, Loader2, ExternalLink, Info, CheckCircle2, AlertCircle } from "lucide-react";
+import { useSearchParams } from "next/navigation";
+import { servicesData } from "@/data/services";
+import { projectsData } from "@/data/projects";
+import { bionlukLinks } from "@/data/bionluk-links";
+import { PageReveal } from "@/components/animations/PageReveal";
 
 const CONTACT_EMAIL = "ismailtanererdogan54@gmail.com";
-const WHATSAPP_URL = "https://wa.me/905511955566";
 const WEB3FORMS_ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY ?? "";
-const projectTypeOptions = [
-  { value: "emin-degilim", labelTr: "Emin değilim, uygun çözümü önerin", labelEn: "Not sure, suggest the right solution" },
-  { value: "kurumsal-web-sitesi", labelTr: "Kurumsal web sitesi", labelEn: "Business website" },
-  { value: "ecommerce-platform", labelTr: "E-ticaret sistemi", labelEn: "E-commerce system" },
-  { value: "whatsapp-siparis-katalog", labelTr: "Ürün katalog / WhatsApp sipariş", labelEn: "Product catalog / WhatsApp order" },
-  { value: "randevu-rezervasyon-sistemi", labelTr: "Randevu / rezervasyon sistemi", labelEn: "Appointment / reservation system" },
-  { value: "admin-panelli-isletme-sistemi", labelTr: "Admin panelli işletme sistemi", labelEn: "Business system with admin panel" },
-  { value: "landing-page", labelTr: "Landing page / satış sayfası", labelEn: "Landing page / sales page" },
-  { value: "cloud-storage-platform", labelTr: "Cloud dosya yönetim platformu", labelEn: "Cloud file management platform" },
-  { value: "task-management-system", labelTr: "Görev yönetim sistemi", labelEn: "Task management system" },
-  { value: "ai-log-analysis-panel", labelTr: "AI / log analiz paneli", labelEn: "AI / log analysis panel" },
-  { value: "video-analysis-platform", labelTr: "Video analiz platformu", labelEn: "Video analysis platform" }
-];
-
-function getProjectTypeLabel(value: string, language: "en" | "tr") {
-  const option = projectTypeOptions.find((item) => item.value === value);
-  return option ? (language === "tr" ? option.labelTr : option.labelEn) : value;
-}
 
 function buildMailToUrl(subject: string, body: string) {
   return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
-function buildProjectRequestMessage(projectSlug: string, language: "en" | "tr", packageName = "") {
-  if (projectSlug === "emin-degilim") {
-    return language === "tr"
-      ? "Merhaba, işletmem için web sitesi / katalog / randevu / e-ticaret / admin panel seçeneklerinden hangisinin daha uygun olduğunu bilmiyorum. İhtiyacımı anlatıp uygun çözümü birlikte netleştirmek istiyorum."
-      : "Hello, I am not sure whether a website, catalog, appointment system, e-commerce system or admin panel would be the right solution for my business. I would like to describe my need and clarify the suitable solution together.";
+function ContactForm() {
+  const searchParams = useSearchParams();
+  const defaultService = searchParams.get("service") || searchParams.get("project") || "none";
+
+  let initialMessage = "";
+  if (defaultService !== "none") {
+    const selectedLabel = servicesData.find(s => s.slug === defaultService)?.title || projectsData.find(p => p.slug === defaultService)?.title || defaultService;
+    initialMessage = `Merhaba, ${selectedLabel} sistemi için fiyat ve kapsam bilgisi almak istiyorum.`;
   }
 
-  const project = projects.find((item) => item.slug === projectSlug);
-
-  if (!project) {
-    return "";
-  }
-
-  const title = language === "tr" ? project.titleTr ?? project.title : project.title;
-
-  if (language === "tr") {
-    return packageName
-      ? `Merhaba, ${title} için ${packageName} paketini istiyorum.`
-      : `Merhaba, ${title} projesinin benzerini istiyorum.`;
-  }
-
-  return packageName
-    ? `Hello, I would like the ${packageName} package for ${title}.`
-    : `Hello, I would like a similar project to ${title}.`;
-}
-
-export default function ContactPage() {
-  const { t, language } = useLanguage();
-  const getInitialProject = () => {
-    if (typeof window === "undefined") {
-      return "";
-    }
-
-    return new URLSearchParams(window.location.search).get("project") ?? "";
-  };
-  const getInitialPackage = () => {
-    if (typeof window === "undefined") {
-      return "";
-    }
-
-    return new URLSearchParams(window.location.search).get("package") ?? "";
-  };
-  const initialProject = getInitialProject();
-  const initialPackage = getInitialPackage();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [projectType, setProjectType] = useState(initialProject);
-  const [message, setMessage] = useState(() =>
-    initialProject ? buildProjectRequestMessage(initialProject, language, initialPackage) : ""
-  );
-  const [submitState, setSubmitState] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [submitState, setSubmitState] = useState<"idle" | "sending" | "success" | "error" | "fallback">("idle");
   const [submitMessage, setSubmitMessage] = useState("");
+  const [formData, setFormData] = useState({ name: "", email: "", phone: "", service: defaultService, message: initialMessage });
 
-  const subject = useMemo(() => {
-    const selectedProject = projectType.trim();
-    return selectedProject
-      ? `NT Web Çözümleri proje talebi - ${getProjectTypeLabel(selectedProject, "tr")}`
-      : "NT Web Çözümleri proje talebi";
-  }, [projectType]);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
+    const selectedLabel = servicesData.find(s => s.slug === formData.service)?.title || projectsData.find(p => p.slug === formData.service)?.title || formData.service;
+    const subject = `NT Web Çözümleri - Yeni Proje Talebi${selectedLabel && selectedLabel !== "none" ? ` - ${selectedLabel}` : ""}`;
     const body = [
-      `Ad: ${name || "-"}`,
-      `E-posta: ${email || "-"}`,
-      `Telefon / WhatsApp: ${phone || "-"}`,
-      `Proje türü: ${projectType ? getProjectTypeLabel(projectType, language) : "-"}`,
+      `Ad: ${formData.name || "-"}`,
+      `E-posta: ${formData.email || "-"}`,
+      `Telefon / WhatsApp: ${formData.phone || "-"}`,
+      `İlgilenilen Sistem: ${selectedLabel || "-"}`,
       "",
       "Mesaj:",
-      message || "-"
+      formData.message || "-",
     ].join("\n");
 
     if (!WEB3FORMS_ACCESS_KEY) {
       window.location.href = buildMailToUrl(subject, body);
+      setSubmitState("fallback");
+      setSubmitMessage("Mail uygulamanız açıldıysa talebi oradan gönderebilirsiniz. Açılmadıysa doğrudan e-posta veya WhatsApp üzerinden ulaşabilirsiniz.");
       return;
     }
 
@@ -121,18 +62,18 @@ export default function ContactPage() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Accept: "application/json"
+          Accept: "application/json",
         },
         body: JSON.stringify({
           access_key: WEB3FORMS_ACCESS_KEY,
           subject,
-          from_name: name || "NT Web Çözümleri formu",
-          email: email || CONTACT_EMAIL,
-          phone: phone || "-",
+          from_name: formData.name || "NT Web Çözümleri formu",
+          email: formData.email || CONTACT_EMAIL,
+          phone: formData.phone || "-",
           to: CONTACT_EMAIL,
-          project_type: projectType ? getProjectTypeLabel(projectType, language) : "-",
-          message: body
-        })
+          project_type: selectedLabel || "-",
+          message: body,
+        }),
       });
 
       const result = await response.json();
@@ -142,188 +83,99 @@ export default function ContactPage() {
       }
 
       setSubmitState("success");
-      setSubmitMessage("Mesajın gönderildi. En kısa sürede dönüş yapacağız.");
-      setName("");
-      setEmail("");
-      setPhone("");
-      setProjectType("");
-      setMessage("");
+      setSubmitMessage("Mesajınız gönderildi. En kısa sürede dönüş yapacağız.");
+      setFormData({ name: "", email: "", phone: "", service: "none", message: "" });
     } catch {
       setSubmitState("error");
       setSubmitMessage("Mesaj gönderilemedi. Lütfen WhatsApp veya e-posta üzerinden ulaşın.");
     }
-  }
+  };
 
   return (
-    <section className="py-10 sm:py-12 lg:py-16">
-      <Container>
-        <SectionTitle
-          eyebrow={t("contact.eyebrow")}
-          title={t("contact.title")}
-          description={t("contact.description")}
-        />
+    <form onSubmit={handleSubmit} className="premium-panel relative overflow-hidden bg-[#0b1830]/88 p-8 md:p-10 border border-white/10 flex flex-col gap-6">
+      <div className="flex flex-col gap-2">
+        <label htmlFor="name" className="text-sm font-bold text-gray-400">Adın</label>
+        <input required type="text" id="name" value={formData.name} onChange={handleChange} className="bg-[#071225]/88 border border-white/10 p-3 text-white focus:outline-none focus:border-white transition-colors" />
+      </div>
 
-        <div className="mx-auto grid max-w-6xl min-w-0 items-stretch gap-6 lg:grid-cols-[1.08fr_0.92fr]">
-          <form
-            onSubmit={handleSubmit}
-            className="flex h-full min-w-0 flex-col rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:rounded-[2rem] sm:p-8"
-          >
-            <div className="grid min-w-0 gap-3 sm:grid-cols-2 sm:gap-5">
-              <label className="grid min-w-0 gap-2 text-sm font-semibold text-slate-700">
-                {language === "tr" ? "Adın" : "Your name"}
-                <input
-                  required
-                  value={name}
-                  onChange={(event) => setName(event.target.value)}
-                  className="min-w-0 rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-950 outline-none transition focus:border-slate-400 focus:bg-white sm:px-4 sm:py-3 sm:text-base"
-                  placeholder={language === "tr" ? "Adını yaz" : "Enter your name"}
-                />
-              </label>
+      <div className="flex flex-col gap-2">
+        <label htmlFor="email" className="text-sm font-bold text-gray-400">E-posta adresin</label>
+        <input required type="email" id="email" value={formData.email} onChange={handleChange} className="bg-[#071225]/88 border border-white/10 p-3 text-white focus:outline-none focus:border-white transition-colors" />
+      </div>
 
-              <label className="grid min-w-0 gap-2 text-sm font-semibold text-slate-700">
-                {language === "tr" ? "E-posta adresin" : "Your email"}
-                <input
-                  required
-                  type="email"
-                  value={email}
-                  onChange={(event) => setEmail(event.target.value)}
-                  className="min-w-0 rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-950 outline-none transition focus:border-slate-400 focus:bg-white sm:px-4 sm:py-3 sm:text-base"
-                  placeholder={language === "tr" ? "ornek@mail.com" : "name@example.com"}
-                />
-              </label>
+      <div className="flex flex-col gap-2">
+        <label htmlFor="phone" className="text-sm font-bold text-gray-400">Telefon / WhatsApp (Opsiyonel)</label>
+        <input type="text" id="phone" value={formData.phone} onChange={handleChange} className="bg-[#071225]/88 border border-white/10 p-3 text-white focus:outline-none focus:border-white transition-colors" />
+      </div>
 
-              <label className="grid min-w-0 gap-2 text-sm font-semibold text-slate-700 sm:col-span-2">
-                {language === "tr" ? "Telefon / WhatsApp (opsiyonel)" : "Phone / WhatsApp (optional)"}
-                <input
-                  value={phone}
-                  onChange={(event) => setPhone(event.target.value)}
-                  className="min-w-0 rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-950 outline-none transition focus:border-slate-400 focus:bg-white sm:px-4 sm:py-3 sm:text-base"
-                  placeholder={language === "tr" ? "Dönüş için telefon numaranı yazabilirsin" : "You can enter your phone number for contact"}
-                />
-              </label>
+      <div className="flex flex-col gap-2">
+        <label htmlFor="service" className="text-sm font-bold text-gray-400">İlgilendiğin proje türü</label>
+        <select id="service" value={formData.service} onChange={handleChange} className="bg-[#071225]/88 border border-white/10 p-3 text-white focus:outline-none focus:border-white transition-colors cursor-pointer appearance-none">
+          <option value="none">Emin değilim, uygun çözümü önerin</option>
+          <optgroup label="Hizmet Kategorileri">
+            {servicesData.map(s => <option key={s.slug} value={s.slug}>{s.title}</option>)}
+          </optgroup>
+          <optgroup label="Canlı Örnekler">
+            {projectsData.map(p => <option key={p.slug} value={p.slug}>{p.title}</option>)}
+          </optgroup>
+        </select>
+      </div>
 
-              <label className="grid min-w-0 gap-2 text-sm font-semibold text-slate-700 sm:col-span-2">
-                {language === "tr" ? "İlgilendiğin proje türü" : "Project type"}
-                <select
-                  value={projectType}
-                  onChange={(event) => {
-                    const nextProject = event.target.value;
-                    setProjectType(nextProject);
-                    setMessage(nextProject ? buildProjectRequestMessage(nextProject, language) : "");
-                  }}
-                  className="min-w-0 rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-950 outline-none transition focus:border-slate-400 focus:bg-white sm:px-4 sm:py-3 sm:text-base"
-                >
-                  <option value="">{language === "tr" ? "Proje türü seç" : "Select project type"}</option>
-                  {projectTypeOptions.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {language === "tr" ? option.labelTr : option.labelEn}
-                    </option>
-                  ))}
-                </select>
-              </label>
+      <div className="flex flex-col gap-2">
+        <label htmlFor="message" className="text-sm font-bold text-gray-400">Mesajın</label>
+        <textarea required id="message" rows={5} value={formData.message} onChange={handleChange} className="bg-[#071225]/88 border border-white/10 p-3 text-white focus:outline-none focus:border-white transition-colors resize-none"></textarea>
+      </div>
 
-              <label className="grid min-w-0 gap-2 text-sm font-semibold text-slate-700 sm:col-span-2">
-                {language === "tr" ? "Mesajın" : "Message"}
-                <textarea
-                  required
-                  value={message}
-                  onChange={(event) => setMessage(event.target.value)}
-                  rows={4}
-                  className="min-w-0 resize-none rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-950 outline-none transition focus:border-slate-400 focus:bg-white sm:px-4 sm:py-3 sm:text-base"
-                  placeholder={
-                    language === "tr"
-                      ? "İşletme türünü, beğendiğin canlı örneği, istediğin özellikleri ve varsa bütçe/süre beklentini yazabilirsin."
-                      : "Describe your business type, the live example you liked, desired features and any budget/timeline expectation."
-                  }
-                />
-              </label>
-            </div>
+      {submitMessage && (
+        <div className={`flex items-start gap-2 border p-3 text-sm ${submitState === "success" ? "border-emerald-400/25 bg-emerald-400/10 text-emerald-200" : submitState === "error" ? "border-red-400/25 bg-red-400/10 text-red-200" : "border-blue-400/25 bg-blue-400/10 text-blue-200"}`}>
+          {submitState === "success" ? <CheckCircle2 size={18} className="shrink-0 mt-0.5" /> : submitState === "error" ? <AlertCircle size={18} className="shrink-0 mt-0.5" /> : <Info size={18} className="shrink-0 mt-0.5" />}
+          <p>{submitMessage}</p>
+        </div>
+      )}
 
-            <div className="mt-auto">
-              <button
-                type="submit"
-              disabled={submitState === "sending"}
-              className="mt-5 inline-flex h-12 min-h-12 w-full items-center justify-center rounded-2xl bg-slate-950 px-5 text-sm font-black text-white shadow-sm transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-70 sm:mt-6"
-            >
-              {submitState === "sending"
-                ? language === "tr" ? "Gönderiliyor..." : "Sending..."
-                : language === "tr" ? "Proje Talebimi Gönder" : "Send Project Request"}
-              </button>
-            </div>
+      <button type="submit" disabled={submitState === "sending"} className="mt-2 flex justify-center py-4 px-4 text-sm font-bold bg-white text-black hover:bg-gray-200 transition-colors disabled:opacity-70 disabled:cursor-not-allowed">
+        {submitState === "sending" ? <Loader2 className="animate-spin" size={20} /> : <span className="flex items-center gap-2">Talebi İlet <Send size={16} /></span>}
+      </button>
+    </form>
+  );
+}
 
-            {submitMessage && (
-              <p
-                className={`mt-4 rounded-2xl border px-4 py-3 text-sm font-medium ${
-                  submitState === "success"
-                    ? "border-emerald-200 bg-emerald-50 text-emerald-800"
-                    : "border-amber-200 bg-amber-50 text-amber-800"
-                }`}
-              >
-                {submitMessage}
-              </p>
-            )}
-          </form>
+export default function Contact() {
+  return (
+    <PageReveal className="content-page pt-32 pb-24 px-6 text-white max-w-7xl mx-auto flex flex-col lg:flex-row gap-16" itemClassName="flex-1 min-w-0">
+      <div>
+        <h1 className="text-5xl md:text-7xl font-medium tracking-tight mb-6">İşletmen için uygun sistemi <span className="text-gray-500">birlikte netleştirelim</span></h1>
+        <p className="text-xl text-gray-400 mb-12">
+          Ne istediğinizden emin değilseniz bile işletme türünüzü, ihtiyacınızı ve aklınızdaki özellikleri yazmanız yeterli.
+        </p>
+        
+        <div className="premium-panel relative overflow-hidden bg-[#0b1830]/88 p-8 border-l-4 border-white mb-10">
+          <h3 className="text-xl font-bold mb-3">Ne yazacağınızı bilmiyorsanız</h3>
+          <p className="text-gray-400 text-sm leading-relaxed">
+            İşletme türünüzü, istediğiniz özellikleri ve varsa bütçe/süre beklentinizi yazmanız yeterli. Uygun yapı birlikte netleştirilebilir.
+          </p>
+        </div>
 
-          <div className="flex h-full min-w-0 flex-col rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:rounded-[2rem] sm:p-8">
-            <div className="grid min-w-0 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-1">
-              <a
-                href={`mailto:${CONTACT_EMAIL}`}
-                className="rounded-2xl border border-slate-200 bg-slate-50 p-3 transition hover:bg-white sm:p-5"
-              >
-                <p className="text-sm text-slate-500">E-posta</p>
-                <p className="mt-1 break-words font-semibold text-slate-950">
-                  {CONTACT_EMAIL}
-                </p>
-              </a>
-
-              <a
-                href={BIONLUK_PROFILE_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="rounded-2xl border border-slate-200 bg-slate-50 p-3 transition hover:bg-white sm:p-5"
-              >
-                <p className="text-sm text-slate-500">Bionluk</p>
-                <p className="mt-1 font-semibold text-slate-950">
-                  {language === "tr" ? "Bionluk üzerinden güvenli ilerle" : "Continue securely through Bionluk"}
-                </p>
-              </a>
-
-              <a
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="rounded-2xl border border-slate-200 bg-slate-50 p-3 transition hover:bg-white sm:col-span-2 sm:p-5 lg:col-span-1"
-              >
-                <div className="flex items-center gap-3">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#25D366] text-white">
-                    <svg viewBox="0 0 32 32" aria-hidden="true" className="h-5 w-5 fill-current">
-                      <path d="M16.02 4C9.4 4 4.02 9.38 4.02 16c0 2.12.56 4.19 1.62 6.02L4 28l6.13-1.61A11.9 11.9 0 0 0 16.02 28C22.64 28 28 22.62 28 16S22.64 4 16.02 4Zm0 21.9c-1.82 0-3.6-.49-5.16-1.42l-.37-.22-3.64.96.97-3.55-.24-.37A9.83 9.83 0 0 1 6.12 16c0-5.45 4.44-9.9 9.9-9.9 5.45 0 9.88 4.45 9.88 9.9 0 5.46-4.43 9.9-9.88 9.9Zm5.43-7.42c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.05 1.03-1.05 2.5s1.08 2.9 1.23 3.1c.15.2 2.12 3.23 5.13 4.53.72.31 1.28.5 1.71.64.72.23 1.38.2 1.9.12.58-.09 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35Z"/>
-                    </svg>
-                  </span>
-                  <div>
-                    <p className="text-sm text-slate-500">WhatsApp</p>
-                    <p className="mt-1 break-words font-semibold text-slate-950">
-                      0 551 195 55 66
-                    </p>
-                  </div>
-                </div>
-              </a>
-            </div>
-
-            <div className="mt-auto rounded-3xl border border-slate-200 bg-slate-50 p-4 text-slate-950 sm:mt-8 sm:p-6">
-              <h2 className="text-xl font-black sm:text-2xl">{t("contact.noteTitle")}</h2>
-              <p className="mt-3 text-sm leading-6 text-slate-700 sm:text-base">
-                {t("contact.noteDescription")}
-              </p>
-              <div className="mt-4 sm:mt-5">
-                <Button href="/projects" className="h-12 min-h-12 w-full justify-center px-5 text-sm sm:w-auto">
-                  {t("contact.viewProjects")}
-                </Button>
-              </div>
-            </div>
+        <div className="space-y-8 text-gray-400 border-t border-white/10 pt-10">
+          <div>
+            <strong className="block text-white mb-2 text-sm uppercase tracking-wider">Doğrudan İletişim</strong>
+            <a href="mailto:ismailtanererdogan54@gmail.com" className="hover:text-white transition-colors block mb-1">ismailtanererdogan54@gmail.com</a>
+            <a href="https://wa.me/905511955566" target="_blank" className="hover:text-white transition-colors block">WhatsApp: +90 551 195 55 66</a>
+          </div>
+          <div>
+            <strong className="block text-white mb-2 text-sm uppercase tracking-wider">Bionluk Üzerinden İlerle</strong>
+            <a href={bionlukLinks.profile} target="_blank" className="inline-flex items-center gap-2 hover:text-white transition-colors">
+              Profilimi İncele <ExternalLink size={14} />
+            </a>
           </div>
         </div>
-      </Container>
-    </section>
+      </div>
+
+      <div>
+        <Suspense fallback={<div className="p-10 border border-white/10 text-center">Yükleniyor...</div>}>
+          <ContactForm />
+        </Suspense>
+      </div>
+    </PageReveal>
   );
 }

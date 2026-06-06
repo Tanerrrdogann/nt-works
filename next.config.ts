@@ -4,6 +4,7 @@ import path from "path";
 const staticDemos = process.env.NTWORKS_STATIC_DEMOS === "1";
 
 const nextConfig: NextConfig = {
+  allowedDevOrigins: ["192.168.3.112", "localhost"],
   experimental: {
     webpackMemoryOptimizations: true,
   },

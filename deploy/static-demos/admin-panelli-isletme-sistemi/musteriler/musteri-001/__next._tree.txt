@@ -1,2 +1,2 @@
-:HL["/admin-panelli-isletme-sistemi/_next/static/chunks/15jz3ui6b0~~l.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"musteriler","param":null,"prefetchHints":0,"slots":{"children":{"name":"id","param":{"type":"d","key":"musteri-001","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"sbbL85LSXThV61mqDfzb5"}
+:HL["/admin-panelli-isletme-sistemi/_next/static/css/acebe04defadb1e5.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"musteriler","param":null,"prefetchHints":0,"slots":{"children":{"name":"id","param":{"type":"d","key":"musteri-001","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"G_UbYHwy3VUehmg_Yw9AX"}

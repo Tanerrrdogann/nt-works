@@ -1,6 +1,6 @@
 1:"$Sreact.fragment"
-2:I[52457,["/whatsapp-siparis-katalog/_next/static/chunks/0ztgvczoq6-5j.js","/whatsapp-siparis-katalog/_next/static/chunks/0d3shmwh5_nmn.js","/whatsapp-siparis-katalog/_next/static/chunks/0u.n_ao_r_p60.js"],"default"]
-3:I[97367,["/whatsapp-siparis-katalog/_next/static/chunks/0ztgvczoq6-5j.js","/whatsapp-siparis-katalog/_next/static/chunks/0d3shmwh5_nmn.js"],"OutletBoundary"]
+2:I[5282,["500","static/chunks/500-c99b8dfd3de17c86.js","355","static/chunks/355-b75a7b28f8b985b2.js","827","static/chunks/app/araclar/page-6c95f163159fa256.js"],"default"]
+3:I[484,[],"OutletBoundary"]
 4:"$Sreact.suspense"
-0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{}],[["$","script","script-0",{"src":"/whatsapp-siparis-katalog/_next/static/chunks/0u.n_ao_r_p60.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"SRU-_FxQoSbF2tYHYzvdB"}
+0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{}],null,["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"5Sl5N1T6JyoFtI0CEAq9t"}
 5:null

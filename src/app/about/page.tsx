@@ -1,348 +1,176 @@
-"use client";
-
-import Link from "next/link";
-import Container from "@/components/layout/Container";
-import Button from "@/components/ui/Button";
-import Badge from "@/components/ui/Badge";
 import { techStack } from "@/data/tech-stack";
-import { useLanguage } from "@/i18n/LanguageProvider";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+import type { Metadata } from "next";
+import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import JsonLd from "@/components/seo/JsonLd";
+import { PageReveal, RevealItem } from "@/components/animations/PageReveal";
 
-export default function AboutPage() {
-  const { language } = useLanguage();
-  const isTr = language === "tr";
+export const metadata: Metadata = pageMetadata({
+  title: "Hakkımızda",
+  description: "NT Web Çözümleri, işletmelerin web sitesi ve özel yazılım ihtiyaçlarını canlı örneklerle netleştiren geliştirme ekibidir.",
+  path: "/about",
+});
 
-  const team = [
-    {
-      name: "İsmail Taner Erdoğan",
-      roleTr: "Web geliştirme, backend, admin panel, e-ticaret ve özel yazılım altyapıları",
-      role: "Web development, backend, admin panels, e-commerce and custom software systems",
-      descriptionTr:
-        "Projelerin teknik tarafını, sistem mimarisini, sayfa akışını, veritabanı/API mantığını ve yayına hazırlık sürecini geliştirir.",
-      description:
-        "Develops the technical side of projects, system architecture, page flow, database/API logic and deployment preparation."
-    },
-    {
-      name: "Nisa Gökşen",
-      roleTr: "İçerik dili, görsel akış, müşteri sunumu ve proje düzeni desteği",
-      role: "Content language, visual flow, client presentation and project organization support",
-      descriptionTr:
-        "Sayfaların daha anlaşılır, düzenli ve müşteriye hitap eden bir yapıya kavuşması için içerik ve sunum tarafında destek sağlar.",
-      description:
-        "Supports the content and presentation side so pages become clearer, more organized and more suitable for clients."
-    }
-  ];
+const stats = [
+  ["10+", "canlı örnek sistem"],
+  ["Modüler", "uyarlanabilir yapı"],
+  ["Net", "kapsam ve iletişim"],
+];
 
-  const principles = [
-    {
-      titleTr: "Canlı örnekle gösterim",
-      title: "Live demo presentation",
-      textTr:
-        "Müşteri sadece açıklama okumaz; benzer çalışan örnekleri gezerek nasıl bir yapı alacağını daha net görebilir.",
-      text:
-        "Clients do not only read descriptions; they can review similar working examples and understand the structure better."
-    },
-    {
-      titleTr: "İşletmeye göre uyarlama",
-      title: "Adapted to the business",
-      textTr:
-        "Hazır kalıp mantığı yerine; renkler, metinler, sayfalar, modüller ve akış işletmenin ihtiyacına göre düzenlenir.",
-      text:
-        "Instead of a fixed template approach, colors, texts, pages, modules and flows are adapted to the business need."
-    },
-    {
-      titleTr: "Net kapsam ve dürüst iletişim",
-      title: "Clear scope and honest communication",
-      textTr:
-        "Proje başlamadan önce ne yapılacağı, hangi modüllerin dahil olduğu ve nelerin ekstra olacağı açık şekilde konuşulur.",
-      text:
-        "Before the project starts, the scope, included modules and possible extras are discussed clearly."
-    },
-    {
-      titleTr: "Teslim öncesi önizleme",
-      title: "Preview before delivery",
-      textTr:
-        "Uygun projelerde yayına almadan önce canlı önizleme bağlantısı paylaşılır ve son kontroller birlikte yapılabilir.",
-      text:
-        "For suitable projects, a live preview link can be shared before publishing and final checks can be done together."
-    }
-  ];
+const team = [
+  {
+    name: "İsmail Taner Erdoğan",
+    role: "Web geliştirme, backend, admin panel, e-ticaret ve özel yazılım altyapıları",
+    desc: "Projelerin teknik tarafını, sistem mimarisini, sayfa akışını, veritabanı/API mantığını ve yayına hazırlık sürecini geliştirir.",
+  },
+  {
+    name: "Nisa Gökşen",
+    role: "İçerik dili, görsel akış, müşteri sunumu ve proje düzeni desteği",
+    desc: "Sayfaların daha anlaşılır, düzenli ve müşteriye hitap eden bir yapıya kavuşması için içerik ve sunum tarafında destek sağlar.",
+  },
+];
 
-  const process = [
-    {
-      titleTr: "İhtiyaç dinlenir",
-      title: "Need is understood",
-      textTr: "İşletmenin neye ihtiyacı olduğu, hedefi ve mevcut durumu netleştirilir.",
-      text: "The business need, goal and current situation are clarified."
-    },
-    {
-      titleTr: "Canlı örnek seçilir",
-      title: "A live example is selected",
-      textTr: "Size en yakın örnek sistem üzerinden nasıl uyarlanacağı konuşulur.",
-      text: "The closest example system is used to discuss how it can be adapted."
-    },
-    {
-      titleTr: "Sistem uyarlanır",
-      title: "The system is adapted",
-      textTr: "Sayfalar, içerikler, modüller ve tasarım işletmeye göre düzenlenir.",
-      text: "Pages, content, modules and design are adjusted to the business."
-    },
-    {
-      titleTr: "Önizleme paylaşılır",
-      title: "Preview is shared",
-      textTr: "Teslimden önce kontrol edilebilir bir canlı bağlantı paylaşılabilir.",
-      text: "A reviewable live preview link can be shared before delivery."
-    },
-    {
-      titleTr: "Yayına alınır",
-      title: "Project goes live",
-      textTr: "Onay sonrası site veya sistem yayına hazır hale getirilir.",
-      text: "After approval, the website or system is prepared for publishing."
-    }
-  ];
+const principles = [
+  ["Canlı örnekle gösterim", "Müşteri sadece açıklama okumaz; benzer çalışan örnekleri gezerek nasıl bir yapı alacağını daha net görebilir."],
+  ["İşletmeye göre uyarlama", "Hazır kalıp mantığı yerine; renkler, metinler, sayfalar, modüller ve akış işletmenin ihtiyacına göre düzenlenir."],
+  ["Net kapsam ve dürüst iletişim", "Proje başlamadan önce ne yapılacağı, hangi modüllerin dahil olduğu ve nelerin ekstra olacağı açık şekilde konuşulur."],
+  ["Teslim öncesi önizleme", "Uygun projelerde yayına almadan önce canlı önizleme bağlantısı paylaşılır ve son kontroller birlikte yapılabilir."],
+];
 
+const process = [
+  ["İhtiyaç dinlenir", "İşletmenin neye ihtiyacı olduğu, hedefi ve mevcut durumu netleştirilir."],
+  ["Canlı örnek seçilir", "Size en yakın örnek sistem üzerinden nasıl uyarlanacağı konuşulur."],
+  ["Sistem uyarlanır", "Sayfalar, içerikler, modüller ve tasarım işletmeye göre düzenlenir."],
+  ["Önizleme paylaşılır", "Teslimden önce kontrol edilebilir bir canlı bağlantı paylaşılabilir."],
+  ["Yayına alınır", "Onay sonrası site veya sistem yayına hazır hale getirilir."],
+];
+
+export default function About() {
   return (
-    <section className="py-10 sm:py-12 lg:py-16">
-      <Container>
-        <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-8 lg:p-10">
-          <div className="max-w-4xl">
-            <p className="text-xs font-black uppercase tracking-[0.22em] text-slate-500">
-              {isTr ? "Hakkımızda" : "About Us"}
-            </p>
+    <>
+    <JsonLd data={breadcrumbJsonLd([
+      { name: "Ana Sayfa", path: "/" },
+      { name: "Hakkımızda", path: "/about" },
+    ])} />
+    <PageReveal className="content-page pt-32 pb-24 px-6 text-white max-w-7xl mx-auto">
+      <RevealItem className="mb-14 relative overflow-hidden p-0">
+        <p className="text-xs font-bold uppercase tracking-[0.22em] text-gray-500">Hakkımızda</p>
+        <h1 className="mt-4 max-w-5xl text-4xl md:text-6xl font-medium tracking-tight leading-tight">
+          NT Web Çözümleri, işletmelerin ne alacağını <span className="text-gray-500">canlı örneklerle görerek</span> karar verebilmesi için kuruldu.
+        </h1>
+        <p className="mt-6 max-w-4xl text-lg md:text-xl leading-8 text-gray-400">
+          Web sitesi, katalog, randevu, e-ticaret, admin panel ve özel yazılım ihtiyaçlarında; sadece sözle anlatılan değil, canlı incelenebilen örnekler üzerinden ilerleyen bir çalışma anlayışı benimsiyoruz.
+        </p>
+        <div className="mt-8 flex flex-wrap gap-4">
+          <Link href="/projects" className="shimmer-button bg-white text-black px-7 py-3 rounded-sm text-sm font-bold transition-colors">
+            Canlı Örnekleri İncele
+          </Link>
+          <Link href="/contact" className="border border-white/20 text-white px-7 py-3 rounded-sm text-sm font-medium hover:bg-white/10 transition-colors">
+            İletişime Geç
+          </Link>
+        </div>
+      </RevealItem>
 
-            <h1 className="mt-3 text-3xl font-black leading-tight text-slate-950 sm:text-4xl lg:text-5xl">
-              {isTr
-                ? "NT Web Çözümleri, işletmelerin ne alacağını canlı örneklerle görerek karar verebilmesi için kuruldu."
-                : "NT Web Solutions was built so businesses can decide by seeing live examples of what they will receive."}
-            </h1>
+      <div className="mb-10 grid grid-cols-3 gap-3 sm:gap-4">
+        {stats.map(([value, label]) => (
+          <RevealItem key={label} className="border border-white/10 bg-[#08162c]/88 p-6">
+            <p className="text-xl md:text-3xl font-light text-white">{value}</p>
+            <p className="mt-2 text-[11px] md:text-sm text-gray-500 leading-4">{label}</p>
+          </RevealItem>
+        ))}
+      </div>
 
-            <p className="mt-5 text-base leading-8 text-slate-600 sm:text-lg sm:leading-8">
-              {isTr
-                ? "Web sitesi, katalog, randevu, e-ticaret, admin panel ve özel yazılım ihtiyaçlarında; sadece sözle anlatılan değil, canlı incelenebilen örnekler üzerinden ilerleyen bir çalışma anlayışı benimsiyoruz."
-                : "For websites, catalogs, appointment systems, e-commerce, admin panels and custom software needs, we follow a workflow based on live, reviewable examples instead of only written explanations."}
-            </p>
+      <div className="grid gap-8 lg:grid-cols-[1fr_0.9fr] mb-10">
+        <RevealItem className="relative overflow-hidden p-0">
+          <p className="text-xs font-bold uppercase tracking-[0.22em] text-gray-500">Yaklaşımımız</p>
+          <h2 className="mt-4 text-3xl font-medium text-white">Klasik ajans dili yerine, görülebilir ve anlaşılır sistemler</h2>
+          <div className="mt-6 space-y-5 text-gray-400 leading-8">
+            <p>Birçok işletme web sitesi yaptırmak isterken ne alacağını tam göremediği için kararsız kalır. Bu yüzden NT Web Çözümleri’nde canlı örnekler önemli bir yer tutar.</p>
+            <p>Hazırlanan örnekler; farklı sektörlere uyarlanabilecek web sitesi, katalog, randevu, e-ticaret ve admin panel altyapılarını göstermek için kullanılır.</p>
+            <p>Amaç, müşterinin sadece tasarıma değil; sitenin akışına, kullanımına ve işletmesine nasıl fayda sağlayacağına da bakarak karar verebilmesidir.</p>
+          </div>
+        </RevealItem>
 
-            <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
-              {[
-                ["10+", isTr ? "canlı örnek sistem" : "live demo systems"],
-                [isTr ? "Modüler" : "Modular", isTr ? "uyarlanabilir yapı" : "adaptable structure"],
-                [isTr ? "Net" : "Clear", isTr ? "kapsam ve iletişim" : "scope and communication"]
-              ].map(([value, label]) => (
-                <div key={label} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                  <p className="text-xl font-black text-slate-950">{value}</p>
-                  <p className="mt-1 text-sm leading-5 text-slate-500">{label}</p>
+        <RevealItem className="premium-panel relative overflow-hidden border border-white/10 bg-[#08162c]/88 p-8">
+          <p className="text-xs font-bold uppercase tracking-[0.22em] text-gray-500">Dürüst Sunum</p>
+          <h2 className="mt-4 text-3xl font-medium text-white">Canlı örnekler müşteri işi gibi gösterilmez</h2>
+          <p className="mt-6 text-gray-400 leading-8">
+            Bu sitedeki canlı örnekler, gerçek müşteri işi gibi gösterilmez. Bunlar; farklı sektörlere uyarlanabilecek, çalışma mantığını göstermek için hazırlanmış örnek sistemlerdir.
+          </p>
+          <div className="mt-6 border border-white/10 bg-white/5 p-4 text-sm leading-7 text-gray-300">
+            Gerçek müşteri işleri oluştukça ve paylaşım izni oldukça ayrı şekilde referans olarak gösterilebilir.
+          </div>
+        </RevealItem>
+      </div>
+
+      <RevealItem className="mb-10 border-t border-white/10 pt-8">
+        <p className="text-xs font-bold uppercase tracking-[0.22em] text-gray-500">Ekip</p>
+        <h2 className="mt-4 text-3xl font-medium text-white">NT Web Çözümleri ekibi</h2>
+        <p className="mt-4 max-w-4xl text-gray-400 leading-8">
+          Projelerde teknik geliştirme, içerik akışı, görsel düzen ve müşteri sunumu birlikte düşünülür. Böylece sadece çalışan değil, müşteriye güven veren ve anlaşılır duran yapılar hazırlanır.
+        </p>
+        <div className="mt-8 grid grid-cols-2 gap-3 md:gap-6">
+          {team.map((member) => (
+            <div key={member.name} className="border border-white/10 bg-[#071225]/55 p-4 md:p-6">
+              <h3 className="text-sm md:text-xl font-bold text-white">{member.name}</h3>
+              <p className="mt-2 text-xs md:text-sm font-semibold leading-5 md:leading-6 text-gray-300">{member.role}</p>
+              <p className="mobile-compact-text mt-3 md:mt-4 text-xs md:text-sm leading-5 md:leading-7 text-gray-500">{member.desc}</p>
+            </div>
+          ))}
+        </div>
+      </RevealItem>
+
+      <RevealItem className="mb-10 border-t border-white/10 pt-8">
+        <p className="text-xs font-bold uppercase tracking-[0.22em] text-gray-500">Neden Bu Yaklaşım?</p>
+        <h2 className="mt-4 text-3xl font-medium text-white">Müşteri ne alacağını baştan görebilmeli</h2>
+        <div className="mt-8 grid grid-cols-2 gap-3 md:gap-4 lg:grid-cols-4">
+          {principles.map(([title, text]) => (
+            <div key={title} className="border border-white/10 bg-[#071225]/55 p-5">
+              <h3 className="font-bold text-white leading-6">{title}</h3>
+              <p className="mt-3 text-sm leading-7 text-gray-500">{text}</p>
+            </div>
+          ))}
+        </div>
+      </RevealItem>
+
+      <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] mb-10">
+        <RevealItem className="border-t border-white/10 pt-8">
+          <p className="text-xs font-bold uppercase tracking-[0.22em] text-gray-500">Çalışma Süreci</p>
+          <h2 className="mt-4 text-3xl font-medium text-white">Nasıl çalışıyoruz?</h2>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+            {process.map(([title, text], index) => (
+              <div key={title} className="grid grid-cols-[2.5rem_1fr] gap-4">
+                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-sm font-bold text-black">{index + 1}</div>
+                <div>
+                  <h3 className="font-bold text-white">{title}</h3>
+                  <p className="mt-1 text-sm leading-6 text-gray-500">{text}</p>
                 </div>
-              ))}
-            </div>
-
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-              <Button href="/projects" className="h-12 min-h-12 justify-center">
-                {isTr ? "Canlı Örnekleri İncele" : "View Live Demos"}
-              </Button>
-              <Button href="/contact" variant="secondary" className="h-12 min-h-12 justify-center">
-                {isTr ? "İletişime Geç" : "Contact Us"}
-              </Button>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_0.9fr]">
-          <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-8">
-            <p className="text-xs font-black uppercase tracking-[0.22em] text-slate-500">
-              {isTr ? "Yaklaşımımız" : "Our Approach"}
-            </p>
-
-            <h2 className="mt-3 text-2xl font-black leading-8 text-slate-950 sm:text-3xl">
-              {isTr
-                ? "Klasik ajans dili yerine, görülebilir ve anlaşılır sistemler"
-                : "Visible and understandable systems instead of classic agency language"}
-            </h2>
-
-            <div className="mt-5 space-y-4 text-base leading-8 text-slate-600">
-              <p>
-                {isTr
-                  ? "Birçok işletme web sitesi yaptırmak isterken ne alacağını tam göremediği için kararsız kalır. Bu yüzden NT Web Çözümleri’nde canlı örnekler önemli bir yer tutar."
-                  : "Many businesses hesitate because they cannot clearly see what they will receive before ordering a website. That is why live examples are central to NT Web Solutions."}
-              </p>
-
-              <p>
-                {isTr
-                  ? "Hazırlanan örnekler; farklı sektörlere uyarlanabilecek web sitesi, katalog, randevu, e-ticaret ve admin panel altyapılarını göstermek için kullanılır."
-                  : "The prepared examples are used to show website, catalog, appointment, e-commerce and admin panel infrastructures that can be adapted to different industries."}
-              </p>
-
-              <p>
-                {isTr
-                  ? "Amaç, müşterinin sadece tasarıma değil; sitenin akışına, kullanımına ve işletmesine nasıl fayda sağlayacağına da bakarak karar verebilmesidir."
-                  : "The goal is to help clients decide not only by looking at design, but also by understanding the flow, usage and business value of the system."}
-              </p>
-            </div>
-          </div>
-
-          <div className="rounded-3xl border border-slate-200 bg-slate-950 p-5 text-white shadow-sm sm:p-8">
-            <p className="text-xs font-black uppercase tracking-[0.22em] text-slate-400">
-              {isTr ? "Dürüst Sunum" : "Honest Presentation"}
-            </p>
-
-            <h2 className="mt-3 text-2xl font-black leading-8 sm:text-3xl">
-              {isTr
-                ? "Canlı örnekler müşteri işi gibi gösterilmez"
-                : "Live examples are not presented as client projects"}
-            </h2>
-
-            <p className="mt-5 text-base leading-8 text-slate-300">
-              {isTr
-                ? "Bu sitedeki canlı örnekler, gerçek müşteri işi gibi gösterilmez. Bunlar; farklı sektörlere uyarlanabilecek, çalışma mantığını göstermek için hazırlanmış örnek sistemlerdir."
-                : "The live examples on this website are not presented as real client projects. They are sample systems created to show the workflow and how they can be adapted to different industries."}
-            </p>
-
-            <div className="mt-5 rounded-2xl border border-white/10 bg-white/5 p-4 text-sm leading-7 text-slate-200">
-              {isTr
-                ? "Gerçek müşteri işleri oluştukça ve paylaşım izni oldukça ayrı şekilde referans olarak gösterilebilir."
-                : "As real client projects are completed and permission is granted, they can be shown separately as references."}
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-6 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-8">
-          <p className="text-xs font-black uppercase tracking-[0.22em] text-slate-500">
-            {isTr ? "Ekip" : "Team"}
-          </p>
-
-          <h2 className="mt-3 text-2xl font-black text-slate-950 sm:text-3xl">
-            {isTr ? "NT Web Çözümleri ekibi" : "NT Web Solutions team"}
-          </h2>
-
-          <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-600 sm:text-base sm:leading-8">
-            {isTr
-              ? "Projelerde teknik geliştirme, içerik akışı, görsel düzen ve müşteri sunumu birlikte düşünülür. Böylece sadece çalışan değil, müşteriye güven veren ve anlaşılır duran yapılar hazırlanır."
-              : "Technical development, content flow, visual structure and client presentation are considered together. This helps create systems that work and also feel clear and trustworthy to clients."}
-          </p>
-
-          <div className="mt-6 grid gap-4 md:grid-cols-2">
-            {team.map((member) => (
-              <div
-                key={member.name}
-                className="rounded-3xl border border-slate-200 bg-slate-50 p-5 sm:p-6"
-              >
-                <h3 className="text-xl font-black text-slate-950">
-                  {member.name}
-                </h3>
-
-                <p className="mt-2 text-sm font-bold leading-6 text-slate-700">
-                  {isTr ? member.roleTr : member.role}
-                </p>
-
-                <p className="mt-4 text-sm leading-7 text-slate-600 sm:text-base sm:leading-8">
-                  {isTr ? member.descriptionTr : member.description}
-                </p>
               </div>
             ))}
           </div>
-        </div>
+        </RevealItem>
 
-        <div className="mt-6 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-8">
-          <p className="text-xs font-black uppercase tracking-[0.22em] text-slate-500">
-            {isTr ? "Neden Bu Yaklaşım?" : "Why This Approach?"}
-          </p>
-
-          <h2 className="mt-3 text-2xl font-black text-slate-950 sm:text-3xl">
-            {isTr ? "Müşteri ne alacağını baştan görebilmeli" : "Clients should see what they will receive from the start"}
-          </h2>
-
-          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {principles.map((item) => (
-              <div
-                key={item.titleTr}
-                className="rounded-2xl border border-slate-200 bg-slate-50 p-4"
-              >
-                <h3 className="text-base font-black leading-6 text-slate-950">
-                  {isTr ? item.titleTr : item.title}
-                </h3>
-                <p className="mt-3 text-sm leading-7 text-slate-600">
-                  {isTr ? item.textTr : item.text}
-                </p>
-              </div>
+        <RevealItem className="premium-panel relative overflow-hidden border border-white/10 bg-[#08162c]/88 p-8">
+          <p className="text-xs font-bold uppercase tracking-[0.22em] text-gray-500">Teknik Altyapı</p>
+          <h2 className="mt-4 text-3xl font-medium text-white">Kullandığımız teknolojiler</h2>
+          <div className="mt-6 flex flex-wrap gap-3">
+            {techStack.map((tech) => (
+              <span key={tech} className="tech-chip border border-white/10 bg-[#071225]/65 px-4 py-2 text-sm text-gray-400 rounded-sm">
+                {tech}
+              </span>
             ))}
           </div>
-        </div>
-
-        <div className="mt-6 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-8">
-          <p className="text-xs font-black uppercase tracking-[0.22em] text-slate-500">
-            {isTr ? "Çalışma Süreci" : "Work Process"}
-          </p>
-
-          <h2 className="mt-3 text-2xl font-black text-slate-950 sm:text-3xl">
-            {isTr ? "Nasıl çalışıyoruz?" : "How do we work?"}
-          </h2>
-
-          <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-            {process.map((step, index) => (
-              <div
-                key={step.titleTr}
-                className="rounded-2xl border border-slate-200 bg-slate-50 p-4"
-              >
-                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-950 text-sm font-black text-white">
-                  {index + 1}
-                </div>
-
-                <h3 className="mt-4 text-base font-black leading-6 text-slate-950">
-                  {isTr ? step.titleTr : step.title}
-                </h3>
-
-                <p className="mt-2 text-sm leading-6 text-slate-600">
-                  {isTr ? step.textTr : step.text}
-                </p>
-              </div>
-            ))}
+          <div className="mt-8 border-t border-white/10 pt-8">
+            <h3 className="text-2xl font-medium text-white">Hangi sistemin size uygun olduğunu bilmiyorsanız birlikte netleştirebiliriz.</h3>
+            <p className="mt-4 text-gray-400 leading-8">İşletmenizi, ihtiyacınızı ve varsa beğendiğiniz canlı örneği yazmanız yeterli. Size uygun sistem, kapsam ve ilerleme şekli birlikte belirlenebilir.</p>
+            <Link href="/services" className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-white hover:text-gray-300 transition-colors">
+              Hizmetleri İncele <ArrowRight size={16} />
+            </Link>
           </div>
-        </div>
-
-        <div className="mt-6 grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
-          <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-8">
-            <p className="text-xs font-black uppercase tracking-[0.22em] text-slate-500">
-              {isTr ? "Teknik Altyapı" : "Technical Stack"}
-            </p>
-
-            <h2 className="mt-3 text-2xl font-black text-slate-950">
-              {isTr ? "Kullandığımız teknolojiler" : "Technologies we use"}
-            </h2>
-
-            <div className="mt-5 flex flex-wrap gap-2">
-              {techStack.map((tech) => (
-                <Badge key={tech} className="px-3 text-xs">
-                  {tech}
-                </Badge>
-              ))}
-            </div>
-          </div>
-
-          <div className="rounded-3xl border border-slate-200 bg-slate-950 p-5 text-white shadow-sm sm:p-8">
-            <h2 className="text-2xl font-black leading-8">
-              {isTr
-                ? "Hangi sistemin size uygun olduğunu bilmiyorsanız birlikte netleştirebiliriz."
-                : "If you are not sure which system fits your business, we can clarify it together."}
-            </h2>
-
-            <p className="mt-4 text-base leading-8 text-slate-300">
-              {isTr
-                ? "İşletmenizi, ihtiyacınızı ve varsa beğendiğiniz canlı örneği yazmanız yeterli. Size uygun sistem, kapsam ve ilerleme şekli birlikte belirlenebilir."
-                : "You can simply share your business, your need and any live example you liked. The suitable system, scope and process can be defined together."}
-            </p>
-
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-              <Button href="/contact" className="h-12 min-h-12 justify-center">
-                {isTr ? "İletişime Geç" : "Contact Us"}
-              </Button>
-              <Link
-                href="/services"
-                className="inline-flex h-12 min-h-12 items-center justify-center rounded-full border border-white/15 bg-white/10 px-5 text-sm font-bold text-white transition hover:bg-white/15"
-              >
-                {isTr ? "Hizmetleri İncele" : "View Services"}
-              </Link>
-            </div>
-          </div>
-        </div>
-      </Container>
-    </section>
+        </RevealItem>
+      </div>
+    </PageReveal>
+    </>
   );
 }

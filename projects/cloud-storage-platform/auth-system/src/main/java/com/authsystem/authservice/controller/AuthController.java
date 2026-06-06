@@ -9,11 +9,8 @@ import com.authsystem.authservice.service.RefreshTokenService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Map;
 
@@ -25,9 +22,6 @@ public class AuthController {
     private final AuthService authService;
     private final RefreshTokenService refreshTokenService;
     private final RateLimitService rateLimitService;
-
-    @Value("${app.demo.read-only:false}")
-    private boolean demoReadOnly;
 
     public AuthController(AuthService authService, 
                           RefreshTokenService refreshTokenService, 
@@ -45,22 +39,8 @@ public class AuthController {
         }
     }
 
-    private boolean isDemoLoginRequest(LoginRequest request) {
-        if (!demoReadOnly || request == null || request.getUsernameOrEmail() == null) {
-            return false;
-        }
-
-        return switch (request.getUsernameOrEmail().trim()) {
-            case "demo.user", "demo.user@ntworks.local",
-                 "demo.moderator", "demo.moderator@ntworks.local",
-                 "demo.admin", "demo.admin@ntworks.local" -> true;
-            default -> false;
-        };
-    }
-
     @PostMapping("/register")
     public ResponseEntity<String> register(@Valid @RequestBody RegisterRequest request, HttpServletRequest httpRequest) {
-        rejectDemoMutation();
         checkRateLimit(httpRequest, "REGISTER");
         String result = authService.register(request, httpRequest.getRemoteAddr());
         return ResponseEntity.ok(result);
@@ -68,9 +48,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request, HttpServletRequest httpRequest) {
-        if (!isDemoLoginRequest(request)) {
-            checkRateLimit(httpRequest, "LOGIN");
-        }
+        checkRateLimit(httpRequest, "LOGIN");
         Object result = authService.login(request, httpRequest.getRemoteAddr(), httpRequest);
         return ResponseEntity.ok(result);
     }
@@ -84,7 +62,6 @@ public class AuthController {
 
     @PostMapping("/forgot-password")
     public ResponseEntity<String> forgotPassword(@Valid @RequestBody ForgetPasswordRequest request, HttpServletRequest httpRequest) {
-        rejectDemoMutation();
         checkRateLimit(httpRequest, "FORGOT_PASSWORD");
         String result = authService.forgotPassword(request.getEmail(), httpRequest.getRemoteAddr());
         return ResponseEntity.ok(result);
@@ -92,7 +69,6 @@ public class AuthController {
 
     @PostMapping("/reset-password")
     public ResponseEntity<String> resetPassword(@RequestBody ResetPasswordRequest request, HttpServletRequest httpRequest) {
-        rejectDemoMutation();
         checkRateLimit(httpRequest, "RESET_PASSWORD");
         String result = authService.resetPassword(request.getToken(), request.getNewPassword(), httpRequest.getRemoteAddr());
         return ResponseEntity.ok(result);
@@ -100,7 +76,6 @@ public class AuthController {
 
     @PostMapping("/verify")
     public ResponseEntity<String> verifyUser(@RequestParam String token, HttpServletRequest httpRequest) {
-        rejectDemoMutation();
         checkRateLimit(httpRequest, "VERIFY");
         String result = authService.verifyUser(token, httpRequest.getRemoteAddr());
         return ResponseEntity.ok(result);
@@ -124,11 +99,5 @@ public class AuthController {
                 "role", user.getRole().name(),
                 "enabled", user.isEnabled()
         ));
-    }
-
-    private void rejectDemoMutation() {
-        if (demoReadOnly) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Demo mode uses fixed accounts and is read-only.");
-        }
     }
 }

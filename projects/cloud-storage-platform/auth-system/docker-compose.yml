@@ -8,7 +8,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: ${AUTH_DB_PASSWORD:-123456}
     ports:
-      - "${CLOUD_AUTH_DB_PORT:-5433}:5432"
+      - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -26,7 +26,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: ${STORAGE_DB_PASSWORD:-postgres}
     ports:
-      - "${CLOUD_STORAGE_DB_PORT:-5434}:5432"
+      - "5434:5432"
     volumes:
       - storage_postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -39,7 +39,7 @@ services:
     build: .
     container_name: auth-service
     ports:
-      - "${CLOUD_AUTH_PORT:-8080}:8080"
+      - "8080:8080"
     depends_on:
       auth-db:
         condition: service_healthy
@@ -88,7 +88,7 @@ services:
     build: ../api-gateway
     container_name: api-gateway
     ports:
-      - "${CLOUD_GATEWAY_PORT:-8443}:8443"
+      - "8443:8443"
     depends_on:
       auth-service:
         condition: service_started
@@ -121,13 +121,13 @@ services:
       api-gateway:
         condition: service_started
     ports:
-      - "${CLOUD_FRONTEND_PORT:-8088}:80"
+      - "8088:80"
 
   storage-service:
     build: ../storage-service
     container_name: storage-service
     ports:
-      - "${CLOUD_STORAGE_PORT:-8082}:8082"
+      - "8082:8082"
     depends_on:
       storage-db:
         condition: service_healthy
@@ -181,8 +181,8 @@ services:
       MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
       MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin}
     ports:
-      - "${CLOUD_MINIO_PORT:-9000}:9000"
-      - "${CLOUD_MINIO_CONSOLE_PORT:-9001}:9001"
+      - "9000:9000"
+      - "9001:9001"
     volumes:
       - minio_data:/data
     healthcheck:
@@ -196,8 +196,8 @@ services:
     container_name: rabbitmq
     restart: always
     ports:
-      - "${CLOUD_RABBITMQ_PORT:-5672}:5672"
-      - "${CLOUD_RABBITMQ_MGMT_PORT:-15672}:15672"
+      - "5672:5672"   
+      - "15672:15672" 
     expose:
       - "15692"
     environment:
@@ -314,7 +314,7 @@ services:
       - --storage.tsdb.path=/prometheus
       - --web.enable-lifecycle
     ports:
-      - "${CLOUD_PROMETHEUS_PORT:-9090}:9090"
+      - "9090:9090"
     volumes:
       - ../observability/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
       - ../observability/prometheus/alerts.yml:/etc/prometheus/alerts.yml:ro
@@ -336,7 +336,7 @@ services:
       GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-admin}
       GF_USERS_ALLOW_SIGN_UP: "false"
     ports:
-      - "${CLOUD_GRAFANA_PORT:-3000}:3000"
+      - "3000:3000"
     volumes:
       - grafana_data:/var/lib/grafana
       - ../observability/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources:ro
@@ -350,7 +350,7 @@ services:
     command:
       - -config.file=/etc/tempo/tempo.yml
     ports:
-      - "${CLOUD_TEMPO_PORT:-3200}:3200"
+      - "3200:3200"
     expose:
       - "4317"
       - "4318"
@@ -365,7 +365,7 @@ services:
     command:
       - -config.file=/etc/loki/loki.yml
     ports:
-      - "${CLOUD_LOKI_PORT:-3100}:3100"
+      - "3100:3100"
     volumes:
       - ../observability/loki/loki.yml:/etc/loki/loki.yml:ro
       - loki_data:/loki
@@ -392,7 +392,7 @@ services:
       - --config.file=/etc/alertmanager/alertmanager.yml
       - --storage.path=/alertmanager
     ports:
-      - "${CLOUD_ALERTMANAGER_PORT:-9093}:9093"
+      - "9093:9093"
     volumes:
       - ../observability/alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro
       - alertmanager_data:/alertmanager

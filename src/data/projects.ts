@@ -1,6 +1,23 @@
-import type { Project } from "@/types/project";
+import { ProjectType } from "@/types";
 
-export const projects: Project[] = [
+type RawProject = {
+  slug: string;
+  titleTr: string;
+  categoryTr: string;
+  shortDescriptionTr: string;
+  descriptionTr?: string;
+  problemTr: string;
+  solutionTr: string;
+  featuresTr?: string[];
+  techStack?: string[];
+  demoIncludesTr?: string[];
+  demoLimitationsTr?: string[];
+  database: string;
+  deployment: string;
+  [key: string]: unknown;
+};
+
+const ntWorksProjects = [
   {
     slug: "kurumsal-web-sitesi",
     title: "Marketing Site Template",
@@ -303,6 +320,22 @@ export const projects: Project[] = [
     image: "/projects/video-analysis/cover.png",
     featured: true
   }
-];
+] satisfies RawProject[];
 
-export const featuredProjects = projects.filter((project) => project.featured).slice(0, 10);
+export const projectsData: ProjectType[] = ntWorksProjects.map((project) => ({
+  ...project,
+  title: project.titleTr,
+  category: project.categoryTr,
+  shortDesc: project.shortDescriptionTr,
+  problem: project.problemTr,
+  solution: project.solutionTr,
+  features: project.featuresTr ?? [],
+  techStack: project.techStack ?? [],
+  database: project.database,
+  deployment: project.deployment,
+  deliveryScope: [
+    project.descriptionTr,
+    ...(project.demoIncludesTr ?? []),
+    ...(project.demoLimitationsTr ?? []),
+  ].filter(Boolean),
+}));

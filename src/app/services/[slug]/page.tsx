@@ -1,220 +1,152 @@
-"use client";
+import { servicesData } from "@/data/services";
+import { notFound } from "next/navigation";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { PageReveal, RevealItem } from "@/components/animations/PageReveal";
+import JsonLd from "@/components/seo/JsonLd";
+import { breadcrumbJsonLd, pageMetadata, serviceJsonLd } from "@/lib/seo";
 
-import { useParams } from "next/navigation";
-import Container from "@/components/layout/Container";
-import Button from "@/components/ui/Button";
-import { services } from "@/data/services";
-import { useLanguage } from "@/i18n/LanguageProvider";
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const service = servicesData.find((s) => s.slug === slug);
+  if (!service) return;
+  return pageMetadata({
+    title: service.title,
+    description: service.longDesc,
+    path: `/services/${service.slug}`,
+    keywords: [
+      service.title,
+      ...service.features,
+      ...service.examples,
+      ...service.infrastructure,
+    ],
+  });
+}
 
-export default function ServiceDetailPage() {
-  const params = useParams();
-  const { language } = useLanguage();
-  const isTr = language === "tr";
-  const slug = String(params?.slug || "");
+export function generateStaticParams() {
+  return servicesData.map((s) => ({ slug: s.slug }));
+}
 
-  const service = services.find((item) => item.slug === slug);
+const process = [
+  ["İhtiyacınızı yazarsınız", "İşletme türünüz, istediğiniz sistem ve varsa örnek aldığınız yapı konuşulur."],
+  ["Canlı örnek seçilir", "Size en yakın canlı örnek üzerinden nasıl uyarlanacağı netleştirilir."],
+  ["Kapsam ve fiyat netleşir", "Sayfalar, modüller, admin panel, ödeme veya randevu ihtiyaçları belirlenir."],
+  ["Güvenli şekilde ilerlenir", "İsterseniz Bionluk üzerinden özel teklif veya uygun paketle ilerlenebilir."],
+];
 
-  if (!service) {
-    return (
-      <section className="py-12 sm:py-16">
-        <Container>
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10">
-            <h1 className="text-2xl font-black text-slate-950">
-              {isTr ? "Hizmet bulunamadı" : "Service not found"}
-            </h1>
-            <p className="mt-3 text-slate-600">
-              {isTr
-                ? "Aradığınız hizmet sayfası bulunamadı."
-                : "The service page you are looking for could not be found."}
-            </p>
-            <div className="mt-6">
-              <Button href="/services">
-                {isTr ? "Hizmetlere Dön" : "Back to Services"}
-              </Button>
-            </div>
-          </div>
-        </Container>
-      </section>
-    );
-  }
-
-  const title = isTr ? service.titleTr : service.title;
-  const description = isTr ? service.descriptionTr : service.description;
-  const examples = isTr ? service.examplesTr : service.examples;
-  const infrastructure = isTr ? service.infrastructureTr : service.infrastructure;
-  const detail = isTr ? service.detailTr : service.detail;
+export default async function ServiceDetail({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const service = servicesData.find((s) => s.slug === slug);
+  if (!service) return notFound();
 
   return (
-    <section className="py-10 sm:py-12 lg:py-16">
-      <Container>
-        <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-8 lg:p-10">
-          <div className="max-w-4xl">
-            <p className="text-xs font-black uppercase tracking-[0.22em] text-slate-500">
-              {isTr ? "Hizmet Detayı" : "Service Detail"}
-            </p>
-
-            <h1 className="mt-3 text-3xl font-black leading-tight text-slate-950 sm:text-4xl lg:text-5xl">
-              {title}
-            </h1>
-
-            <p className="mt-4 text-base leading-8 text-slate-600 sm:text-lg sm:leading-8">
-              {description}
-            </p>
-
-            <div className="mt-6 grid grid-cols-1 gap-3 sm:flex sm:flex-row">
-              <Button href="/contact" className="h-12 min-h-12 justify-center">
-                {isTr ? "Bu Hizmet İçin Fiyat Al" : "Get a Quote"}
-              </Button>
-              <Button href="/projects" variant="secondary" className="h-12 min-h-12 justify-center">
-                {isTr ? "Canlı Örnekleri İncele" : "View Live Demos"}
-              </Button>
-            </div>
-          </div>
+    <>
+      <JsonLd data={[
+        breadcrumbJsonLd([
+          { name: "Ana Sayfa", path: "/" },
+          { name: "Hizmetler", path: "/services" },
+          { name: service.title, path: `/services/${service.slug}` },
+        ]),
+        serviceJsonLd({
+          name: service.title,
+          description: service.longDesc,
+          path: `/services/${service.slug}`,
+          offers: service.features,
+        }),
+      ]} />
+      <PageReveal className="content-page pt-32 pb-24 px-6 text-white max-w-6xl mx-auto">
+      <RevealItem className="mb-8 relative overflow-hidden p-0 md:p-0">
+        <div className="mb-4 inline-block border border-white/10 bg-white/5 px-3 py-1 text-xs font-bold text-gray-400 uppercase tracking-widest">
+          Hizmet Detayı
         </div>
-
-        <div className="mt-6 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-8">
-            <h2 className="text-2xl font-black leading-8 text-slate-950">
-              {isTr ? "Bu hizmet ne işe yarar?" : "What is this service for?"}
-            </h2>
-
-            <div className="mt-4 space-y-4 text-base leading-8 text-slate-600">
-              {detail.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
-            </div>
-          </div>
-
-          <div className="rounded-3xl border border-slate-200 bg-slate-950 p-5 text-white shadow-sm sm:p-8">
-            <h2 className="text-2xl font-black leading-8">
-              {isTr ? "Canlı önizleme avantajı" : "Live preview advantage"}
-            </h2>
-
-            <p className="mt-4 text-base leading-8 text-slate-300">
-              {isTr
-                ? "Proje başlamadan önce benzer canlı örnekleri inceleyebilirsiniz. Proje sürecinde de uygun durumlarda size özel önizleme bağlantısı paylaşılabilir. Böylece sadece ekran görüntüsü değil, telefonunuzdan gezebileceğiniz çalışan bir yapı üzerinden kontrol sağlayabilirsiniz."
-                : "Before the project starts, you can review similar live demos. During the project, a private preview link can be shared when suitable. This allows you to check a working structure from your phone instead of only seeing screenshots."}
-            </p>
-
-            <div className="mt-5 grid gap-3">
-              {[
-                isTr ? "Canlı örnek üzerinden güven" : "Trust through live demos",
-                isTr ? "İşletmeye göre uyarlama" : "Adaptation to your business",
-                isTr ? "Teslim öncesi kontrol" : "Pre-delivery review",
-                isTr ? "Bionluk üzerinden güvenli ilerleme seçeneği" : "Secure Bionluk order option"
-              ].map((item) => (
-                <div
-                  key={item}
-                  className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4 text-sm font-semibold leading-6 text-slate-100"
-                >
-                  {item}
-                </div>
-              ))}
-            </div>
-          </div>
+        <h1 className="text-4xl md:text-6xl font-medium mb-6 leading-tight">{service.title}</h1>
+        <p className="text-lg md:text-xl text-gray-400 max-w-4xl leading-8">{service.longDesc}</p>
+        <div className="mt-8 flex flex-wrap gap-4">
+          <Link href={`/contact?service=${service.slug}`} className="shimmer-button bg-white text-black px-6 py-3 font-bold hover:bg-gray-200 transition-colors flex items-center gap-2">
+            Bu Hizmet İçin Fiyat Al <ArrowRight size={18} />
+          </Link>
+          <Link href="/projects" className="border border-white/20 text-white px-6 py-3 font-medium hover:bg-white/10 transition-colors">
+            Canlı Örnekleri İncele
+          </Link>
+          <Link href="/services" className="border border-white/10 text-gray-400 px-6 py-3 font-medium hover:text-white hover:bg-white/5 transition-colors">
+            Tüm Hizmetler
+          </Link>
         </div>
+      </RevealItem>
 
-        <div className="mt-6 grid gap-6 lg:grid-cols-2">
-          <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-8">
-            <h2 className="text-2xl font-black leading-8 text-slate-950">
-              {isTr ? "Örnek kullanım alanları" : "Example use cases"}
-            </h2>
-
-            <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
-              {examples.map((item) => (
-                <div
-                  key={item}
-                  className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm font-semibold leading-6 text-slate-700"
-                >
-                  {item}
-                </div>
-              ))}
-            </div>
+      <div className="grid gap-8 lg:grid-cols-[1.08fr_0.92fr] mb-8">
+        <RevealItem className="border-t border-white/10 pt-8">
+          <h2 className="text-2xl md:text-3xl font-medium mb-5">Bu hizmet ne işe yarar?</h2>
+          <div className="space-y-5 text-gray-400 leading-8">
+            {service.detail.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
           </div>
+        </RevealItem>
 
-          <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-8">
-            <h2 className="text-2xl font-black leading-8 text-slate-950">
-              {isTr ? "Kullanılabilecek altyapılar" : "Possible infrastructure"}
-            </h2>
-
-            <div className="mt-4 flex flex-wrap gap-2">
-              {infrastructure.map((item) => (
-                <span
-                  key={item}
-                  className="rounded-full border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-bold leading-5 text-slate-600"
-                >
-                  {item}
-                </span>
-              ))}
-            </div>
-
-            <div className="mt-6 rounded-2xl bg-slate-50 p-4 text-sm leading-7 text-slate-600">
-              {isTr
-                ? "Bu altyapılar sabit paket gibi düşünülmez. İhtiyacınıza göre bazı modüller çıkarılabilir, bazıları eklenebilir veya aynı proje içinde birleştirilebilir."
-                : "These infrastructures are not fixed packages. Depending on your needs, some modules can be removed, added or combined in the same project."}
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-6 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-8">
-          <h2 className="text-2xl font-black leading-8 text-slate-950">
-            {isTr ? "Satın alma süreci nasıl ilerler?" : "How does the purchase process work?"}
-          </h2>
-
-          <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-4">
-            {[
-              {
-                tr: "İhtiyacınızı yazarsınız",
-                en: "You share your need",
-                trDesc: "İşletme türünüz, istediğiniz sistem ve varsa örnek aldığınız yapı konuşulur.",
-                enDesc: "Your business type, desired system and references are discussed."
-              },
-              {
-                tr: "Canlı örnek seçilir",
-                en: "A live demo is selected",
-                trDesc: "Size en yakın canlı örnek üzerinden nasıl uyarlanacağı netleştirilir.",
-                enDesc: "The closest live demo is used to clarify how it can be adapted."
-              },
-              {
-                tr: "Kapsam ve fiyat netleşir",
-                en: "Scope and price are clarified",
-                trDesc: "Sayfalar, modüller, admin panel, ödeme veya randevu ihtiyaçları belirlenir.",
-                enDesc: "Pages, modules, admin panel, payment or appointment needs are defined."
-              },
-              {
-                tr: "Güvenli şekilde ilerlenir",
-                en: "The process moves securely",
-                trDesc: "İsterseniz Bionluk üzerinden özel teklif veya uygun paketle ilerlenebilir.",
-                enDesc: "If preferred, the project can continue through Bionluk with a custom offer or package."
-              }
-            ].map((step, index) => (
-              <div
-                key={step.tr}
-                className="rounded-2xl border border-slate-200 bg-slate-50 p-4"
-              >
-                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-950 text-sm font-black text-white">
-                  {index + 1}
-                </div>
-                <h3 className="mt-4 text-base font-black leading-6 text-slate-950 md:text-sm">
-                  {isTr ? step.tr : step.en}
-                </h3>
-                <p className="mt-2 text-sm leading-6 text-slate-600 md:text-xs md:leading-5 lg:text-sm lg:leading-6">
-                  {isTr ? step.trDesc : step.enDesc}
-                </p>
+        <RevealItem className="relative overflow-hidden border-l-4 border-white pl-6 py-2">
+          <h2 className="text-2xl md:text-3xl font-medium mb-5">Canlı önizleme avantajı</h2>
+          <p className="text-gray-400 leading-8">
+            Proje başlamadan önce benzer canlı örnekleri inceleyebilirsiniz. Proje sürecinde de uygun durumlarda size özel önizleme bağlantısı paylaşılabilir. Böylece sadece ekran görüntüsü değil, telefonunuzdan gezebileceğiniz çalışan bir yapı üzerinden kontrol sağlayabilirsiniz.
+          </p>
+          <div className="mt-6 grid gap-3">
+            {["Canlı örnek üzerinden güven", "İşletmeye göre uyarlama", "Teslim öncesi kontrol", "Bionluk üzerinden güvenli ilerleme seçeneği"].map((item) => (
+              <div key={item} className="border border-white/10 bg-white/5 px-4 py-4 text-sm font-semibold leading-6 text-gray-200">
+                {item}
               </div>
             ))}
           </div>
+        </RevealItem>
+      </div>
 
-          <div className="mt-6 grid grid-cols-1 gap-3 sm:flex sm:flex-row">
-            <Button href="/contact" className="h-12 min-h-12 justify-center">
-              {isTr ? "Bu Hizmet İçin İletişime Geç" : "Contact for This Service"}
-            </Button>
-            <Button href="/services" variant="secondary" className="h-12 min-h-12 justify-center">
-              {isTr ? "Tüm Hizmetlere Dön" : "Back to All Services"}
-            </Button>
+      <div className="grid gap-8 lg:grid-cols-2 mb-8">
+        <RevealItem className="border-t border-white/10 pt-8">
+          <h2 className="text-2xl md:text-3xl font-medium mb-6">Örnek kullanım alanları</h2>
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            {service.examples.map((item) => (
+              <div key={item} className="border border-white/10 bg-[#071225]/55 p-4 text-sm font-medium leading-6 text-gray-300">
+                {item}
+              </div>
+            ))}
           </div>
+        </RevealItem>
+
+        <RevealItem className="border-t border-white/10 pt-8">
+          <h2 className="text-2xl md:text-3xl font-medium mb-6">Kullanılabilecek altyapılar</h2>
+          <div className="flex flex-wrap gap-2">
+            {service.infrastructure.map((tech) => (
+              <span key={tech} className="tech-chip px-3 py-2 bg-[#071225]/65 border border-white/10 text-sm text-gray-400 rounded-sm">
+                {tech}
+              </span>
+            ))}
+          </div>
+          <p className="mt-6 text-sm text-gray-500 border-l-2 border-white/20 pl-4 leading-7">
+            Bu altyapılar sabit paket gibi düşünülmez. İhtiyacınıza göre bazı modüller çıkarılabilir, bazıları eklenebilir veya aynı proje içinde birleştirilebilir.
+          </p>
+        </RevealItem>
+      </div>
+
+      <RevealItem className="border-t border-white/10 pt-8 mb-8">
+        <h2 className="text-2xl md:text-3xl font-medium mb-6">Satın alma süreci nasıl ilerler?</h2>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
+          {process.map(([title, desc], index) => (
+            <div key={title} className="border border-white/10 bg-[#071225]/55 p-5">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-black font-bold">{index + 1}</div>
+              <h3 className="mt-4 font-bold text-white leading-6">{title}</h3>
+              <p className="mt-2 text-sm leading-6 text-gray-500">{desc}</p>
+            </div>
+          ))}
         </div>
-      </Container>
-    </section>
+        <div className="mt-8 flex flex-wrap gap-4">
+          <Link href={`/contact?service=${service.slug}`} className="bg-white text-black px-7 py-3 font-bold hover:bg-gray-200 transition-colors">
+            Bu Hizmet İçin İletişime Geç
+          </Link>
+          <Link href="/services" className="border border-white/20 text-white px-7 py-3 font-medium hover:bg-white/10 transition-colors">
+            Tüm Hizmetlere Dön
+          </Link>
+        </div>
+      </RevealItem>
+      </PageReveal>
+    </>
   );
 }
