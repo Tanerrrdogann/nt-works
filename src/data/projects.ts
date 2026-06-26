@@ -436,6 +436,10 @@ export const projectsData: ProjectType[] = ntWorksProjects.map((project) => ({
   techStack: project.techStack ?? [],
   database: project.database,
   deployment: project.deployment,
+  projectKind: project.projectKind as ProjectType["projectKind"],
+  clientDisplayName: project.clientDisplayName as string | undefined,
+  result: project.result as string | undefined,
+  testimonialSlug: project.testimonialSlug as string | undefined,
   deliveryScope: [
     project.descriptionTr,
     ...(project.demoIncludesTr ?? []),
