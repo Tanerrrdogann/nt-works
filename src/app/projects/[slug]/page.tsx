@@ -1,4 +1,6 @@
 import { projectsData } from "@/data/projects";
+import { getProjectMeta } from "@/data/project-meta";
+import { testimonials } from "@/data/testimonials";
 import { getBionlukLink } from "@/data/bionluk-links";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -18,6 +20,10 @@ type RichProject = ProjectType & {
   demoUrl?: string;
   githubUrl?: string;
   image?: string;
+  projectKind?: "demo" | "client";
+  clientDisplayName?: string;
+  result?: string;
+  testimonialSlug?: string;
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -51,6 +57,8 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
   const demoLimitations = project.demoLimitationsTr ?? [];
   const hasDemoInfo = demoIncludes.length > 0 || demoLimitations.length > 0 || Boolean(project.demoAccounts?.length);
   const demoEnabled = project.isDemoEnabled !== false && Boolean(project.demoUrl);
+  const meta = getProjectMeta(project.slug);
+  const testimonial = meta.testimonialSlug ? testimonials.find((item) => item.slug === meta.testimonialSlug) : undefined;
 
   return (
     <>
@@ -70,14 +78,16 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
         }),
       ]} />
       <PageReveal className="content-page pt-32 pb-24 px-6 text-white max-w-6xl mx-auto">
-      <Link href="/projects" className="text-sm text-gray-500 hover:text-white transition-colors mb-8 inline-block">
-        &larr; Tüm Canlı Örneklere Dön
+      <Link href={meta.projectKind === "client" ? "/portfolio" : "/projects"} className="text-sm text-gray-500 hover:text-white transition-colors mb-8 inline-block">
+        &larr; {meta.projectKind === "client" ? "Portföye Dön" : "Tüm Canlı Örneklere Dön"}
       </Link>
 
       <RevealItem className="mb-8 relative overflow-hidden p-0 md:p-0">
         <div className="mb-4 flex flex-wrap items-center gap-3">
           <span className="border border-white/10 bg-white/5 px-3 py-1 text-xs font-bold uppercase tracking-widest text-gray-400">{project.category}</span>
-          <span className="border border-white/10 bg-[#071225]/70 px-3 py-1 text-xs font-bold uppercase tracking-widest text-gray-500">Uyarlanabilir Canlı Örnek</span>
+          <span className="border border-white/10 bg-[#071225]/70 px-3 py-1 text-xs font-bold uppercase tracking-widest text-gray-500">
+            {meta.projectKind === "client" ? "Gerçek Müşteri İşi" : "Uyarlanabilir Canlı Örnek"}
+          </span>
         </div>
         <h1 className="text-4xl md:text-6xl font-medium mb-6 leading-tight">{project.title}</h1>
         <p className="text-lg md:text-xl text-gray-400 max-w-4xl leading-8">{project.descriptionTr ?? project.shortDesc}</p>
@@ -85,7 +95,9 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
         <div className="mt-7 flex items-start gap-3 border border-white/10 bg-white/5 p-4">
           <AlertCircle className="text-gray-400 shrink-0 mt-0.5" size={20} />
           <p className="text-sm text-gray-300 leading-6">
-            Bu çalışma gerçek müşteri işi gibi gösterilen bir referans değildir. İşletmenize göre benzeri hazırlanabilecek, canlı incelenebilir örnek sistemdir.
+            {meta.projectKind === "client"
+              ? "Bu çalışma Bionluk üzerinden teslim edilen gerçek müşteri işi olarak eklenmiştir. Müşteri bilgileri izin durumuna göre anonim tutulur."
+              : "Bu çalışma gerçek müşteri işi gibi gösterilen bir referans değildir. İşletmenize göre benzeri hazırlanabilecek, canlı incelenebilir örnek sistemdir."}
           </p>
         </div>
 
@@ -119,16 +131,44 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
         </RevealItem>
       </div>
 
+      {(meta.result || testimonial) && (
+        <RevealItem className="border-t border-white/10 pt-8 mb-8">
+          <h2 className="text-2xl md:text-3xl font-medium mb-6">Sonuç ve müşteri geri bildirimi</h2>
+          <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
+            {meta.result && (
+              <div className="border border-white/10 bg-[#071225]/55 p-5">
+                <h3 className="font-bold text-white">Proje sonucu</h3>
+                <p className="mt-3 text-sm leading-7 text-gray-400">{meta.result}</p>
+              </div>
+            )}
+            {testimonial && (
+              <div className="border border-white/10 bg-[#08162c]/88 p-5">
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <h3 className="font-bold text-white">{testimonial.displayName}</h3>
+                  <span className="text-sm font-bold text-white">{testimonial.rating}.0 / 5</span>
+                </div>
+                <p className="mt-3 text-sm leading-7 text-gray-400">{testimonial.text}</p>
+                <p className="mt-4 text-xs font-bold uppercase tracking-widest text-gray-500">Bionluk üzerinden doğrulanmış yorum</p>
+              </div>
+            )}
+          </div>
+        </RevealItem>
+      )}
+
       <div className="grid gap-8 lg:grid-cols-[1fr_0.9fr] mb-8">
         <RevealItem className="border-t border-white/10 pt-8">
-          <h2 className="text-2xl md:text-3xl font-medium mb-6">Bu canlı örnek neyi gösterir?</h2>
+          <h2 className="text-2xl md:text-3xl font-medium mb-6">{meta.projectKind === "client" ? "Bu işte ne yapıldı?" : "Bu canlı örnek neyi gösterir?"}</h2>
           <div className="space-y-5 text-gray-400 leading-8">
             <p>{project.descriptionTr ?? project.shortDesc}</p>
             <p>{project.solution}</p>
           </div>
           <div className="mt-6 border-l-4 border-white pl-5 py-2">
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-gray-500">Canlı inceleme odağı</p>
-            <p className="mt-3 text-gray-300 leading-7">Ziyaretçi örnek akışı, sistem mantığını, kullanılabilecek modülleri ve işletmeye nasıl uyarlanabileceğini tek sayfada görebilir.</p>
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-gray-500">{meta.projectKind === "client" ? "Case study odağı" : "Canlı inceleme odağı"}</p>
+            <p className="mt-3 text-gray-300 leading-7">
+              {meta.projectKind === "client"
+                ? "Bu kayıt; tamamlanan işin problem, çözüm, teknik kapsam ve müşteri geri bildirimi tarafını özetler."
+                : "Ziyaretçi örnek akışı, sistem mantığını, kullanılabilecek modülleri ve işletmeye nasıl uyarlanabileceğini tek sayfada görebilir."}
+            </p>
           </div>
         </RevealItem>
 
@@ -211,7 +251,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
       </div>
 
       <RevealItem className="border-t border-white/10 pt-8">
-        <h2 className="text-2xl md:text-3xl font-medium mb-6">Bu canlı örnek nasıl uyarlanır?</h2>
+        <h2 className="text-2xl md:text-3xl font-medium mb-6">{meta.projectKind === "client" ? "Benzer iş nasıl planlanır?" : "Bu canlı örnek nasıl uyarlanır?"}</h2>
         <div className="grid gap-4 md:grid-cols-3">
           {[
             ["İhtiyaç", `${project.title}, ${project.category.toLocaleLowerCase("tr-TR")} ihtiyacını canlı ekranlarla anlatmak için hazırlanır.`],

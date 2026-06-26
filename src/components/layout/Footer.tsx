@@ -19,6 +19,9 @@ export default function Footer() {
           <Link href="/" className="text-slate-400 hover:text-white text-xs md:text-sm transition-colors w-fit leading-5">Ana Sayfa</Link>
           <Link href="/services" className="text-slate-400 hover:text-white text-xs md:text-sm transition-colors w-fit leading-5">Hizmetler</Link>
           <Link href="/projects" className="text-slate-400 hover:text-white text-xs md:text-sm transition-colors w-fit leading-5">Canlı Örnekler</Link>
+          <Link href="/portfolio" className="text-slate-400 hover:text-white text-xs md:text-sm transition-colors w-fit leading-5">Portföy</Link>
+          <Link href="/blog" className="text-slate-400 hover:text-white text-xs md:text-sm transition-colors w-fit leading-5">Blog</Link>
+          <Link href="/testimonials" className="text-slate-400 hover:text-white text-xs md:text-sm transition-colors w-fit leading-5">Müşteri Yorumları</Link>
           <Link href="/about" className="text-slate-400 hover:text-white text-xs md:text-sm transition-colors w-fit leading-5">Hakkımızda</Link>
         </div>
         <div className="flex min-w-0 flex-col gap-1.5 md:gap-3">
@@ -28,6 +31,8 @@ export default function Footer() {
           <Link href="/services/e-ticaret-satis-sistemleri" className="text-slate-400 hover:text-white text-xs md:text-sm transition-colors w-fit leading-5">E-Ticaret</Link>
           <Link href="/services/randevu-rezervasyon-sistemleri" className="text-slate-400 hover:text-white text-xs md:text-sm transition-colors w-fit leading-5">Randevu Sistemi</Link>
           <Link href="/services/admin-panel-isletme-yonetimi" className="text-slate-400 hover:text-white text-xs md:text-sm transition-colors w-fit leading-5">Admin Panel</Link>
+          <Link href="/pazaryeri-entegrasyonu" className="text-slate-400 hover:text-white text-xs md:text-sm transition-colors w-fit leading-5">Pazaryeri Entegrasyonu</Link>
+          <Link href="/maintenance-packages" className="text-slate-400 hover:text-white text-xs md:text-sm transition-colors w-fit leading-5">Bakım Paketleri</Link>
         </div>
         <div className="flex min-w-0 flex-col gap-1.5 md:gap-3">
           <h4 className="font-bold mb-1 md:mb-2 text-sm md:text-base">İletişim</h4>
@@ -35,7 +40,17 @@ export default function Footer() {
           <a href="mailto:ismailtanererdogan54@gmail.com" className="text-slate-400 hover:text-white text-xs md:text-sm transition-colors w-fit leading-5">E-posta Gönder</a>
           <a href="https://wa.me/905511955566" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white text-xs md:text-sm transition-colors w-fit leading-5">WhatsApp Hattı</a>
           <a href={bionlukLinks.profile} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white text-xs md:text-sm transition-colors w-fit leading-5">Bionluk Profili</a>
+          <Link href="/safe-bionluk" className="text-slate-400 hover:text-white text-xs md:text-sm transition-colors w-fit leading-5">Bionluk ile Güvenli Çalışma</Link>
+          <Link href="/faq" className="text-slate-400 hover:text-white text-xs md:text-sm transition-colors w-fit leading-5">Sık Sorulan Sorular</Link>
         </div>
+      </div>
+      <div className="max-w-7xl mx-auto mb-8 flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs text-slate-500">
+        <Link href="/privacy" className="hover:text-white transition-colors">Gizlilik</Link>
+        <Link href="/kvkk" className="hover:text-white transition-colors">KVKK</Link>
+        <Link href="/cookies" className="hover:text-white transition-colors">Çerezler</Link>
+        <Link href="/terms" className="hover:text-white transition-colors">Çalışma Koşulları</Link>
+        <Link href="/support" className="hover:text-white transition-colors">Teslim Sonrası Destek</Link>
+        <Link href="/scope-pricing" className="hover:text-white transition-colors">Kapsam ve Fiyatlandırma</Link>
       </div>
       <div className="max-w-7xl mx-auto border-t border-white/14 pt-6 md:pt-8 text-center text-xs text-slate-500">
         &copy; {new Date().getFullYear()} NT Web Çözümleri. Tüm hakları saklıdır.

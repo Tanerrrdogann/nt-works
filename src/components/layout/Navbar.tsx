@@ -13,6 +13,8 @@ export default function Navbar() {
     { name: "Ana Sayfa", path: "/" },
     { name: "Hizmetler", path: "/services" },
     { name: "Canlı Örnekler", path: "/projects" },
+    { name: "Portföy", path: "/portfolio" },
+    { name: "Blog", path: "/blog" },
     { name: "Hakkımızda", path: "/about" },
   ];
 

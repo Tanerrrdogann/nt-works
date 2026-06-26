@@ -370,6 +370,81 @@ const ntWorksServices = [
   }
 ] satisfies RawService[];
 
+const serviceStrategy: Record<string, Pick<ServiceType, "suitableFor" | "problemSolved" | "scopeLevels" | "relatedProjects" | "relatedBlogPosts" | "bionlukLinkKey">> = {
+  "tanitim-kurumsal-web-siteleri": {
+    suitableFor: ["Hizmet veren işletmeler", "Kişisel markalar", "Danışmanlık ve ajans ekipleri", "Referans ve teklif akışını güçlendirmek isteyen firmalar"],
+    problemSolved: "Firmanın ne yaptığını, neden güvenilir olduğunu ve müşterinin nasıl iletişime geçeceğini tek akışta netleştirir.",
+    scopeLevels: [
+      { name: "Başlangıç site", description: "Ana sayfa, hizmet özeti, hakkımızda ve iletişim akışıyla sade kurumsal görünürlük." },
+      { name: "Profesyonel site", description: "Hizmet detayları, SSS, güven alanları, teklif yönlendirmesi ve temel SEO kurgusu." },
+      { name: "Tam kurumsal yapı", description: "Blog, referans, çoklu hizmet sayfaları, gelişmiş içerik akışı ve dönüşüm odaklı CTA yapısı." },
+    ],
+    relatedProjects: ["kurumsal-web-sitesi", "landing-page"],
+    relatedBlogPosts: ["kurumsal-web-sitesi-yaptirirken-nelere-dikkat-edilmeli", "web-sitesi-projesinde-kapsam-nasil-belirlenir"],
+    bionlukLinkKey: "profile",
+  },
+  "urun-katalog-whatsapp-siparis": {
+    suitableFor: ["Butikler", "Takı ve kozmetik satıcıları", "Restoran ve kafeler", "Toptancılar", "Araç veya emlak listeleyen işletmeler"],
+    problemSolved: "Ürünleri tek tek mesajla göndermek yerine kategori, detay ve WhatsApp yönlendirmesi olan düzenli bir satış vitrini kurar.",
+    scopeLevels: [
+      { name: "Başlangıç katalog", description: "Kategori, ürün kartları, detay metinleri ve WhatsApp iletişim butonları." },
+      { name: "Filtreli katalog", description: "Arama, filtre, ürün detay sayfası ve daha güçlü mobil ürün gezme deneyimi." },
+      { name: "Yönetilebilir katalog", description: "Ürünleri sonradan eklemek ve güncellemek için admin panel veya CMS yapısı." },
+    ],
+    relatedProjects: ["whatsapp-siparis-katalog"],
+    relatedBlogPosts: ["whatsapp-katalog-sitesi-nedir", "e-ticaret-sitesi-ile-katalog-sitesi-farki"],
+    bionlukLinkKey: "profile",
+  },
+  "e-ticaret-satis-sistemleri": {
+    suitableFor: ["Online satışa başlamak isteyen işletmeler", "Katalogdan sepete geçmek isteyen markalar", "Sipariş ve stok takibini düzenlemek isteyen ekipler"],
+    problemSolved: "Ürün, sepet, sipariş, ödeme ve yönetim paneli ihtiyacını aynı satış sistemi içinde planlar.",
+    scopeLevels: [
+      { name: "Başlangıç sipariş sistemi", description: "Ürün listeleme, sepet benzeri talep akışı ve sipariş kaydı." },
+      { name: "MVP e-ticaret", description: "Sepet, checkout, sipariş yönetimi ve temel ödeme/iletişim akışı." },
+      { name: "Gelişmiş satış sistemi", description: "Stok, kampanya, ödeme, kargo, entegrasyon ve raporlama ihtiyaçlarına göre genişleyen yapı." },
+    ],
+    relatedProjects: ["ecommerce-platform", "whatsapp-siparis-katalog"],
+    relatedBlogPosts: ["e-ticaret-sitesi-ile-katalog-sitesi-farki"],
+    bionlukLinkKey: "profile",
+  },
+  "randevu-rezervasyon-sistemleri": {
+    suitableFor: ["Güzellik merkezleri", "Klinikler", "Kurslar", "Spor salonları", "Oto ekspertiz ve servis işletmeleri"],
+    problemSolved: "WhatsApp, telefon ve DM üzerinden dağınık gelen randevu taleplerini takip edilebilir bir akışa dönüştürür.",
+    scopeLevels: [
+      { name: "Temel randevu formu", description: "Hizmet, tarih/saat, müşteri bilgisi ve bildirim akışı." },
+      { name: "Rezervasyon takip sistemi", description: "Talep listesi, durum yönetimi ve işletme tarafında takip ekranı." },
+      { name: "Gelişmiş randevu paneli", description: "Onay, iptal, tamamlandı durumları, kullanıcı rolleri ve raporlama." },
+    ],
+    relatedProjects: ["randevu-rezervasyon-sistemi"],
+    relatedBlogPosts: ["randevu-sistemi-nedir"],
+    bionlukLinkKey: "profile",
+  },
+  "admin-panel-isletme-yonetimi": {
+    suitableFor: ["Excel ve WhatsApp ile takip yapan işletmeler", "Stok, sipariş veya müşteri kaydı tutan ekipler", "Operasyonunu tek panelden görmek isteyen firmalar"],
+    problemSolved: "Müşteri, ürün, stok, sipariş, görev, teklif ve ödeme gibi dağınık iş kayıtlarını tek yönetim panelinde toplar.",
+    scopeLevels: [
+      { name: "Temel panel", description: "Tek ana modül, kayıt ekleme/düzenleme, listeleme ve basit durum takibi." },
+      { name: "İşletme paneli", description: "Birden fazla modül, filtreleme, raporlama, rol yapısı ve operasyon akışı." },
+      { name: "Gelişmiş yönetim sistemi", description: "Özel dashboard, entegrasyonlar, işlem geçmişi, çıktı ve bakım/geliştirme desteği." },
+    ],
+    relatedProjects: ["admin-panelli-isletme-sistemi", "task-management-system", "cloud-storage-platform"],
+    relatedBlogPosts: ["admin-panel-nedir", "stok-takip-sistemi-yaptirirken-nelere-dikkat-edilmeli", "admin-panel-projelerinde-bakim-paketi-neden-onemlidir"],
+    bionlukLinkKey: "profile",
+  },
+  "ozel-yazilim-premium-sistemler": {
+    suitableFor: ["Standart paketlerin yetmediği işletmeler", "API/XML entegrasyonu isteyen ekipler", "Özel dashboard ve otomasyon ihtiyacı olan firmalar"],
+    problemSolved: "Hazır site veya basit panelle çözülemeyen özel iş akışlarını, entegrasyonları ve yönetim ihtiyaçlarını projeye özel yazılıma dönüştürür.",
+    scopeLevels: [
+      { name: "Ön analiz", description: "İhtiyaç, modüller, veri yapısı, entegrasyon ve teslim beklentisi netleştirilir." },
+      { name: "MVP sistem", description: "En kritik ekranlar ve akışlar çalışan ilk sürüm olarak hazırlanır." },
+      { name: "Premium sistem", description: "Rol yönetimi, API, raporlama, otomasyon, bakım ve yeni modül geliştirme akışıyla büyür." },
+    ],
+    relatedProjects: ["pazaryeri-xml-entegrasyonu", "mizan-mulk-yonetim-sistemi", "menar-operasyon-paneli", "cloud-storage-platform", "ai-log-analysis-panel", "video-analysis-platform"],
+    relatedBlogPosts: ["ozel-yazilim-fiyatlari-nasil-belirlenir", "pazaryeri-xml-entegrasyonu-nedir", "power-apps-ile-isletme-surecleri-nasil-dijitallesir"],
+    bionlukLinkKey: "profile",
+  },
+};
+
 export const servicesData: ServiceType[] = ntWorksServices.map((service, index) => ({
   id: service.slug ?? `service-${index + 1}`,
   slug: service.slug,
@@ -381,4 +456,10 @@ export const servicesData: ServiceType[] = ntWorksServices.map((service, index) 
   examples: service.examplesTr ?? [],
   infrastructure: service.infrastructureTr ?? [],
   combinations: service.examplesTr ?? [],
+  suitableFor: serviceStrategy[service.slug]?.suitableFor ?? [],
+  problemSolved: serviceStrategy[service.slug]?.problemSolved ?? service.descriptionTr,
+  scopeLevels: serviceStrategy[service.slug]?.scopeLevels ?? [],
+  relatedProjects: serviceStrategy[service.slug]?.relatedProjects ?? [],
+  relatedBlogPosts: serviceStrategy[service.slug]?.relatedBlogPosts ?? [],
+  bionlukLinkKey: serviceStrategy[service.slug]?.bionlukLinkKey,
 }));

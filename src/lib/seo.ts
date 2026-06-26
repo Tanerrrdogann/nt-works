@@ -274,3 +274,55 @@ export function softwareExampleJsonLd({
     },
   };
 }
+
+export function blogPostingJsonLd({
+  title,
+  description,
+  path,
+  publishedAt,
+  updatedAt,
+}: {
+  title: string;
+  description: string;
+  path: string;
+  publishedAt: string;
+  updatedAt: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: title,
+    description,
+    url: absoluteUrl(path),
+    inLanguage: siteConfig.language,
+    datePublished: publishedAt,
+    dateModified: updatedAt,
+    author: {
+      "@type": "Person",
+      name: "İsmail Taner Erdoğan",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: siteConfig.name,
+      logo: {
+        "@type": "ImageObject",
+        url: absoluteUrl(siteConfig.logo),
+      },
+    },
+  };
+}
+
+export function faqJsonLd(faqs: Array<{ question: string; answer: string }>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
+}

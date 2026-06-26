@@ -42,6 +42,7 @@ export default function Services() {
             <div className="relative z-10 mx-auto max-w-xl">
               <h2 className="text-base md:text-2xl font-medium mb-3 md:mb-4">{srv.title}</h2>
               <p className="text-gray-400 mb-4 md:mb-8 leading-6 md:leading-7">{srv.shortDesc}</p>
+              <p className="mobile-hide-detail mb-4 text-xs md:text-sm leading-6 text-gray-500">{srv.problemSolved}</p>
             </div>
             <div className="mobile-actions relative z-10 mt-auto flex flex-wrap justify-center gap-2 md:gap-4 pt-4 md:pt-6 border-t border-white/10">
               <Link href={`/services/${srv.slug}`} className="shimmer-button bg-white text-black px-3 md:px-6 py-2 md:py-2.5 rounded-sm text-xs md:text-sm font-bold transition-colors">

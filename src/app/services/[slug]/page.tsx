@@ -1,7 +1,10 @@
 import { servicesData } from "@/data/services";
+import { blogPosts } from "@/data/blog";
+import { projectsData } from "@/data/projects";
+import { getBionlukLink } from "@/data/bionluk-links";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ExternalLink } from "lucide-react";
 import { PageReveal, RevealItem } from "@/components/animations/PageReveal";
 import JsonLd from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd, pageMetadata, serviceJsonLd } from "@/lib/seo";
@@ -38,6 +41,12 @@ export default async function ServiceDetail({ params }: { params: Promise<{ slug
   const { slug } = await params;
   const service = servicesData.find((s) => s.slug === slug);
   if (!service) return notFound();
+  const relatedProjects = service.relatedProjects
+    .map((projectSlug) => projectsData.find((project) => project.slug === projectSlug))
+    .filter(Boolean);
+  const relatedBlogPosts = service.relatedBlogPosts
+    .map((postSlug) => blogPosts.find((post) => post.slug === postSlug))
+    .filter(Boolean);
 
   return (
     <>
@@ -67,6 +76,9 @@ export default async function ServiceDetail({ params }: { params: Promise<{ slug
           </Link>
           <Link href="/projects" className="border border-white/20 text-white px-6 py-3 font-medium hover:bg-white/10 transition-colors">
             Canlı Örnekleri İncele
+          </Link>
+          <Link href={getBionlukLink(service.bionlukLinkKey ?? service.slug)} target="_blank" className="border border-white/20 text-white px-6 py-3 font-medium hover:bg-white/10 transition-colors flex items-center gap-2">
+            Bionluk Profili <ExternalLink size={18} />
           </Link>
           <Link href="/services" className="border border-white/10 text-gray-400 px-6 py-3 font-medium hover:text-white hover:bg-white/5 transition-colors">
             Tüm Hizmetler
@@ -100,6 +112,43 @@ export default async function ServiceDetail({ params }: { params: Promise<{ slug
       </div>
 
       <div className="grid gap-8 lg:grid-cols-2 mb-8">
+        {service.suitableFor.length > 0 && (
+        <RevealItem className="border-t border-white/10 pt-8">
+          <h2 className="text-2xl md:text-3xl font-medium mb-6">Kimler için uygun?</h2>
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            {service.suitableFor.map((item) => (
+              <div key={item} className="border border-white/10 bg-[#071225]/55 p-4 text-sm font-medium leading-6 text-gray-300">
+                {item}
+              </div>
+            ))}
+          </div>
+        </RevealItem>
+        )}
+
+        <RevealItem className="border-t border-white/10 pt-8">
+          <h2 className="text-2xl md:text-3xl font-medium mb-6">Çözdüğü problem</h2>
+          <p className="text-gray-400 leading-8">{service.problemSolved}</p>
+        </RevealItem>
+      </div>
+
+      {service.scopeLevels.length > 0 && (
+      <RevealItem className="border-t border-white/10 pt-8 mb-8">
+        <h2 className="text-2xl md:text-3xl font-medium mb-6">Kapsam seviyeleri</h2>
+        <div className="grid gap-4 md:grid-cols-3">
+          {service.scopeLevels.map((level) => (
+            <div key={level.name} className="border border-white/10 bg-[#071225]/55 p-5">
+              <h3 className="font-bold text-white">{level.name}</h3>
+              <p className="mt-3 text-sm leading-7 text-gray-500">{level.description}</p>
+            </div>
+          ))}
+        </div>
+        <p className="mt-5 border-l-2 border-white/20 pl-4 text-sm leading-7 text-gray-500">
+          Kapsam proje başlamadan önce netleştirilir. Ek modül, entegrasyon ve özel istekler ayrıca fiyatlandırılır.
+        </p>
+      </RevealItem>
+      )}
+
+      <div className="grid gap-8 lg:grid-cols-2 mb-8">
         <RevealItem className="border-t border-white/10 pt-8">
           <h2 className="text-2xl md:text-3xl font-medium mb-6">Örnek kullanım alanları</h2>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -125,6 +174,36 @@ export default async function ServiceDetail({ params }: { params: Promise<{ slug
           </p>
         </RevealItem>
       </div>
+
+      {(relatedProjects.length > 0 || relatedBlogPosts.length > 0) && (
+      <div className="grid gap-8 lg:grid-cols-2 mb-8">
+        {relatedProjects.length > 0 && (
+        <RevealItem className="border-t border-white/10 pt-8">
+          <h2 className="text-2xl md:text-3xl font-medium mb-6">İlgili canlı örnekler</h2>
+          <div className="grid gap-3">
+            {relatedProjects.map((project) => project && (
+              <Link key={project.slug} href={`/projects/${project.slug}`} className="border border-white/10 bg-[#071225]/55 p-4 text-sm font-semibold leading-6 text-gray-300 hover:bg-white/10">
+                {project.title}
+              </Link>
+            ))}
+          </div>
+        </RevealItem>
+        )}
+
+        {relatedBlogPosts.length > 0 && (
+        <RevealItem className="border-t border-white/10 pt-8">
+          <h2 className="text-2xl md:text-3xl font-medium mb-6">İlgili rehberler</h2>
+          <div className="grid gap-3">
+            {relatedBlogPosts.map((post) => post && (
+              <Link key={post.slug} href={`/blog/${post.slug}`} className="border border-white/10 bg-[#071225]/55 p-4 text-sm font-semibold leading-6 text-gray-300 hover:bg-white/10">
+                {post.title}
+              </Link>
+            ))}
+          </div>
+        </RevealItem>
+        )}
+      </div>
+      )}
 
       <RevealItem className="border-t border-white/10 pt-8 mb-8">
         <h2 className="text-2xl md:text-3xl font-medium mb-6">Satın alma süreci nasıl ilerler?</h2>

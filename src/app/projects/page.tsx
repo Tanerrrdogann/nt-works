@@ -1,4 +1,5 @@
 import { projectsData } from "@/data/projects";
+import { getProjectMeta } from "@/data/project-meta";
 import { getBionlukLink } from "@/data/bionluk-links";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -19,6 +20,8 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default function Projects() {
+  const demoProjects = projectsData.filter((project) => getProjectMeta(project.slug).projectKind !== "client");
+
   return (
     <>
     <JsonLd data={[
@@ -29,7 +32,7 @@ export default function Projects() {
       itemListJsonLd({
         name: "NT Web Çözümleri canlı örnekleri",
         description: "Uyarlanabilir web sitesi, e-ticaret, katalog, randevu, admin panel ve özel yazılım canlı örnekleri.",
-        items: projectsData.map((project) => ({
+        items: demoProjects.map((project) => ({
           name: project.title,
           description: project.shortDesc,
           path: `/projects/${project.slug}`,
@@ -39,18 +42,25 @@ export default function Projects() {
     <PageReveal className="content-page pt-32 pb-24 px-6 text-white max-w-7xl mx-auto">
       <div className="mb-12 md:mb-20">
         <h1 className="text-4xl md:text-6xl font-medium tracking-tight mb-6">Canlı Örnekler ve <br/><span className="text-gray-500">Uyarlanabilir Sistem Kapsamları</span></h1>
-        <p className="mobile-compact-text text-base md:text-xl text-gray-400 max-w-3xl">Canlı inceleyebileceğiniz uyarlanabilir web sitesi ve yazılım örnekleri. Her örnek farklı işletmelere göre yeniden düzenlenebilir.</p>
+        <p className="mobile-compact-text text-base md:text-xl text-gray-400 max-w-3xl">Canlı inceleyebileceğiniz uyarlanabilir web sitesi ve yazılım örnekleri. Gerçek müşteri işleri ayrı Portföy sayfasında gösterilir.</p>
+        <div className="mt-7 max-w-4xl border border-white/10 bg-white/5 p-4 text-sm leading-7 text-gray-300">
+          Bu sayfadaki sistemler demo/önizleme amaçlıdır ve gerçek müşteri işi gibi gösterilmez. Tamamlanan işler ve Bionluk yorumları Portföy ve Müşteri Yorumları sayfalarında yer alır.
+        </div>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-2 gap-3 md:gap-8">
-        {projectsData.map((proj) => {
+        {demoProjects.map((proj) => {
           const project = proj as ProjectWithDemo;
+          const meta = getProjectMeta(project.slug);
           const demoEnabled = project.isDemoEnabled !== false && Boolean(project.demoUrl);
 
           return (
           <RevealItem key={project.slug} className="project-showcase-card mobile-compact-card group relative overflow-hidden bg-[rgba(9,26,49,0.92)] border border-white/10 p-4 md:p-8 flex flex-col justify-between">
             <div className="relative z-10">
               <span className="text-gray-500 text-[10px] md:text-xs font-mono uppercase tracking-widest mb-2 md:mb-3 block">{project.category}</span>
+              <span className="mb-3 inline-block border border-white/10 bg-white/5 px-2 py-1 text-[10px] font-bold uppercase tracking-widest text-gray-500">
+                {meta.projectKind === "client" ? "Gerçek müşteri işi" : "Uyarlanabilir demo"}
+              </span>
               <h2 className="text-base md:text-2xl font-medium mb-3 md:mb-4">{project.title}</h2>
               <p className="text-gray-400 mb-4 md:mb-8 text-xs md:text-sm leading-5">{project.shortDesc}</p>
               

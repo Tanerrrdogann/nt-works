@@ -26,7 +26,20 @@ function ContactForm() {
 
   const [submitState, setSubmitState] = useState<"idle" | "sending" | "success" | "error" | "fallback">("idle");
   const [submitMessage, setSubmitMessage] = useState("");
-  const [formData, setFormData] = useState({ name: "", email: "", phone: "", service: defaultService, message: initialMessage });
+  const [formData, setFormData] = useState({
+    name: "",
+    company: "",
+    email: "",
+    phone: "",
+    service: defaultService,
+    currentSystem: "",
+    modules: "",
+    budget: "",
+    deadline: "",
+    bionlukPreference: "",
+    referenceLink: "",
+    message: initialMessage,
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -39,9 +52,16 @@ function ContactForm() {
     const subject = `NT Web Çözümleri - Yeni Proje Talebi${selectedLabel && selectedLabel !== "none" ? ` - ${selectedLabel}` : ""}`;
     const body = [
       `Ad: ${formData.name || "-"}`,
+      `Firma: ${formData.company || "-"}`,
       `E-posta: ${formData.email || "-"}`,
       `Telefon / WhatsApp: ${formData.phone || "-"}`,
       `İlgilenilen Sistem: ${selectedLabel || "-"}`,
+      `Mevcut Sistem: ${formData.currentSystem || "-"}`,
+      `İstenen Modüller: ${formData.modules || "-"}`,
+      `Tahmini Bütçe: ${formData.budget || "-"}`,
+      `Teslim Beklentisi: ${formData.deadline || "-"}`,
+      `Bionluk Tercihi: ${formData.bionlukPreference || "-"}`,
+      `Dosya / Link / Beğenilen Örnek: ${formData.referenceLink || "-"}`,
       "",
       "Mesaj:",
       formData.message || "-",
@@ -72,6 +92,13 @@ function ContactForm() {
           phone: formData.phone || "-",
           to: CONTACT_EMAIL,
           project_type: selectedLabel || "-",
+          company: formData.company || "-",
+          current_system: formData.currentSystem || "-",
+          requested_modules: formData.modules || "-",
+          budget: formData.budget || "-",
+          deadline: formData.deadline || "-",
+          bionluk_preference: formData.bionlukPreference || "-",
+          reference_link: formData.referenceLink || "-",
           message: body,
         }),
       });
@@ -84,7 +111,7 @@ function ContactForm() {
 
       setSubmitState("success");
       setSubmitMessage("Mesajınız gönderildi. En kısa sürede dönüş yapacağız.");
-      setFormData({ name: "", email: "", phone: "", service: "none", message: "" });
+      setFormData({ name: "", company: "", email: "", phone: "", service: "none", currentSystem: "", modules: "", budget: "", deadline: "", bionlukPreference: "", referenceLink: "", message: "" });
     } catch {
       setSubmitState("error");
       setSubmitMessage("Mesaj gönderilemedi. Lütfen WhatsApp veya e-posta üzerinden ulaşın.");
@@ -96,6 +123,11 @@ function ContactForm() {
       <div className="flex flex-col gap-2">
         <label htmlFor="name" className="text-sm font-bold text-gray-400">Adın</label>
         <input required type="text" id="name" value={formData.name} onChange={handleChange} className="bg-[#071225]/88 border border-white/10 p-3 text-white focus:outline-none focus:border-white transition-colors" />
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <label htmlFor="company" className="text-sm font-bold text-gray-400">Firma adı (Opsiyonel)</label>
+        <input type="text" id="company" value={formData.company} onChange={handleChange} className="bg-[#071225]/88 border border-white/10 p-3 text-white focus:outline-none focus:border-white transition-colors" />
       </div>
 
       <div className="flex flex-col gap-2">
@@ -119,6 +151,64 @@ function ContactForm() {
             {projectsData.map(p => <option key={p.slug} value={p.slug}>{p.title}</option>)}
           </optgroup>
         </select>
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-2">
+        <div className="flex flex-col gap-2">
+          <label htmlFor="currentSystem" className="text-sm font-bold text-gray-400">Mevcut sistem var mı?</label>
+          <select id="currentSystem" value={formData.currentSystem} onChange={handleChange} className="bg-[#071225]/88 border border-white/10 p-3 text-white focus:outline-none focus:border-white transition-colors cursor-pointer appearance-none">
+            <option value="">Seçiniz</option>
+            <option value="Yok, sıfırdan yapılacak">Yok, sıfırdan yapılacak</option>
+            <option value="Var, yenilenecek">Var, yenilenecek</option>
+            <option value="Var, ek geliştirme yapılacak">Var, ek geliştirme yapılacak</option>
+            <option value="Emin değilim">Emin değilim</option>
+          </select>
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <label htmlFor="budget" className="text-sm font-bold text-gray-400">Tahmini bütçe aralığı</label>
+          <select id="budget" value={formData.budget} onChange={handleChange} className="bg-[#071225]/88 border border-white/10 p-3 text-white focus:outline-none focus:border-white transition-colors cursor-pointer appearance-none">
+            <option value="">Belirtmek istemiyorum</option>
+            <option value="10.000 TL altı">10.000 TL altı</option>
+            <option value="10.000 - 25.000 TL">10.000 - 25.000 TL</option>
+            <option value="25.000 - 50.000 TL">25.000 - 50.000 TL</option>
+            <option value="50.000 TL üzeri">50.000 TL üzeri</option>
+            <option value="Kapsama göre netleşsin">Kapsama göre netleşsin</option>
+          </select>
+        </div>
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-2">
+        <div className="flex flex-col gap-2">
+          <label htmlFor="deadline" className="text-sm font-bold text-gray-400">Teslim beklentisi</label>
+          <select id="deadline" value={formData.deadline} onChange={handleChange} className="bg-[#071225]/88 border border-white/10 p-3 text-white focus:outline-none focus:border-white transition-colors cursor-pointer appearance-none">
+            <option value="">Net değil</option>
+            <option value="Acil">Acil</option>
+            <option value="1-2 hafta">1-2 hafta</option>
+            <option value="2-4 hafta">2-4 hafta</option>
+            <option value="1 ay üzeri">1 ay üzeri</option>
+          </select>
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <label htmlFor="bionlukPreference" className="text-sm font-bold text-gray-400">Bionluk üzerinden ilerleme</label>
+          <select id="bionlukPreference" value={formData.bionlukPreference} onChange={handleChange} className="bg-[#071225]/88 border border-white/10 p-3 text-white focus:outline-none focus:border-white transition-colors cursor-pointer appearance-none">
+            <option value="">Fark etmez</option>
+            <option value="Bionluk üzerinden ilerlemek istiyorum">Bionluk üzerinden ilerlemek istiyorum</option>
+            <option value="Doğrudan iletişim tercih ederim">Doğrudan iletişim tercih ederim</option>
+            <option value="Önce kapsamı konuşalım">Önce kapsamı konuşalım</option>
+          </select>
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <label htmlFor="modules" className="text-sm font-bold text-gray-400">İstenen modüller / özellikler</label>
+        <input type="text" id="modules" value={formData.modules} onChange={handleChange} placeholder="Örn: ürün yönetimi, randevu, stok, rapor, ödeme..." className="bg-[#071225]/88 border border-white/10 p-3 text-white placeholder:text-gray-600 focus:outline-none focus:border-white transition-colors" />
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <label htmlFor="referenceLink" className="text-sm font-bold text-gray-400">Dosya / link / beğenilen canlı örnek</label>
+        <input type="text" id="referenceLink" value={formData.referenceLink} onChange={handleChange} placeholder="Varsa link veya örnek proje adı yazabilirsiniz" className="bg-[#071225]/88 border border-white/10 p-3 text-white placeholder:text-gray-600 focus:outline-none focus:border-white transition-colors" />
       </div>
 
       <div className="flex flex-col gap-2">
@@ -146,13 +236,13 @@ export default function Contact() {
       <div>
         <h1 className="text-5xl md:text-7xl font-medium tracking-tight mb-6">İşletmen için uygun sistemi <span className="text-gray-500">birlikte netleştirelim</span></h1>
         <p className="text-xl text-gray-400 mb-12">
-          Ne istediğinizden emin değilseniz bile işletme türünüzü, ihtiyacınızı ve aklınızdaki özellikleri yazmanız yeterli.
+          Ne istediğinizden emin değilseniz bile işletme türünüzü, mevcut durumunuzu, aklınızdaki özellikleri ve varsa bütçe/süre beklentinizi yazmanız yeterli.
         </p>
         
         <div className="premium-panel relative overflow-hidden bg-[#0b1830]/88 p-8 border-l-4 border-white mb-10">
           <h3 className="text-xl font-bold mb-3">Ne yazacağınızı bilmiyorsanız</h3>
           <p className="text-gray-400 text-sm leading-relaxed">
-            İşletme türünüzü, istediğiniz özellikleri ve varsa bütçe/süre beklentinizi yazmanız yeterli. Uygun yapı birlikte netleştirilebilir.
+            Form bir ön analiz gibi çalışır. Bütçe aralığı ve teslim beklentisi belirtmek, kapsamı doğru daraltmamıza yardımcı olur; emin olmadığınız alanları boş bırakabilirsiniz.
           </p>
         </div>
 
