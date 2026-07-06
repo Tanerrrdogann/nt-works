@@ -1,6 +1,8 @@
 export interface ServiceType {
   id: string;
   slug: string;
+  category: string;
+  categorySlug: string;
   title: string;
   shortDesc: string;
   longDesc: string;
@@ -9,14 +11,21 @@ export interface ServiceType {
   examples: string[];
   infrastructure: string[];
   combinations: string[];
+  modules: string[];
+  priceFactors: string[];
   suitableFor: string[];
   problemSolved: string;
   scopeLevels: Array<{
     name: string;
     description: string;
   }>;
+  faqs: Array<{
+    question: string;
+    answer: string;
+  }>;
   relatedProjects: string[];
   relatedBlogPosts: string[];
+  riskNote?: string;
   bionlukLinkKey?: string;
 }
 
@@ -36,6 +45,26 @@ export interface ProjectType {
   clientDisplayName?: string;
   result?: string;
   testimonialSlug?: string;
+  metrics?: Array<{
+    value: string;
+    label: string;
+  }>;
+  screenshots?: Array<{
+    src: string;
+    alt: string;
+    altTr?: string;
+    caption?: string;
+  }>;
+  caseStudies?: Array<{
+    title: string;
+    summary: string;
+    sections: Array<{
+      title: string;
+      body: string[];
+      bullets?: string[];
+    }>;
+    outcomes?: string[];
+  }>;
 }
 
 export interface TestimonialType {

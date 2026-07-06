@@ -1,0 +1,692 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <title>Infinity Chassis Units - Teknik SEO ve Migration Ön İnceleme Raporu</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 18mm 16mm 18mm 16mm;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: #172033;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      font-size: 10.4pt;
+      line-height: 1.55;
+      background: #fff;
+    }
+    .cover {
+      min-height: 257mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      page-break-after: always;
+      padding: 8mm 0;
+    }
+    .brandline {
+      width: 72px;
+      height: 5px;
+      background: #bd1d37;
+      margin-bottom: 18mm;
+    }
+    .eyebrow {
+      color: #bd1d37;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: 9pt;
+      margin-bottom: 8mm;
+    }
+    .cover h1 {
+      font-size: 34pt;
+      line-height: 1.05;
+      margin: 0 0 8mm 0;
+      color: #111827;
+      letter-spacing: 0;
+    }
+    .cover h2 {
+      font-size: 15pt;
+      line-height: 1.35;
+      color: #475569;
+      font-weight: 500;
+      margin: 0;
+      max-width: 145mm;
+    }
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 20mm;
+      max-width: 150mm;
+    }
+    .meta-card {
+      border: 1px solid #e5e7eb;
+      border-left: 4px solid #bd1d37;
+      padding: 10px 12px;
+      border-radius: 6px;
+      background: #fafafa;
+    }
+    .meta-card b {
+      display: block;
+      color: #111827;
+      margin-bottom: 2px;
+      font-size: 9pt;
+    }
+    .meta-card span {
+      color: #475569;
+      font-size: 9pt;
+    }
+    .footer-note {
+      color: #64748b;
+      font-size: 9pt;
+      border-top: 1px solid #e5e7eb;
+      padding-top: 8mm;
+    }
+    .toc {
+      page-break-after: always;
+      padding-top: 6mm;
+    }
+    .toc h2 {
+      font-size: 22pt;
+      margin-top: 0;
+      color: #111827;
+    }
+    .toc ul {
+      columns: 2;
+      column-gap: 18mm;
+      padding-left: 0;
+      margin-top: 10mm;
+      list-style: none;
+    }
+    .toc li {
+      break-inside: avoid;
+      margin: 0 0 7px 0;
+      color: #475569;
+    }
+    .toc a {
+      color: #172033;
+      text-decoration: none;
+    }
+    main h1 {
+      display: none;
+    }
+    main h2 {
+      font-size: 18pt;
+      line-height: 1.2;
+      color: #111827;
+      margin: 12mm 0 5mm;
+      padding-top: 2mm;
+      border-top: 2px solid #bd1d37;
+      page-break-after: avoid;
+    }
+    main h3 {
+      font-size: 12.5pt;
+      color: #bd1d37;
+      margin: 8mm 0 3mm;
+      page-break-after: avoid;
+    }
+    main h4 {
+      font-size: 11pt;
+      margin: 6mm 0 2mm;
+      page-break-after: avoid;
+    }
+    p {
+      margin: 0 0 3.2mm;
+    }
+    ul {
+      margin: 0 0 4mm 0;
+      padding-left: 18px;
+    }
+    li {
+      margin-bottom: 1.4mm;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 4mm 0 6mm;
+      font-size: 9.2pt;
+      page-break-inside: avoid;
+    }
+    th {
+      background: #172033;
+      color: #fff;
+      font-weight: 700;
+      text-align: left;
+      padding: 7px 8px;
+    }
+    td {
+      border: 1px solid #e5e7eb;
+      padding: 6px 8px;
+      vertical-align: top;
+    }
+    tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      padding: 1px 4px;
+      font-size: 8.8pt;
+      color: #9f1239;
+    }
+    pre {
+      background: #111827;
+      color: #f8fafc;
+      border-radius: 6px;
+      padding: 10px 12px;
+      overflow: hidden;
+      white-space: pre-wrap;
+      font-size: 8.8pt;
+      page-break-inside: avoid;
+    }
+    pre code {
+      background: transparent;
+      color: inherit;
+      border: 0;
+      padding: 0;
+    }
+    hr {
+      border: 0;
+      height: 1px;
+      background: #e5e7eb;
+      margin: 8mm 0;
+    }
+    strong {
+      color: #111827;
+    }
+    .callout {
+      border-left: 5px solid #bd1d37;
+      background: #fff7f8;
+      padding: 12px 14px;
+      border-radius: 6px;
+      margin: 0 0 8mm;
+      color: #334155;
+    }
+  </style>
+</head>
+<body>
+  <section class="cover">
+    <div>
+      <div class="brandline"></div>
+      <div class="eyebrow">Teknik SEO ve Migration Ön İnceleme</div>
+      <h1>Infinity Chassis Units</h1>
+      <h2>WordPress'ten React/Next yapıya geçiş sonrası organik görünürlük kaybı, indexleme sorunları ve kurtarma yol haritası.</h2>
+      <div class="meta-grid">
+        <div class="meta-card"><b>Site</b><span>infinitychassis.com</span></div>
+        <div class="meta-card"><b>İnceleme Tarihi</b><span>2 Temmuz 2026</span></div>
+        <div class="meta-card"><b>Kapsam</b><span>GSC, cPanel, DB, sitemap, robots, redirect</span></div>
+        <div class="meta-card"><b>Durum</b><span>Ön teknik rapor ve aksiyon planı</span></div>
+      </div>
+    </div>
+    <div class="footer-note">Hazırlayan: NT Works - Teknik SEO / Migration İncelemesi</div>
+  </section>
+  <section class="toc">
+    <h2>İçindekiler</h2>
+    <ul><li><a href="#1-yönetici-özeti">1. Yönetici Özeti</a></li>
+<li><a href="#2-ana-bulgular">2. Ana Bulgular</a></li>
+<li><a href="#3-search-console-bulguları">3. Search Console Bulguları</a></li>
+<li><a href="#4-cpanel-ve-eski-wordpress-bulguları">4. cPanel ve Eski WordPress Bulguları</a></li>
+<li><a href="#5-eski-wordpress-database-bulguları">5. Eski WordPress Database Bulguları</a></li>
+<li><a href="#6-link-ve-internal-link-bulguları">6. Link ve Internal Link Bulguları</a></li>
+<li><a href="#7-performans-güvenlik-ve-https">7. Performans, Güvenlik ve HTTPS</a></li>
+<li><a href="#8-ana-problem-listesi">8. Ana Problem Listesi</a></li>
+<li><a href="#9-çözüm-planı">9. Çözüm Planı</a></li>
+<li><a href="#10-önceliklendirilmiş-aksiyon-listesi">10. Önceliklendirilmiş Aksiyon Listesi</a></li>
+<li><a href="#11-beklenen-etki">11. Beklenen Etki</a></li>
+<li><a href="#12-sonuç">12. Sonuç</a></li></ul>
+  </section>
+  <main>
+    <h1 id="infinity-chassis-units">Infinity Chassis Units</h1>
+<h2 id="teknik-seo-ve-migration-ön-i-nceleme-raporu">Teknik SEO ve Migration Ön İnceleme Raporu</h2>
+<p><strong>Site:</strong> https://infinitychassis.com</p>
+<p><strong>İnceleme tarihi:</strong> 2 Temmuz 2026</p>
+<p><strong>Kapsam:</strong> Google Search Console, cPanel, eski WordPress dosya yapısı, eski WordPress database, robots.txt, sitemap, .htaccess, indexleme, performans ve migration sinyalleri</p>
+<hr />
+<h2 id="1-yönetici-özeti">1. Yönetici Özeti</h2>
+<p>Yapılan incelemeye göre organik trafik düşüşünün ana nedeni React/Next altyapısının Google tarafından okunamaması değildir. Google mevcut siteyi tarayabiliyor, sitemap'i okuyabiliyor ve bazı yeni URL'leri indeksliyor.</p>
+<p>Ana problem, WordPress'ten yeni React/Next siteye geçiş sırasında SEO migration sürecinin eksik ve hatalı tamamlanmış olmasıdır.</p>
+<p>Özellikle eski WordPress URL'leri, ürün URL'leri, kategori URL'leri, attachment URL'leri, PDF/katalog URL'leri, <code>?add-to-cart</code>, <code>?attachment_id</code>, eski dil URL'leri ve yeni <code>/en/...</code> URL yapısı aynı anda Google tarafından görülmeye devam ediyor. Bu durum Google'ın site yapısını net algılamasını zorlaştırıyor ve eski SEO değerinin yeni siteye sağlıklı aktarılmasını engelliyor.</p>
+<p>İlk öneri WordPress'e geri dönmek değildir. Öncelik mevcut React/Next site üzerinde migration, redirect, canonical, noindex, robots, sitemap ve internal link problemlerini düzeltmek olmalıdır.</p>
+<hr />
+<h2 id="2-ana-bulgular">2. Ana Bulgular</h2>
+<h3 id="2-1-trafik-düşüşü">2.1 Trafik Düşüşü</h3>
+<p>Search Console verilerine göre son 3 ay ile önceki 3 ay karşılaştırıldığında ciddi düşüş vardır:</p>
+<table><thead><tr><th>Metrik</th><th>Son 3 Ay</th><th>Önceki 3 Ay</th><th>Değişim</th></tr></thead><tbody><tr><td>Tıklama</td><td>721</td><td>1.570</td><td>-849</td></tr><tr><td>Gösterim</td><td>84,6K</td><td>213K</td><td>-128,4K</td></tr><tr><td>Ortalama CTR</td><td>%0,9</td><td>%0,7</td><td>+%0,2</td></tr><tr><td>Ortalama konum</td><td>28,1</td><td>19,8</td><td>-8,3 pozisyon</td></tr></tbody></table>
+<p>16 aylık grafikte Mart 2025 - Eylül 2025 arası güçlü görünürlük vardır. Eylül 2025 sonrası düşüş başlamakta, Ocak 2026 sonrası zayıflama artmakta, Mart 2026 sonrası belirgin şekilde sertleşmektedir.</p>
+<h3 id="2-2-trafik-kaybı-eski-wordpress-url-leriyle-i-lişkili">2.2 Trafik Kaybı Eski WordPress URL'leriyle İlişkili</h3>
+<p>Search Console'da en çok trafik alan ve trafik kaybeden sayfaların önemli bölümü eski WordPress URL yapısındadır:</p>
+<ul>
+<li><code>https://infinitychassis.com/price-of-ambulance/</code></li>
+<li><code>https://infinitychassis.com/toyota-hiace-ambulance-price-lowest/</code></li>
+<li><code>https://infinitychassis.com/product/toyota-hiace-ambulance/</code></li>
+<li><code>https://infinitychassis.com/mercedes-ambulance-sprinter/</code></li>
+<li><code>https://infinitychassis.com/product/fiat-ducato-ambulance/</code></li>
+<li><code>https://infinitychassis.com/wp-content/uploads/...</code></li>
+<li><code>https://infinitychassis.com/?attachment_id=...</code></li>
+</ul>
+<p>Yeni URL yapısı olan <code>/en/products/...</code> sayfaları eski performansı henüz devralamamış görünmektedir.</p>
+<p>Örnek:</p>
+<ul>
+<li><code>https://infinitychassis.com/en/products</code></li>
+<li>Son 3 ay: 3 tıklama</li>
+<li>Gösterim: 9.064</li>
+<li>Ortalama pozisyon: 51,3</li>
+</ul>
+<p>Bu sayfa görünürlük alıyor fakat çok geride konumlanıyor ve tıklama üretemiyor.</p>
+<hr />
+<h2 id="3-search-console-bulguları">3. Search Console Bulguları</h2>
+<h3 id="3-1-indexleme-durumu">3.1 Indexleme Durumu</h3>
+<p>Search Console &gt; Sayfalar raporunda görülen durum:</p>
+<table><thead><tr><th>Durum</th><th>URL Sayısı</th></tr></thead><tbody><tr><td>Dizine eklenmeyen</td><td>21,1K</td></tr><tr><td>Dizine eklenen</td><td>2,27K</td></tr><tr><td>Yönlendirmeli sayfa</td><td>9.941</td></tr><tr><td>Robots.txt tarafından engellendi</td><td>2.489</td></tr><tr><td>Bulunamadı 404</td><td>1.453</td></tr><tr><td>Sunucu hatası 5xx</td><td>21</td></tr><tr><td>Tarandı, şu anda dizine eklenmiş değil</td><td>5.111</td></tr><tr><td>Kullanıcı tarafından seçilen canonical olmadan kopya</td><td>438</td></tr><tr><td>Doğru canonical etikete sahip alternatif sayfa</td><td>146</td></tr><tr><td>Yeniden yönlendirme hatası</td><td>3</td></tr><tr><td>Noindex etiketi nedeniyle hariç tutuldu</td><td>1.450</td></tr><tr><td>Robots tarafından engelleniyor olsa da dizine eklendi</td><td>19</td></tr></tbody></table>
+<p>Bu tablo, Google'ın sitede çok fazla eski, yönlenen, engellenen, kopya, 404 ve noindex URL gördüğünü göstermektedir.</p>
+<h3 id="3-2-404-problemleri">3.2 404 Problemleri</h3>
+<p>404 raporunda eski WordPress ürün, kategori ve dosya URL'leri görünmektedir:</p>
+<ul>
+<li><code>/en/product/...</code></li>
+<li><code>/fr/product/...</code></li>
+<li><code>/ru/product/...</code></li>
+<li><code>/ar/product/...</code></li>
+<li><code>/product-categories/...</code></li>
+<li><code>/brand/...</code></li>
+<li><code>/wp-content/uploads/2026/04/SAMU-Ambulance_compressed.pdf</code></li>
+<li><code>/wp-content/uploads/2026/04/Ford-Transit-Ambulance-Catalog.pdf</code></li>
+</ul>
+<p>Bu durum eski URL'lerin yeni karşılıklarına doğru taşınmadığını göstermektedir.</p>
+<h3 id="3-3-noindex-problemleri">3.3 Noindex Problemleri</h3>
+<p>Noindex raporunda sadece admin veya teknik sayfalar değil, ürün ve haber sayfaları da görünmektedir:</p>
+<ul>
+<li><code>/tr/urunler/...</code></li>
+<li><code>/fr/produits/...</code></li>
+<li><code>/ar/muntajatuna/...</code></li>
+<li><code>/ru/produkty/...</code></li>
+<li><code>/en/products/gmc-savana-ambulance/</code></li>
+<li><code>/en/news/mobile-surgery-ambulance</code></li>
+<li><code>/en/news/mobile-laboratories-manufacturer</code></li>
+<li><code>/en/news/ambulance-spare-parts</code></li>
+</ul>
+<p>Bu URL'ler ticari veya içerik değeri taşıyorsa noindex durumu kritik bir hatadır.</p>
+<h3 id="3-4-canonical-ve-duplicate-problemleri">3.4 Canonical ve Duplicate Problemleri</h3>
+<p>Google'ın kullanıcıdan farklı canonical seçtiği URL örnekleri arasında önemli ticari sayfalar vardır:</p>
+<ul>
+<li><code>/en/mercedes-sprinter-ambulance/</code></li>
+<li><code>/en/toyota-hilux-ambulance/</code></li>
+<li><code>/en/toyota-land-cruiser-ambulance/</code></li>
+<li><code>/en/military-mobile-command-control-center/</code></li>
+<li><code>/en/product/toyota-hiace-ambulance/</code></li>
+<li><code>/product/toyota-hiace-4x4-ambulance/</code></li>
+</ul>
+<p>Bu, aynı veya çok benzer içeriklerin birden fazla URL'de bulunduğunu ve canonical kararının Google'a bırakıldığını gösterir.</p>
+<h3 id="3-5-robots-problemleri">3.5 Robots Problemleri</h3>
+<p>Robots blocked raporunda şu tip URL'ler görünmektedir:</p>
+<ul>
+<li><code>?attachment_id=...</code></li>
+<li><code>?add-to-cart=...</code></li>
+<li>eski WooCommerce URL'leri</li>
+<li>eski attachment URL'leri</li>
+<li>bazı statik dosyalar</li>
+</ul>
+<p>Bu URL'lerin hâlâ Google tarafından bulunması eski WordPress/WooCommerce kalıntılarının tam temizlenmediğini göstermektedir.</p>
+<h3 id="3-6-sitemap-durumu">3.6 Sitemap Durumu</h3>
+<p>Güncel sitemap Search Console'a doğru gönderilmiştir:</p>
+<ul>
+<li><code>/sitemap.xml</code></li>
+<li>Durum: Başarılı</li>
+<li>Son okuma: 30 Haziran 2026</li>
+<li>Keşfedilen sayfa: 368</li>
+</ul>
+<p>Alt sitemap'ler:</p>
+<ul>
+<li><code>/sitemap/case-studies.xml</code> - 7 URL</li>
+<li><code>/sitemap/categories.xml</code> - 7 URL</li>
+<li><code>/sitemap/pages.xml</code> - 9 URL</li>
+<li><code>/sitemap/posts.xml</code> - 198 URL</li>
+<li><code>/sitemap/products.xml</code> - 136 URL</li>
+<li><code>/sitemap/segments.xml</code> - 4 URL</li>
+<li><code>/sitemap/static.xml</code> - 7 URL</li>
+</ul>
+<p>Sitemap tarafında ana problem görünmemektedir. Ancak önemli çelişki şudur:</p>
+<ul>
+<li>Sitemap'te 368 URL var.</li>
+<li>Google'ın gördüğü dizine eklenmeyen URL sayısı 21,1K.</li>
+</ul>
+<p>Bu, Google'ın sitemap dışından çok fazla eski/çöp URL bulduğunu göstermektedir.</p>
+<h3 id="3-7-removals-geçmişi">3.7 Removals Geçmişi</h3>
+<p>13 Ocak 2026'da şu URL tipleri için kaldırma istekleri verilmiş, ancak iptal edilmiştir:</p>
+<ul>
+<li><code>?add-to-cart=</code></li>
+<li><code>?attachment_id=</code></li>
+<li><code>*attachment_id*</code></li>
+<li><code>*add-to-cart*</code></li>
+</ul>
+<p>Bu, daha önce WooCommerce/attachment URL kirliliğinin fark edildiğini fakat çözümün tamamlanmadığını göstermektedir.</p>
+<hr />
+<h2 id="4-cpanel-ve-eski-wordpress-bulguları">4. cPanel ve Eski WordPress Bulguları</h2>
+<h3 id="4-1-eski-wordpress-dosyaları-duruyor">4.1 Eski WordPress Dosyaları Duruyor</h3>
+<p>cPanel'de eski WordPress kurulumu durmaktadır:</p>
+<ul>
+<li><code>public_html/old/old.infinitychassis.com/</code></li>
+</ul>
+<p>İçeride bulunan önemli dosya ve klasörler:</p>
+<ul>
+<li><code>wp-admin</code></li>
+<li><code>wp-content</code></li>
+<li><code>wp-includes</code></li>
+<li><code>wp-config.php</code></li>
+<li><code>wp-login.php</code></li>
+<li><code>xmlrpc.php</code></li>
+<li><code>robots.txt</code></li>
+<li><code>.htaccess</code></li>
+<li><code>.htaccess.bk</code></li>
+<li><code>error_log</code></li>
+</ul>
+<p>Bu durum recovery için avantajdır. Eski dosya ve URL yapısı üzerinden kurtarma/mapping çalışması yapılabilir.</p>
+<h3 id="4-2-aktif-htaccess">4.2 Aktif .htaccess</h3>
+<p>Aktif <code>.htaccess</code> dosyasında eski URL'leri yeni URL'lere taşıyan 301 redirect kuralları bulunmamaktadır. Dosya yalnızca PHP handler bilgisi içermektedir.</p>
+<p>Bu kritik bir migration eksikliğidir.</p>
+<h3 id="4-3-eski-htaccess-bk">4.3 Eski .htaccess.bk</h3>
+<p>Eski <code>.htaccess.bk</code> dosyasında da eski WordPress URL'lerini yeni React/Next URL'lerine taşıyan redirect mapping bulunmamaktadır.</p>
+<p>İçerik ağırlıklı olarak:</p>
+<ul>
+<li>WordPress rewrite</li>
+<li>cache header</li>
+<li>gzip</li>
+<li>expires</li>
+<li>SpeedyCache</li>
+<li>LiteSpeed</li>
+<li>Wordfence</li>
+<li>PHP handler</li>
+</ul>
+<p>kurallarından oluşmaktadır.</p>
+<h3 id="4-4-eski-robots-txt">4.4 Eski Robots.txt</h3>
+<p>Eski robots.txt içinde eski WordPress sitemap'i tanımlıdır:</p>
+<pre><code>Sitemap: https://infinitychassis.com/sitemap_index.xml</code></pre>
+<p>Güncel sitemap ise:</p>
+<pre><code>https://infinitychassis.com/sitemap.xml</code></pre>
+<p>Eski robots.txt ayrıca PDF ve medya dosyalarını engelliyordu:</p>
+<pre><code>Disallow: /*.pdf$
+Disallow: /*.jpg$
+Disallow: /*.jpeg$
+Disallow: /*.png$
+Disallow: /*.webp$</code></pre>
+<p>Bu yapı katalog/PDF gibi değerli dosyaların Google tarafından doğru işlenmesini zorlaştırmış olabilir.</p>
+<hr />
+<h2 id="5-eski-wordpress-database-bulguları">5. Eski WordPress Database Bulguları</h2>
+<p>Eski WordPress database durmaktadır:</p>
+<ul>
+<li>Database: <code>infini10_wp862</code></li>
+<li>Table prefix: <code>wp9v_</code></li>
+</ul>
+<p>Temel URL ayarları:</p>
+<table><thead><tr><th>Alan</th><th>Değer</th></tr></thead><tbody><tr><td><code>siteurl</code></td><td><code>https://old.infinitychassis.com</code></td></tr><tr><td><code>home</code></td><td><code>https://old.infinitychassis.com</code></td></tr><tr><td><code>permalink_structure</code></td><td><code>/%postname%/</code></td></tr><tr><td><code>blogname</code></td><td><code>Ambulance Manufacturer</code></td></tr></tbody></table>
+<p>Yayınlanmış içerik sayıları:</p>
+<table><thead><tr><th>Tip</th><th>Durum</th><th>Sayı</th></tr></thead><tbody><tr><td>post</td><td>publish</td><td>720</td></tr><tr><td>product</td><td>publish</td><td>351</td></tr><tr><td>page</td><td>publish</td><td>38</td></tr><tr><td>attachment</td><td>inherit</td><td>2.067</td></tr></tbody></table>
+<p>Eski URL yapısı büyük ihtimalle slug bazlıydı:</p>
+<pre><code>https://infinitychassis.com/{post_name}/</code></pre>
+<p>Bu database, eski URL listesini çıkarmak ve yeni URL'lerle eşleştirmek için güçlü veri kaynağıdır.</p>
+<h3 id="5-1-eski-404-logları">5.1 Eski 404 Logları</h3>
+<p><code>wp9v_redirects_404</code> tablosunda eski 404 kayıtları bulunmaktadır.</p>
+<p>Örnek değerli eski URL'ler:</p>
+<ul>
+<li><code>/product-categories/ambulance-manufacturer-en/</code></li>
+<li><code>/product-categories/ambulance-manufacturer-en/renault-ambulance/</code></li>
+<li><code>/product/cash-in-transit-vehicles/</code></li>
+<li><code>/product/ford-transit-ambulance-350l/</code></li>
+<li><code>/mobile-laboratory-sales/</code></li>
+<li><code>/armored-money-transport-vehicle/</code></li>
+<li><code>/high-performance-armor-for-cash-in-transit/</code></li>
+<li><code>/brand/mercedes/</code></li>
+<li><code>/contact-us/</code></li>
+</ul>
+<p>Örnek teknik/temizlenecek URL'ler:</p>
+<ul>
+<li><code>/wp-includes/...</code></li>
+<li><code>?attachment_id=...</code></li>
+<li><code>?p=...</code></li>
+<li><code>?uicore-tb=...</code></li>
+<li><code>/cart/</code></li>
+</ul>
+<p>Örnek güvenlik/bot kaynaklı URL'ler:</p>
+<ul>
+<li><code>/shell.php</code></li>
+<li><code>/class-t.api.php</code></li>
+<li><code>/alfa-rex.php7</code></li>
+<li><code>/system_log.php</code></li>
+<li><code>/inputs.php</code></li>
+<li><code>/0.php</code></li>
+<li><code>/100.php</code></li>
+</ul>
+<p>Bu bot URL'leri SEO redirect mapping'e alınmamalıdır. Eski ürün, kategori, blog, landing page ve PDF/katalog URL'leri mapping'e alınmalıdır.</p>
+<hr />
+<h2 id="6-link-ve-internal-link-bulguları">6. Link ve Internal Link Bulguları</h2>
+<h3 id="6-1-harici-linkler">6.1 Harici Linkler</h3>
+<p>Search Console Links raporunda harici link alan URL sayısı sınırlıdır.</p>
+<p>En çok link alan sayfalar:</p>
+<ul>
+<li>Ana sayfa: 146 link</li>
+<li><code>/contact</code>: 7 link</li>
+<li><code>/en/products</code>: 5 link</li>
+</ul>
+<p>Link veren başlıca domainler:</p>
+<ul>
+<li><code>ayanambulans.com</code></li>
+<li><code>mercedesambulances.com</code></li>
+<li><code>toyotaambulance.com</code></li>
+<li><code>hiaceambulance.com</code></li>
+<li><code>fordtransitambulance.com</code></li>
+<li><code>medicalexpo.com</code></li>
+<li><code>medicalexpo.com.cn</code></li>
+<li><code>medicalexpo.es</code></li>
+</ul>
+<p>Anchor textlerde ticari ifadeler vardır:</p>
+<ul>
+<li><code>mercedes ambulance manufacturer</code></li>
+<li><code>toyota land cruiser ambulance</code></li>
+<li><code>ambulance conversion</code></li>
+<li><code>box ambulance</code></li>
+<li><code>download 2026 catalog</code></li>
+<li><code>request a quote</code></li>
+</ul>
+<p>Ancak bu link değeri ürün ve kategori landing page'lerine yeterince dağılmamış görünmektedir.</p>
+<h3 id="6-2-dahili-linkler">6.2 Dahili Linkler</h3>
+<p>Toplam dahili link sayısı:</p>
+<ul>
+<li>19.114</li>
+</ul>
+<p>En çok dahili link alan sayfalar:</p>
+<ul>
+<li>Ana sayfa: 2.448</li>
+<li><code>/en/products</code>: 1.277</li>
+<li><code>/contact</code>: 1.099</li>
+</ul>
+<p>Sorunlu durum:</p>
+<ul>
+<li>Aynı ürünlerin hem <code>/products/...</code> hem <code>/en/products/...</code> versiyonları internal link almaktadır.</li>
+<li><code>/ar/products</code>, <code>/es/products</code>, <code>/ru/products</code>, <code>/ru/produkty/...</code> gibi karışık URL yapıları internal linklerde yer almaktadır.</li>
+<li>Önemli kategori sayfalarının bazıları az internal link almaktadır:</li>
+<li><code>/en/products/mobile-health-vehicles</code>: 22</li>
+<li><code>/en/products/mobile-health-containers</code>: 11</li>
+<li><code>/en/products/hospital-tents</code>: 10</li>
+</ul>
+<p>Bu durum canonical karmaşasını ve site içi otorite dağılımı problemini artırmaktadır.</p>
+<hr />
+<h2 id="7-performans-güvenlik-ve-https">7. Performans, Güvenlik ve HTTPS</h2>
+<h3 id="7-1-core-web-vitals">7.1 Core Web Vitals</h3>
+<p>Mobil:</p>
+<ul>
+<li>Poor: 0</li>
+<li>Needs improvement: 48</li>
+<li>Good: 0</li>
+</ul>
+<p>Ana sorun:</p>
+<ul>
+<li>Mobil LCP 2,5 saniyeden uzun</li>
+</ul>
+<p>Örnek gruplar:</p>
+<ul>
+<li><code>/en/products</code> - 27 URL - LCP 2,7 sn</li>
+<li><code>/en</code> - 21 URL - LCP 2,6 sn</li>
+</ul>
+<p>Desktop tarafında aktif problem görünmemektedir.</p>
+<p>Performans iyileştirilmelidir fakat trafik düşüşünün ana nedeni Core Web Vitals görünmemektedir.</p>
+<h3 id="7-2-https">7.2 HTTPS</h3>
+<ul>
+<li>HTTPS olmayan URL: 0</li>
+<li>HTTPS URL: 48</li>
+<li>Kritik sorun yok</li>
+</ul>
+<h3 id="7-3-manual-actions">7.3 Manual Actions</h3>
+<ul>
+<li>Manuel işlem yok</li>
+</ul>
+<h3 id="7-4-security-issues">7.4 Security Issues</h3>
+<ul>
+<li>Güvenlik sorunu yok</li>
+</ul>
+<p>Trafik düşüşü manuel ceza, güvenlik problemi veya HTTPS kaynaklı görünmemektedir.</p>
+<hr />
+<h2 id="8-ana-problem-listesi">8. Ana Problem Listesi</h2>
+<p>1. Eski WordPress URL'leri yeni siteye birebir taşınmamış.</p>
+<p>2. Eski URL'ler için 301 redirect mapping yok.</p>
+<p>3. <code>.htaccess</code> içinde migration redirect kuralları yok.</p>
+<p>4. Eski ürün URL'leri 404 veya yanlış sayfalara düşüyor.</p>
+<p>5. Eski kategori URL'leri 404/noindex/redirect durumlarında.</p>
+<p>6. Eski PDF/katalog URL'leri 404 veriyor.</p>
+<p>7. Google hâlâ <code>?attachment_id</code> ve <code>?add-to-cart</code> URL'lerini görüyor.</p>
+<p>8. Çok sayıda noindex URL içinde ticari ürün ve haber sayfaları var.</p>
+<p>9. Canonical sinyalleri tutarsız.</p>
+<p>10. Aynı içeriğin farklı dil/slug/product URL'leri bir arada bulunuyor.</p>
+<p>11. Yeni <code>/en/...</code> URL yapısı eski trafiği devralamamış.</p>
+<p>12. Internal linklerde canonical olmayan URL'ler kullanılıyor.</p>
+<p>13. Önemli kategori sayfaları yeterli internal link almıyor.</p>
+<p>14. Eski WordPress database ve dosyaları duruyor fakat yeni siteye sağlıklı migration yapılmamış.</p>
+<p>15. Sitemap doğru görünse de Google sitemap dışından 21K+ URL görüyor.</p>
+<hr />
+<h2 id="9-çözüm-planı">9. Çözüm Planı</h2>
+<h3 id="aşama-1-acil-teknik-temizlik">Aşama 1: Acil Teknik Temizlik</h3>
+<p>1. Eski WordPress URL listesi çıkarılacak.</p>
+<p>2. Eski URL'ler önem sırasına göre sınıflandırılacak:</p>
+<ul>
+<li>Trafik alan URL'ler</li>
+<li>Backlink alan URL'ler</li>
+<li>Ürün URL'leri</li>
+<li>Kategori URL'leri</li>
+<li>Blog/landing page URL'leri</li>
+<li>PDF/katalog URL'leri</li>
+<li>Teknik/çöp URL'ler</li>
+<li>Bot/güvenlik tarama URL'leri</li>
+</ul>
+<p>3. Değerli eski URL'ler yeni sitedeki en alakalı URL'lere 301 ile yönlendirilecek.</p>
+<p>4. Çöp URL'ler redirect mapping'e alınmayacak.</p>
+<p>5. Bot/güvenlik URL'leri SEO aksiyon listesine alınmayacak.</p>
+<h3 id="aşama-2-redirect-mapping">Aşama 2: Redirect Mapping</h3>
+<p>İlk örnek redirect mantığı:</p>
+<pre><code>/product-categories/ambulance-manufacturer-en/ -&gt; /en/products/ambulances
+/product/ford-transit-ambulance-350l/ -&gt; /en/products/ambulances/ford-transit-ambulance
+/product/cash-in-transit-vehicles/ -&gt; /en/products/government-service-vehicles veya ilgili yeni sayfa
+/mobile-laboratory-sales/ -&gt; /en/products/mobile-technical-laboratories veya ilgili yeni sayfa
+/brand/mercedes/ -&gt; Mercedes ambulans kategori/ürün sayfası
+/contact-us/ -&gt; /contact veya /en/contact</code></pre>
+<p>Nihai redirect listesi eski URL export'u, Search Console kayıpları, 404 logları ve yeni site URL listesi eşleştirilerek hazırlanmalıdır.</p>
+<h3 id="aşama-3-noindex-ve-canonical-düzeltmeleri">Aşama 3: Noindex ve Canonical Düzeltmeleri</h3>
+<p>1. Noindex olan ürün/haber/kategori URL'leri kontrol edilecek.</p>
+<p>2. Ticari değeri olan sayfalarda noindex kaldırılacak.</p>
+<p>3. Canonical her sayfada tek ve doğru hedefe işaret edecek.</p>
+<p>4. <code>/product/...</code>, <code>/products/...</code>, <code>/en/product/...</code>, <code>/en/products/...</code> gibi varyasyonlar sadeleştirilecek.</p>
+<p>5. Dil URL'lerinde hreflang/canonical ilişkisi netleştirilecek.</p>
+<h3 id="aşama-4-internal-link-temizliği">Aşama 4: Internal Link Temizliği</h3>
+<p>1. Site içi linkler canonical URL'lere güncellenecek.</p>
+<p>2. <code>/products/...</code> ile <code>/en/products/...</code> karışıklığı giderilecek.</p>
+<p>3. Ana kategori sayfalarına daha fazla iç link verilecek.</p>
+<p>4. Ana sayfa, blog, ürün ve kategori sayfaları birbirini ticari anahtar kelimelerle destekleyecek.</p>
+<h3 id="aşama-5-pdf-ve-katalog-kurtarma">Aşama 5: PDF ve Katalog Kurtarma</h3>
+<p>Eski WordPress dosya arşivi indirildikten sonra şu çalışma yapılacak:</p>
+<p>1. Eski <code>wp-content/uploads</code> içinde PDF/katalog dosyaları taranacak.</p>
+<p>2. Search Console'da 404 görünen PDF'ler fiziksel olarak aranacak.</p>
+<p>3. Bulunan dosyalar yeni aktif siteye taşınacak veya eski URL yolu restore edilecek.</p>
+<p>4. Bulunamayan dosyalar için en yakın yeni katalog/sayfa hedefi belirlenip 301 yönlendirme yapılacak.</p>
+<p>5. Kataloglar SEO ve lead generation açısından yeniden değerlendirilecek.</p>
+<p>Bu aşamada kurtarılabilen tüm dosyalar kurtarılacak; kurtarılamayanlar için doğru redirect stratejisi uygulanacaktır.</p>
+<h3 id="aşama-6-meta-ve-i-çerik-optimizasyonu">Aşama 6: Meta ve İçerik Optimizasyonu</h3>
+<p>Öncelikli optimize edilecek ticari alanlar:</p>
+<ul>
+<li>Ambulance Manufacturer</li>
+<li>Ambulance Manufacturer Turkey</li>
+<li>Toyota Ambulance</li>
+<li>Toyota Hiace Ambulance Price</li>
+<li>Mercedes Sprinter Ambulance</li>
+<li>Ford Transit Ambulance</li>
+<li>Mobile Clinic Manufacturer</li>
+<li>Mobile Dental Clinic</li>
+<li>Mobile Laboratory</li>
+<li>Mobile X-Ray Van</li>
+<li>EN1789 Ambulance</li>
+<li>Armored Ambulance</li>
+<li>Cash in Transit Vehicle</li>
+</ul>
+<p>Sayfa bazında yapılacaklar:</p>
+<p>1. Title güncellemesi</p>
+<p>2. Meta description güncellemesi</p>
+<p>3. H1/H2 yapısı</p>
+<p>4. İçerik derinliği</p>
+<p>5. Ürün teknik detayları</p>
+<p>6. Sertifika ve kalite sinyalleri</p>
+<p>7. CTA ve teklif alma akışı</p>
+<p>8. Schema markup kontrolü</p>
+<hr />
+<h2 id="10-önceliklendirilmiş-aksiyon-listesi">10. Önceliklendirilmiş Aksiyon Listesi</h2>
+<h3 id="i-lk-24-48-saat">İlk 24-48 Saat</h3>
+<p>1. Eski URL listesinin tamamını export et.</p>
+<p>2. En değerli 100 eski URL'yi belirle.</p>
+<p>3. Eski 404 loglarını temizle ve sınıflandır.</p>
+<p>4. 404 veren PDF/katalog URL'lerini eski dosya arşivinde ara.</p>
+<p>5. İlk 301 redirect mapping listesini hazırla.</p>
+<p>6. Yanlış noindex verilen ticari URL'leri tespit et.</p>
+<p>7. Canonical çakışması olan önemli ürün URL'lerini listele.</p>
+<h3 id="i-lk-7-gün">İlk 7 Gün</h3>
+<p>1. 301 redirectleri uygula.</p>
+<p>2. PDF/katalog dosyalarını restore et veya yönlendir.</p>
+<p>3. Noindex/canonical problemlerini düzelt.</p>
+<p>4. Internal linkleri canonical URL'lere çevir.</p>
+<p>5. GSC URL Inspection ile kritik URL'leri test et.</p>
+<p>6. Sitemap'i yeniden gönder.</p>
+<p>7. GSC Pages raporunda doğrulama başlat.</p>
+<h3 id="i-lk-30-gün">İlk 30 Gün</h3>
+<p>1. En değerli ürün/kategori sayfalarını SEO açısından güçlendir.</p>
+<p>2. Düşen sorgulara göre içerik güncelle.</p>
+<p>3. Çok dilli sayfalarda hreflang/canonical kontrolü yap.</p>
+<p>4. Core Web Vitals mobil LCP değerini iyileştir.</p>
+<p>5. Organik lead event tracking kontrolü yap.</p>
+<p>6. Haftalık GSC takip raporu oluştur.</p>
+<hr />
+<h2 id="11-beklenen-etki">11. Beklenen Etki</h2>
+<p>Bu çalışma Google'a sitenin yeni yapısını daha net anlatacaktır.</p>
+<p>Beklenen iyileşmeler:</p>
+<ul>
+<li>Eski URL değerlerinin yeni sayfalara aktarılması</li>
+<li>404 ve redirect karmaşasının azalması</li>
+<li>Noindex/canonical hatalarının temizlenmesi</li>
+<li>Yeni URL yapısının Google tarafından daha sağlıklı algılanması</li>
+<li>Önemli ürün/kategori sayfalarının tekrar görünürlük kazanması</li>
+<li>Ticari sorgularda pozisyon toparlanması</li>
+<li>Organik lead potansiyelinin yeniden artması</li>
+</ul>
+<p>SEO toparlanması anlık olmaz. Ancak teknik migration eksikleri düzeltildiğinde Google'ın yeni sinyalleri işlemesiyle 2-8 hafta içinde anlamlı indeksleme ve görünürlük değişimleri beklenebilir. Rekabetçi ticari sorgularda tam toparlanma daha uzun sürebilir.</p>
+<hr />
+<h2 id="12-sonuç">12. Sonuç</h2>
+<p>İlk inceleme sonucunda trafik düşüşünün ana nedeni React/Next altyapısı değil, WordPress'ten yeni siteye geçişte eski SEO değerinin yeni URL yapısına doğru taşınmamasıdır.</p>
+<p>Mevcut site üzerinde teknik SEO migration düzeltmeleri yapılmadan WordPress'e geri dönmek ikinci bir migration riski yaratır.</p>
+<p>Önerilen yol:</p>
+<p>1. Mevcut React/Next site korunmalı.</p>
+<p>2. Eski WordPress URL'leri yeni sayfalara 301 ile taşınmalı.</p>
+<p>3. 404, noindex, canonical, robots ve internal link problemleri temizlenmeli.</p>
+<p>4. Eski PDF/katalog dosyaları kurtarılmalı veya doğru sayfalara yönlendirilmeli.</p>
+<p>5. Ticari ürün ve kategori sayfaları SEO açısından güçlendirilmeli.</p>
+<p>Bu yaklaşım, mevcut yatırımın korunmasını ve eski organik performansa geri dönüş için en kontrollü yolu sağlar.</p>
+
+  </main>
+</body>
+</html>

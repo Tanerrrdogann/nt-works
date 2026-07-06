@@ -74,8 +74,8 @@ Bu dosya, ilk iki yapılacaklar listesindeki **web sitesiyle ilgili** maddelerin
 ### Landing Page ve SEO Sayfaları
 
 - [x] Hizmet bazlı landing page sistemi kuruldu.
-- [x] `/admin-panel-gelistirme` oluşturuldu.
-- [x] `/isletme-yonetim-sistemi` oluşturuldu.
+- [x] `/admin-panel-yaptirmak` oluşturuldu.
+- [x] `/isletme-yonetim-paneli` oluşturuldu.
 - [x] `/pazaryeri-entegrasyonu` oluşturuldu.
 - [x] `/xml-entegrasyonu` oluşturuldu.
 - [x] `/stok-takip-sistemi` oluşturuldu.
@@ -84,7 +84,7 @@ Bu dosya, ilk iki yapılacaklar listesindeki **web sitesiyle ilgili** maddelerin
 - [x] `/randevu-sistemi` oluşturuldu.
 - [x] `/e-ticaret-sitesi` oluşturuldu.
 - [x] `/power-apps-gelistirme` oluşturuldu.
-- [x] Sektör bazlı bazı landing sayfaları oluşturuldu: güzellik merkezi, klinik, butik, restoran/QR menü, teknik servis, küçük işletme admin paneli.
+- [x] Sektör bazlı landing sayfa sistemi tamamlandı; ana sektör listesi ayrı sayfalar halinde oluşturuldu.
 
 ### Güven, Yasal ve Destek Sayfaları
 
@@ -95,6 +95,7 @@ Bu dosya, ilk iki yapılacaklar listesindeki **web sitesiyle ilgili** maddelerin
 - [x] Teslim sonrası destek sayfası eklendi.
 - [x] Kapsam ve fiyatlandırma sayfası eklendi.
 - [x] Bionluk üzerinden güvenli çalışma sayfası eklendi.
+- [x] Bionluk güvenli çalışma sayfası doğru içerikle teklif/iletişim akışına bağlandı.
 - [x] Sık sorulan sorular sayfası eklendi.
 - [x] Bakım ve geliştirme paketleri sayfası eklendi.
 
@@ -106,26 +107,23 @@ Bu dosya, ilk iki yapılacaklar listesindeki **web sitesiyle ilgili** maddelerin
 - [x] Navbar'a Blog ve Portföy eklendi.
 - [x] Footer linkleri güçlendirildi.
 - [x] Blog -> hizmet -> portföy/canlı örnek -> teklif formu akışı kuruldu.
+- [x] Hakkımızda sayfasına alınan/alınmayan işler ve regülasyonlu proje sorumluluk ayrımı eklendi.
 
 ## Kısmen Tamamlananlar
 
 - [ ] Tüm blog yazıları tam uzunlukta SEO makalesi seviyesinde değil; temel yazılar genişletildi ama bazı konu kümeleri hâlâ eksik.
-- [ ] Hizmet bazlı landing page sistemi kuruldu ama `/api-entegrasyonu`, `/sharepoint-operasyon-paneli`, `/ozel-yazilim-gelistirme`, `/tahsilat-takip-sistemi` henüz eklenmedi.
-- [ ] Sektör bazlı landing page sistemi başladı ama tüm sektör listesi tamamlanmadı.
-- [ ] Gerçek müşteri işleri eklendi ama ekran görüntüleri ve kapak görselleri henüz yok.
-- [ ] Bionluk yorumları metin olarak eklendi; ekran görüntüsü/görsel kanıt henüz eklenmedi.
+- [x] Hizmet bazlı landing page sistemi tamamlandı; ana landing sayfaları, ilgili blog/proje bağlantıları ve teklif CTA'larıyla yayında.
+- [x] Sektör bazlı landing page sistemi tamamlandı; sektör sayfaları ilgili demo/portföy, blog ve teklif akışına bağlandı.
+- [x] Gerçek müşteri işleri ekran görüntüleriyle birlikte portföy detaylarında güçlendirildi.
 - [ ] Open Graph sistemi var ama sayfa bazlı özel görseller hazırlanmadı.
 - [ ] Mobil/tablet/masaüstü görsel kontrol kullanıcı tarafından yapılacak.
 - [ ] Lighthouse, performans ve yatay taşma kontrolleri kullanıcı tarafından yapılacak.
 
 ## Henüz Yapılmayanlar
 
-- [ ] Admin panel / CMS / CRM sistemi.
-- [ ] Blog yazılarını admin panelden ekleme ve düzenleme.
-- [ ] Portföy ve müşteri yorumlarını admin panelden yönetme.
-- [ ] Medya kütüphanesi, görsel kırpma ve görsel optimizasyon paneli.
-- [ ] Google Business Profile kurulumu.
-- [ ] Google Search Console kurulumu ve index takip sistemi.
+- [x] NT Works için iç admin / CMS / CRM sistemi yapılmamasına karar verildi.
+- [x] Google Business Profile kurulumu tamamlandı.
+- [x] Google Search Console kurulumu ve sitemap gönderimi tamamlandı.
 - [ ] Backlink, sosyal medya ve dış kaynak görünürlük çalışmaları.
 - [ ] Şehir bazlı SEO sayfaları.
 - [ ] Tüm planlanan 24+ blog yazısının yayınlanması.

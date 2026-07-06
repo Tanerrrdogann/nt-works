@@ -12,6 +12,40 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: path.resolve(__dirname),
   },
+  async redirects() {
+    return [
+      {
+        source: "/admin-panel-gelistirme",
+        destination: "/admin-panel-yaptirmak",
+        permanent: true
+      },
+      {
+        source: "/admin-panel-yazilimi",
+        destination: "/admin-panel-yaptirmak",
+        permanent: true
+      },
+      {
+        source: "/isletme-yonetim-sistemi",
+        destination: "/isletme-yonetim-paneli",
+        permanent: true
+      },
+      {
+        source: "/referanslar",
+        destination: "/portfolio",
+        permanent: true
+      },
+      {
+        source: "/musteri-yorumlari",
+        destination: "/portfolio",
+        permanent: true
+      },
+      {
+        source: "/testimonials",
+        destination: "/portfolio",
+        permanent: true
+      }
+    ];
+  },
   async rewrites() {
     const frontendDemoRewrites = staticDemos
       ? [

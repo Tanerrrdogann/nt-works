@@ -4,16 +4,16 @@ Bu doküman Google Business Profile, Search Console, sitemap gönderimi, index i
 
 ## 1. Google Business Profile
 
-Durum: Kullanıcı hesabıyla kurulacak dış platform işi.
+Durum: Kurulum tamamlandı; düzenli post ve profil güncellemeleri takip edilecek.
 
 Yapılacaklar:
 
-- [ ] Google Business Profile aç.
-- [ ] İşletme adı: `NT Web Çözümleri`.
-- [ ] Site bağlantısı: `https://ntwebcozumleri.com.tr`.
-- [ ] Ana kategori: web tasarım / yazılım geliştirme / internet pazarlama kategorilerinden en uygun olanı seç.
-- [ ] Hizmet bölgesi: Türkiye geneli / uzaktan çalışma vurgusu.
-- [ ] Açıklama:
+- [x] Google Business Profile aç.
+- [x] İşletme adı: `NT Web Çözümleri`.
+- [x] Site bağlantısı: `https://ntwebcozumleri.com.tr`.
+- [x] Ana kategori: web tasarım / yazılım geliştirme / internet pazarlama kategorilerinden en uygun olanı seç.
+- [x] Hizmet bölgesi: Türkiye geneli / uzaktan çalışma vurgusu.
+- [x] Açıklama:
 
 ```text
 NT Web Çözümleri; işletmelere özel web sitesi, admin panel, e-ticaret, ürün katalog, randevu, pazaryeri entegrasyonu, otomasyon ve özel yazılım sistemleri geliştiren butik yazılım stüdyosudur. Projelerde kapsamı baştan netleştirir, mümkün olduğunda canlı örneklerle ilerler ve teslim sonrası bakım/geliştirme desteği sunar.
@@ -40,14 +40,14 @@ Google Business post planı:
 
 ## 2. Google Search Console
 
-Durum: Kullanıcı Google hesabıyla kurulacak dış platform işi.
+Durum: Kurulum tamamlandı; index ve performans takibi düzenli yapılacak.
 
 Kurulum:
 
-- [ ] Domain property ekle: `ntwebcozumleri.com.tr`.
-- [ ] DNS doğrulamasını domain panelinden yap.
-- [ ] Alternatif olarak URL-prefix property ekle: `https://ntwebcozumleri.com.tr`.
-- [ ] Sitemap gönder: `https://ntwebcozumleri.com.tr/sitemap.xml`.
+- [x] Domain property ekle: `ntwebcozumleri.com.tr`.
+- [x] DNS doğrulamasını domain panelinden yap.
+- [x] Alternatif olarak URL-prefix property ekle: `https://ntwebcozumleri.com.tr`.
+- [x] Sitemap gönder: `https://ntwebcozumleri.com.tr/sitemap.xml`.
 
 İlk kontrol:
 
@@ -59,7 +59,7 @@ Kurulum:
 - [ ] `/testimonials`
 - [ ] `/pazaryeri-entegrasyonu`
 - [ ] `/xml-entegrasyonu`
-- [ ] `/admin-panel-gelistirme`
+- [ ] `/admin-panel-yaptirmak`
 - [ ] `/stok-takip-sistemi`
 
 Yeni içerik yayınlandıktan sonra:
@@ -100,7 +100,7 @@ Güncellenecek profiller:
 - [ ] Instagram bio linkine site veya Bionluk ekle.
 - [ ] GitHub profil README içine NT Web Çözümleri linki ekle.
 - [ ] GitHub demo proje README dosyalarına canlı demo ve NT Web Çözümleri linki ekle.
-- [ ] Google Business Profile’a site linki ekle.
+- [x] Google Business Profile’a site linki ekle.
 
 Paylaşım yapılabilecek yerler:
 

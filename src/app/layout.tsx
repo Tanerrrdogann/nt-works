@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
+import HtmlLocaleSync from "@/components/i18n/HtmlLocaleSync";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import JsonLd from "@/components/seo/JsonLd";
@@ -74,8 +75,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="tr" className="scroll-smooth">
+    <html lang="tr-TR" dir="ltr" className="scroll-smooth">
       <body className={`${inter.className} flex flex-col min-h-screen bg-[#071225]`}>
+        <HtmlLocaleSync />
         <div className="software-split-background" aria-hidden="true">
           <span className="software-split-background-divider" />
           <span className="software-split-mobile-middle" />

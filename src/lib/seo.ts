@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { createLanguageAlternates, defaultLocale, getLocaleConfig, type Locale, withLocalePath } from "@/lib/i18n";
 
 export const siteConfig = {
   name: "NT Web Çözümleri",
@@ -39,6 +40,7 @@ export function pageMetadata({
   keywords = [],
   type = "website",
   noIndex = false,
+  locale = defaultLocale,
 }: {
   title: string;
   description: string;
@@ -47,17 +49,24 @@ export function pageMetadata({
   keywords?: string[];
   type?: "website" | "article";
   noIndex?: boolean;
+  locale?: Locale;
 }): Metadata {
-  const url = absoluteUrl(path);
+  const localizedPath = withLocalePath(path, locale);
+  const url = absoluteUrl(localizedPath);
   const imageUrl = absoluteUrl(image);
   const mergedKeywords = Array.from(new Set([...seoKeywords, ...keywords]));
+  const localeConfig = getLocaleConfig(locale);
 
   return {
     title,
     description,
     keywords: mergedKeywords,
     alternates: {
-      canonical: path,
+      canonical: localizedPath,
+      languages: {
+        ...createLanguageAlternates(path),
+        "x-default": path,
+      },
     },
     robots: {
       index: !noIndex,
@@ -75,7 +84,7 @@ export function pageMetadata({
       description,
       url,
       siteName: siteConfig.name,
-      locale: siteConfig.locale,
+      locale: localeConfig.ogLocale,
       type,
       images: [
         {
@@ -106,6 +115,7 @@ export const organizationJsonLd = {
   telephone: siteConfig.phone,
   sameAs: [
     "https://github.com/Tanerrrdogann",
+    "https://www.linkedin.com/in/ismail-taner-erdo%C4%9Fan28632232b",
     "https://bionluk.com/tanererdogann",
   ],
   contactPoint: {

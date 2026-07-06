@@ -13,9 +13,11 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default function FaqPage() {
+  const faqItems = page.sections?.map((section) => ({ question: section.heading, answer: section.body.join(" ") })) ?? [];
+
   return (
     <>
-      <JsonLd data={faqJsonLd(page.sections.map((section) => ({ question: section.heading, answer: section.body.join(" ") })))} />
+      {faqItems.length > 0 && <JsonLd data={faqJsonLd(faqItems)} />}
       <TrustPageView page={page} />
     </>
   );

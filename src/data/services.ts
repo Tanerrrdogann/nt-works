@@ -1,465 +1,850 @@
 import { ServiceType } from "@/types";
 
-type RawService = {
+export type ServiceCategory = {
   slug: string;
-  titleTr: string;
-  shortTr: string;
-  descriptionTr: string;
-  infrastructureTr?: string[];
-  examplesTr?: string[];
-  detailTr?: string[];
-  [key: string]: unknown;
+  title: string;
+  description: string;
+  signal: string;
 };
 
-const ntWorksServices = [
+export const serviceCategories: ServiceCategory[] = [
+  {
+    slug: "web-tanitim",
+    title: "Web Sitesi ve Tanıtım",
+    description: "Markayı, hizmeti, güven unsurlarını ve teklif akışını net gösteren web sitesi çözümleri.",
+    signal: "Görünürlük ve güven",
+  },
+  {
+    slug: "satis-siparis",
+    title: "Katalog, Satış ve Sipariş",
+    description: "Ürün, sepet, WhatsApp, stok, sipariş, bayi ve teklif akışlarını satış sistemine çeviren hizmetler.",
+    signal: "Satış ve sipariş",
+  },
+  {
+    slug: "panel-crm",
+    title: "Admin Panel, CRM ve Operasyon",
+    description: "Excel, WhatsApp ve dağınık kayıtları tek yönetim panelinde toparlayan işletme sistemleri.",
+    signal: "Operasyon kontrolü",
+  },
+  {
+    slug: "randevu-rezervasyon",
+    title: "Randevu ve Rezervasyon",
+    description: "Tarih, saat, müsaitlik, ön talep ve rezervasyon süreçlerini düzenleyen sistemler.",
+    signal: "Takvim ve rezervasyon",
+  },
+  {
+    slug: "entegrasyon",
+    title: "Entegrasyon Hizmetleri",
+    description: "Pazaryeri, XML, API, ödeme, kargo ve harici servis bağlantılarını yöneten çözümler.",
+    signal: "Sistemleri bağlama",
+  },
+  {
+    slug: "ozel-yazilim-platform",
+    title: "Özel Yazılım ve Platform",
+    description: "Hazır sistemlerin yetmediği noktalarda işletmeye özel panel, platform ve MVP geliştirme.",
+    signal: "Özel iş akışı",
+  },
+  {
+    slug: "ai-mobil",
+    title: "Yapay Zeka, Otomasyon ve Mobil",
+    description: "AI asistan, otomasyon, mobil/webview ve müşteri mesajı süreçlerini büyüten hizmetler.",
+    signal: "Yeni nesil otomasyon",
+  },
+  {
+    slug: "bakim-destek",
+    title: "Bakım ve Destek",
+    description: "Teslim sonrası hata düzeltme, yeni modül, içerik, güvenlik, yedek ve geliştirme desteği.",
+    signal: "Süreklilik",
+  },
+];
+
+export const featuredServiceSlugs = [
+  "ozel-yazilim-premium-sistemler",
+  "admin-panel-isletme-yonetimi",
+  "e-ticaret-satis-sistemleri",
+  "randevu-rezervasyon-sistemleri",
+  "pazaryeri-entegrasyonu",
+  "whatsapp-ai-asistan",
+  "b2b-bayi-siparis-sistemi",
+  "bakim-gelistirme-destek-hizmeti",
+];
+
+export const homepageServiceSlugs = [
+  "tanitim-kurumsal-web-siteleri",
+  "urun-katalog-whatsapp-siparis",
+  "e-ticaret-satis-sistemleri",
+  "randevu-rezervasyon-sistemleri",
+  "admin-panel-isletme-yonetimi",
+  "ozel-yazilim-premium-sistemler",
+];
+
+type ServiceInput = {
+  slug: string;
+  categorySlug: string;
+  title: string;
+  shortDesc: string;
+  longDesc: string;
+  detail: string[];
+  features: string[];
+  examples: string[];
+  suitableFor: string[];
+  problemSolved: string;
+  priceFactors: string[];
+  infrastructure?: string[];
+  combinations?: string[];
+  scopeLevels?: ServiceType["scopeLevels"];
+  faqs?: ServiceType["faqs"];
+  relatedProjects?: string[];
+  relatedBlogPosts?: string[];
+  riskNote?: string;
+};
+
+const standardInfrastructure = [
+  "Next.js / React",
+  "Admin panel",
+  "Veritabanı",
+  "REST API",
+  "Responsive arayüz",
+  "SEO metadata",
+  "Form ve bildirim akışı",
+];
+
+function scopeLevelsFor(title: string): ServiceType["scopeLevels"] {
+  return [
+    {
+      name: "Başlangıç",
+      description: `${title} için temel ekranlar, sade akış ve ilk kullanılabilir sürüm hazırlanır.`,
+    },
+    {
+      name: "Gelişmiş",
+      description: "Admin panel, filtreleme, durum takibi, raporlama ve işletmeye özel alanlar eklenir.",
+    },
+    {
+      name: "Özel Sistem",
+      description: "Entegrasyon, rol yönetimi, otomasyon, bakım ve yeni modül geliştirme akışıyla büyütülür.",
+    },
+  ];
+}
+
+function faqsFor(title: string): ServiceType["faqs"] {
+  return [
+    {
+      question: `${title} hazır paket olarak mı yapılır?`,
+      answer: "Kapsam işletmenin ihtiyacına göre netleştirilir. Bazı projeler hazır şablondan uyarlanabilir, bazıları özel panel ve veri yapısı gerektirir.",
+    },
+    {
+      question: "Teslim sonrası geliştirme yapılabilir mi?",
+      answer: "Evet. Hata düzeltmeleri, yeni modüller, içerik güncellemeleri, entegrasyonlar ve bakım ihtiyaçları ayrıca planlanabilir.",
+    },
+    {
+      question: "Fiyat nasıl netleşir?",
+      answer: "Ekran sayısı, modüller, admin panel ihtiyacı, veri yapısı, entegrasyonlar, teslim süresi ve destek kapsamı görüldükten sonra netleşir.",
+    },
+  ];
+}
+
+const serviceEntries: ServiceInput[] = [
   {
     slug: "tanitim-kurumsal-web-siteleri",
-    title: "Promotional & Corporate Websites",
-    titleTr: "Tanıtım ve Kurumsal Web Siteleri",
-    shortTr: "Hizmetlerinizi, markanızı ve iletişim kanallarınızı profesyonel şekilde sunan web siteleri.",
-    short: "Professional websites for presenting your brand, services and contact channels clearly.",
-    description:
-      "Professional websites for companies, personal brands, service providers and businesses that want to present themselves clearly online.",
-    descriptionTr:
-      "Firmanızı, hizmetlerinizi, hakkınızda bilgileri, görsellerinizi ve iletişim yönlendirmelerinizi profesyonel bir web sitesinde toplamak için hazırlanır.",
-    examplesTr: [
-      "Kurumsal tanıtım sitesi",
-      "Landing page / tek sayfalık satış sayfası",
-      "Kişisel marka / CV sitesi",
-      "Hizmet veren işletme sitesi",
-      "Avukat / hukuk bürosu sitesi",
-      "Muhasebe / mali müşavir sitesi",
-      "Spor hocası / personal trainer sitesi",
-      "Organizasyon / düğün firması sitesi",
-      "İnşaat projesi tanıtım sitesi"
-    ],
-    examples: [
-      "Corporate website",
-      "Landing page",
-      "Personal brand / CV website",
-      "Service business website",
-      "Law office website",
-      "Accounting / financial advisor website",
-      "Personal trainer website",
-      "Organization / wedding company website",
-      "Construction project presentation website"
-    ],
-    infrastructureTr: [
-      "Marketing site altyapısı",
-      "Landing page",
-      "İletişim formu",
-      "WhatsApp yönlendirme",
-      "Hizmet bölümleri",
-      "SSS alanı",
-      "Teklif alma formu"
-    ],
-    infrastructure: [
-      "Marketing site template",
-      "Landing page",
-      "Contact form",
-      "WhatsApp direction",
-      "Service sections",
-      "FAQ section",
-      "Offer request form"
-    ],
-    detailTr: [
-      "Tanıtım ve kurumsal web siteleri; işletmenizin kim olduğunu, ne sunduğunu ve müşterinin size nasıl ulaşacağını net şekilde anlatmak için hazırlanır.",
-      "Bu yapı sadece güzel görünen bir sayfa değildir. Hizmetleriniz, fotoğraflarınız, sık sorulan sorular, referans alanları, iletişim butonları ve teklif alma yönlendirmeleri tek akışta toplanabilir.",
-      "Canlı örnek üzerinden ilerlenebildiği için müşteri daha işe başlamadan nasıl bir yapı alacağını görebilir. Renkler, metinler, görseller ve bölümler işletmenize göre düzenlenebilir."
-    ],
+    categorySlug: "web-tanitim",
+    title: "Tanıtım ve Kurumsal Web Sitesi",
+    shortDesc: "Şirketinizi, hizmetlerinizi ve iletişim kanallarınızı güven veren bir web sitesinde sunar.",
+    longDesc: "Kurumsal web sitesi; işletmenin kim olduğunu, ne sunduğunu, neden güvenilir olduğunu ve müşterinin nasıl iletişime geçeceğini net anlatan dijital vitrindir.",
     detail: [
-      "Promotional and corporate websites are built to explain who you are, what you offer and how customers can reach you clearly.",
-      "This is not just a visually nice page. Services, images, FAQ, references, contact buttons and offer request flows can be gathered in one structure.",
-      "Because the work can start from a live demo, the client can see the structure before the project begins. Colors, texts, visuals and sections can be adapted to the business."
-    ]
+      "Bu hizmet sadece görsel bir sayfa hazırlamak için değil, işletmenin teklif ve iletişim akışını daha düzenli hale getirmek için planlanır.",
+      "Hizmet bölümleri, hakkımızda alanı, güven unsurları, SSS, müşteri değerlendirmeleri, portföy bağlantısı ve WhatsApp/e-posta yönlendirmesi tek yapıda toplanabilir.",
+    ],
+    features: ["Ana sayfa", "Hizmet bölümleri", "Hakkımızda alanı", "İletişim formu", "WhatsApp yönlendirme", "SSS", "Temel SEO"],
+    examples: ["Kurumsal site", "Danışmanlık sitesi", "Hizmet firması sitesi", "Ajans sitesi", "Yerel işletme sitesi"],
+    suitableFor: ["Hizmet veren işletmeler", "Küçük ve orta ölçekli firmalar", "Yeni marka kuranlar", "Daha profesyonel görünmek isteyen işletmeler"],
+    problemSolved: "Müşterinin sizi araştırırken güven duymasını, hizmetlerinizi anlamasını ve hızlıca iletişime geçmesini sağlar.",
+    priceFactors: ["Sayfa sayısı", "Metin ve görsel hazırlığı", "Blog veya portföy ihtiyacı", "Form ve yönlendirme yapısı", "SEO kapsamı"],
+    relatedProjects: ["kurumsal-web-sitesi", "landing-page"],
+    relatedBlogPosts: ["kurumsal-web-sitesi-yaptirirken-nelere-dikkat-edilmeli", "web-sitesi-projesinde-kapsam-nasil-belirlenir"],
+  },
+  {
+    slug: "landing-page-satis-sayfasi",
+    categorySlug: "web-tanitim",
+    title: "Landing Page / Satış Sayfası",
+    shortDesc: "Tek ürün, hizmet, kampanya veya reklam trafiği için dönüşüm odaklı satış sayfası.",
+    longDesc: "Landing page, ziyaretçiyi tek bir hedefe yönlendiren kısa ve güçlü satış sayfasıdır: teklif almak, WhatsApp'a geçmek, form doldurmak veya demo inceletmek.",
+    detail: [
+      "Reklamdan gelen ziyaretçi uzun menüler arasında kaybolmadan teklif, randevu, sipariş veya iletişim aksiyonuna yönlendirilir.",
+      "Başlık, değer önerisi, güven alanı, hizmet açıklaması, SSS ve CTA akışı tek bir sayfada satış mantığıyla kurgulanır.",
+    ],
+    features: ["Hero alanı", "Teklif CTA", "Güven blokları", "SSS", "Form", "WhatsApp butonu", "SEO başlığı"],
+    examples: ["Reklam açılış sayfası", "Tek hizmet sayfası", "Kampanya sayfası", "Ürün tanıtım sayfası"],
+    suitableFor: ["Reklam veren işletmeler", "Tek hizmet satmak isteyenler", "Kampanya yapan markalar", "Yeni ürün çıkaran ekipler"],
+    problemSolved: "Ziyaretçiyi dağınık bir sitede gezdirmek yerine tek teklif veya iletişim hedefine taşır.",
+    priceFactors: ["Teklif akışı", "Form alanları", "Metin hazırlığı", "Güven unsurları", "A/B varyasyon ihtiyacı"],
+    relatedProjects: ["landing-page"],
+    relatedBlogPosts: ["web-sitesi-projesinde-kapsam-nasil-belirlenir", "yazilim-projesi-fiyati-neden-degisir"],
+  },
+  {
+    slug: "hizmet-sitesi",
+    categorySlug: "web-tanitim",
+    title: "Hizmet Sitesi",
+    shortDesc: "Danışman, doktor, ajans, usta, eğitmen veya hizmet işletmeleri için teklif odaklı site.",
+    longDesc: "Hizmet sitesi, fiziksel ürün satmayan ama müşteri talebi, randevu veya teklif almak isteyen işletmeler için hazırlanır.",
+    detail: [
+      "Müşteri hizmeti anlamalı, güven duymalı ve sizinle iletişime geçmek için net bir yol görmelidir.",
+      "Hizmet detayları, süreç anlatımı, sık sorulan sorular, referanslar ve iletişim yönlendirmeleri sade bir akışla sunulur.",
+    ],
+    features: ["Hizmet detayları", "Süreç alanı", "Referans alanı", "SSS", "Teklif formu", "WhatsApp yönlendirme"],
+    examples: ["Danışmanlık sitesi", "Klinik sitesi", "Usta hizmet sitesi", "Eğitmen sitesi", "Ajans hizmet sitesi"],
+    suitableFor: ["Hizmet veren kişiler", "Yerel hizmet işletmeleri", "Danışmanlar", "Klinikler", "Eğitmenler"],
+    problemSolved: "Hizmetin ne olduğunu ve müşterinin nasıl teklif alacağını netleştirir.",
+    priceFactors: ["Hizmet sayısı", "Randevu ihtiyacı", "Referans/portföy alanı", "Teklif formu kapsamı", "İçerik hazırlığı"],
+    relatedProjects: ["kurumsal-web-sitesi"],
+    relatedBlogPosts: ["kurumsal-web-sitesi-yaptirirken-nelere-dikkat-edilmeli"],
+  },
+  {
+    slug: "portfoy-kisisel-marka-sitesi",
+    categorySlug: "web-tanitim",
+    title: "Portföy / Kişisel Marka Sitesi",
+    shortDesc: "Uzmanlığınızı, projelerinizi, CV'nizi ve iletişim kanallarınızı profesyonel gösterir.",
+    longDesc: "Portföy ve kişisel marka sitesi, freelancer, yazılımcı, tasarımcı, danışman veya uzmanların güven veren bir dijital profil oluşturması için hazırlanır.",
+    detail: [
+      "Çalışmalar, yetkinlikler, CV, sosyal bağlantılar ve iletişim akışı tek sayfada veya çok sayfalı yapıda sunulabilir.",
+      "Amaç sadece kendinizi anlatmak değil, başvuru, iş görüşmesi, freelance teklif veya danışmanlık talebi almaktır.",
+    ],
+    features: ["CV alanı", "Proje listesi", "Yetenekler", "Sosyal bağlantılar", "İletişim formu", "Referans alanı"],
+    examples: ["Yazılımcı portföyü", "Tasarımcı sitesi", "Danışman profili", "CV sitesi", "Akademik profil"],
+    suitableFor: ["Freelancerlar", "Uzmanlar", "Danışmanlar", "İş başvurusu yapan profesyoneller", "Kişisel marka oluşturanlar"],
+    problemSolved: "Dağınık sosyal profiller yerine tek profesyonel merkez oluşturur.",
+    priceFactors: ["Proje sayısı", "CV içeriği", "Dil seçeneği", "Blog ihtiyacı", "Özel tasarım seviyesi"],
+    relatedProjects: ["kurumsal-web-sitesi"],
+    relatedBlogPosts: ["web-sitesi-projesinde-kapsam-nasil-belirlenir"],
+  },
+  {
+    slug: "seo-blog-bilgi-merkezi",
+    categorySlug: "web-tanitim",
+    title: "SEO Uyumlu Blog / Bilgi Merkezi Kurulumu",
+    shortDesc: "Google'dan müşteri çekmek için kategori, etiket, blog detay ve iç link sistemi kurar.",
+    longDesc: "Blog ve bilgi merkezi, hizmetlerinizi sadece menüde göstermek yerine arama yapan müşterinin sorularına cevap veren içerik sistemine dönüştürür.",
+    detail: [
+      "Kategori sayfaları, etiket sayfaları, blog detay şablonu, ilgili hizmet bağlantıları ve teklif CTA'ları birlikte planlanır.",
+      "Amaç çok yazı üretmek kadar, yazıların hizmet, demo ve portföy sayfalarına müşteri taşımasını sağlamaktır.",
+    ],
+    features: ["Blog ana sayfası", "Kategori sayfaları", "Etiket sayfaları", "Blog detay şablonu", "İç link yapısı", "SSS", "SEO metadata"],
+    examples: ["Hizmet rehberleri", "Fiyat yazıları", "Karşılaştırma içerikleri", "Sektörel blog serileri"],
+    suitableFor: ["Organik müşteri isteyen işletmeler", "Hizmet sayfası güçlü markalar", "SEO yatırımı yapmak isteyen ekipler"],
+    problemSolved: "Siteyi sadece kartvizit olmaktan çıkarıp aramalardan müşteri çeken bilgi merkezine çevirir.",
+    priceFactors: ["Kategori sayısı", "Blog şablonu", "İç link kurgusu", "İlk içerik sayısı", "SEO teknik kapsamı"],
+    relatedProjects: ["kurumsal-web-sitesi"],
+    relatedBlogPosts: ["google-da-one-cikmak-icin-blog-stratejisi", "web-sitesi-projesinde-kapsam-nasil-belirlenir"],
   },
   {
     slug: "urun-katalog-whatsapp-siparis",
-    title: "Product Catalog & WhatsApp Order Systems",
-    titleTr: "Ürün Katalog ve WhatsApp Sipariş Sistemleri",
-    shortTr: "Ürün, menü, araç veya ilanları düzenli gösterip müşteriyi WhatsApp’a yönlendiren sistemler.",
-    short: "Catalog systems that display products, menus, vehicles or listings and direct visitors to WhatsApp.",
-    description:
-      "Catalog-style websites that organize products, menus, vehicles or listings and direct visitors to WhatsApp or contact channels.",
-    descriptionTr:
-      "Ürünlerinizi, menünüzü, araçlarınızı veya ilanlarınızı düzenli şekilde sergileyip müşteriyi WhatsApp ya da iletişim kanalına yönlendiren sistemlerdir.",
-    examplesTr: [
-      "Ürün katalog sitesi",
-      "WhatsApp siparişli mağaza",
-      "QR menü sitesi",
-      "Online siparişsiz restoran sitesi",
-      "Oto galeri araç listeleme sitesi",
-      "Emlak ilan sitesi",
-      "Rent a Car sitesi",
-      "Butik / kozmetik / toptancı katalog sitesi"
-    ],
-    examples: [
-      "Product catalog website",
-      "WhatsApp order store",
-      "QR menu website",
-      "Restaurant website without online payment",
-      "Car gallery listing website",
-      "Real estate listing website",
-      "Rent a car website",
-      "Boutique / cosmetics / wholesale catalog"
-    ],
-    infrastructureTr: [
-      "Catalog / Product altyapısı",
-      "Kategori yapısı",
-      "Ürün detay sayfası",
-      "Filtreleme",
-      "WhatsApp sipariş butonu",
-      "Galeri",
-      "Admin panel eklenebilir"
-    ],
-    infrastructure: [
-      "Catalog / Product infrastructure",
-      "Category structure",
-      "Product detail page",
-      "Filtering",
-      "WhatsApp order button",
-      "Gallery",
-      "Admin panel can be added"
-    ],
-    detailTr: [
-      "Katalog ve WhatsApp sipariş sistemleri, Instagram’da veya mesajlarda dağınık duran ürünleri tek düzenli sayfada toplamak için kullanılır.",
-      "Müşteri ürünleri kategori kategori gezebilir, fiyat ve açıklamaları görebilir, ilgilendiği ürün için WhatsApp üzerinden kolayca iletişime geçebilir.",
-      "Bu sistem restoran menüsü, butik ürünleri, araç listesi, emlak ilanları veya toptancı ürünleri gibi farklı alanlara uyarlanabilir. İstenirse admin panel eklenerek ürünler daha sonra yönetilebilir hale getirilebilir."
-    ],
+    categorySlug: "satis-siparis",
+    title: "Ürün Katalog Sitesi",
+    shortDesc: "Ürünleri kategori, görsel, açıklama ve filtrelerle düzenli gösteren katalog sistemi.",
+    longDesc: "Ürün katalog sitesi, ödeme almak zorunda kalmadan ürünlerinizi profesyonel biçimde sergileyip müşteriyi iletişim veya sipariş akışına taşır.",
     detail: [
-      "Catalog and WhatsApp order systems are used to gather scattered products from Instagram or messages into one organized page.",
-      "Visitors can browse categories, see prices and details, and contact the business via WhatsApp for the product they are interested in.",
-      "This system can be adapted to restaurant menus, boutique products, vehicle listings, real estate listings or wholesale catalogs. An admin panel can be added later if product management is needed."
-    ]
+      "Instagram, PDF veya WhatsApp mesajlarında dağınık duran ürünler tek düzenli katalogda toplanır.",
+      "Ürün detay sayfası, kategori, arama, filtreleme, WhatsApp yönlendirmesi ve isteğe bağlı admin panel eklenebilir.",
+    ],
+    features: ["Kategori yapısı", "Ürün kartları", "Ürün detay sayfası", "Filtreleme", "Arama", "WhatsApp butonu", "Admin panel opsiyonu"],
+    examples: ["Butik katalog", "Kuyumcu katalog", "Oto galeri katalog", "Emlak ilan katalog", "Toptancı ürün listesi"],
+    suitableFor: ["Butikler", "Kuyumcular", "Toptancılar", "Oto galeriler", "Emlakçılar", "Ürün sergileyen işletmeler"],
+    problemSolved: "Ürünleri tek tek mesajla anlatma yükünü azaltır ve müşterinin katalog içinde gezerek karar vermesini sağlar.",
+    priceFactors: ["Ürün sayısı", "Filtre ihtiyacı", "Admin panel", "WhatsApp akışı", "Katalog tasarımı"],
+    relatedProjects: ["whatsapp-siparis-katalog"],
+    relatedBlogPosts: ["whatsapp-katalog-sitesi-nedir", "katalog-sitesi-mi-e-ticaret-sitesi-mi"],
+  },
+  {
+    slug: "whatsapp-siparis-sistemi",
+    categorySlug: "satis-siparis",
+    title: "WhatsApp Sipariş Sistemi",
+    shortDesc: "Ürün veya hizmet seçen müşteriyi düzenli bir WhatsApp sipariş mesajına yönlendirir.",
+    longDesc: "WhatsApp sipariş sistemi, küçük işletmeler için ödeme ve tam e-ticaret yüküne girmeden daha düzenli sipariş toplama yolu sağlar.",
+    detail: [
+      "Müşteri ürünleri seçer, adet veya not ekler ve işletmeye hazır mesajla ulaşır.",
+      "İstenirse ürün yönetimi, sipariş paneli, durum takibi ve teslimat notları sonraki aşamada eklenebilir.",
+    ],
+    features: ["Ürün seçimi", "Adet alanı", "Hazır WhatsApp mesajı", "Kategori", "Mobil uyum", "Sipariş notu", "Admin panel opsiyonu"],
+    examples: ["Butik sipariş", "Restoran sipariş", "Yerel market", "Çiçekçi", "Kasap/manav sipariş"],
+    suitableFor: ["Instagram satıcıları", "Yerel işletmeler", "Restoranlar", "Butikler", "Katalogdan satış yapanlar"],
+    problemSolved: "Müşterinin ne istediğini dağınık mesajlarla anlatması yerine düzenli sipariş mesajı oluşturur.",
+    priceFactors: ["Ürün sayısı", "Sepet mantığı", "Admin panel", "Sipariş notları", "Dil ve para birimi ihtiyacı"],
+    relatedProjects: ["whatsapp-siparis-katalog"],
+    relatedBlogPosts: ["whatsapp-siparis-sistemi-nedir", "katalog-sitesi-mi-e-ticaret-sitesi-mi"],
+  },
+  {
+    slug: "qr-menu-sistemi",
+    categorySlug: "satis-siparis",
+    title: "QR Menü Sistemi",
+    shortDesc: "Restoran ve kafeler için QR kodla açılan menü, kategori ve ürün yönetimi sistemi.",
+    longDesc: "QR menü sistemi, masa üstü baskı menüleri yerine telefondan gezilebilen güncel ve yönetilebilir menü yapısı kurar.",
+    detail: [
+      "Ürün, fiyat, açıklama, alerjen veya kampanya bilgileri panelden yönetilebilir.",
+      "Sadece menü gösterimi yapılabileceği gibi masa siparişi veya WhatsApp sipariş akışı da eklenebilir.",
+    ],
+    features: ["QR yönlendirme", "Menü kategorileri", "Ürün detayları", "Fiyat yönetimi", "Kampanya alanı", "Admin panel", "Masa siparişi opsiyonu"],
+    examples: ["Kafe menüsü", "Restoran menüsü", "Tatlıcı menüsü", "Otel menüsü", "Paket servis menüsü"],
+    suitableFor: ["Restoranlar", "Kafeler", "Tatlıcılar", "Otel restoranları", "Paket servis işletmeleri"],
+    problemSolved: "Fiyat ve menü değişikliklerini sürekli baskı maliyetine girmeden güncel tutar.",
+    priceFactors: ["Kategori sayısı", "Admin panel", "Masa siparişi", "Dil seçeneği", "Görsel içerik"],
+    relatedProjects: ["whatsapp-siparis-katalog"],
+    relatedBlogPosts: ["restoran-qr-menu-ve-siparis-sistemi"],
   },
   {
     slug: "e-ticaret-satis-sistemleri",
-    title: "E-Commerce & Online Sales Systems",
-    titleTr: "E-Ticaret ve Satış Sistemleri",
-    shortTr: "Ürün yönetimi, sepet, sipariş paneli ve ödeme akışı olan satış sistemleri.",
-    short: "Sales systems with product management, cart, order panel and payment flow.",
-    description:
-      "Sales systems with product management, cart, checkout, order tracking, optional payment integration and admin panel.",
-    descriptionTr:
-      "Ürün yönetimi, sepet, ödeme akışı, sipariş kaydı ve admin panel üzerinden yönetim ihtiyacı olan işletmeler için hazırlanır.",
-    examplesTr: [
-      "Sepetli ama ödemesiz e-ticaret sitesi",
-      "Online ödemeli e-ticaret MVP",
-      "Dijital ürün satış sitesi",
-      "Sipariş panelli satış sistemi",
-      "Admin panelli mağaza",
-      "Butik, takı, kozmetik veya tekstil satış sitesi"
-    ],
-    examples: [
-      "E-commerce website without online payment",
-      "Online payment e-commerce MVP",
-      "Digital product sales website",
-      "Order management system",
-      "Admin-managed online store",
-      "Boutique, jewelry, cosmetics or textile store"
-    ],
-    infrastructureTr: [
-      "E-Commerce altyapısı",
-      "Ürün yönetimi",
-      "Sepet",
-      "Checkout",
-      "Ödeme entegrasyonu",
-      "Sipariş paneli",
-      "Stok takibi"
-    ],
-    infrastructure: [
-      "E-Commerce infrastructure",
-      "Product management",
-      "Cart",
-      "Checkout",
-      "Payment integration",
-      "Order panel",
-      "Stock tracking"
-    ],
-    detailTr: [
-      "E-ticaret ve satış sistemleri, ürünlerin sadece sergilenmesini değil; sipariş, sepet, ödeme ve yönetim tarafını da kapsayan daha gelişmiş yapılardır.",
-      "İhtiyaca göre ödemesiz sipariş sistemi, online ödeme altyapılı MVP veya admin panelli tam mağaza yapısı hazırlanabilir.",
-      "Ürün yönetimi, sipariş takibi, müşteri bilgileri, ödeme yönlendirmesi ve stok mantığı projeye göre şekillendirilebilir. Başlangıçta sade kurulan yapı daha sonra geliştirilebilir."
-    ],
+    categorySlug: "satis-siparis",
+    title: "E-Ticaret Sitesi",
+    shortDesc: "Ürün, sepet, sipariş, ödeme ve admin panel mantığı olan online satış sistemi.",
+    longDesc: "E-ticaret sitesi, katalogdan daha gelişmiş şekilde ürün yönetimi, sepet, sipariş kaydı ve ödeme akışını bir araya getirir.",
     detail: [
-      "E-commerce and sales systems are more advanced structures that include not only product display, but also cart, order, payment and management flows.",
-      "Depending on the need, a no-payment order system, online payment MVP or admin-managed online store can be built.",
-      "Product management, order tracking, customer information, payment flow and stock logic can be shaped according to the project. A simple first version can be extended later."
-    ]
+      "Başlangıçta ödemesiz sipariş sistemi, ödeme yönlendirmeli MVP veya tam ödeme altyapılı mağaza olarak planlanabilir.",
+      "Ürün, stok, kampanya, sipariş paneli, müşteri bilgileri ve kargo/entegrasyon ihtiyaçları projeye göre büyütülür.",
+    ],
+    features: ["Ürün yönetimi", "Sepet", "Checkout", "Sipariş paneli", "Ödeme opsiyonu", "Stok takibi", "Kampanya/kupon"],
+    examples: ["Butik mağaza", "Kozmetik satışı", "Takı mağazası", "Dijital ürün satışı", "Yerel mağaza e-ticareti"],
+    suitableFor: ["Online satışa başlamak isteyenler", "Katalogdan sepete geçmek isteyenler", "Siparişini panelden yönetmek isteyen işletmeler"],
+    problemSolved: "Ürün, müşteri ve sipariş sürecini tek satış sistemi içinde takip edilebilir hale getirir.",
+    priceFactors: ["Ürün/stok yapısı", "Ödeme entegrasyonu", "Kargo takibi", "Kampanya modülü", "Admin panel kapsamı"],
+    relatedProjects: ["ecommerce-platform", "whatsapp-siparis-katalog"],
+    relatedBlogPosts: ["e-ticaret-sitesi-yaptirmak-kucuk-isletme", "e-ticaret-sitesi-ile-katalog-sitesi-farki"],
   },
   {
-    slug: "randevu-rezervasyon-sistemleri",
-    title: "Appointment & Reservation Systems",
-    titleTr: "Randevu ve Rezervasyon Sistemleri",
-    shortTr: "Tarih, saat, hizmet ve müşteri taleplerini daha düzenli takip eden sistemler.",
-    short: "Systems that organize date, time, service and customer booking requests.",
-    description:
-      "Systems for businesses that receive appointment, booking, date, time, service or reservation requests.",
-    descriptionTr:
-      "Telefon, DM ve WhatsApp üzerinden dağınık gelen randevu veya rezervasyon taleplerini daha düzenli takip edebilmek için hazırlanır.",
-    examplesTr: [
-      "Randevu alma sistemi",
-      "Rezervasyon sistemi",
-      "Halı saha / spor salonu rezervasyon paneli",
-      "Otel / pansiyon rezervasyon sitesi",
-      "Güzellik merkezi sitesi + randevu",
-      "Diş kliniği / doktor sitesi + randevu",
-      "Araç ekspertiz randevu sistemi",
-      "Kurs kayıt / ders talep sistemi"
-    ],
-    examples: [
-      "Appointment system",
-      "Reservation system",
-      "Football field / gym booking panel",
-      "Hotel / pension reservation website",
-      "Beauty center website with appointment",
-      "Doctor / dentist website with appointment",
-      "Vehicle inspection appointment system",
-      "Course registration / lesson request system"
-    ],
-    infrastructureTr: [
-      "Reservation altyapısı",
-      "Tarih / saat seçimi",
-      "Hizmet seçimi",
-      "Müşteri formu",
-      "Admin takip ekranı",
-      "E-posta bildirimi",
-      "WhatsApp yönlendirme"
-    ],
-    infrastructure: [
-      "Reservation infrastructure",
-      "Date / time selection",
-      "Service selection",
-      "Customer form",
-      "Admin tracking",
-      "Email notification",
-      "WhatsApp direction"
-    ],
-    detailTr: [
-      "Randevu ve rezervasyon sistemleri, WhatsApp, telefon veya DM üzerinden karışan saatleri daha düzenli hale getirmek için hazırlanır.",
-      "Müşteri hizmet seçebilir, tarih ve saat talebi bırakabilir, işletme tarafında bu talepler admin panel veya bildirim mantığıyla takip edilebilir.",
-      "Güzellik merkezi, doktor, diş kliniği, kurs, halı saha, spor salonu, araç ekspertiz veya otel/pansiyon gibi birçok senaryoya uyarlanabilir."
-    ],
+    slug: "siparis-takip-sistemi",
+    categorySlug: "satis-siparis",
+    title: "Sipariş Takip Sistemi",
+    shortDesc: "WhatsApp, Instagram, site veya pazaryerinden gelen siparişleri tek panelde takip eder.",
+    longDesc: "Sipariş takip sistemi, siparişlerin hazırlanıyor, kargoda, teslim edildi veya iptal gibi durumlarla yönetilmesini sağlar.",
     detail: [
-      "Appointment and reservation systems help organize date and time requests that usually come through WhatsApp, phone or DMs.",
-      "Customers can choose a service and request a date/time, while the business can track these requests through an admin panel or notification flow.",
-      "It can be adapted to beauty centers, doctors, dentists, courses, football fields, gyms, vehicle inspection services, hotels or pensions."
-    ]
+      "Siparişin kimden geldiği, hangi ürünleri içerdiği, ödeme/teslimat durumu ve notları tek panelde tutulabilir.",
+      "Bu sistem e-ticaretin parçası olabileceği gibi sadece iç operasyon paneli olarak da kurulabilir.",
+    ],
+    features: ["Sipariş listesi", "Durum takibi", "Müşteri bilgisi", "Ürün kalemleri", "Teslimat notu", "Filtreleme", "Raporlama"],
+    examples: ["WhatsApp sipariş paneli", "Instagram sipariş takibi", "Pazaryeri sipariş kontrolü", "Yerel teslimat takibi"],
+    suitableFor: ["Siparişi karışan işletmeler", "Butikler", "Yerel marketler", "Kargo/teslimat takip eden ekipler"],
+    problemSolved: "Siparişlerin mesaj kutusunda kaybolmasını engeller ve işletmeye durum bazlı takip sağlar.",
+    priceFactors: ["Sipariş kaynakları", "Durum akışı", "Rapor ihtiyacı", "Entegrasyon", "Kullanıcı rolleri"],
+    relatedProjects: ["admin-panelli-isletme-sistemi", "ecommerce-platform"],
+    relatedBlogPosts: ["siparis-takip-sistemi-nedir"],
+  },
+  {
+    slug: "stok-takip-sistemi",
+    categorySlug: "satis-siparis",
+    title: "Stok Takip Sistemi",
+    shortDesc: "Ürün giriş-çıkış, stok miktarı, depo, kategori ve rapor takibi için panel.",
+    longDesc: "Stok takip sistemi, ürünlerin eldeki miktarını, giriş-çıkış hareketlerini ve kritik stok durumlarını daha düzenli yönetmek için hazırlanır.",
+    detail: [
+      "Excel veya defterle takip edilen stoklar, filtrelenebilir ve raporlanabilir bir panele taşınır.",
+      "Sipariş, e-ticaret, depo, sevkiyat veya pazaryeri entegrasyonlarıyla birlikte büyüyebilir.",
+    ],
+    features: ["Ürün kaydı", "Stok girişi", "Stok çıkışı", "Depo alanı", "Kritik stok", "Hareket geçmişi", "Raporlama"],
+    examples: ["Butik stok paneli", "Depo stok takibi", "Teknik servis parça stoğu", "Toptancı ürün stoğu"],
+    suitableFor: ["Deposu olan işletmeler", "Butikler", "Toptancılar", "Servis işletmeleri", "E-ticaret satıcıları"],
+    problemSolved: "Hangi üründen ne kadar kaldığını ve stok hareketlerinin nereden geldiğini netleştirir.",
+    priceFactors: ["Ürün sayısı", "Depo sayısı", "Varyant yapısı", "Sipariş bağlantısı", "Raporlama ihtiyacı"],
+    relatedProjects: ["admin-panelli-isletme-sistemi"],
+    relatedBlogPosts: ["stok-takip-sistemi-yaptirmak", "stok-takip-sistemi-yaptirirken-nelere-dikkat-edilmeli"],
+  },
+  {
+    slug: "b2b-bayi-siparis-sistemi",
+    categorySlug: "satis-siparis",
+    title: "B2B Bayi Sipariş Sistemi",
+    shortDesc: "Toptancı, üretici ve distribütörler için bayi girişi, özel fiyat ve toplu sipariş paneli.",
+    longDesc: "B2B bayi sipariş sistemi, son kullanıcıya değil bayilere satış yapan firmaların özel fiyat, stok ve sipariş sürecini yönetir.",
+    detail: [
+      "Bayiler giriş yapar, kendilerine özel ürün/fiyat görür, toplu sipariş oluşturur ve sipariş geçmişini takip eder.",
+      "Cari hesap, minimum sipariş, teklif onayı, stok görünümü ve admin onay akışları projeye göre eklenebilir.",
+    ],
+    features: ["Bayi girişi", "Özel fiyat", "Toplu sipariş", "Sipariş geçmişi", "Cari notları", "Admin onayı", "Stok görünümü"],
+    examples: ["Toptancı sipariş paneli", "Distribütör sistemi", "Bayi ürün kataloğu", "Üretici sipariş portalı"],
+    suitableFor: ["Toptancılar", "Üreticiler", "Distribütörler", "Bayi ağı olan firmalar"],
+    problemSolved: "Telefon ve Excel ile alınan bayi siparişlerini daha kontrollü ve ölçeklenebilir hale getirir.",
+    priceFactors: ["Bayi rol yapısı", "Fiyat kuralı", "Cari hesap", "Stok bağlantısı", "Sipariş onay akışı"],
+    relatedProjects: ["admin-panelli-isletme-sistemi"],
+    relatedBlogPosts: ["b2b-bayi-siparis-sistemi-nedir"],
+  },
+  {
+    slug: "bayi-distributor-paneli",
+    categorySlug: "satis-siparis",
+    title: "Bayi / Distribütör Paneli",
+    shortDesc: "Ana firma, bayi, alt bayi, ürün, fiyat, sipariş ve rapor yönetimi için panel.",
+    longDesc: "Bayi ve distribütör paneli, satış ağını tek merkezden yönetmek isteyen firmalar için hazırlanır.",
+    detail: [
+      "Bayi bazlı fiyat, yetki, bölge, sipariş, stok ve rapor yapıları kurulabilir.",
+      "B2B sipariş sisteminden daha geniş olarak kullanıcı rolü, alt bayi, performans raporu ve özel iş akışlarını kapsayabilir.",
+    ],
+    features: ["Bayi rolleri", "Alt bayi", "Fiyat listesi", "Bölge bilgisi", "Sipariş takibi", "Raporlar", "Yetki sistemi"],
+    examples: ["Distribütör yönetimi", "Bölge bayi paneli", "Ana firma bayi sistemi", "Satış temsilcisi paneli"],
+    suitableFor: ["Bayi ağı olan markalar", "Distribütörler", "Üretici firmalar", "Saha satış ekipleri"],
+    problemSolved: "Bayi ağındaki fiyat, sipariş ve yetki karmaşasını merkezi bir panele toplar.",
+    priceFactors: ["Bayi hiyerarşisi", "Fiyat kuralı", "Rapor ihtiyacı", "Rol yetkisi", "Entegrasyonlar"],
+    relatedProjects: ["admin-panelli-isletme-sistemi"],
+    relatedBlogPosts: ["b2b-bayi-siparis-sistemi-nedir"],
+  },
+  {
+    slug: "teklif-alma-sistemi",
+    categorySlug: "satis-siparis",
+    title: "Teklif Alma Sistemi",
+    shortDesc: "Müşteriden ihtiyacını toplayan ve işletmeye düzenli teklif talebi ulaştıran yapı.",
+    longDesc: "Teklif alma sistemi, müşterinin ihtiyacını form, seçenek ve açıklama alanlarıyla toplar; işletmenin daha net dönüş yapmasını sağlar.",
+    detail: [
+      "Basit iletişim formundan farklı olarak proje türü, sektör, modül, bütçe, teslim beklentisi ve açıklama alanları kurgulanabilir.",
+      "Form çıktısı e-posta, panel veya ileride CRM/lead takip sistemine bağlanabilir.",
+    ],
+    features: ["Proje türü seçimi", "Sektör seçimi", "Modül seçimi", "Bütçe aralığı", "Teslim beklentisi", "E-posta bildirimi", "Panel opsiyonu"],
+    examples: ["Web sitesi teklif formu", "Yazılım proje ön analiz formu", "Hizmet talep formu", "B2B teklif talebi"],
+    suitableFor: ["Hizmet veren işletmeler", "Yazılım/ajans ekipleri", "Özel proje alan firmalar", "Danışmanlık verenler"],
+    problemSolved: "Eksik bilgiyle gelen talepleri daha anlaşılır teklif isteklerine dönüştürür.",
+    priceFactors: ["Form adımları", "Alan sayısı", "Panel ihtiyacı", "E-posta/WhatsApp bildirim", "CRM bağlantısı"],
+    relatedProjects: ["landing-page"],
+    relatedBlogPosts: ["web-sitesi-projesinde-kapsam-nasil-belirlenir", "teklif-takip-sistemi-hizmet-isletmeleri"],
+  },
+  {
+    slug: "teklif-takip-sistemi",
+    categorySlug: "satis-siparis",
+    title: "Teklif Takip Sistemi",
+    shortDesc: "Hizmet işletmeleri için teklif oluşturma, durum takibi ve müşteri dönüş paneli.",
+    longDesc: "Teklif takip sistemi, verilen tekliflerin kaybolmaması, durumunun takip edilmesi ve müşteriyle sonraki adımların düzenlenmesi için kullanılır.",
+    detail: [
+      "Teklif oluşturuldu, gönderildi, dönüş bekleniyor, kabul edildi veya reddedildi gibi durumlar tek panelde takip edilebilir.",
+      "Lead takip, CRM ve görev yönetimiyle birleştiğinde satış süreci daha kontrollü hale gelir.",
+    ],
+    features: ["Teklif listesi", "Durum takibi", "Müşteri kaydı", "Notlar", "Hatırlatma", "Filtreleme", "Raporlama"],
+    examples: ["Ajans teklif takibi", "Teknik servis teklifleri", "İnşaat teklifleri", "Danışmanlık teklif paneli"],
+    suitableFor: ["Hizmet işletmeleri", "Ajanslar", "Teknik servisler", "Saha satış ekipleri", "Proje bazlı çalışan firmalar"],
+    problemSolved: "Verilen tekliflerin unutulmasını ve müşteriye geç dönüş yapılmasını engeller.",
+    priceFactors: ["Teklif şablonu", "Durum akışı", "PDF/çıktı ihtiyacı", "Hatırlatma", "CRM bağlantısı"],
+    relatedProjects: ["admin-panelli-isletme-sistemi"],
+    relatedBlogPosts: ["teklif-takip-sistemi-hizmet-isletmeleri"],
   },
   {
     slug: "admin-panel-isletme-yonetimi",
-    title: "Admin Panel & Business Management Systems",
-    titleTr: "Admin Panel ve İşletme Yönetim Sistemleri",
-    shortTr: "Müşteri, stok, sipariş, görev, teklif ve süreçleri tek panelden yönetmeye yarayan sistemler.",
-    short: "Dashboards for managing customers, stock, orders, tasks, offers and business processes.",
-    description:
-      "Custom dashboards for businesses that want to manage customers, stock, orders, tasks, offers or internal processes from one place.",
-    descriptionTr:
-      "Excel, WhatsApp, not defteri ve dağınık mesajlar arasında kalan işleri tek panelde toplamak için hazırlanır.",
-    examplesTr: [
-      "Küçük işletme CRM paneli",
-      "Stok takip sistemi",
-      "Servis / teknik destek takip sistemi",
-      "İş takip / görev yönetim paneli",
-      "Teklif / fatura öncesi yönetim sistemi",
-      "Lojistik / nakliye teklif alma sitesi",
-      "Sipariş takip paneli",
-      "Personel / müşteri / görev yönetimi"
-    ],
-    examples: [
-      "Small business CRM panel",
-      "Stock tracking system",
-      "Service / technical support tracking system",
-      "Task management panel",
-      "Offer / pre-invoice management system",
-      "Logistics / shipping offer request system",
-      "Order tracking panel",
-      "Personnel / customer / task management"
-    ],
-    infrastructureTr: [
-      "Admin Dashboard altyapısı",
-      "Kullanıcı rolleri",
-      "Müşteri kayıtları",
-      "Stok yönetimi",
-      "Görev takibi",
-      "Raporlama",
-      "Filtreleme",
-      "İşlem geçmişi"
-    ],
-    infrastructure: [
-      "Admin Dashboard infrastructure",
-      "User roles",
-      "Customer records",
-      "Stock management",
-      "Task tracking",
-      "Reporting",
-      "Filtering",
-      "Activity history"
-    ],
-    detailTr: [
-      "Admin panel ve işletme yönetim sistemleri, işletmenin arka tarafındaki işleri tek yerden takip etmek için hazırlanır.",
-      "Müşteri kayıtları, ürün/stok bilgileri, siparişler, görevler, teklifler, servis talepleri veya raporlar tek panelde toplanabilir.",
-      "Bu yapı standart web sitesinin ötesine geçer. İhtiyaca göre kullanıcı rolleri, filtreleme, kayıt geçmişi, raporlama ve özel iş akışları eklenebilir."
-    ],
+    categorySlug: "panel-crm",
+    title: "Admin Panel Geliştirme",
+    shortDesc: "Ürün, hizmet, içerik, sipariş, müşteri veya operasyon kayıtlarını yönetmek için özel panel.",
+    longDesc: "Admin panel geliştirme, web sitesinin veya işletme sisteminin arka tarafını yönetilebilir hale getirir.",
     detail: [
-      "Admin panel and business management systems are built to manage the operational side of a business from one place.",
-      "Customer records, product/stock information, orders, tasks, offers, service requests or reports can be gathered in one dashboard.",
-      "This goes beyond a standard website. User roles, filters, activity history, reporting and custom workflows can be added according to the need."
-    ]
+      "İçerik, ürün, sipariş, müşteri, randevu, dosya veya özel kayıtlar panelden eklenip düzenlenebilir.",
+      "Bu panel basit bir yönetim ekranı olabileceği gibi rol, rapor, filtre, işlem geçmişi ve entegrasyonlarla büyüyen işletme sistemine dönüşebilir.",
+    ],
+    features: ["Kayıt ekleme", "Listeleme", "Düzenleme", "Silme/onay", "Filtreleme", "Rol yetkisi", "Dashboard"],
+    examples: ["Ürün yönetim paneli", "Sipariş paneli", "Randevu paneli", "İçerik yönetim paneli", "Operasyon paneli"],
+    suitableFor: ["İçeriğini kendisi yönetmek isteyenler", "Sipariş alan işletmeler", "Operasyon takibi yapan ekipler", "Özel yazılım ihtiyacı olanlar"],
+    problemSolved: "Site veya sistem sahibinin verileri yazılımcıya bağlı kalmadan yönetmesini sağlar.",
+    priceFactors: ["Modül sayısı", "Rol yapısı", "Filtre/rapor", "Veri ilişkileri", "Entegrasyon ihtiyacı"],
+    relatedProjects: ["admin-panelli-isletme-sistemi", "task-management-system", "cloud-storage-platform"],
+    relatedBlogPosts: ["admin-panel-yaptirmak-kapsam-rehberi", "admin-panel-nedir", "isletme-yonetim-paneli-nedir"],
+  },
+  {
+    slug: "isletme-yonetim-paneli",
+    categorySlug: "panel-crm",
+    title: "İşletme Yönetim Paneli",
+    shortDesc: "Stok, müşteri, sipariş, görev, ödeme, dosya ve raporları tek yerden takip eder.",
+    longDesc: "İşletme yönetim paneli, günlük operasyonu WhatsApp, Excel ve not defteri yerine tek merkezden izlemek için hazırlanır.",
+    detail: [
+      "Müşteri, sipariş, görev, stok, ödeme, dosya ve rapor gibi kayıtlar aynı panele bağlanabilir.",
+      "Her işletme aynı modüllere ihtiyaç duymaz; kapsam mevcut süreçler incelenerek sade bir ilk sürümle başlatılabilir.",
+    ],
+    features: ["Dashboard", "Müşteri kayıtları", "Görev takibi", "Sipariş modülü", "Stok modülü", "Dosya alanı", "Raporlama"],
+    examples: ["Turizm operasyon paneli", "Emlak yönetim paneli", "Servis takip paneli", "Küçük işletme ERP başlangıcı"],
+    suitableFor: ["Excel ile takip yapan işletmeler", "Operasyonu büyüyen ekipler", "Müşteri ve görev takibi isteyen firmalar"],
+    problemSolved: "Dağınık operasyon kayıtlarını yönetilebilir, filtrelenebilir ve raporlanabilir hale getirir.",
+    priceFactors: ["Modül sayısı", "Kullanıcı rolleri", "Raporlar", "Dosya yönetimi", "İş akışı karmaşıklığı"],
+    relatedProjects: ["menar-operasyon-paneli", "mizan-mulk-yonetim-sistemi", "admin-panelli-isletme-sistemi"],
+    relatedBlogPosts: ["isletme-yonetim-paneli-nedir", "kucuk-isletmeler-icin-yazilim-sistemleri"],
+  },
+  {
+    slug: "crm-musteri-takip-sistemi",
+    categorySlug: "panel-crm",
+    title: "CRM Müşteri Takip Sistemi",
+    shortDesc: "Müşteri kayıtları, görüşme notları, teklif durumu ve satış aşaması için CRM paneli.",
+    longDesc: "CRM müşteri takip sistemi, satış sürecindeki kişileri, firmaları, görüşmeleri ve teklif durumlarını düzenli izlemek için kurulur.",
+    detail: [
+      "Müşteri kartı, görüşme geçmişi, notlar, teklif durumu, hatırlatma ve satış aşamaları takip edilebilir.",
+      "Lead takip, teklif takip ve görev yönetimi modülleriyle birlikte daha güçlü satış paneline dönüşebilir.",
+    ],
+    features: ["Müşteri kartı", "Görüşme notu", "Satış aşaması", "Teklif bağlantısı", "Hatırlatma", "Filtreleme", "Raporlama"],
+    examples: ["Küçük işletme CRM", "Emlak CRM", "Danışmanlık CRM", "Ajans müşteri paneli"],
+    suitableFor: ["Müşteri takip eden işletmeler", "Satış ekipleri", "Danışmanlar", "Emlakçılar", "Ajanslar"],
+    problemSolved: "Müşteriyle ne konuşulduğunu ve satışın hangi aşamada olduğunu unutmayı engeller.",
+    priceFactors: ["Müşteri alanları", "Satış aşamaları", "Hatırlatma", "Teklif bağlantısı", "Raporlama"],
+    relatedProjects: ["mizan-mulk-yonetim-sistemi", "admin-panelli-isletme-sistemi"],
+    relatedBlogPosts: ["crm-musteri-takip-sistemi-ne-ise-yarar"],
+  },
+  {
+    slug: "lead-takip-sistemi",
+    categorySlug: "panel-crm",
+    title: "Lead Takip Sistemi",
+    shortDesc: "Reklam, form, WhatsApp veya sosyal medyadan gelen potansiyel müşterileri takip eder.",
+    longDesc: "Lead takip sistemi, gelen müşteri adaylarının kaybolmadan sınıflandırılması, aranması, notlanması ve satışa dönüştürülmesi için kullanılır.",
+    detail: [
+      "Lead kaynağı, durum, öncelik, not, son görüşme ve sonraki aksiyon bilgileri panelde tutulabilir.",
+      "Reklam veren işletmeler için gelen talebin boşa gitmemesi ve dönüş hızının artması açısından kritiktir.",
+    ],
+    features: ["Lead kaydı", "Kaynak bilgisi", "Durum takibi", "Öncelik", "Notlar", "Hatırlatma", "Satış raporu"],
+    examples: ["Reklam lead paneli", "Form talepleri", "WhatsApp müşteri adayları", "Saha satış takip paneli"],
+    suitableFor: ["Reklam veren işletmeler", "Satış ekipleri", "Hizmet firmaları", "Ajanslar", "Klinikler"],
+    problemSolved: "Gelen potansiyel müşterilerin geç dönüş veya unutma yüzünden kaybedilmesini azaltır.",
+    priceFactors: ["Lead kaynakları", "Durum aşamaları", "Hatırlatma", "CRM bağlantısı", "Rapor ihtiyacı"],
+    relatedProjects: ["admin-panelli-isletme-sistemi"],
+    relatedBlogPosts: ["lead-takip-sistemi-nedir"],
+  },
+  {
+    slug: "gorev-is-takip-paneli",
+    categorySlug: "panel-crm",
+    title: "Görev / İş Takip Paneli",
+    shortDesc: "Ekip, görev, teslim tarihi, durum ve iş akışı takibi için yönetim sistemi.",
+    longDesc: "Görev ve iş takip paneli, ekip içindeki yapılacak işleri, sorumluları, tarihleri ve durumları düzenli yönetmek için hazırlanır.",
+    detail: [
+      "Görev atama, öncelik, teslim tarihi, durum, yorum ve dosya ekleme gibi alanlar projeye göre kurgulanabilir.",
+      "Ajans, teknik servis, yazılım ekibi veya operasyon ekipleri için sade bir iç takip sistemi olabilir.",
+    ],
+    features: ["Görev listesi", "Sorumlu kişi", "Durum takibi", "Teslim tarihi", "Öncelik", "Yorumlar", "Dosya ekleme"],
+    examples: ["Ajans iş takibi", "Teknik servis görevleri", "Proje takip paneli", "Operasyon görev listesi"],
+    suitableFor: ["Ekip yöneten işletmeler", "Ajanslar", "Teknik servisler", "Operasyon ekipleri"],
+    problemSolved: "Kimin hangi işi ne zaman yapacağını ve işin hangi aşamada olduğunu görünür hale getirir.",
+    priceFactors: ["Görev alanları", "Kullanıcı rolleri", "Bildirim", "Dosya ekleme", "Raporlama"],
+    relatedProjects: ["task-management-system", "admin-panelli-isletme-sistemi"],
+    relatedBlogPosts: ["ajanslar-icin-musteri-paneli"],
+  },
+  {
+    slug: "dosya-belge-yonetim-sistemi",
+    categorySlug: "panel-crm",
+    title: "Dosya / Belge Yönetim Sistemi",
+    shortDesc: "Müşteri dosyaları, evrak, sözleşme, görsel ve proje belgelerini düzenli saklar.",
+    longDesc: "Dosya ve belge yönetim sistemi, işletmenin müşteri veya proje bazlı evraklarını arşivlemek, bulmak ve yetkiye göre yönetmek için geliştirilir.",
+    detail: [
+      "Dosyalar müşteri, proje, kategori veya tarih bazlı saklanabilir; erişim rolleriyle sınırlanabilir.",
+      "Turizm, emlak, danışmanlık, ajans, hukuk, muhasebe ve servis süreçlerinde belge takibini kolaylaştırır.",
+    ],
+    features: ["Dosya yükleme", "Kategori", "Müşteri bağlantısı", "Yetki kontrolü", "Arama", "Önizleme", "İşlem geçmişi"],
+    examples: ["Müşteri evrak paneli", "Proje dosya arşivi", "Turizm belge takibi", "Sözleşme arşivi"],
+    suitableFor: ["Belgeyle çalışan işletmeler", "Ajanslar", "Turizm firmaları", "Emlakçılar", "Danışmanlık ekipleri"],
+    problemSolved: "Evrakların bilgisayar klasörleri ve mesaj ekleri içinde kaybolmasını engeller.",
+    priceFactors: ["Dosya türleri", "Depolama ihtiyacı", "Yetki rolleri", "Arama/filtreleme", "Müşteri bağlantısı"],
+    relatedProjects: ["cloud-storage-platform", "menar-operasyon-paneli"],
+    relatedBlogPosts: ["isletme-yonetim-paneli-nedir"],
+  },
+  {
+    slug: "raporlama-dashboard-sistemi",
+    categorySlug: "panel-crm",
+    title: "Raporlama Dashboard Sistemi",
+    shortDesc: "Satış, sipariş, stok, müşteri, ödeme veya operasyon verilerini özetleyen panel.",
+    longDesc: "Raporlama dashboard sistemi, işletmenin kritik verilerini tablo ve grafiklerle tek ekranda anlaşılır hale getirir.",
+    detail: [
+      "Günlük satış, sipariş durumu, stok, müşteri sayısı, görev performansı veya operasyon özeti gösterilebilir.",
+      "Dashboard bağımsız yapılabileceği gibi admin panel veya özel yazılımın üst ekranı olarak da kurgulanır.",
+    ],
+    features: ["Özet kartları", "Grafikler", "Filtreleme", "Tarih aralığı", "Durum raporu", "Dışa aktarma opsiyonu", "Yetkili görünüm"],
+    examples: ["Satış dashboard", "Stok raporu", "Operasyon özeti", "Lead performans raporu", "Servis takip raporu"],
+    suitableFor: ["Veriyle karar vermek isteyen işletmeler", "Yönetim ekipleri", "Satış ekipleri", "Operasyon yöneticileri"],
+    problemSolved: "Ham veriyi okunabilir iş özetlerine dönüştürür.",
+    priceFactors: ["Rapor sayısı", "Veri kaynakları", "Grafik ihtiyacı", "Filtreleme", "Dışa aktarma"],
+    relatedProjects: ["admin-panelli-isletme-sistemi", "ai-log-analysis-panel"],
+    relatedBlogPosts: ["isletme-yonetim-paneli-nedir"],
+  },
+  {
+    slug: "randevu-rezervasyon-sistemleri",
+    categorySlug: "randevu-rezervasyon",
+    title: "Randevu Sistemi",
+    shortDesc: "Klinik, güzellik merkezi, kurs, danışmanlık ve hizmet işletmeleri için randevu akışı.",
+    longDesc: "Randevu sistemi, telefon veya WhatsApp üzerinden karışan tarih/saat taleplerini daha düzenli ve takip edilebilir hale getirir.",
+    detail: [
+      "Müşteri hizmet seçebilir, tarih/saat talebi bırakabilir ve işletme tarafında randevu durumu panelden yönetilebilir.",
+      "Onay, iptal, tamamlandı, not, personel, hizmet süresi ve hatırlatma akışları projeye göre eklenebilir.",
+    ],
+    features: ["Hizmet seçimi", "Tarih/saat talebi", "Müşteri formu", "Randevu durumu", "Admin panel", "Bildirim", "Personel opsiyonu"],
+    examples: ["Klinik randevu", "Güzellik merkezi", "Kurs kayıt", "Spor salonu", "Oto ekspertiz randevu"],
+    suitableFor: ["Klinikler", "Güzellik merkezleri", "Kurslar", "Danışmanlar", "Spor salonları", "Servis işletmeleri"],
+    problemSolved: "Randevu saatlerinin mesajlar arasında karışmasını azaltır ve işletmeye net takip ekranı verir.",
+    priceFactors: ["Takvim yapısı", "Personel sayısı", "Hizmet süresi", "Bildirim", "Panel kapsamı"],
+    relatedProjects: ["randevu-rezervasyon-sistemi"],
+    relatedBlogPosts: ["randevu-sistemi-yaptirmak", "randevu-sistemi-nedir"],
+  },
+  {
+    slug: "rezervasyon-sistemi",
+    categorySlug: "randevu-rezervasyon",
+    title: "Rezervasyon Sistemi",
+    shortDesc: "Turizm, otel, villa, rent a car, etkinlik veya kiralama işleri için rezervasyon sistemi.",
+    longDesc: "Rezervasyon sistemi, belirli tarih aralığı, müsaitlik, kişi sayısı, araç/oda/ürün seçimi ve ön talep akışını yönetir.",
+    detail: [
+      "Randevudan farklı olarak bir kaynak veya kapasite rezerve edilir: oda, araç, tur, villa, masa veya etkinlik kontenjanı.",
+      "Müsaitlik takvimi, fiyat bilgisi, kapora yönlendirmesi ve admin onay süreci eklenebilir.",
+    ],
+    features: ["Müsaitlik takvimi", "Tarih aralığı", "Rezervasyon formu", "Kapasite", "Onay durumu", "Kapora opsiyonu", "Admin panel"],
+    examples: ["Rent a car rezervasyon", "Villa kiralama", "Tur rezervasyonu", "Otel oda talebi", "Etkinlik kaydı"],
+    suitableFor: ["Turizm firmaları", "Rent a car işletmeleri", "Oteller", "Villa/bungalov kiralama", "Etkinlik firmaları"],
+    problemSolved: "Müsaitlik ve rezervasyon taleplerini mesaj karmaşasından çıkarıp takip edilebilir hale getirir.",
+    priceFactors: ["Takvim mantığı", "Fiyat kuralları", "Kapora", "Kapasite", "Onay/iptal akışı"],
+    relatedProjects: ["randevu-rezervasyon-sistemi", "menar-operasyon-paneli"],
+    relatedBlogPosts: ["rezervasyon-sistemi-turizm-kiralama", "rent-a-car-yazilimi-nasil-planlanir"],
+  },
+  {
+    slug: "kapora-on-talep-sistemi",
+    categorySlug: "randevu-rezervasyon",
+    title: "Kapora / Ön Talep Toplama Sistemi",
+    shortDesc: "Rezervasyon, özel ürün, araç, etkinlik veya hizmet için ön talep ve kapora yönlendirmesi.",
+    longDesc: "Kapora ve ön talep sistemi, müşteriden ciddi talep almak, rezervasyon niyetini ölçmek ve işletmeye düzenli başvuru kaydı oluşturmak için kullanılır.",
+    detail: [
+      "Kapora doğrudan ödeme entegrasyonuyla veya banka/manuel yönlendirme mantığıyla planlanabilir.",
+      "Talep, müşteri, ürün/hizmet, tarih, not ve durum bilgileri panelde takip edilebilir.",
+    ],
+    features: ["Ön talep formu", "Kapora yönlendirme", "Müşteri bilgisi", "Durum takibi", "Admin panel", "E-posta bildirimi", "Not alanı"],
+    examples: ["Araç kapora talebi", "Villa ön rezervasyon", "Özel ürün ayırma", "Etkinlik kayıt talebi"],
+    suitableFor: ["Rezervasyon alan işletmeler", "Özel ürün satanlar", "Araç/otel/turizm firmaları", "Etkinlik düzenleyenler"],
+    problemSolved: "Ciddi müşteriyi ayırır ve ön talepleri düzenli takip edilebilir hale getirir.",
+    priceFactors: ["Kapora yöntemi", "Ödeme entegrasyonu", "Onay akışı", "Form alanları", "Panel ihtiyacı"],
+    relatedProjects: ["randevu-rezervasyon-sistemi"],
+    relatedBlogPosts: ["rezervasyon-sistemi-turizm-kiralama"],
+    riskNote: "Ödeme, kapora, iptal ve iade süreçleri işletmenin çalışma şartlarına ve yasal sorumluluklarına göre ayrıca netleştirilmelidir.",
+  },
+  {
+    slug: "pazaryeri-entegrasyonu",
+    categorySlug: "entegrasyon",
+    title: "Pazaryeri Entegrasyonu",
+    shortDesc: "Trendyol, Hepsiburada, N11, Amazon, Pazarama gibi platformlarla ürün/stok/fiyat akışı.",
+    longDesc: "Pazaryeri entegrasyonu, ürün, fiyat, stok, sipariş ve hata kontrolü gibi süreçlerin tek panel veya otomasyonla yönetilmesini sağlar.",
+    detail: [
+      "Her pazaryerinin API yapısı, kategori zorunlulukları ve hata mesajları farklıdır; kapsam platforma göre netleşir.",
+      "Ürün aktarımı, stok/fiyat güncelleme, sipariş çekme, log takibi ve hata raporlama modülleri planlanabilir.",
+    ],
+    features: ["Ürün aktarımı", "Stok güncelleme", "Fiyat güncelleme", "Sipariş çekme", "Hata logları", "Kategori eşleştirme", "Panel"],
+    examples: ["Trendyol entegrasyonu", "Hepsiburada entegrasyonu", "N11 entegrasyonu", "Pazaryeri ürün paneli"],
+    suitableFor: ["Pazaryeri satıcıları", "Toptancılar", "E-ticaret ekipleri", "Ürün verisi çok olan işletmeler"],
+    problemSolved: "Pazaryeri ürün ve stok yönetimini manuel işlem yükünden çıkarır.",
+    priceFactors: ["Platform sayısı", "API kapsamı", "Ürün alanları", "Stok/fiyat kuralları", "Hata raporlama"],
+    relatedProjects: ["pazaryeri-xml-entegrasyonu"],
+    relatedBlogPosts: ["pazaryeri-entegrasyonu-nedir", "pazaryeri-xml-entegrasyonu-nedir"],
+  },
+  {
+    slug: "xml-entegrasyonu",
+    categorySlug: "entegrasyon",
+    title: "XML Entegrasyonu",
+    shortDesc: "Tedarikçi veya başka sistemlerden XML ile ürün, fiyat, stok veya kategori aktarımı.",
+    longDesc: "XML entegrasyonu, dış kaynaktan gelen ürün verilerini okuyup site, panel, katalog veya pazaryeri yapısına aktarmak için geliştirilir.",
+    detail: [
+      "XML dosyasındaki alanlar incelenir, ürün adı, fiyat, stok, kategori, görsel ve açıklama gibi veriler eşleştirilir.",
+      "Veri temizleme, eksik alan kontrolü, fiyat kuralı, stok güncelleme ve hata logları projeye göre eklenebilir.",
+    ],
+    features: ["XML okuma", "Alan eşleştirme", "Kategori aktarımı", "Stok/fiyat güncelleme", "Görsel kontrolü", "Hata logu", "Panel"],
+    examples: ["Tedarikçi XML aktarımı", "Ürün katalog besleme", "Pazaryeri XML hazırlama", "Stok/fiyat senkronizasyonu"],
+    suitableFor: ["Tedarikçi verisi kullananlar", "E-ticaret satıcıları", "Pazaryeri ekipleri", "Ürün katalog işletmeleri"],
+    problemSolved: "Ürün verisini tek tek girmek yerine tedarikçi kaynağından düzenli aktarım sağlar.",
+    priceFactors: ["XML kalitesi", "Alan sayısı", "Fiyat kuralı", "Görsel aktarımı", "Güncelleme sıklığı"],
+    relatedProjects: ["pazaryeri-xml-entegrasyonu"],
+    relatedBlogPosts: ["xml-entegrasyonu-nedir", "pazaryeri-xml-entegrasyonu-nedir"],
+  },
+  {
+    slug: "api-entegrasyonu",
+    categorySlug: "entegrasyon",
+    title: "API Entegrasyonu",
+    shortDesc: "İki farklı yazılım sistemini veri alışverişi yapacak şekilde birbirine bağlar.",
+    longDesc: "API entegrasyonu, farklı yazılım sistemleri arasında müşteri, ürün, sipariş, ödeme, stok veya rapor verisi taşımak için hazırlanır.",
+    detail: [
+      "Bir sistemden veri çekme, başka sisteme veri gönderme, webhook alma veya zamanlanmış senkronizasyon yapılabilir.",
+      "Güvenlik, kimlik doğrulama, hata yönetimi, log takibi ve veri eşleştirme kapsamın önemli parçalarıdır.",
+    ],
+    features: ["REST API", "Veri çekme", "Veri gönderme", "Webhook", "Token/auth", "Loglama", "Hata yönetimi"],
+    examples: ["CRM bağlantısı", "Ödeme API", "Kargo API", "Google Sheets aktarımı", "Harici sistem bağlantısı"],
+    suitableFor: ["İki sistemi bağlamak isteyenler", "Manuel veri aktaran ekipler", "E-ticaret ve operasyon ekipleri"],
+    problemSolved: "Aynı verinin farklı sistemlere elle girilmesini azaltır.",
+    priceFactors: ["API dokümantasyonu", "Veri alanları", "Kimlik doğrulama", "Senkronizasyon sıklığı", "Hata yönetimi"],
+    relatedProjects: ["pazaryeri-xml-entegrasyonu", "ai-log-analysis-panel"],
+    relatedBlogPosts: ["api-entegrasyonu-nedir"],
+  },
+  {
+    slug: "odeme-kargo-servis-entegrasyonu",
+    categorySlug: "entegrasyon",
+    title: "Ödeme / Kargo / Harici Servis Entegrasyonu",
+    shortDesc: "Ödeme, kargo, bildirim, e-posta, Google Sheets, CRM veya farklı servis bağlantıları.",
+    longDesc: "Harici servis entegrasyonları, web sitesi veya panelin işletmenin kullandığı dış servislerle veri alışverişi yapmasını sağlar.",
+    detail: [
+      "Ödeme alma, kargo takip, e-posta gönderimi, SMS/WhatsApp bildirim, Google Sheets aktarımı veya CRM bağlantısı yapılabilir.",
+      "Her servis için hesap, API erişimi, test ortamı ve hata senaryoları ayrıca değerlendirilir.",
+    ],
+    features: ["Ödeme bağlantısı", "Kargo takip", "E-posta bildirimi", "Sheets aktarımı", "CRM bağlantısı", "Webhook", "Log takibi"],
+    examples: ["Ödeme entegrasyonu", "Kargo durum sorgusu", "Mail bildirim sistemi", "Google Sheets kayıt aktarımı"],
+    suitableFor: ["Satış yapan işletmeler", "Panel kullanan ekipler", "Sipariş operasyonu olan firmalar", "Veri aktarımı isteyenler"],
+    problemSolved: "Site veya paneli işletmenin kullandığı servislerle konuşturur.",
+    priceFactors: ["Servis sayısı", "API erişimi", "Test süreci", "Hata senaryosu", "Güvenlik ihtiyacı"],
+    relatedProjects: ["ecommerce-platform", "admin-panelli-isletme-sistemi"],
+    relatedBlogPosts: ["api-entegrasyonu-nedir", "web-admin-ozel-yazilim-teslim-suresi"],
+    riskNote: "Ödeme hizmetlerinde sağlayıcı hesabı, sözleşme, komisyon, iade ve mevzuat sorumlulukları müşterinin faaliyet alanına göre ayrıca değerlendirilmelidir.",
   },
   {
     slug: "ozel-yazilim-premium-sistemler",
-    title: "Custom Software & Premium Systems",
-    titleTr: "Özel Yazılım ve Premium Sistemler",
-    shortTr: "Standart web sitesinden daha fazlasını isteyen projeler için özel panel ve yazılım sistemleri.",
-    short: "Custom panels and software systems for projects that need more than a standard website.",
-    description:
-      "Advanced full-stack systems for projects that need more than a standard website, including dashboards, file management, reporting or special workflows.",
-    descriptionTr:
-      "Standart web sitesinden daha fazlasına ihtiyaç duyan, özel panel, kullanıcı yönetimi, raporlama veya teknik iş akışı isteyen projeler için hazırlanır.",
-    examplesTr: [
-      "Cloud dosya yönetim platformu",
-      "AI hata / log analiz paneli",
-      "Video analiz platformu",
-      "Virtual Computer / eğitim simülatörü",
-      "Özel dashboard",
-      "Özel raporlama sistemi",
-      "Kuruma özel panel",
-      "Sektöre özel yazılım"
-    ],
-    examples: [
-      "Cloud file management platform",
-      "AI error / log analysis panel",
-      "Video analytics platform",
-      "Virtual computer / education simulator",
-      "Custom dashboard",
-      "Custom reporting system",
-      "Company-specific panel",
-      "Industry-specific software"
-    ],
-    infrastructureTr: [
-      "Spring Boot",
-      "React / Next.js",
-      "PostgreSQL",
-      "Docker",
-      "REST API",
-      "Kullanıcı rolleri",
-      "Dashboard",
-      "Raporlama"
-    ],
-    infrastructure: [
-      "Spring Boot",
-      "React / Next.js",
-      "PostgreSQL",
-      "Docker",
-      "REST API",
-      "User roles",
-      "Dashboard",
-      "Reporting"
-    ],
-    detailTr: [
-      "Özel yazılım ve premium sistemler, hazır site mantığının yetmediği durumlar için geliştirilir.",
-      "Dosya yönetimi, log analizi, video analizi, eğitim simülatörü, özel dashboard veya kurum içi panel gibi ihtiyaçlara göre özel yapı kurulabilir.",
-      "Bu projelerde kapsam baştan netleştirilir. Gereken modüller, kullanıcı rolleri, veritabanı, API, raporlama ve canlı önizleme süreci projeye göre planlanır."
-    ],
+    categorySlug: "ozel-yazilim-platform",
+    title: "Özel Yazılım Geliştirme",
+    shortDesc: "Hazır sistemlerin yetmediği durumlarda işletmeye özel web, panel, API ve veritabanı sistemi.",
+    longDesc: "Özel yazılım geliştirme, işletmenin hazır paketlerle çözemediği iş akışlarını projeye özel web uygulaması, panel, API ve veritabanı yapısına dönüştürür.",
     detail: [
-      "Custom software and premium systems are developed when a standard website structure is not enough.",
-      "A custom structure can be built for file management, log analysis, video analytics, education simulators, dashboards or internal company panels.",
-      "The scope is clarified at the beginning. Required modules, user roles, database, API, reporting and live preview process are planned according to the project."
-    ]
-  }
-] satisfies RawService[];
+      "Amaç her şeyi bir anda yapmak değil, önce çalışır ilk kapsamı netleştirip sonrasında modül modül büyütmektir.",
+      "Kullanıcı rolleri, yönetim paneli, raporlar, dosya, entegrasyon, ödeme, bildirim ve otomasyon gibi parçalar ihtiyaca göre eklenir.",
+    ],
+    features: ["Özel panel", "Kullanıcı rolleri", "Veritabanı", "REST API", "Dashboard", "Raporlama", "Entegrasyon"],
+    examples: ["Operasyon paneli", "Sektörel yazılım", "Dosya platformu", "AI analiz paneli", "Video analiz platformu"],
+    suitableFor: ["Hazır sistemlerin yetmediği işletmeler", "Özel iş akışı olan firmalar", "Panel ve entegrasyon isteyen ekipler"],
+    problemSolved: "İşletmenin kendine özel sürecini yazılıma döker ve tek kalıba sıkışma sorununu azaltır.",
+    priceFactors: ["Modül sayısı", "Veri yapısı", "Rol sistemi", "Entegrasyon", "Raporlama", "Bakım kapsamı"],
+    infrastructure: ["Next.js / React", "Spring Boot", "PostgreSQL", "Docker", "REST API", "Rol yönetimi", "VPS deployment"],
+    relatedProjects: ["menar-operasyon-paneli", "mizan-mulk-yonetim-sistemi", "cloud-storage-platform", "video-analysis-platform"],
+    relatedBlogPosts: ["ozel-yazilim-yaptirmak-isteyenler-icin-rehber", "ozel-yazilim-fiyatlari-nasil-belirlenir"],
+  },
+  {
+    slug: "kucuk-isletme-yazilim-sistemleri",
+    categorySlug: "ozel-yazilim-platform",
+    title: "Küçük İşletmeler İçin Yazılım Sistemleri",
+    shortDesc: "Web sitesi, panel, sipariş, stok, müşteri ve operasyon ihtiyaçlarını birleştiren çözümler.",
+    longDesc: "Küçük işletme yazılım sistemleri, büyük ERP bütçesine girmeden günlük işi düzenleyen sade ve büyüyebilir yapılar kurar.",
+    detail: [
+      "Başlangıçta web sitesi, teklif formu veya ürün katalogu kurulabilir; sonraki aşamada panel, stok, sipariş, müşteri ve rapor modülleri eklenebilir.",
+      "Bu yaklaşım işletmenin hemen kullanabileceği ilk sürümle başlayıp ihtiyaç çıktıkça büyümesini sağlar.",
+    ],
+    features: ["Web sitesi", "Admin panel", "Müşteri takibi", "Sipariş takibi", "Stok modülü", "Teklif formu", "Raporlama"],
+    examples: ["Butik işletme sistemi", "Servis takip paneli", "Küçük işletme CRM", "Yerel satış sistemi"],
+    suitableFor: ["Küçük işletmeler", "Yeni büyüyen firmalar", "Excel'den çıkmak isteyen ekipler", "Dijitalleşmeye başlayan işletmeler"],
+    problemSolved: "Birçok küçük iş aracını tek sade sisteme bağlayarak takip yükünü azaltır.",
+    priceFactors: ["Başlangıç modülü", "Panel kapsamı", "Süreç sayısı", "Kullanıcı sayısı", "Büyüme planı"],
+    relatedProjects: ["admin-panelli-isletme-sistemi", "whatsapp-siparis-katalog"],
+    relatedBlogPosts: ["kucuk-isletmeler-icin-yazilim-sistemleri", "web-sitesi-mi-admin-panel-mi"],
+  },
+  {
+    slug: "saas-mvp-gelistirme",
+    categorySlug: "ozel-yazilim-platform",
+    title: "SaaS MVP Geliştirme",
+    shortDesc: "Bir fikrin ilk çalışan sürümünü kullanıcı, panel, ödeme ve dashboard mantığıyla çıkarır.",
+    longDesc: "SaaS MVP geliştirme, ürün fikrini aylarca büyütmeden önce test edilebilir ilk çalışan sürüme dönüştürür.",
+    detail: [
+      "Kullanıcı girişi, abonelik veya ödeme mantığı, yönetim paneli, temel dashboard ve kritik iş akışı önceliklendirilir.",
+      "Amaç yatırım seviyesinde dev ürün değil, müşterinin veya kullanıcının deneyebileceği sağlam başlangıç sürümüdür.",
+    ],
+    features: ["Kullanıcı girişi", "Üyelik yapısı", "Dashboard", "Admin panel", "Ödeme opsiyonu", "Rol yapısı", "MVP kapsamı"],
+    examples: ["Mini SaaS", "Üyelikli platform", "Abonelikli araç", "Dashboard ürünü", "Eğitim platformu MVP"],
+    suitableFor: ["Ürün fikri olan girişimler", "MVP denemek isteyen ekipler", "Özel platform kurmak isteyenler"],
+    problemSolved: "Fikri sadece anlatılan bir proje olmaktan çıkarıp denenebilir ürüne çevirir.",
+    priceFactors: ["Kullanıcı rolleri", "Ödeme/abonelik", "Dashboard", "Admin panel", "MVP modül sayısı"],
+    relatedProjects: ["cloud-storage-platform", "video-analysis-platform"],
+    relatedBlogPosts: ["saas-mvp-gelistirme-nedir", "ozel-yazilim-yaptirmak-isteyenler-icin-rehber"],
+  },
+  {
+    slug: "mini-platform-uyelikli-sistem",
+    categorySlug: "ozel-yazilim-platform",
+    title: "Mini Platform / Üyelikli Sistem",
+    shortDesc: "Kullanıcı girişi, profil, içerik, başvuru, ilan, ödeme veya üyelik mantığı olan platform.",
+    longDesc: "Mini platform ve üyelikli sistemler, sadece tanıtım sitesi değil, kullanıcıların giriş yapıp işlem yaptığı web uygulamalarıdır.",
+    detail: [
+      "Profil, başvuru, ilan, içerik, dosya, ödeme, mesaj, yorum veya eğitim modülleri ihtiyaca göre kurulabilir.",
+      "Başlangıçta tek ana iş akışı seçilerek MVP hazırlanır; sistem daha sonra yeni modüllerle büyütülür.",
+    ],
+    features: ["Kullanıcı girişi", "Profil", "Üyelik rolleri", "İçerik yönetimi", "Başvuru/ilan", "Admin panel", "Ödeme opsiyonu"],
+    examples: ["Online kurs platformu", "Başvuru platformu", "Üyelikli içerik sitesi", "Mini ilan platformu"],
+    suitableFor: ["Platform fikri olanlar", "Eğitimciler", "Topluluk kuranlar", "Başvuru veya ilan sistemi isteyenler"],
+    problemSolved: "Ziyaretçiyi sadece okuyan kişi olmaktan çıkarıp sisteme dahil olan kullanıcıya dönüştürür.",
+    priceFactors: ["Kullanıcı rolü", "Profil alanları", "İçerik yapısı", "Ödeme", "Admin panel"],
+    relatedProjects: ["cloud-storage-platform"],
+    relatedBlogPosts: ["online-kurs-platformu-nasil-yapilir", "saas-mvp-gelistirme-nedir"],
+  },
+  {
+    slug: "whatsapp-ai-asistan",
+    categorySlug: "ai-mobil",
+    title: "WhatsApp AI Asistan",
+    shortDesc: "Müşteri mesajlarını sınıflandıran, cevap öneren veya basit süreçleri otomatikleştiren asistan.",
+    longDesc: "WhatsApp AI asistan, müşteri mesajlarını anlamlandırmak, lead sınıflandırmak, cevap taslağı üretmek veya sık sorulan soruları hızlandırmak için planlanır.",
+    detail: [
+      "Tam otomatik cevap yerine insan onaylı cevap önerisi, lead etiketleme ve talep özetleme gibi kontrollü kullanım daha güvenli başlangıçtır.",
+      "WhatsApp akışı CRM, lead takip veya teklif alma sistemiyle birlikte kurgulanabilir.",
+    ],
+    features: ["Mesaj sınıflandırma", "Cevap önerisi", "Lead etiketi", "Talep özeti", "SSS yanıtı", "İnsan onayı", "Panel bağlantısı"],
+    examples: ["WhatsApp satış asistanı", "Lead ön eleme", "Sık soru asistanı", "Talep özetleme"],
+    suitableFor: ["Çok mesaj alan işletmeler", "Satış ekipleri", "Klinikler", "E-ticaret/katalog işletmeleri", "Danışmanlık firmaları"],
+    problemSolved: "Müşteri mesajlarını daha hızlı anlamayı ve önceliklendirmeyi sağlar.",
+    priceFactors: ["Mesaj akışı", "AI sağlayıcısı", "İnsan onayı", "CRM bağlantısı", "Güvenlik ve log ihtiyacı"],
+    relatedProjects: ["ai-log-analysis-panel"],
+    relatedBlogPosts: ["whatsapp-ai-asistan-kucuk-isletme", "yapay-zeka-otomasyonlari-isletmelerde-nasil-kullanilir"],
+    riskNote: "AI cevapları kritik karar yerine yardımcı öneri olarak kurgulanmalıdır. Yanlış cevap riskini azaltmak için insan onayı ve kayıt tutma önerilir.",
+  },
+  {
+    slug: "yapay-zeka-isletme-otomasyonlari",
+    categorySlug: "ai-mobil",
+    title: "Yapay Zeka ve İşletme Otomasyonları",
+    shortDesc: "Lead sınıflandırma, metin özetleme, rapor analizi, içerik üretimi ve otomatik iş akışları.",
+    longDesc: "Yapay zeka otomasyonları, işletmedeki tekrar eden metin, analiz, sınıflandırma ve raporlama işlerini hızlandırmak için kullanılır.",
+    detail: [
+      "AI modülleri tek başına ürün değil, mevcut panel veya iş akışına yardımcı katman olarak daha verimli çalışır.",
+      "Log analizi, mesaj sınıflandırma, rapor özetleme, içerik taslağı, form değerlendirme veya doküman özeti yapılabilir.",
+    ],
+    features: ["Metin özetleme", "Lead sınıflandırma", "Rapor analizi", "İçerik taslağı", "Doküman özeti", "Otomatik etiketleme", "Panel entegrasyonu"],
+    examples: ["Log analiz paneli", "Müşteri mesaj analizi", "Rapor özetleme", "İçerik üretim aracı", "Talep sınıflandırma"],
+    suitableFor: ["Tekrarlı metin işi olan işletmeler", "Rapor okuyan ekipler", "Müşteri talebi yoğun firmalar", "Operasyon ekipleri"],
+    problemSolved: "Tekrarlı analiz ve sınıflandırma işlerini hızlandırır, insana karar için daha düzenli özet sunar.",
+    priceFactors: ["AI sağlayıcısı", "Veri türü", "Panel bağlantısı", "Onay akışı", "Log ve güvenlik"],
+    relatedProjects: ["ai-log-analysis-panel", "video-analysis-platform"],
+    relatedBlogPosts: ["yapay-zeka-otomasyonlari-isletmelerde-nasil-kullanilir", "whatsapp-ai-asistan-kucuk-isletme"],
+    riskNote: "AI çıktıları özellikle finans, sağlık, hukuk ve kritik operasyon kararlarında insan kontrolüyle kullanılmalıdır.",
+  },
+  {
+    slug: "mobil-webview-uygulama",
+    categorySlug: "ai-mobil",
+    title: "Mobil Uygulama / Webview Uygulama",
+    shortDesc: "Mevcut web sistemi veya paneli mobil uygulama gibi kullanılabilir hale getirir.",
+    longDesc: "Mobil/webview uygulama, web sisteminin telefondan uygulama benzeri deneyimle kullanılmasını sağlar; küçük işletmeler için native uygulamadan önce daha hafif bir başlangıç olabilir.",
+    detail: [
+      "Webview, PWA veya mobil uyumlu panel seçenekleri ihtiyaca göre değerlendirilir.",
+      "Bildirim, cihaz özellikleri, mağaza yayını ve kullanıcı girişi gibi konular kapsamı değiştirebilir.",
+    ],
+    features: ["Webview paketleme", "PWA opsiyonu", "Mobil uyumlu panel", "Kullanıcı girişi", "Bildirim opsiyonu", "Mağaza yayını danışmanlığı"],
+    examples: ["Müşteri uygulaması", "Personel paneli", "Bayi uygulaması", "Randevu uygulaması", "Web sisteminin mobil kullanımı"],
+    suitableFor: ["Web sistemi olan işletmeler", "Müşterisine uygulama deneyimi sunmak isteyenler", "Personel paneli kullanan ekipler"],
+    problemSolved: "Tam native uygulama maliyetine girmeden mobil kullanım deneyimini güçlendirir.",
+    priceFactors: ["Webview/PWA seçimi", "Bildirim", "Mağaza yayını", "Giriş sistemi", "Mobil arayüz düzeni"],
+    relatedProjects: ["admin-panelli-isletme-sistemi"],
+    relatedBlogPosts: ["mobil-uygulama-mi-webview-mi"],
+  },
+  {
+    slug: "bakim-gelistirme-destek-hizmeti",
+    categorySlug: "bakim-destek",
+    title: "Bakım, Geliştirme ve Destek Hizmeti",
+    shortDesc: "Teslim sonrası hata düzeltme, yeni modül, güvenlik, yedek, içerik ve panel geliştirme.",
+    longDesc: "Bakım ve geliştirme desteği, teslim edilen web sitesi veya yazılımın yaşayan bir sistem olarak güncel kalmasını sağlar.",
+    detail: [
+      "Hata düzeltme, küçük içerik güncellemeleri, yeni modül planlama, güvenlik kontrolü, yedek, performans ve entegrasyon takibi yapılabilir.",
+      "Her projenin destek ihtiyacı farklıdır; basit web sitesiyle özel panelin bakım kapsamı aynı düşünülmez.",
+    ],
+    features: ["Hata düzeltme", "İçerik güncelleme", "Yeni modül", "Yedek kontrolü", "Güvenlik kontrolü", "Panel geliştirme", "Entegrasyon takibi"],
+    examples: ["Aylık web bakım", "Admin panel geliştirme", "SEO içerik desteği", "Entegrasyon kontrolü", "Yeni özellik ekleme"],
+    suitableFor: ["Teslim sonrası destek isteyenler", "Panel kullanan işletmeler", "Düzenli içerik güncelleyenler", "Sistemini büyütmek isteyenler"],
+    problemSolved: "Teslimden sonra sistemin sahipsiz kalmasını ve küçük ihtiyaçların birikmesini engeller.",
+    priceFactors: ["Destek süresi", "Müdahale sıklığı", "Yeni modül kapsamı", "Yedek/güvenlik ihtiyacı", "Entegrasyon takibi"],
+    relatedProjects: ["admin-panelli-isletme-sistemi", "ecommerce-platform"],
+    relatedBlogPosts: ["bakim-ve-gelistirme-paketi-neden-onemlidir", "admin-panel-projelerinde-bakim-paketi-neden-onemlidir"],
+  },
+];
 
-const serviceStrategy: Record<string, Pick<ServiceType, "suitableFor" | "problemSolved" | "scopeLevels" | "relatedProjects" | "relatedBlogPosts" | "bionlukLinkKey">> = {
-  "tanitim-kurumsal-web-siteleri": {
-    suitableFor: ["Hizmet veren işletmeler", "Kişisel markalar", "Danışmanlık ve ajans ekipleri", "Referans ve teklif akışını güçlendirmek isteyen firmalar"],
-    problemSolved: "Firmanın ne yaptığını, neden güvenilir olduğunu ve müşterinin nasıl iletişime geçeceğini tek akışta netleştirir.",
-    scopeLevels: [
-      { name: "Başlangıç site", description: "Ana sayfa, hizmet özeti, hakkımızda ve iletişim akışıyla sade kurumsal görünürlük." },
-      { name: "Profesyonel site", description: "Hizmet detayları, SSS, güven alanları, teklif yönlendirmesi ve temel SEO kurgusu." },
-      { name: "Tam kurumsal yapı", description: "Blog, referans, çoklu hizmet sayfaları, gelişmiş içerik akışı ve dönüşüm odaklı CTA yapısı." },
-    ],
-    relatedProjects: ["kurumsal-web-sitesi", "landing-page"],
-    relatedBlogPosts: ["kurumsal-web-sitesi-yaptirirken-nelere-dikkat-edilmeli", "web-sitesi-projesinde-kapsam-nasil-belirlenir"],
-    bionlukLinkKey: "profile",
-  },
-  "urun-katalog-whatsapp-siparis": {
-    suitableFor: ["Butikler", "Takı ve kozmetik satıcıları", "Restoran ve kafeler", "Toptancılar", "Araç veya emlak listeleyen işletmeler"],
-    problemSolved: "Ürünleri tek tek mesajla göndermek yerine kategori, detay ve WhatsApp yönlendirmesi olan düzenli bir satış vitrini kurar.",
-    scopeLevels: [
-      { name: "Başlangıç katalog", description: "Kategori, ürün kartları, detay metinleri ve WhatsApp iletişim butonları." },
-      { name: "Filtreli katalog", description: "Arama, filtre, ürün detay sayfası ve daha güçlü mobil ürün gezme deneyimi." },
-      { name: "Yönetilebilir katalog", description: "Ürünleri sonradan eklemek ve güncellemek için admin panel veya CMS yapısı." },
-    ],
-    relatedProjects: ["whatsapp-siparis-katalog"],
-    relatedBlogPosts: ["whatsapp-katalog-sitesi-nedir", "e-ticaret-sitesi-ile-katalog-sitesi-farki"],
-    bionlukLinkKey: "profile",
-  },
-  "e-ticaret-satis-sistemleri": {
-    suitableFor: ["Online satışa başlamak isteyen işletmeler", "Katalogdan sepete geçmek isteyen markalar", "Sipariş ve stok takibini düzenlemek isteyen ekipler"],
-    problemSolved: "Ürün, sepet, sipariş, ödeme ve yönetim paneli ihtiyacını aynı satış sistemi içinde planlar.",
-    scopeLevels: [
-      { name: "Başlangıç sipariş sistemi", description: "Ürün listeleme, sepet benzeri talep akışı ve sipariş kaydı." },
-      { name: "MVP e-ticaret", description: "Sepet, checkout, sipariş yönetimi ve temel ödeme/iletişim akışı." },
-      { name: "Gelişmiş satış sistemi", description: "Stok, kampanya, ödeme, kargo, entegrasyon ve raporlama ihtiyaçlarına göre genişleyen yapı." },
-    ],
-    relatedProjects: ["ecommerce-platform", "whatsapp-siparis-katalog"],
-    relatedBlogPosts: ["e-ticaret-sitesi-ile-katalog-sitesi-farki"],
-    bionlukLinkKey: "profile",
-  },
-  "randevu-rezervasyon-sistemleri": {
-    suitableFor: ["Güzellik merkezleri", "Klinikler", "Kurslar", "Spor salonları", "Oto ekspertiz ve servis işletmeleri"],
-    problemSolved: "WhatsApp, telefon ve DM üzerinden dağınık gelen randevu taleplerini takip edilebilir bir akışa dönüştürür.",
-    scopeLevels: [
-      { name: "Temel randevu formu", description: "Hizmet, tarih/saat, müşteri bilgisi ve bildirim akışı." },
-      { name: "Rezervasyon takip sistemi", description: "Talep listesi, durum yönetimi ve işletme tarafında takip ekranı." },
-      { name: "Gelişmiş randevu paneli", description: "Onay, iptal, tamamlandı durumları, kullanıcı rolleri ve raporlama." },
-    ],
-    relatedProjects: ["randevu-rezervasyon-sistemi"],
-    relatedBlogPosts: ["randevu-sistemi-nedir"],
-    bionlukLinkKey: "profile",
-  },
-  "admin-panel-isletme-yonetimi": {
-    suitableFor: ["Excel ve WhatsApp ile takip yapan işletmeler", "Stok, sipariş veya müşteri kaydı tutan ekipler", "Operasyonunu tek panelden görmek isteyen firmalar"],
-    problemSolved: "Müşteri, ürün, stok, sipariş, görev, teklif ve ödeme gibi dağınık iş kayıtlarını tek yönetim panelinde toplar.",
-    scopeLevels: [
-      { name: "Temel panel", description: "Tek ana modül, kayıt ekleme/düzenleme, listeleme ve basit durum takibi." },
-      { name: "İşletme paneli", description: "Birden fazla modül, filtreleme, raporlama, rol yapısı ve operasyon akışı." },
-      { name: "Gelişmiş yönetim sistemi", description: "Özel dashboard, entegrasyonlar, işlem geçmişi, çıktı ve bakım/geliştirme desteği." },
-    ],
-    relatedProjects: ["admin-panelli-isletme-sistemi", "task-management-system", "cloud-storage-platform"],
-    relatedBlogPosts: ["admin-panel-nedir", "stok-takip-sistemi-yaptirirken-nelere-dikkat-edilmeli", "admin-panel-projelerinde-bakim-paketi-neden-onemlidir"],
-    bionlukLinkKey: "profile",
-  },
-  "ozel-yazilim-premium-sistemler": {
-    suitableFor: ["Standart paketlerin yetmediği işletmeler", "API/XML entegrasyonu isteyen ekipler", "Özel dashboard ve otomasyon ihtiyacı olan firmalar"],
-    problemSolved: "Hazır site veya basit panelle çözülemeyen özel iş akışlarını, entegrasyonları ve yönetim ihtiyaçlarını projeye özel yazılıma dönüştürür.",
-    scopeLevels: [
-      { name: "Ön analiz", description: "İhtiyaç, modüller, veri yapısı, entegrasyon ve teslim beklentisi netleştirilir." },
-      { name: "MVP sistem", description: "En kritik ekranlar ve akışlar çalışan ilk sürüm olarak hazırlanır." },
-      { name: "Premium sistem", description: "Rol yönetimi, API, raporlama, otomasyon, bakım ve yeni modül geliştirme akışıyla büyür." },
-    ],
-    relatedProjects: ["pazaryeri-xml-entegrasyonu", "mizan-mulk-yonetim-sistemi", "menar-operasyon-paneli", "cloud-storage-platform", "ai-log-analysis-panel", "video-analysis-platform"],
-    relatedBlogPosts: ["ozel-yazilim-fiyatlari-nasil-belirlenir", "pazaryeri-xml-entegrasyonu-nedir", "power-apps-ile-isletme-surecleri-nasil-dijitallesir"],
-    bionlukLinkKey: "profile",
-  },
-};
+function getCategory(categorySlug: string) {
+  return serviceCategories.find((category) => category.slug === categorySlug);
+}
 
-export const servicesData: ServiceType[] = ntWorksServices.map((service, index) => ({
-  id: service.slug ?? `service-${index + 1}`,
-  slug: service.slug,
-  title: service.titleTr,
-  shortDesc: service.shortTr,
-  longDesc: service.descriptionTr,
-  detail: service.detailTr ?? [],
-  features: service.infrastructureTr ?? [],
-  examples: service.examplesTr ?? [],
-  infrastructure: service.infrastructureTr ?? [],
-  combinations: service.examplesTr ?? [],
-  suitableFor: serviceStrategy[service.slug]?.suitableFor ?? [],
-  problemSolved: serviceStrategy[service.slug]?.problemSolved ?? service.descriptionTr,
-  scopeLevels: serviceStrategy[service.slug]?.scopeLevels ?? [],
-  relatedProjects: serviceStrategy[service.slug]?.relatedProjects ?? [],
-  relatedBlogPosts: serviceStrategy[service.slug]?.relatedBlogPosts ?? [],
-  bionlukLinkKey: serviceStrategy[service.slug]?.bionlukLinkKey,
-}));
+export const servicesData: ServiceType[] = serviceEntries.map((service, index) => {
+  const category = getCategory(service.categorySlug);
+
+  return {
+    id: service.slug ?? `service-${index + 1}`,
+    slug: service.slug,
+    category: category?.title ?? "Hizmet",
+    categorySlug: service.categorySlug,
+    title: service.title,
+    shortDesc: service.shortDesc,
+    longDesc: service.longDesc,
+    detail: service.detail,
+    features: service.features,
+    examples: service.examples,
+    infrastructure: service.infrastructure ?? standardInfrastructure,
+    combinations: service.combinations ?? service.examples,
+    modules: service.features,
+    priceFactors: service.priceFactors,
+    suitableFor: service.suitableFor,
+    problemSolved: service.problemSolved,
+    scopeLevels: service.scopeLevels ?? scopeLevelsFor(service.title),
+    faqs: service.faqs ?? faqsFor(service.title),
+    relatedProjects: service.relatedProjects ?? [],
+    relatedBlogPosts: service.relatedBlogPosts ?? [],
+    riskNote: service.riskNote,
+  };
+});

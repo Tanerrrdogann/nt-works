@@ -1,8 +1,10 @@
 import type { MetadataRoute } from "next";
 import { blogCategories, blogPosts } from "@/data/blog";
+import { cityPages } from "@/data/city-pages";
 import { landingPages } from "@/data/landing-pages";
 import { projectsData } from "@/data/projects";
 import { servicesData } from "@/data/services";
+import { publishedLocales, withLocalePath } from "@/lib/i18n";
 import { absoluteUrl } from "@/lib/seo";
 
 function normalize(value: string) {
@@ -11,54 +13,67 @@ function normalize(value: string) {
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-  const staticRoutes = ["/", "/services", "/projects", "/portfolio", "/testimonials", "/blog", "/about", "/contact", "/maintenance-packages", "/privacy", "/kvkk", "/cookies", "/terms", "/support", "/scope-pricing", "/safe-bionluk", "/faq"].map((path) => ({
-    url: absoluteUrl(path),
-    lastModified: now,
+  const localizedEntries = (
+    path: string,
+    options: {
+      lastModified?: Date;
+      changeFrequency?: MetadataRoute.Sitemap[number]["changeFrequency"];
+      priority?: number;
+    } = {},
+  ) => publishedLocales.map((locale) => ({
+    url: absoluteUrl(withLocalePath(path, locale)),
+    lastModified: options.lastModified ?? now,
+    changeFrequency: options.changeFrequency ?? "monthly" as const,
+    priority: options.priority ?? 0.75,
+  }));
+
+  const staticRoutes = ["/", "/services", "/projects", "/portfolio", "/blog", "/about", "/contact", "/maintenance-packages", "/privacy", "/kvkk", "/cookies", "/terms", "/support", "/scope-pricing", "/work-process", "/safe-bionluk", "/faq"].flatMap((path) => localizedEntries(path, {
     changeFrequency: path === "/" ? "weekly" as const : "monthly" as const,
     priority: path === "/" ? 1 : path === "/services" || path === "/projects" || path === "/blog" ? 0.9 : 0.75,
   }));
 
-  const serviceRoutes = servicesData.map((service) => ({
-    url: absoluteUrl(`/services/${service.slug}`),
+  const serviceRoutes = servicesData.flatMap((service) => localizedEntries(`/services/${service.slug}`, {
     lastModified: now,
     changeFrequency: "monthly" as const,
     priority: 0.82,
   }));
 
-  const projectRoutes = projectsData.map((project) => ({
-    url: absoluteUrl(`/projects/${project.slug}`),
+  const projectRoutes = projectsData.flatMap((project) => localizedEntries(`/projects/${project.slug}`, {
     lastModified: now,
     changeFrequency: "monthly" as const,
     priority: 0.84,
   }));
 
-  const blogRoutes = blogPosts.map((post) => ({
-    url: absoluteUrl(`/blog/${post.slug}`),
+  const blogRoutes = blogPosts.flatMap((post) => localizedEntries(`/blog/${post.slug}`, {
     lastModified: new Date(post.updatedAt),
     changeFrequency: "monthly" as const,
     priority: 0.8,
   }));
 
-  const blogCategoryRoutes = blogCategories.map((category) => ({
-    url: absoluteUrl(`/blog/category/${normalize(category)}`),
+  const blogCategoryRoutes = blogCategories.flatMap((category) => localizedEntries(`/blog/category/${normalize(category)}`, {
     lastModified: now,
     changeFrequency: "monthly" as const,
     priority: 0.72,
   }));
 
-  const blogTagRoutes = Array.from(new Set(blogPosts.flatMap((post) => post.tags))).map((tag) => ({
-    url: absoluteUrl(`/blog/tag/${normalize(tag)}`),
+  const blogTagRoutes = Array.from(new Set(blogPosts.flatMap((post) => post.tags))).flatMap((tag) => localizedEntries(`/blog/tag/${normalize(tag)}`, {
     lastModified: now,
     changeFrequency: "monthly" as const,
     priority: 0.68,
   }));
 
-  const landingRoutes = landingPages.map((page) => ({
-    url: absoluteUrl(`/${page.slug}`),
+  const landingRoutes = landingPages.flatMap((page) => localizedEntries(`/${page.slug}`, {
     lastModified: now,
     changeFrequency: "monthly" as const,
     priority: 0.82,
   }));
 
-  return [...staticRoutes, ...serviceRoutes, ...projectRoutes, ...blogRoutes, ...blogCategoryRoutes, ...blogTagRoutes, ...landingRoutes];
+  const cityRoutes = cityPages.map((page) => ({
+    url: absoluteUrl(`/sehir/${page.slug}`),
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.78,
+  }));
+
+  return [...staticRoutes, ...serviceRoutes, ...projectRoutes, ...blogRoutes, ...blogCategoryRoutes, ...blogTagRoutes, ...landingRoutes, ...cityRoutes];
 }

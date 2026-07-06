@@ -199,7 +199,6 @@ Bu fazdan kaldırıldı. Site şu an statik veri ve dosya tabanlı yönetilecek.
 
 - [x] Siteye müşteri yorumları bölümü eklendi.
 - [x] Bionluk yorumları metin olarak eklendi.
-- [ ] Bionluk yorumları ekran görüntüsü olarak eklenmedi.
 - [x] Yorumlarda müşteri adı / kullanıcı adı gösterildi.
 - [x] Yorumlarda proje türü gösterildi.
 - [x] Yorumlarda yıldız puanı gösterildi.
@@ -239,7 +238,7 @@ Bu fazdan kaldırıldı. Site şu an statik veri ve dosya tabanlı yönetilecek.
 - [x] Blog yazılarında teklif al CTA’sı var.
 - [x] Blog yazılarında Bionluk güven akışı var.
 - [x] Blog yazılarında SSS alanı var.
-- [ ] Blog yazılarında otomatik içindekiler alanı yok.
+- [x] Blog yazılarında otomatik içindekiler alanı eklendi.
 - [x] Blog yazılarında okunma süresi gösteriliyor.
 - [x] Blog yazılarında son güncelleme tarihi gösteriliyor.
 - [ ] Blog yazılarının mobil okunabilirliği son test bekliyor.
@@ -270,7 +269,7 @@ Bu fazdan kaldırıldı. Site şu an statik veri ve dosya tabanlı yönetilecek.
 - [x] Power Apps ile işletme süreçleri nasıl dijitalleşir?
 - [x] Web sitesi projesinde kapsam nasıl belirlenir?
 - [x] Admin panel ve özel yazılım projelerinde bakım paketi neden önemlidir?
-- [ ] Diğer planlanan 24+ blog yazısı yazılmadı.
+- [x] İlk 30 uzun SEO blog yazısı yazıldı ve blog veri dosyasına eklendi.
 
 ### 4. Hizmet Bazlı Landing Page
 
@@ -280,8 +279,8 @@ Bu fazdan kaldırıldı. Site şu an statik veri ve dosya tabanlı yönetilecek.
 - [x] `/whatsapp-siparis-sistemi` oluşturuldu.
 - [x] `/e-ticaret-sitesi` oluşturuldu.
 - [x] `/randevu-sistemi` oluşturuldu.
-- [x] `/admin-panel-gelistirme` oluşturuldu.
-- [x] `/isletme-yonetim-sistemi` oluşturuldu.
+- [x] `/admin-panel-yaptirmak` oluşturuldu.
+- [x] `/isletme-yonetim-paneli` oluşturuldu.
 - [x] `/stok-takip-sistemi` oluşturuldu.
 - [x] `/siparis-takip-sistemi` oluşturuldu.
 - [ ] `/tahsilat-takip-sistemi` oluşturulmadı.
@@ -292,7 +291,7 @@ Bu fazdan kaldırıldı. Site şu an statik veri ve dosya tabanlı yönetilecek.
 - [ ] `/sharepoint-operasyon-paneli` oluşturulmadı.
 - [ ] `/ozel-yazilim-gelistirme` oluşturulmadı.
 - [x] Her landing page içinde problem, modüller, fiyatı etkileyen faktörler ve CTA var.
-- [ ] Her landing page sonunda ilgili blog yazıları ve portföy projeleri ayrı blok olarak tam eklenmedi.
+- [x] Her landing page sonunda ilgili blog yazıları ve portföy/canlı örnek projeleri ayrı blok olarak eklendi.
 - [ ] Her landing page sonunda Bionluk yönlendirmesi ayrı blok olarak tam eklenmedi.
 
 ### 5. Sektör Bazlı Landing Page
@@ -311,7 +310,7 @@ Bu fazdan kaldırıldı. Site şu an statik veri ve dosya tabanlı yönetilecek.
 - [x] Küçük işletmeler için admin panel sayfası oluşturuldu.
 - [ ] Ajanslar için müşteri ve görev takip paneli sayfası oluşturulmadı.
 - [x] Oluşturulan sektör sayfalarında sektör problemi, önerilen çözüm, modüller ve teklif CTA’sı var.
-- [ ] Oluşturulan sektör sayfalarında ilgili canlı örnek/portföy ayrı blok olarak tam gösterilmiyor.
+- [x] Oluşturulan sektör sayfalarında ilgili canlı örnek/portföy ve blog bağlantıları gösteriliyor.
 
 ### 6. Teknik SEO
 
@@ -354,6 +353,8 @@ Bu fazdan kaldırıldı. Site şu an statik veri ve dosya tabanlı yönetilecek.
 
 ### 8. Google Business, Search Console ve Dış Görünürlük
 
+- [x] Google Business Profile kurulumu tamamlandı.
+- [x] Google Search Console kurulumu ve sitemap gönderimi tamamlandı.
 - [x] Google Business Profile kurulumu için uygulanabilir playbook hazırlandı.
 - [x] Google Search Console kurulumu için uygulanabilir playbook hazırlandı.
 - [x] Sitemap gönderimi için URL ve adımlar belirlendi.
