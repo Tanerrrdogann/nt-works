@@ -1,6 +1,7 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { defaultLocale, getLocaleFromPath, shouldNoIndexLocale, stripLocaleFromPath } from "@/lib/i18n";
+import { siteConfig } from "@/lib/seo";
 
 export function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
@@ -16,7 +17,12 @@ export function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
-  const rewriteUrl = request.nextUrl.clone();
+  const forwardedHost = request.headers.get("x-forwarded-host") ?? request.headers.get("host");
+  const forwardedProto = request.headers.get("x-forwarded-proto") ?? request.nextUrl.protocol.replace(":", "");
+  const origin = forwardedHost && !forwardedHost.includes("localhost")
+    ? `${forwardedProto}://${forwardedHost}`
+    : siteConfig.url;
+  const rewriteUrl = new URL(stripLocaleFromPath(pathname), origin);
   rewriteUrl.pathname = stripLocaleFromPath(pathname);
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("x-nt-locale", locale);
