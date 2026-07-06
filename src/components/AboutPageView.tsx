@@ -769,7 +769,7 @@ export default function AboutPageView() {
         <p className="text-xs font-bold uppercase tracking-[0.22em] text-gray-500">{copy.teamKicker}</p>
         <h2 className="mt-4 text-3xl font-medium text-white">{copy.teamTitle}</h2>
         <p className="mt-4 max-w-4xl text-gray-400 leading-8">{copy.teamDesc}</p>
-        <div className="mt-8 grid grid-cols-2 gap-3 md:gap-6">
+        <div className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-6">
           {copy.team.map(([name, role, desc]) => (
             <div key={name} className="border border-white/10 bg-[#071225]/55 p-4 md:p-6">
               <h3 className="text-sm md:text-xl font-bold text-white">{name}</h3>
@@ -783,7 +783,7 @@ export default function AboutPageView() {
       <RevealItem className="mb-10 border-t border-white/10 pt-8">
         <p className="text-xs font-bold uppercase tracking-[0.22em] text-gray-500">{copy.principlesKicker}</p>
         <h2 className="mt-4 text-3xl font-medium text-white">{copy.principlesTitle}</h2>
-        <div className="mt-8 grid grid-cols-2 gap-3 md:gap-4 lg:grid-cols-4">
+        <div className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
           {copy.principles.map(([title, text]) => (
             <div key={title} className="border border-white/10 bg-[#071225]/55 p-5">
               <h3 className="font-bold text-white leading-6">{title}</h3>
@@ -811,7 +811,7 @@ export default function AboutPageView() {
         <p className="text-xs font-bold uppercase tracking-[0.22em] text-gray-500">{copy.responsibilityKicker}</p>
         <h2 className="mt-4 text-3xl font-medium text-white">{copy.responsibilityTitle}</h2>
         <p className="mt-4 max-w-4xl text-gray-400 leading-8">{copy.responsibilityDesc}</p>
-        <div className="mt-8 grid gap-4 md:grid-cols-3">
+        <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {copy.regulated.map(([title, text]) => (
             <div key={title} className="border border-white/10 bg-[#071225]/55 p-5">
               <h3 className="font-bold text-white leading-6">{title}</h3>

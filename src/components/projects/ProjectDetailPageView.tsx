@@ -572,7 +572,7 @@ export default function ProjectDetailPageView({ slug }: { slug: string }) {
       )}
 
       {project.metrics && project.metrics.length > 0 && (
-        <RevealItem className="mb-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <RevealItem className="mb-8 grid gap-3 md:grid-cols-3 lg:grid-cols-4">
           {project.metrics.map((metric) => (
             <div key={`${metric.value}-${metric.label}`} className="border border-white/10 bg-[#071225]/70 p-5">
               <p className="text-3xl md:text-4xl font-light text-white">{metric.value}</p>
@@ -648,7 +648,7 @@ export default function ProjectDetailPageView({ slug }: { slug: string }) {
       {hasDemoInfo && (
         <RevealItem className="border-t border-white/10 pt-8 mb-8">
           <h2 className="text-2xl md:text-3xl font-medium mb-6">{text.demoScope}</h2>
-          <div className="grid gap-6 lg:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             <div>
               <h3 className="text-sm font-bold uppercase tracking-widest text-white mb-4">{text.openItems}</h3>
               <ul className="space-y-3">
@@ -704,7 +704,7 @@ export default function ProjectDetailPageView({ slug }: { slug: string }) {
 
       <RevealItem className="border-t border-white/10 pt-8">
         <h2 className="text-2xl md:text-3xl font-medium mb-6">{originalMeta.projectKind === "client" ? text.adaptClient : text.adaptDemo}</h2>
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {text.cards.map(([title, body]) => (
             <div key={title} className="border border-white/10 bg-[#071225]/55 p-5">
               <h3 className="font-bold text-white">{title}</h3>

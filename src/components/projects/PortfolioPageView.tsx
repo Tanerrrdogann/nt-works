@@ -223,7 +223,7 @@ export default function PortfolioPageView() {
         <p className="mt-4 max-w-4xl text-gray-400 leading-8">{text.p2}</p>
       </RevealItem>
 
-      <RevealItem className="grid gap-5 md:grid-cols-3">
+      <RevealItem className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {clientProjects.map((project) => {
           const meta = getLocalizedProjectMeta(project.slug, locale);
 

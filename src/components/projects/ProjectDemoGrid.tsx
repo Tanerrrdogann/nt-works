@@ -244,7 +244,7 @@ export default function ProjectDemoGrid({ projects }: { projects: ProjectWithDem
         {text.shown(filteredProjects.length)}
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-2 gap-3 md:gap-8">
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-8">
         {filteredProjects.map((project) => {
           const meta = getProjectMeta(project.slug);
           const demoEnabled = project.isDemoEnabled !== false && Boolean(project.demoUrl);

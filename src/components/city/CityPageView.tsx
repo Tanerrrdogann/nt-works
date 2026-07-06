@@ -78,7 +78,7 @@ export default function CityPageView({ page }: { page: CityPage }) {
             <p className="text-xs font-bold uppercase tracking-[0.18em]">Çözüm mimarisi</p>
           </div>
           <h2 className="mt-4 text-2xl font-medium md:text-3xl">Nasıl bir sistem kurulur?</h2>
-          <div className="mt-6 grid grid-cols-2 gap-3 md:gap-4 lg:grid-cols-3">
+          <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
             {page.solutions.map((solution) => (
               <div key={solution.title} className="border border-white/10 bg-[#071225]/55 p-3 md:p-5">
                 <h3 className="text-sm font-bold leading-5 text-white md:text-base md:leading-6">{solution.title}</h3>
@@ -129,7 +129,7 @@ export default function CityPageView({ page }: { page: CityPage }) {
           <p className="text-xs font-bold uppercase tracking-[0.18em]">İlgili hizmetler</p>
         </div>
         <h2 className="mt-4 text-2xl font-medium md:text-3xl">{page.city} sayfasının beslendiği ana çözümler</h2>
-        <div className="mt-6 grid grid-cols-2 gap-3 md:gap-4 lg:grid-cols-4">
+        <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
           {services.map((service) => (
             <Link key={service.slug} href={`/services/${service.slug}`} className="border border-white/10 bg-[#071225]/55 p-3 transition-colors hover:bg-white/10 md:p-5">
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-gray-500">Hizmet</p>
@@ -143,7 +143,7 @@ export default function CityPageView({ page }: { page: CityPage }) {
       {startPlan.length > 0 && (
         <section className="mt-10 border-t border-white/10 pt-8">
           <h2 className="text-2xl font-medium md:text-3xl">{page.city} projesine nasıl başlanır?</h2>
-          <div className="mt-6 grid grid-cols-2 gap-3 md:gap-4 lg:grid-cols-4">
+          <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
             {startPlan.map((step, index) => (
               <div key={step.title} className="border border-white/10 bg-[#071225]/55 p-3 md:p-5">
                 <span className="flex h-8 w-8 items-center justify-center bg-white text-sm font-bold text-black">{index + 1}</span>

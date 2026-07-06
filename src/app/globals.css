@@ -628,6 +628,15 @@ header,
     line-height: 1.45 !important;
   }
 
+  .mobile-compact-card .desktop-card-copy {
+    display: none !important;
+  }
+
+  .mobile-compact-card .phone-card-copy {
+    display: block !important;
+    overflow: visible !important;
+  }
+
   .mobile-compact-card .mobile-actions {
     gap: 0.45rem !important;
     padding-top: 0.75rem !important;

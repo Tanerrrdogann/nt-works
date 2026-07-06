@@ -408,7 +408,7 @@ export default function ServiceDetailPageView({ slug }: { slug: string }) {
         <RevealItem disableOnMobile={false} className="border-t border-white/10 pt-8">
           <h2 className="text-2xl md:text-3xl font-medium mb-5">{text.problem}</h2>
           <p className="text-gray-400 leading-8">{service.problemSolved}</p>
-          <div className="mt-6 grid grid-cols-2 gap-3">
+          <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3">
             {service.scopeLevels.map((level) => (
               <div key={level.name} className="border border-white/10 bg-[#071225]/55 p-3 md:p-4">
                 <h3 className="font-bold text-white">{level.name}</h3>
@@ -422,24 +422,24 @@ export default function ServiceDetailPageView({ slug }: { slug: string }) {
       <div className="grid gap-8 lg:grid-cols-2 mb-8">
         <RevealItem disableOnMobile={false} className="border-t border-white/10 pt-8">
           <h2 className="text-2xl md:text-3xl font-medium mb-6">{text.suitable}</h2>
-          <div className="grid grid-cols-2 gap-3">{service.suitableFor.map((item) => <div key={item} className="border border-white/10 bg-[#071225]/55 p-3 text-xs font-medium leading-5 text-gray-300 md:p-4 md:text-sm md:leading-6">{item}</div>)}</div>
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-2">{service.suitableFor.map((item) => <div key={item} className="border border-white/10 bg-[#071225]/55 p-3 text-xs font-medium leading-5 text-gray-300 md:p-4 md:text-sm md:leading-6">{item}</div>)}</div>
         </RevealItem>
 
         <RevealItem disableOnMobile={false} className="border-t border-white/10 pt-8">
           <h2 className="text-2xl md:text-3xl font-medium mb-6">{text.usage}</h2>
-          <div className="grid grid-cols-2 gap-3">{service.examples.map((item) => <div key={item} className="border border-white/10 bg-[#071225]/55 p-3 text-xs font-medium leading-5 text-gray-300 md:p-4 md:text-sm md:leading-6">{item}</div>)}</div>
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-2">{service.examples.map((item) => <div key={item} className="border border-white/10 bg-[#071225]/55 p-3 text-xs font-medium leading-5 text-gray-300 md:p-4 md:text-sm md:leading-6">{item}</div>)}</div>
         </RevealItem>
       </div>
 
       <RevealItem disableOnMobile={false} className="border-t border-white/10 pt-8 mb-8">
         <h2 className="text-2xl md:text-3xl font-medium mb-6">{text.modules}</h2>
-        <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">{service.modules.map((module) => <div key={module} className="border border-white/10 bg-[#071225]/55 p-3 text-xs font-medium leading-5 text-gray-300 md:p-4 md:text-sm md:leading-6">{module}</div>)}</div>
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-3">{service.modules.map((module) => <div key={module} className="border border-white/10 bg-[#071225]/55 p-3 text-xs font-medium leading-5 text-gray-300 md:p-4 md:text-sm md:leading-6">{module}</div>)}</div>
       </RevealItem>
 
       <div className="grid gap-8 lg:grid-cols-2 mb-8">
         <RevealItem disableOnMobile={false} className="border-t border-white/10 pt-8">
           <h2 className="text-2xl md:text-3xl font-medium mb-6">{text.price}</h2>
-          <div className="grid grid-cols-2 gap-3">{service.priceFactors.map((factor) => <div key={factor} className="border border-white/10 bg-[#071225]/55 p-3 text-xs font-medium leading-5 text-gray-300 md:p-4 md:text-sm md:leading-6">{factor}</div>)}</div>
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-2">{service.priceFactors.map((factor) => <div key={factor} className="border border-white/10 bg-[#071225]/55 p-3 text-xs font-medium leading-5 text-gray-300 md:p-4 md:text-sm md:leading-6">{factor}</div>)}</div>
           <p className="mt-5 border-l-2 border-white/20 pl-4 text-sm leading-7 text-gray-500">{text.priceNote}</p>
         </RevealItem>
 
@@ -494,7 +494,7 @@ export default function ServiceDetailPageView({ slug }: { slug: string }) {
 
       <RevealItem disableOnMobile={false} className="border-t border-white/10 pt-8 mb-8">
         <h2 className="text-2xl md:text-3xl font-medium mb-6">{text.process}</h2>
-        <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 md:gap-4">
           {process.map(([title, desc], index) => (
             <div key={title} className="border border-white/10 bg-[#071225]/55 p-4 md:p-5">
               <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-sm font-bold text-black md:h-10 md:w-10 md:text-base">{index + 1}</div>

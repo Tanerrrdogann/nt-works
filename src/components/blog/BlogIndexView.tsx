@@ -11,6 +11,33 @@ function postsBySlugs(slugs: string[], posts: typeof blogPosts) {
   return slugs.map((slug) => posts.find((post) => post.slug === slug)).filter((post): post is NonNullable<typeof post> => Boolean(post));
 }
 
+const compactBlogCategoryDescTr: Record<string, string> = {
+  "Admin Panel": "Panel kapsamı ve işletme yönetimi.",
+  Entegrasyon: "XML API ve bağlantı rehberleri.",
+  Katalog: "Ürün kataloğu ve sipariş akışı.",
+  Randevu: "Takvim ve rezervasyon seçimi.",
+  "E-Ticaret": "Online satış altyapısı rehberleri.",
+  "Özel Yazılım": "Özel sistem kapsamı ve planı.",
+  "Power Apps": "Power Apps süreç notları.",
+  "Web Sitesi": "Tanıtım sitesi ve teklif akışı.",
+  Bakım: "Destek bakım ve geliştirme.",
+  MVP: "İlk sürüm kapsam rehberi.",
+  CRM: "Müşteri takip sistemi rehberleri.",
+  "Stok ve Sipariş": "Stok sipariş ve operasyon.",
+  "Satış Sistemleri": "Satışa dönen sistem fikirleri.",
+  "Yapay Zeka": "AI otomasyon ve asistanlar.",
+  "Sektörel Yazılım": "Sektöre göre yazılım seçimi.",
+  Karşılaştırma: "Seçenekleri net kıyaslama.",
+  "Fiyat Rehberi": "Fiyatı etkileyen kapsamlar.",
+  Mobil: "Mobil kullanım ve webview.",
+  SEO: "Arama görünürlüğü ve teknik SEO.",
+};
+
+function compactBlogCategoryDesc(originalCategory: string, localizedCategory: string, locale: string) {
+  if (locale === "tr") return compactBlogCategoryDescTr[originalCategory] ?? `${originalCategory} rehberleri.`;
+  return `${localizedCategory} guides.`;
+}
+
 export default function BlogIndexView() {
   const locale = getLocaleFromPath(usePathname() ?? "/");
   const isEnglish = locale === "en";
@@ -222,7 +249,7 @@ export default function BlogIndexView() {
             </div>
             <LocalizedLink href="/contact?source=blog-index" className="w-fit border border-white/20 px-5 py-2.5 text-sm font-bold text-white hover:bg-white/10">{text.explain}</LocalizedLink>
           </div>
-          <div className="grid gap-4 lg:grid-cols-4">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {featuredPosts.map((post) => (
               <article key={post.slug} className="border border-white/10 bg-[#071225]/78 p-5">
                 <p className="text-xs font-bold uppercase tracking-widest text-gray-500">{post.category}</p>
@@ -238,7 +265,7 @@ export default function BlogIndexView() {
       <section className="mb-14 border-t border-white/10 pt-8">
         <p className="text-xs font-bold uppercase tracking-[0.22em] text-gray-500">{text.categories}</p>
         <h2 className="mt-3 text-2xl md:text-3xl font-medium text-white">{text.categoryTitle}</h2>
-        <div className="mt-6 grid grid-cols-2 gap-3 md:gap-4 xl:grid-cols-3">
+        <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
           {blogCategories.map((originalCategory, index) => {
             const localizedCategory = categories[index];
             const count = blogPosts.filter((post) => post.category === originalCategory).length;
@@ -248,7 +275,8 @@ export default function BlogIndexView() {
                   <h3 className="text-base font-medium leading-6 text-white md:text-xl">{localizedCategory}</h3>
                   <span className="w-fit shrink-0 border border-white/10 bg-white/5 px-2 py-1 text-[11px] font-bold text-gray-500 md:px-2.5 md:text-xs">{count} {text.posts}</span>
                 </div>
-                <p className="mt-3 line-clamp-2 text-xs leading-5 text-gray-400 md:line-clamp-none md:text-sm md:leading-7">{isEnglish ? `Guides about ${localizedCategory.toLowerCase()} scope, pricing, process, and system selection.` : isGerman ? `Leitfäden zu Umfang, Preis, Prozess und Systemauswahl im Bereich ${localizedCategory.toLowerCase()}.` : isFrench ? `Guides sur le périmètre, le prix, le processus et le choix du système pour ${localizedCategory.toLowerCase()}.` : isSpanish ? `Guías sobre alcance, precio, proceso y elección del sistema para ${localizedCategory.toLowerCase()}.` : isArabic ? `أدلة حول النطاق والسعر والعملية واختيار النظام ضمن ${localizedCategory}.` : isRussian ? `Гиды про объем, цену, процесс и выбор системы в теме ${localizedCategory.toLowerCase()}.` : isPortuguese ? `Guias sobre escopo, preço, processo e escolha do sistema em ${localizedCategory.toLowerCase()}.` : isItalian ? `Guide su ambito, prezzo, processo e scelta del sistema per ${localizedCategory.toLowerCase()}.` : isDutch ? `Gidsen over scope, prijs, proces en systeemkeuze rond ${localizedCategory.toLowerCase()}.` : isChinese ? `关于${localizedCategory}项目范围、价格、流程和系统选择的指南。` : `${originalCategory} konusunda kapsam, fiyat, süreç ve doğru sistem seçimi için rehber içerikler.`}</p>
+                <p className="phone-card-copy mt-3 text-xs leading-5 text-gray-400 sm:hidden">{compactBlogCategoryDesc(originalCategory, localizedCategory, locale)}</p>
+                <p className="desktop-card-copy mt-3 hidden text-sm leading-7 text-gray-400 sm:block">{isEnglish ? `Guides about ${localizedCategory.toLowerCase()} scope, pricing, process, and system selection.` : isGerman ? `Leitfäden zu Umfang, Preis, Prozess und Systemauswahl im Bereich ${localizedCategory.toLowerCase()}.` : isFrench ? `Guides sur le périmètre, le prix, le processus et le choix du système pour ${localizedCategory.toLowerCase()}.` : isSpanish ? `Guías sobre alcance, precio, proceso y elección del sistema para ${localizedCategory.toLowerCase()}.` : isArabic ? `أدلة حول النطاق والسعر والعملية واختيار النظام ضمن ${localizedCategory}.` : isRussian ? `Гиды про объем, цену, процесс и выбор системы в теме ${localizedCategory.toLowerCase()}.` : isPortuguese ? `Guias sobre escopo, preço, processo e escolha do sistema em ${localizedCategory.toLowerCase()}.` : isItalian ? `Guide su ambito, prezzo, processo e scelta del sistema per ${localizedCategory.toLowerCase()}.` : isDutch ? `Gidsen over scope, prijs, proces en systeemkeuze rond ${localizedCategory.toLowerCase()}.` : isChinese ? `关于${localizedCategory}项目范围、价格、流程和系统选择的指南。` : `${originalCategory} konusunda kapsam, fiyat, süreç ve doğru sistem seçimi için rehber içerikler.`}</p>
                 <div className="mt-5 flex flex-wrap gap-3">
                   <LocalizedLink href={`/blog/category/${normalizeBlogPath(originalCategory)}`} className="bg-white px-3 py-2 text-xs font-bold text-black hover:bg-gray-200 md:px-4 md:text-sm">{text.viewPosts}</LocalizedLink>
                 </div>

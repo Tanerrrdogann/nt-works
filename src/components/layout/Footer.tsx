@@ -15,7 +15,7 @@ export default function Footer() {
 
   return (
     <footer className="relative z-20 border-t border-white/14 bg-[#050505]/95 pt-10 md:pt-16 pb-8 px-4 md:px-6 text-white backdrop-blur-xl">
-      <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-10 md:gap-12 mb-10 md:mb-12">
+      <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10 md:gap-12 mb-10 md:mb-12">
         <div className="min-w-0">
           <div className="flex items-center gap-1 mb-3 md:mb-4">
             <Image src="/logo.png" alt="NT Logo" width={30} height={30} className="invert opacity-90" />

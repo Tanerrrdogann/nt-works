@@ -30,7 +30,7 @@ export default function Navbar() {
           <Image src="/logo.png" alt="NT Web Çözümleri Logo" width={54} height={54} className="invert opacity-90" priority />
         </LocalizedLink>
         
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
+        <nav className="hidden xl:flex items-center gap-8 text-sm font-medium">
           {navLinks.map((link) => (
             <LocalizedLink key={link.path} href={link.path} className={`nav-link ${activePathname === link.path || (link.path !== "/" && activePathname.startsWith(link.path)) ? "is-active text-white" : "text-gray-500"} hover:text-white transition-colors`}>
               {link.name}
@@ -42,7 +42,7 @@ export default function Navbar() {
           </LocalizedLink>
         </nav>
 
-        <div className="md:hidden flex items-center gap-3">
+        <div className="flex items-center gap-3 xl:hidden">
           <LanguageSwitcher />
           <LocalizedLink href="/contact" className="shimmer-button bg-white text-black px-4 py-2 rounded-sm text-xs font-bold transition-all active:scale-95">
             {text.nav.contact}
@@ -54,9 +54,9 @@ export default function Navbar() {
       </div>
 
       {isOpen && (
-        <div className="mobile-menu-panel md:hidden absolute top-20 left-0 w-full bg-[#050505]/88 border-b border-white/10 flex flex-col px-6 py-4 gap-4">
+        <div className="mobile-menu-panel absolute right-6 top-20 flex w-max max-w-[calc(100vw-3rem)] flex-col gap-3 border border-white/10 bg-[#050505]/92 px-5 py-4 shadow-2xl shadow-black/35 xl:hidden">
           {navLinks.map((link) => (
-            <LocalizedLink key={link.path} href={link.path} onClick={() => setIsOpen(false)} className={`text-lg font-medium py-2 border-b border-white/10 ${activePathname === link.path ? "text-white" : "text-gray-400"}`}>
+            <LocalizedLink key={link.path} href={link.path} onClick={() => setIsOpen(false)} className={`whitespace-nowrap border-b border-white/10 py-2 text-center text-base font-medium last:border-b-0 ${activePathname === link.path ? "text-white" : "text-gray-400"}`}>
               {link.name}
             </LocalizedLink>
           ))}

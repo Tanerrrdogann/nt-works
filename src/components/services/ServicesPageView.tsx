@@ -13,6 +13,17 @@ function getServicesBySlugs(slugs: string[], services: typeof servicesData) {
     .filter((service): service is NonNullable<typeof service> => Boolean(service));
 }
 
+function compactSentence(value: string, wordLimit: number) {
+  const words = value
+    .replace(/[,:;]/g, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .split(" ")
+    .filter(Boolean);
+  const sentence = words.slice(0, wordLimit).join(" ");
+  return sentence.endsWith(".") || sentence.endsWith("。") || sentence.endsWith("؟") ? sentence : `${sentence}.`;
+}
+
 const pageCopy = {
   tr: {
     kicker: "Hizmetler",
@@ -356,14 +367,15 @@ export default function ServicesPageView() {
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-gray-500">{copy.featuredKicker}</p>
             <h2 className="mt-3 text-2xl md:text-3xl font-medium text-white">{copy.featuredTitle}</h2>
           </RevealItem>
-          <div className="grid grid-cols-2 gap-3 md:gap-4 xl:grid-cols-4">
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 xl:grid-cols-4">
             {featuredServices.map((service) => (
               <RevealItem disableOnMobile={false} key={service.slug} className="premium-card mobile-compact-card group relative flex min-h-[14rem] flex-col overflow-hidden border border-white/10 bg-[rgba(9,26,49,0.92)] p-3 md:min-h-[18rem] md:p-5">
                 <span className="card-sheen" aria-hidden="true" />
                 <div className="relative z-10">
                   <p className="text-xs font-bold uppercase tracking-widest text-gray-500">{service.category}</p>
                   <h3 className="mt-3 text-base font-medium leading-6 text-white md:text-xl md:leading-7">{service.title}</h3>
-                  <p className="mt-3 line-clamp-2 text-xs leading-5 text-gray-400 md:line-clamp-none md:text-sm md:leading-6">{service.shortDesc}</p>
+                  <p className="phone-card-copy mt-3 text-xs leading-5 text-gray-400 sm:hidden">{compactSentence(service.shortDesc, 7)}</p>
+                  <p className="desktop-card-copy mt-3 hidden text-sm leading-6 text-gray-400 sm:block">{service.shortDesc}</p>
                 </div>
                 <div className="relative z-10 mt-auto grid grid-cols-1 gap-2 border-t border-white/10 pt-4 md:flex md:flex-wrap md:pt-5">
                   <LocalizedLink href={`/services/${service.slug}`} className="bg-white px-3 py-2 text-center text-xs font-bold text-black hover:bg-gray-200 md:px-4">{copy.detail}</LocalizedLink>
@@ -381,16 +393,17 @@ export default function ServicesPageView() {
           <p className="text-xs font-bold uppercase tracking-[0.22em] text-gray-500">{copy.categoriesKicker}</p>
           <h2 className="mt-3 text-2xl md:text-3xl font-medium text-white">{copy.categoriesTitle}</h2>
         </RevealItem>
-        <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 xl:grid-cols-4">
           {serviceGroups.map((group) => (
             <RevealItem disableOnMobile={false} key={group.slug}>
-              <a href={`#${group.slug}`} className="block h-full border border-white/10 bg-[#071225]/65 p-5 hover:bg-white/10">
-                <div className="flex items-start justify-between gap-4">
-                  <h3 className="text-lg font-medium leading-7 text-white">{group.title}</h3>
-                  <span className="shrink-0 border border-white/10 bg-white/5 px-2.5 py-1 text-xs font-bold text-gray-500">{group.services.length}</span>
+              <a href={`#${group.slug}`} className="block h-full min-h-[10.75rem] border border-white/10 bg-[#071225]/65 p-3 hover:bg-white/10 md:min-h-0 md:p-5">
+                <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between md:gap-4">
+                  <h3 className="text-sm font-medium leading-5 text-white md:text-lg md:leading-7">{group.title}</h3>
+                  <span className="w-fit shrink-0 border border-white/10 bg-white/5 px-2 py-1 text-[11px] font-bold text-gray-500 md:px-2.5 md:text-xs">{group.services.length}</span>
                 </div>
-                <p className="mt-3 text-sm leading-6 text-gray-400">{group.description}</p>
-                <p className="mt-4 text-xs font-bold uppercase tracking-widest text-gray-500">{group.signal}</p>
+                <p className="phone-card-copy mt-3 text-xs leading-5 text-gray-400 sm:hidden">{compactSentence(group.description, 8)}</p>
+                <p className="desktop-card-copy mt-3 hidden text-sm leading-6 text-gray-400 sm:block">{group.description}</p>
+                <p className="mt-3 text-[10px] font-bold uppercase tracking-widest text-gray-500 md:mt-4 md:text-xs">{group.signal}</p>
               </a>
             </RevealItem>
           ))}
@@ -435,7 +448,7 @@ export default function ServicesPageView() {
         <RevealItem disableOnMobile={false} className="premium-panel relative overflow-hidden border border-white/10 bg-[#071225]/78 p-5 md:p-8">
           <h2 className="text-2xl md:text-3xl font-medium text-white">{copy.modulesTitle}</h2>
           <p className="mt-4 max-w-3xl text-sm md:text-base leading-7 text-gray-400">{copy.modulesDesc}</p>
-          <div className="mt-6 grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="mt-6 grid gap-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {modulePool.map((module) => <span key={module} className="border border-white/10 bg-white/5 px-3 py-2 text-sm text-gray-300">{module}</span>)}
           </div>
         </RevealItem>

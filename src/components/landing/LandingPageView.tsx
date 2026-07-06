@@ -467,7 +467,7 @@ export default function LandingPageView({ page }: { page: LandingPage }) {
         <RevealItem className="border-t border-white/10 pt-8">
           <div className="flex items-center gap-3 text-gray-500"><TrendingUp size={18} /><p className="text-xs font-bold uppercase tracking-[0.18em]">{text.scopeKicker}</p></div>
           <h2 className="mt-4 text-2xl md:text-3xl font-medium">{text.priceTitle}</h2>
-          <div className="mt-5 grid grid-cols-2 gap-3">{localizedPage.priceFactors.map((factor) => <div key={factor} className="border border-white/10 bg-[#071225]/55 p-3 text-xs font-semibold leading-5 text-gray-300 md:text-sm md:leading-6">{factor}</div>)}</div>
+          <div className="mt-5 grid grid-cols-2 gap-3 md:grid-cols-3">{localizedPage.priceFactors.map((factor) => <div key={factor} className="border border-white/10 bg-[#071225]/55 p-3 text-xs font-semibold leading-5 text-gray-300 md:text-sm md:leading-6">{factor}</div>)}</div>
         </RevealItem>
       </div>
 
@@ -475,24 +475,24 @@ export default function LandingPageView({ page }: { page: LandingPage }) {
         <RevealItem className="border-t border-white/10 pt-8">
           <div className="flex items-center gap-3 text-gray-500"><ClipboardCheck size={18} /><p className="text-xs font-bold uppercase tracking-[0.18em]">{text.fitKicker}</p></div>
           <h2 className="mt-4 text-2xl md:text-3xl font-medium">{text.fitTitle}</h2>
-          <div className="mt-6 grid grid-cols-2 gap-3">{audience.map((item) => <div key={item} className="flex gap-2 border border-white/10 bg-[#071225]/55 p-3 text-xs leading-5 text-gray-300 md:gap-3 md:p-4 md:text-sm md:leading-6"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-white" /><span>{item}</span></div>)}</div>
+          <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3">{audience.map((item) => <div key={item} className="flex gap-2 border border-white/10 bg-[#071225]/55 p-3 text-xs leading-5 text-gray-300 md:gap-3 md:p-4 md:text-sm md:leading-6"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-white" /><span>{item}</span></div>)}</div>
         </RevealItem>
         <RevealItem className="border-t border-white/10 pt-8">
           <div className="flex items-center gap-3 text-gray-500"><TrendingUp size={18} /><p className="text-xs font-bold uppercase tracking-[0.18em]">{text.outcomeKicker}</p></div>
           <h2 className="mt-4 text-2xl md:text-3xl font-medium">{text.outcomeTitle}</h2>
-          <div className="mt-6 grid grid-cols-2 gap-3">{outcomes.map((item) => <div key={item} className="border border-white/10 bg-white/[0.04] p-3 text-xs font-semibold leading-5 text-gray-300 md:p-4 md:text-sm md:leading-6">{item}</div>)}</div>
+          <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3">{outcomes.map((item) => <div key={item} className="border border-white/10 bg-white/[0.04] p-3 text-xs font-semibold leading-5 text-gray-300 md:p-4 md:text-sm md:leading-6">{item}</div>)}</div>
         </RevealItem>
       </div>
 
       <RevealItem className="mt-8 border-t border-white/10 pt-8">
         <div className="flex items-center gap-3 text-gray-500"><Layers size={18} /><p className="text-xs font-bold uppercase tracking-[0.18em]">{text.modulesKicker}</p></div>
         <h2 className="mt-4 text-2xl md:text-3xl font-medium">{text.modulesTitle}</h2>
-        <div className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-3">{localizedPage.modules.map((module) => <div key={module} className="border border-white/10 bg-[#071225]/55 p-3 text-xs font-medium leading-5 text-gray-300 md:p-4 md:text-sm md:leading-6">{module}</div>)}</div>
+        <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3">{localizedPage.modules.map((module) => <div key={module} className="border border-white/10 bg-[#071225]/55 p-3 text-xs font-medium leading-5 text-gray-300 md:p-4 md:text-sm md:leading-6">{module}</div>)}</div>
       </RevealItem>
 
       <RevealItem className="mt-8 border-t border-white/10 pt-8">
         <h2 className="text-2xl md:text-3xl font-medium">{text.scenariosTitle}</h2>
-        <div className="mt-6 grid gap-4 md:grid-cols-3">{scenarios.map((scenario) => <div key={scenario.title} className="border border-white/10 bg-[#071225]/55 p-5"><h3 className="font-bold leading-6 text-white">{scenario.title}</h3><p className="mt-3 text-sm leading-7 text-gray-400">{scenario.text}</p></div>)}</div>
+        <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">{scenarios.map((scenario) => <div key={scenario.title} className="border border-white/10 bg-[#071225]/55 p-5"><h3 className="font-bold leading-6 text-white">{scenario.title}</h3><p className="mt-3 text-sm leading-7 text-gray-400">{scenario.text}</p></div>)}</div>
       </RevealItem>
 
       <RevealItem className="mt-8 border-t border-white/10 pt-8">
@@ -503,7 +503,7 @@ export default function LandingPageView({ page }: { page: LandingPage }) {
 
       <RevealItem className="mt-8 border-t border-white/10 pt-8">
         <h2 className="text-2xl md:text-3xl font-medium">{text.processTitle}</h2>
-        <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4">{text.process.map((item, index) => <div key={item} className="border border-white/10 bg-[#071225]/55 p-3 md:p-4"><span className="flex h-8 w-8 items-center justify-center bg-white text-sm font-bold text-black">{index + 1}</span><p className="mt-3 text-xs font-semibold leading-5 text-gray-300 md:mt-4 md:text-sm md:leading-6">{item}</p></div>)}</div>
+        <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">{text.process.map((item, index) => <div key={item} className="border border-white/10 bg-[#071225]/55 p-3 md:p-4"><span className="flex h-8 w-8 items-center justify-center bg-white text-sm font-bold text-black">{index + 1}</span><p className="mt-3 text-xs font-semibold leading-5 text-gray-300 md:mt-4 md:text-sm md:leading-6">{item}</p></div>)}</div>
       </RevealItem>
 
       <RevealItem className="mt-8 border-t border-white/10 pt-8">
@@ -514,7 +514,7 @@ export default function LandingPageView({ page }: { page: LandingPage }) {
       {(relatedBlogs.length > 0 || relatedProjects.length > 0 || service) && (
         <RevealItem className="mt-8 border-t border-white/10 pt-8">
           <h2 className="text-2xl md:text-3xl font-medium">{text.resourcesTitle}</h2>
-          <div className="mt-6 grid gap-4 md:grid-cols-3">
+          <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {service && <LocalizedLink href={`/services/${service.slug}`} className="border border-white/10 bg-[#071225]/55 p-5 transition-colors hover:bg-white/10"><p className="text-xs font-bold uppercase tracking-[0.18em] text-gray-500">{text.service}</p><h3 className="mt-3 font-bold leading-6 text-white">{service.title}</h3><p className="mt-2 text-sm leading-6 text-gray-500">{service.shortDesc}</p></LocalizedLink>}
             {relatedBlogs.slice(0, 2).map((post) => <LocalizedLink key={post.slug} href={`/blog/${post.slug}`} className="border border-white/10 bg-[#071225]/55 p-5 transition-colors hover:bg-white/10"><p className="text-xs font-bold uppercase tracking-[0.18em] text-gray-500">{text.blog}</p><h3 className="mt-3 font-bold leading-6 text-white">{post.title}</h3><p className="mt-2 text-sm leading-6 text-gray-500">{post.description}</p></LocalizedLink>)}
             {relatedProjects.slice(0, 2).map((project) => <LocalizedLink key={project.slug} href={`/projects/${project.slug}`} className="border border-white/10 bg-[#071225]/55 p-5 transition-colors hover:bg-white/10"><p className="text-xs font-bold uppercase tracking-[0.18em] text-gray-500">{project.projectKind === "client" ? text.portfolio : text.liveExample}</p><h3 className="mt-3 font-bold leading-6 text-white">{project.title}</h3><p className="mt-2 text-sm leading-6 text-gray-500">{project.shortDesc}</p></LocalizedLink>)}

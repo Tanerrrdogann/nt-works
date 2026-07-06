@@ -1358,7 +1358,7 @@ export default function Home() {
       </section>
 
       <section className="relative z-10 px-4 md:px-6 pb-16">
-        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
+        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 md:gap-4">
           {copy.trustSignals.map(([title, text]) => (
             <div key={title} className="border border-white/10 bg-[#071225]/70 p-4 md:p-5">
               <h2 className="text-sm md:text-base font-bold text-white">{title}</h2>
@@ -1406,7 +1406,7 @@ export default function Home() {
             <h2 className="text-2xl md:text-4xl font-medium mb-4">{copy.systemsTitle}</h2>
             <p className="mobile-compact-text text-gray-400 max-w-2xl">{copy.systemsDesc}</p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
             {homepageServices.map((srv) => (
               <div key={srv.slug}>
                 <LocalizedLink href={`/services/${srv.slug}`} className="premium-card mobile-compact-card group relative flex h-full min-h-[12.5rem] md:min-h-[17rem] flex-col items-center justify-center overflow-hidden bg-[#0b1830]/82 p-4 md:p-8 text-center border border-white/10 backdrop-blur-xl">
@@ -1438,7 +1438,7 @@ export default function Home() {
                 {copy.demoPortfolioDesc}
               </p>
             </div>
-            <div className="grid gap-3 sm:grid-cols-2">
+            <div className="grid gap-3 md:grid-cols-2">
               <LocalizedLink href="/projects" className="premium-card group relative flex min-h-[12rem] flex-col justify-between overflow-hidden border border-white/10 bg-[#0b1830]/82 p-5">
                 <span className="card-sheen" aria-hidden="true" />
                 <span className="relative z-10 text-xs font-bold uppercase tracking-widest text-gray-500">{copy.demoLabel}</span>
@@ -1472,7 +1472,7 @@ export default function Home() {
             <h2 className="text-2xl md:text-4xl font-medium mb-4">{copy.problemsTitle}</h2>
             <p className="mobile-compact-text text-gray-400 max-w-3xl">{copy.problemsDesc}</p>
           </div>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             {copy.problems.map(([title, text]) => (
               <div key={title} className="premium-panel border border-white/10 bg-[#101010]/88 p-6">
                 <h3 className="text-xl font-bold text-white">{title}</h3>
@@ -1494,7 +1494,7 @@ export default function Home() {
               {copy.portfolioReviews}
             </LocalizedLink>
           </div>
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {testimonials.map((testimonial) => (
               <div key={testimonial.slug} className="premium-panel border border-white/10 bg-[#101010]/88 p-6">
                 <div className="flex items-center justify-between gap-3">

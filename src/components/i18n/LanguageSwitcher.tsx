@@ -75,7 +75,7 @@ export default function LanguageSwitcher() {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 top-12 z-50 w-40 overflow-hidden border border-white/12 bg-[#071225]/96 shadow-2xl shadow-black/35 backdrop-blur-xl">
+        <div className="absolute right-0 top-12 z-50 w-max min-w-full overflow-hidden border border-white/12 bg-[#071225]/96 shadow-2xl shadow-black/35 backdrop-blur-xl">
           <div>
             {localeConfigs.map((locale) => {
               const isActive = locale.code === currentLocale;
@@ -84,10 +84,10 @@ export default function LanguageSwitcher() {
                   key={locale.code}
                   type="button"
                   onClick={() => handleLocaleChange(locale.code)}
-                  className={`flex w-full items-center gap-2.5 px-3 py-2 text-left text-sm transition-colors ${isActive ? "bg-white/10 text-white" : "text-gray-300 hover:bg-white/[0.06] hover:text-white"}`}
+                  className={`flex w-full items-center gap-2.5 whitespace-nowrap px-3 py-2 text-left text-sm transition-colors ${isActive ? "bg-white/10 text-white" : "text-gray-300 hover:bg-white/[0.06] hover:text-white"}`}
                 >
                   <span className="shrink-0 text-base leading-none">{flagLabels[locale.code]}</span>
-                  <span className="min-w-0 flex-1 truncate">{locale.label}</span>
+                  <span>{locale.label}</span>
                 </button>
               );
             })}
