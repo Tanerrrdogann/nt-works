@@ -2,15 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import LocalizedLink from "@/components/i18n/LocalizedLink";
+import { useCurrentLocale } from "@/components/i18n/LocaleProvider";
 import { cityPages } from "@/data/city-pages";
-import { getLocaleFromPath } from "@/lib/i18n";
 import { getUiText } from "@/data/i18n/ui-translations";
 
 export default function Footer() {
-  const pathname = usePathname() ?? "/";
-  const locale = getLocaleFromPath(pathname);
+  const locale = useCurrentLocale();
   const text = getUiText(locale);
 
   return (
@@ -45,7 +43,7 @@ export default function Footer() {
         </div>
         <div className="flex min-w-0 flex-col gap-1.5 md:gap-3">
           <h4 className="font-bold mb-1 md:mb-2 text-sm md:text-base">{text.footer.contactTitle}</h4>
-          <LocalizedLink href="/contact" className="text-slate-400 hover:text-white text-xs md:text-sm transition-colors w-fit leading-5">{text.footer.getQuote}</LocalizedLink>
+          <LocalizedLink href="/contact?source=footer" className="text-slate-400 hover:text-white text-xs md:text-sm transition-colors w-fit leading-5">{text.footer.getQuote}</LocalizedLink>
           <a href="mailto:ismailtanererdogan54@gmail.com" className="text-slate-400 hover:text-white text-xs md:text-sm transition-colors w-fit leading-5">{text.footer.email}</a>
           <a href="https://wa.me/905511955566" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white text-xs md:text-sm transition-colors w-fit leading-5">{text.footer.whatsapp}</a>
           <a href="https://github.com/Tanerrrdogann" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white text-xs md:text-sm transition-colors w-fit leading-5">GitHub</a>

@@ -496,6 +496,20 @@ const baseBlogPosts: BlogPostType[] = [
           "Bakım paketi bu taleplerin plansız ve kopuk ilerlemesi yerine düzenli destek akışı kurar.",
         ],
       },
+      {
+        heading: "Bakım kapsamı baştan ayrılmalı",
+        body: [
+          "Hata düzeltme, güvenlik güncellemesi, yedek kontrolü ve çalışma takibi bakım kapsamına yazılabilir. Yeni ekran, entegrasyon veya iş akışı ise ayrı geliştirme olarak değerlendirilmelidir.",
+          "Bu ayrım yapılmadığında küçük destek talepleri ile yeni ürün geliştirme işleri birbirine karışır; süre ve bütçe beklentisi belirsizleşir.",
+        ],
+      },
+      {
+        heading: "İş sürekliliği nasıl korunur?",
+        body: [
+          "Aktif kullanılan sistemlerde kritik ekranlar, entegrasyonlar, hata kayıtları ve yedekler belirli aralıklarla kontrol edilmelidir.",
+          "Talep kanalı, müdahale önceliği ve sorumlu kişi baştan belirlenirse sorunlar kullanıcıların günlük işini durdurmadan daha kontrollü çözülebilir.",
+        ],
+      },
     ],
   },
   {
@@ -519,6 +533,20 @@ const baseBlogPosts: BlogPostType[] = [
         body: [
           "Kurumsal web sitesi ziyaretçiye firmanın ne yaptığını, kimlere hizmet verdiğini ve nasıl iletişime geçileceğini hızlıca anlatmalıdır.",
           "Hizmet sayfaları, hakkımızda, referans, SSS ve teklif akışı güven hissini doğrudan etkiler.",
+        ],
+      },
+      {
+        heading: "Mobil deneyim ve hız birlikte düşünülmeli",
+        body: [
+          "Ziyaretçilerin önemli bölümü siteyi telefondan açtığı için başlıklar, menü, formlar ve iletişim düğmeleri küçük ekranda kolay kullanılmalıdır.",
+          "Büyük görseller, gereksiz animasyonlar ve ağır üçüncü taraf kodları sayfayı yavaşlatabilir. Tasarım kararı verilirken görünüm kadar yüklenme süresi de kontrol edilmelidir.",
+        ],
+      },
+      {
+        heading: "SEO ve teklif akışı nasıl bağlanır?",
+        body: [
+          "Her hizmetin ayrı ve açıklayıcı bir sayfası olmalı; başlık, açıklama, soru-cevap ve iç bağlantılar gerçek arama niyetine göre hazırlanmalıdır.",
+          "Organik aramadan gelen ziyaretçi ilgili hizmeti anladıktan sonra örnek iş, çalışma süreci ve teklif formuna doğal biçimde ilerleyebilmelidir.",
         ],
       },
     ],

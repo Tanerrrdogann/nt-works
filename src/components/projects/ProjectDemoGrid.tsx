@@ -2,10 +2,9 @@
 
 import { RevealItem } from "@/components/animations/PageReveal";
 import LocalizedLink from "@/components/i18n/LocalizedLink";
+import { useCurrentLocale } from "@/components/i18n/LocaleProvider";
 import { getProjectMeta } from "@/data/project-meta";
-import { getLocaleFromPath } from "@/lib/i18n";
 import type { ProjectType } from "@/types";
-import { usePathname } from "next/navigation";
 import { useMemo, useState } from "react";
 
 type ProjectWithDemo = ProjectType & {
@@ -208,8 +207,7 @@ const projectMatches = (project: ProjectWithDemo, filter: string) => {
 
 export default function ProjectDemoGrid({ projects }: { projects: ProjectWithDemo[] }) {
   const [activeFilter, setActiveFilter] = useState("all");
-  const pathname = usePathname();
-  const locale = getLocaleFromPath(pathname ?? "/");
+  const locale = useCurrentLocale();
   const text = locale === "en" ? labels.en : locale === "de" ? labels.de : locale === "fr" ? labels.fr : locale === "es" ? labels.es : locale === "ar" ? labels.ar : locale === "ru" ? labels.ru : locale === "pt" ? labels.pt : locale === "it" ? labels.it : locale === "nl" ? labels.nl : locale === "zh" ? labels.zh : labels.tr;
 
   const filteredProjects = useMemo(
@@ -228,7 +226,7 @@ export default function ProjectDemoGrid({ projects }: { projects: ProjectWithDem
               key={filter.key}
               type="button"
               onClick={() => setActiveFilter(filter.key)}
-              className={`border px-3 py-2 text-xs font-bold uppercase tracking-widest transition-colors ${
+              className={`min-h-11 border px-3 py-2 text-xs font-bold uppercase tracking-widest transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 ${
                 isActive
                   ? "border-white bg-white text-black"
                   : "border-white/10 bg-white/5 text-gray-400 hover:border-white/30 hover:text-white"
@@ -253,8 +251,8 @@ export default function ProjectDemoGrid({ projects }: { projects: ProjectWithDem
           return (
             <RevealItem key={project.slug} className="project-showcase-card mobile-compact-card group relative overflow-hidden bg-[rgba(9,26,49,0.92)] border border-white/10 p-4 md:p-8 flex flex-col justify-between">
               <div className="relative z-10">
-                <span className="text-gray-500 text-[10px] md:text-xs font-mono uppercase tracking-widest mb-2 md:mb-3 block">{project.category}</span>
-                <span className="mb-3 inline-block border border-white/10 bg-white/5 px-2 py-1 text-[10px] font-bold uppercase tracking-widest text-gray-500">
+                <span className="mb-2 block font-mono text-xs uppercase tracking-widest text-gray-500 md:mb-3">{project.category}</span>
+                <span className="mb-3 inline-block border border-white/10 bg-white/5 px-2 py-1 text-xs font-bold uppercase tracking-widest text-gray-500">
                   {isPlanned ? text.plannedCard : meta.projectKind === "client" ? text.clientCard : text.demoCard}
                 </span>
                 <h2 className="text-base md:text-2xl font-medium mb-3 md:mb-4">{project.title}</h2>
@@ -267,19 +265,19 @@ export default function ProjectDemoGrid({ projects }: { projects: ProjectWithDem
               </div>
 
               <div className="mobile-actions relative z-10 flex flex-wrap gap-2 md:gap-4 mt-auto">
-                <LocalizedLink href={`/projects/${project.slug}`} className="shimmer-button bg-white text-black px-3 md:px-6 py-2 md:py-2.5 rounded-sm text-xs md:text-sm font-bold transition-colors">
+                <LocalizedLink href={`/projects/${project.slug}`} className="shimmer-button inline-flex min-h-11 items-center justify-center rounded-sm bg-white px-3 py-2 text-xs font-bold text-black transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 md:px-6 md:py-2.5 md:text-sm">
                   {text.detail}
                 </LocalizedLink>
                 {demoEnabled ? (
-                  <LocalizedLink href={project.demoUrl!} target="_blank" rel="noreferrer" className="border border-white/20 text-white px-3 md:px-6 py-2 md:py-2.5 rounded-sm text-xs md:text-sm font-medium hover:bg-white/10 transition-colors">
+                  <LocalizedLink href={project.demoUrl!} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center justify-center rounded-sm border border-white/20 px-3 py-2 text-xs font-medium text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 md:px-6 md:py-2.5 md:text-sm">
                     {text.live}
                   </LocalizedLink>
                 ) : (
-                  <button type="button" disabled className="border border-white/15 text-gray-500 px-3 md:px-6 py-2 md:py-2.5 rounded-sm text-xs md:text-sm font-medium cursor-not-allowed opacity-75">
+                  <button type="button" disabled className="inline-flex min-h-11 cursor-not-allowed items-center justify-center rounded-sm border border-white/15 px-3 py-2 text-xs font-medium text-gray-500 opacity-75 md:px-6 md:py-2.5 md:text-sm">
                     {text.planned}
                   </button>
                 )}
-                <LocalizedLink href={`/contact?project=${project.slug}`} className="border border-white/20 text-white px-3 md:px-6 py-2 md:py-2.5 rounded-sm text-xs md:text-sm font-medium hover:bg-white/10 transition-colors project-secondary-action">
+                <LocalizedLink href={`/contact?project=${project.slug}&source=projects-grid`} className="project-secondary-action inline-flex min-h-11 items-center justify-center rounded-sm border border-white/20 px-3 py-2 text-xs font-medium text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 md:px-6 md:py-2.5 md:text-sm">
                   {text.request}
                 </LocalizedLink>
               </div>

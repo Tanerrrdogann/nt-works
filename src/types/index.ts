@@ -42,6 +42,14 @@ export interface ProjectType {
   deployment: string;
   deliveryScope: string[];
   projectKind?: "demo" | "client";
+  status?: "client" | "live" | "maintenance" | "planned";
+  isDemoEnabled?: boolean;
+  demoUrl?: string;
+  demoAccounts?: Array<{
+    role: string;
+    email: string;
+    password: string;
+  }>;
   clientDisplayName?: string;
   result?: string;
   testimonialSlug?: string;

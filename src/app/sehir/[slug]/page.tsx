@@ -4,7 +4,8 @@ import CityPageView from "@/components/city/CityPageView";
 import { PageReveal } from "@/components/animations/PageReveal";
 import JsonLd from "@/components/seo/JsonLd";
 import { cityPages, getCityPage } from "@/data/city-pages";
-import { absoluteUrl, breadcrumbJsonLd, serviceJsonLd, siteConfig } from "@/lib/seo";
+import { breadcrumbJsonLd, pageMetadata, serviceJsonLd } from "@/lib/seo";
+import { getCitySeoCopy } from "@/lib/seo-strategy";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata | undefined> {
   const { slug } = await params;
@@ -12,10 +13,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!page) return;
 
   const path = `/sehir/${page.slug}`;
+  const seo = getCitySeoCopy(page);
 
-  return {
-    title: page.title,
-    description: page.description,
+  return pageMetadata({
+    title: seo.title,
+    description: seo.description,
+    path,
     keywords: [
       page.city,
       `${page.city} web tasarım`,
@@ -27,32 +30,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       ...(page.districtFocus ?? []),
       ...page.sectorFocus,
     ],
-    alternates: {
-      canonical: path,
-    },
-    openGraph: {
-      title: page.title,
-      description: page.description,
-      url: absoluteUrl(path),
-      siteName: siteConfig.name,
-      locale: siteConfig.locale,
-      type: "website",
-      images: [
-        {
-          url: absoluteUrl(siteConfig.image),
-          width: 1200,
-          height: 630,
-          alt: page.title,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: page.title,
-      description: page.description,
-      images: [absoluteUrl(siteConfig.image)],
-    },
-  };
+    alternateLocales: ["tr"],
+  });
 }
 
 export function generateStaticParams() {
@@ -71,7 +50,6 @@ export default async function CitySeoPage({ params }: { params: Promise<{ slug: 
       <JsonLd data={[
         breadcrumbJsonLd([
           { name: "Ana Sayfa", path: "/" },
-          { name: "Şehir SEO", path: "/sehir/istanbul" },
           { name: page.city, path },
         ]),
         serviceJsonLd({

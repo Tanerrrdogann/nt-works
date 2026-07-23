@@ -5,8 +5,7 @@ import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import type { ProjectType } from "@/types";
-import { usePathname } from "next/navigation";
-import { getLocaleFromPath } from "@/lib/i18n";
+import { useCurrentLocale } from "@/components/i18n/LocaleProvider";
 
 type ProjectImageGalleryProps = {
   screenshots: NonNullable<ProjectType["screenshots"]>;
@@ -14,8 +13,7 @@ type ProjectImageGalleryProps = {
 };
 
 export default function ProjectImageGallery({ screenshots, projectSlug }: ProjectImageGalleryProps) {
-  const pathname = usePathname();
-  const locale = getLocaleFromPath(pathname ?? "/");
+  const locale = useCurrentLocale();
   const galleryText = locale === "en" ? {
     gallery: "Project image gallery",
     open: "Open image in large view",

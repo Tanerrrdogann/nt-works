@@ -1,18 +1,17 @@
-import type { Metadata } from "next";
 import JsonLd from "@/components/seo/JsonLd";
 import TrustPageView from "@/components/TrustPageView";
 import { getTrustPage } from "@/data/trust-pages";
-import { faqJsonLd, pageMetadata } from "@/lib/seo";
+import { faqJsonLd } from "@/lib/seo";
+import { localizedTrustPageMetadata } from "@/lib/localized-metadata";
+import { getServerLocale } from "@/lib/server-locale";
 
-const page = getTrustPage("faq");
+export function generateMetadata() {
+  return localizedTrustPageMetadata({ path: "/faq" });
+}
 
-export const metadata: Metadata = pageMetadata({
-  title: page.title,
-  description: page.description,
-  path: "/faq",
-});
-
-export default function FaqPage() {
+export default async function FaqPage() {
+  const locale = await getServerLocale();
+  const page = getTrustPage("faq", locale);
   const faqItems = page.sections?.map((section) => ({ question: section.heading, answer: section.body.join(" ") })) ?? [];
 
   return (

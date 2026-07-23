@@ -1,21 +1,62 @@
-import type { Metadata } from "next";
 import JsonLd from "@/components/seo/JsonLd";
 import AboutPageView from "@/components/AboutPageView";
-import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { breadcrumbJsonLd } from "@/lib/seo";
+import { localizedStaticPageMetadata } from "@/lib/localized-metadata";
+import { getServerLocale } from "@/lib/server-locale";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Hakkımızda",
-  description: "NT Web Çözümleri, işletmelerin web sitesi ve özel yazılım ihtiyaçlarını canlı örneklerle netleştiren geliştirme ekibidir.",
-  path: "/about",
-});
+export function generateMetadata() {
+  return localizedStaticPageMetadata({
+    path: "/about",
+    fallback: {
+      title: "Hakkımızda",
+      description: "NT Web Çözümleri, işletmelerin web sitesi ve özel yazılım ihtiyaçlarını canlı örneklerle netleştiren geliştirme ekibidir.",
+    },
+  });
+}
 
-export default function About() {
+export default async function About() {
+  const locale = await getServerLocale();
+
   return (
     <>
       <JsonLd data={breadcrumbJsonLd([
-        { name: "Ana Sayfa", path: "/" },
-        { name: "Hakkımızda", path: "/about" },
-      ])} />
+        {
+          name: locale === "de"
+            ? "Startseite"
+            : locale === "en"
+              ? "Home"
+              : locale === "fr"
+                ? "Accueil"
+                : locale === "es"
+                  ? "Inicio"
+                  : locale === "ar"
+                    ? "الرئيسية"
+                    : locale === "ru"
+                      ? "Главная"
+                      : locale === "pt"
+                        ? "Início"
+                        : locale === "it" || locale === "nl" ? "Home" : locale === "zh" ? "首页" : "Ana Sayfa",
+          path: "/",
+        },
+        {
+          name: locale === "de"
+            ? "Über uns"
+            : locale === "en"
+              ? "About Us"
+              : locale === "fr"
+                ? "À propos"
+                : locale === "es"
+                  ? "Sobre nosotros"
+                  : locale === "ar"
+                    ? "من نحن"
+                    : locale === "ru"
+                      ? "О нас"
+                      : locale === "pt"
+                        ? "Sobre nós"
+                        : locale === "it" ? "Chi siamo" : locale === "nl" ? "Over ons" : locale === "zh" ? "关于我们" : "Hakkımızda",
+          path: "/about",
+        },
+      ], locale)} />
       <AboutPageView />
     </>
   );

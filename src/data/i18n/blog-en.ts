@@ -2058,3 +2058,33 @@ export function getLocalizedBlogCategory(originalCategory: string, locale: strin
   if (locale === "en") return getEnglishCategory(originalCategory);
   return originalCategory;
 }
+
+export function getLocalizedBlogTag(originalTag: string, locale: string) {
+  const preciseOverrides: Partial<Record<string, Partial<Record<string, string>>>> = {
+    de: {
+      "kargo takip": "Paketverfolgung",
+      "sevkiyat takip": "Versandverfolgung",
+    },
+    fr: {
+      "kargo takip": "suivi de colis",
+      "teslimat takip": "suivi de livraison",
+    },
+    es: {
+      "bayi paneli": "panel de distribuidores",
+      "distributor paneli": "panel de canal comercial",
+    },
+  };
+  const preciseLabel = preciseOverrides[locale]?.[originalTag.toLowerCase()];
+  if (preciseLabel) return preciseLabel;
+  if (locale === "de") return germanTag(originalTag);
+  if (locale === "fr") return frenchTag(originalTag);
+  if (locale === "es") return spanishTag(originalTag);
+  const sourceQualifier = readableTag(originalTag);
+  if (locale === "ar") return `${arabicTag(originalTag)} — ${sourceQualifier}`;
+  if (locale === "ru") return `${russianTag(originalTag)} — ${sourceQualifier}`;
+  if (locale === "pt") return `${portugueseTag(originalTag)} — ${sourceQualifier}`;
+  if (locale === "it") return `${italianTag(originalTag)} — ${sourceQualifier}`;
+  if (locale === "nl") return `${dutchTag(originalTag)} — ${sourceQualifier}`;
+  if (locale === "zh") return `${chineseTag(originalTag)} · ${sourceQualifier}`;
+  return readableTag(originalTag);
+}

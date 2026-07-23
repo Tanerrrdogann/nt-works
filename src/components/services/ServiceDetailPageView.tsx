@@ -1,12 +1,11 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
-import { usePathname } from "next/navigation";
 import { RevealItem } from "@/components/animations/PageReveal";
 import LocalizedLink from "@/components/i18n/LocalizedLink";
+import { useCurrentLocale } from "@/components/i18n/LocaleProvider";
 import { serviceCategories, servicesData } from "@/data/services";
 import { getLocalizedServiceCategories, getLocalizedServices } from "@/data/i18n/services-en";
-import { getLocaleFromPath } from "@/lib/i18n";
 
 const processCopy = {
   tr: [
@@ -93,7 +92,6 @@ const copy = {
     infrastructureNote: "Teknoloji seçimi sabit paket gibi düşünülmez. İhtiyaca göre daha sade veya daha gelişmiş mimari kurulabilir.",
     risk: "Kapsam ve sorumluluk notu",
     relatedSolutions: "İlgili çözümler",
-    relatedSolutionsDesc: "Bu hizmetle bağlantılı daha hedefli çözüm sayfaları. İhtiyacınız netse doğrudan ilgili sayfadan kapsamı inceleyebilirsiniz.",
     relatedDemos: "İlgili canlı örnekler",
     relatedPortfolio: "İlgili portföy işleri",
     relatedGuides: "İlgili rehberler",
@@ -118,7 +116,6 @@ const copy = {
     infrastructureNote: "Technology is not treated as a fixed package. A simpler or more advanced architecture can be selected according to need.",
     risk: "Scope and responsibility note",
     relatedSolutions: "Related solutions",
-    relatedSolutionsDesc: "More focused English solution pages will be connected as their translation turn is completed.",
     relatedDemos: "Related live examples",
     relatedPortfolio: "Related portfolio work",
     relatedGuides: "Related guides",
@@ -143,7 +140,6 @@ const copy = {
     infrastructureNote: "Technologie wird nicht als starres Paket betrachtet. Je nach Bedarf kann eine einfachere oder fortgeschrittenere Architektur gewählt werden.",
     risk: "Hinweis zu Umfang und Verantwortung",
     relatedSolutions: "Verwandte Lösungen",
-    relatedSolutionsDesc: "Gezieltere deutsche Lösungsseiten werden verbunden, sobald deren Übersetzungsturnus abgeschlossen ist.",
     relatedDemos: "Verwandte Live-Beispiele",
     relatedPortfolio: "Verwandte Portfolio-Arbeiten",
     relatedGuides: "Verwandte Leitfäden",
@@ -168,7 +164,6 @@ const copy = {
     infrastructureNote: "La technologie n'est pas traitée comme un forfait fixe. Une architecture plus simple ou plus avancée peut être choisie selon le besoin.",
     risk: "Note sur le périmètre et les responsabilités",
     relatedSolutions: "Solutions liées",
-    relatedSolutionsDesc: "Des pages de solutions françaises plus ciblées seront reliées lorsque leur tour de traduction sera terminé.",
     relatedDemos: "Exemples en direct liés",
     relatedPortfolio: "Travaux portfolio liés",
     relatedGuides: "Guides liés",
@@ -193,7 +188,6 @@ const copy = {
     infrastructureNote: "La tecnología no se trata como un paquete fijo. Según la necesidad, puede elegirse una arquitectura más simple o más avanzada.",
     risk: "Nota sobre alcance y responsabilidad",
     relatedSolutions: "Soluciones relacionadas",
-    relatedSolutionsDesc: "Las páginas de solución en español más específicas se conectarán cuando termine su turno de traducción.",
     relatedDemos: "Ejemplos en vivo relacionados",
     relatedPortfolio: "Trabajos de portafolio relacionados",
     relatedGuides: "Guías relacionadas",
@@ -218,7 +212,6 @@ const copy = {
     infrastructureNote: "لا يتم التعامل مع التقنية كباقة ثابتة. يمكن اختيار بنية أبسط أو أكثر تقدماً حسب الحاجة.",
     risk: "ملاحظة النطاق والمسؤولية",
     relatedSolutions: "حلول مرتبطة",
-    relatedSolutionsDesc: "سيتم ربط صفحات الحلول العربية الأكثر تحديداً عند اكتمال دور ترجمتها.",
     relatedDemos: "أمثلة حية مرتبطة",
     relatedPortfolio: "أعمال بورتفوليو مرتبطة",
     relatedGuides: "أدلة مرتبطة",
@@ -243,7 +236,6 @@ const copy = {
     infrastructureNote: "Технология не рассматривается как фиксированный пакет. По потребности можно выбрать более простую или более продвинутую архитектуру.",
     risk: "Заметка об объеме и ответственности",
     relatedSolutions: "Связанные решения",
-    relatedSolutionsDesc: "Более целевые русские страницы решений будут подключены после завершения их тура перевода.",
     relatedDemos: "Связанные живые примеры",
     relatedPortfolio: "Связанные работы портфолио",
     relatedGuides: "Связанные гайды",
@@ -268,7 +260,6 @@ const copy = {
     infrastructureNote: "A tecnologia não é tratada como um pacote fixo. Conforme a necessidade, uma arquitetura mais simples ou mais avançada pode ser escolhida.",
     risk: "Nota sobre escopo e responsabilidade",
     relatedSolutions: "Soluções relacionadas",
-    relatedSolutionsDesc: "Páginas de solução em português mais específicas serão conectadas quando o turno de tradução delas for concluído.",
     relatedDemos: "Exemplos ao vivo relacionados",
     relatedPortfolio: "Trabalhos de portfólio relacionados",
     relatedGuides: "Guias relacionados",
@@ -293,7 +284,6 @@ const copy = {
     infrastructureNote: "La tecnologia non viene trattata come un pacchetto fisso. In base all'esigenza si può scegliere un'architettura più semplice o più avanzata.",
     risk: "Nota su ambito e responsabilità",
     relatedSolutions: "Soluzioni correlate",
-    relatedSolutionsDesc: "Pagine di soluzione italiane più specifiche saranno collegate quando il loro turno di traduzione sarà completato.",
     relatedDemos: "Esempi live correlati",
     relatedPortfolio: "Lavori portfolio correlati",
     relatedGuides: "Guide correlate",
@@ -318,7 +308,6 @@ const copy = {
     infrastructureNote: "Technologie wordt niet als vast pakket behandeld. Volgens behoefte kan een eenvoudigere of geavanceerdere architectuur worden gekozen.",
     risk: "Notitie over scope en verantwoordelijkheid",
     relatedSolutions: "Gerelateerde oplossingen",
-    relatedSolutionsDesc: "Gerichtere Nederlandse oplossingspagina's worden gekoppeld wanneer hun vertaalronde is afgerond.",
     relatedDemos: "Gerelateerde live voorbeelden",
     relatedPortfolio: "Gerelateerd portfoliowerk",
     relatedGuides: "Gerelateerde gidsen",
@@ -343,7 +332,6 @@ const copy = {
     infrastructureNote: "技术不是固定套餐。可按需求选择更简单或更高级的架构。",
     risk: "范围和责任说明",
     relatedSolutions: "相关解决方案",
-    relatedSolutionsDesc: "更具体的中文解决方案页面会在对应翻译轮次完成后连接。",
     relatedDemos: "相关在线示例",
     relatedPortfolio: "相关作品集项目",
     relatedGuides: "相关指南",
@@ -355,8 +343,26 @@ const copy = {
   },
 };
 
-export default function ServiceDetailPageView({ slug }: { slug: string }) {
-  const locale = getLocaleFromPath(usePathname() ?? "/");
+type RelatedContentItem = {
+  title: string;
+  description: string;
+  path: string;
+};
+
+export type ServiceRelatedContent = {
+  solutions: RelatedContentItem[];
+  projects: RelatedContentItem[];
+  guides: RelatedContentItem[];
+};
+
+export default function ServiceDetailPageView({
+  slug,
+  relatedContent,
+}: {
+  slug: string;
+  relatedContent: ServiceRelatedContent;
+}) {
+  const locale = useCurrentLocale();
   const isEnglish = locale === "en";
   const isGerman = locale === "de";
   const isFrench = locale === "fr";
@@ -392,7 +398,7 @@ export default function ServiceDetailPageView({ slug }: { slug: string }) {
         <h1 className="text-4xl md:text-6xl font-medium mb-6 leading-tight">{service.title}</h1>
         <p className="text-lg md:text-xl text-gray-400 max-w-4xl leading-8">{service.longDesc}</p>
         <div className="mt-8 flex flex-wrap gap-4">
-          <LocalizedLink href={`/contact?service=${service.slug}`} className="shimmer-button bg-white text-black px-6 py-3 font-bold hover:bg-gray-200 transition-colors flex items-center gap-2">
+          <LocalizedLink href={`/contact?service=${service.slug}&source=service-detail-hero`} className="shimmer-button bg-white text-black px-6 py-3 font-bold hover:bg-gray-200 transition-colors flex items-center gap-2">
             {text.quote} <ArrowRight size={18} />
           </LocalizedLink>
           <LocalizedLink href="/projects" className="border border-white/20 text-white px-6 py-3 font-medium hover:bg-white/10 transition-colors">{text.examples}</LocalizedLink>
@@ -457,12 +463,53 @@ export default function ServiceDetailPageView({ slug }: { slug: string }) {
         </RevealItem>
       )}
 
-      {(isEnglish || isGerman || isFrench || isSpanish || isArabic || isRussian || isPortuguese || isItalian || isDutch || isChinese) && (
+      {relatedContent.solutions.length > 0 && (
         <RevealItem disableOnMobile={false} className="border-t border-white/10 pt-8 mb-8">
-          <h2 className="text-2xl md:text-3xl font-medium mb-4">{text.relatedSolutions}</h2>
-          <p className="max-w-3xl text-sm leading-7 text-gray-400">{text.relatedSolutionsDesc}</p>
+          <h2 className="text-2xl md:text-3xl font-medium mb-6">{text.relatedSolutions}</h2>
+          <div className="grid gap-3 md:grid-cols-2">
+            {relatedContent.solutions.map((item) => (
+              <LocalizedLink key={item.path} href={item.path} className="border border-white/10 bg-[#071225]/55 p-4 transition-colors hover:bg-white/10">
+                <span className="text-sm font-semibold leading-6 text-gray-200">{item.title}</span>
+                <span className="mt-2 block text-xs leading-5 text-gray-500">{item.description}</span>
+              </LocalizedLink>
+            ))}
+          </div>
         </RevealItem>
       )}
+
+      <div className="grid gap-8 lg:grid-cols-2">
+        {relatedContent.projects.length > 0 && (
+          <RevealItem disableOnMobile={false} className="border-t border-white/10 pt-8 mb-8">
+            <h2 className="text-2xl md:text-3xl font-medium mb-6">
+              {service.relatedProjects.length > 0 && service.relatedProjects.every((projectSlug) => projectSlug.includes("demo"))
+                ? text.relatedDemos
+                : text.relatedPortfolio}
+            </h2>
+            <div className="grid gap-3">
+              {relatedContent.projects.map((item) => (
+                <LocalizedLink key={item.path} href={item.path} className="border border-white/10 bg-[#071225]/55 p-4 transition-colors hover:bg-white/10">
+                  <span className="text-sm font-semibold leading-6 text-gray-200">{item.title}</span>
+                  <span className="mt-2 block text-xs leading-5 text-gray-500">{item.description}</span>
+                </LocalizedLink>
+              ))}
+            </div>
+          </RevealItem>
+        )}
+
+        {relatedContent.guides.length > 0 && (
+          <RevealItem disableOnMobile={false} className="border-t border-white/10 pt-8 mb-8">
+            <h2 className="text-2xl md:text-3xl font-medium mb-6">{text.relatedGuides}</h2>
+            <div className="grid gap-3">
+              {relatedContent.guides.map((item) => (
+                <LocalizedLink key={item.path} href={item.path} className="border border-white/10 bg-[#071225]/55 p-4 transition-colors hover:bg-white/10">
+                  <span className="text-sm font-semibold leading-6 text-gray-200">{item.title}</span>
+                  <span className="mt-2 block text-xs leading-5 text-gray-500">{item.description}</span>
+                </LocalizedLink>
+              ))}
+            </div>
+          </RevealItem>
+        )}
+      </div>
 
       {siblingServices.length > 0 && (
         <RevealItem disableOnMobile={false} className="border-t border-white/10 pt-8 mb-8">
@@ -504,7 +551,7 @@ export default function ServiceDetailPageView({ slug }: { slug: string }) {
           ))}
         </div>
         <div className="mt-8 flex flex-wrap gap-4">
-          <LocalizedLink href={`/contact?service=${service.slug}`} className="bg-white text-black px-7 py-3 font-bold hover:bg-gray-200 transition-colors">{text.contact}</LocalizedLink>
+          <LocalizedLink href={`/contact?service=${service.slug}&source=service-detail-bottom`} className="bg-white text-black px-7 py-3 font-bold hover:bg-gray-200 transition-colors">{text.contact}</LocalizedLink>
           <LocalizedLink href="/services" className="border border-white/20 text-white px-7 py-3 font-medium hover:bg-white/10 transition-colors">{text.all}</LocalizedLink>
         </div>
       </RevealItem>

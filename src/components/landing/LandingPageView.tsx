@@ -1,16 +1,10 @@
 "use client";
 
 import { ArrowRight, CheckCircle2, ClipboardCheck, Layers, Target, TrendingUp } from "lucide-react";
-import { usePathname } from "next/navigation";
 import { RevealItem } from "@/components/animations/PageReveal";
 import LocalizedLink from "@/components/i18n/LocalizedLink";
-import { blogPosts } from "@/data/blog";
-import { projectsData } from "@/data/projects";
-import { servicesData } from "@/data/services";
+import { useCurrentLocale } from "@/components/i18n/LocaleProvider";
 import type { LandingPage } from "@/data/landing-pages";
-import { getLocalizedLandingFaqs, getLocalizedLandingPage } from "@/data/i18n/landing-pages-en";
-import { getLocalizedServices } from "@/data/i18n/services-en";
-import { getLocaleFromPath } from "@/lib/i18n";
 
 const copy = {
   tr: {
@@ -209,7 +203,7 @@ const copy = {
     faqTitle: "أسئلة شائعة",
     resourcesTitle: "مصادر مرتبطة",
     service: "خدمة",
-    blog: "Blog",
+    blog: "المدونة",
     portfolio: "بورتفوليو",
     liveExample: "مثال حي",
     nextStep: "الخطوة التالية",
@@ -239,7 +233,7 @@ const copy = {
     clarifyTitle: "Как уточняется объем?",
     clarifyDesc: "Сначала обсуждаются текущая ситуация, нужные экраны, структура данных, ожидания по сдаче и бюджетный диапазон. Затем становятся ясны объем, сроки и цена. Дополнительные модули, интеграции или особые запросы оцениваются отдельно.",
     processTitle: "Как идет процесс?",
-    process: ["Понимается потребность и текущая ситуация", "Уточняются экраны, модули и объем данных", "Готовится первая версия или phase plan", "Делятся предложение, сроки и ожидания по поддержке"],
+    process: ["Понимается потребность и текущая ситуация", "Уточняются экраны, модули и объем данных", "Готовится первая версия или поэтапный план", "Фиксируются предложение, сроки и ожидания по поддержке"],
     faqTitle: "Частые вопросы",
     resourcesTitle: "Связанные ресурсы",
     service: "Услуга",
@@ -252,37 +246,37 @@ const copy = {
     quote: "Получить предложение",
   },
   pt: {
-    defaultEyebrow: "Pagina de servico focada em conversao",
+    defaultEyebrow: "Página de serviço focada em conversão",
     talk: "Vamos discutir este projeto",
-    mainService: "Ver servico principal",
-    summary: "Resumo rapido para decisao",
-    moduleIdea: "ideias de modulo",
-    priceFactor: "fatores de preco",
+    mainService: "Ver serviço principal",
+    summary: "Resumo rápido para decisão",
+    moduleIdea: "ideias de módulo",
+    priceFactor: "fatores de preço",
     faq: "FAQ",
     problemKicker: "Problema",
     problemTitle: "Qual problema resolve?",
     scopeKicker: "Escopo",
-    priceTitle: "O que influencia o preco",
-    fitKicker: "Adequacao",
-    fitTitle: "Para quem e indicado?",
+    priceTitle: "O que influencia o preço",
+    fitKicker: "Adequação",
+    fitTitle: "Para quem é indicado?",
     outcomeKicker: "Resultado",
-    outcomeTitle: "O que entrega ao negocio?",
-    modulesKicker: "Modulos",
-    modulesTitle: "Modulos que podem entrar no projeto",
-    scenariosTitle: "Cenarios de uso",
-    clarifyTitle: "Como o escopo e esclarecido?",
-    clarifyDesc: "Primeiro sao discutidos a situacao atual, telas necessarias, estrutura de dados, expectativas de entrega e faixa de orcamento. Depois escopo, prazo e preco ficam claros. Modulos extras, integracoes ou solicitacoes especiais sao precificados separadamente.",
-    processTitle: "Como o processo avanca?",
-    process: ["A necessidade e a situacao atual sao entendidas", "Telas, modulos e escopo de dados sao esclarecidos", "A primeira versao ou plano de fases e preparado", "Proposta, prazo e expectativa de suporte sao compartilhados"],
+    outcomeTitle: "O que entrega ao negócio?",
+    modulesKicker: "Módulos",
+    modulesTitle: "Módulos que podem entrar no projeto",
+    scenariosTitle: "Cenários de uso",
+    clarifyTitle: "Como o escopo é esclarecido?",
+    clarifyDesc: "Primeiro são discutidos a situação atual, as telas necessárias, a estrutura de dados, as expectativas de entrega e a faixa de orçamento. Depois, escopo, prazo e preço ficam claros. Módulos extras, integrações ou solicitações especiais são precificados separadamente.",
+    processTitle: "Como o processo avança?",
+    process: ["A necessidade e a situação atual são entendidas", "Telas, módulos e escopo de dados são esclarecidos", "A primeira versão ou plano de fases é preparado", "Proposta, prazo e expectativa de suporte são compartilhados"],
     faqTitle: "Perguntas frequentes",
     resourcesTitle: "Recursos relacionados",
-    service: "Servico",
+    service: "Serviço",
     blog: "Blog",
-    portfolio: "Portfolio",
+    portfolio: "Portfólio",
     liveExample: "Exemplo ao vivo",
-    nextStep: "Proximo passo",
+    nextStep: "Próximo passo",
     finalTitle: "Vamos esclarecer se esta estrutura combina com sua empresa.",
-    finalDesc: "Mesmo que sua necessidade ainda nao esteja totalmente clara, descreva a situacao atual, o problema e os exemplos que tem em mente.",
+    finalDesc: "Mesmo que sua necessidade ainda não esteja totalmente clara, descreva a situação atual, o problema e os exemplos que tem em mente.",
     quote: "Solicitar proposta",
   },
   it: {
@@ -324,13 +318,13 @@ const copy = {
     talk: "Bespreek dit project",
     mainService: "Bekijk hoofdservice",
     summary: "Snelle beslissamenvatting",
-    moduleIdea: "module-ideeen",
+    moduleIdea: "module-ideeën",
     priceFactor: "prijsfactoren",
     faq: "FAQ",
     problemKicker: "Probleem",
     problemTitle: "Welk probleem lost dit op?",
     scopeKicker: "Scope",
-    priceTitle: "Wat beinvloedt de prijs",
+    priceTitle: "Wat beïnvloedt de prijs",
     fitKicker: "Geschiktheid",
     fitTitle: "Voor wie is dit geschikt?",
     outcomeKicker: "Resultaat",
@@ -389,8 +383,28 @@ const copy = {
   },
 };
 
-export default function LandingPageView({ page }: { page: LandingPage }) {
-  const locale = getLocaleFromPath(usePathname() ?? "/");
+type RelatedContentItem = {
+  title: string;
+  description: string;
+  path: string;
+};
+
+export type LandingRelatedContent = {
+  service?: RelatedContentItem;
+  blogs: RelatedContentItem[];
+  projects: Array<RelatedContentItem & { projectKind?: "demo" | "client" }>;
+};
+
+export default function LandingPageView({
+  page,
+  faqs,
+  relatedContent,
+}: {
+  page: LandingPage;
+  faqs: Array<{ question: string; answer: string }>;
+  relatedContent: LandingRelatedContent;
+}) {
+  const locale = useCurrentLocale();
   const isEnglish = locale === "en";
   const isGerman = locale === "de";
   const isFrench = locale === "fr";
@@ -402,21 +416,12 @@ export default function LandingPageView({ page }: { page: LandingPage }) {
   const isDutch = locale === "nl";
   const isChinese = locale === "zh";
   const text = isEnglish ? copy.en : isGerman ? copy.de : isFrench ? copy.fr : isSpanish ? copy.es : isArabic ? copy.ar : isRussian ? copy.ru : isPortuguese ? copy.pt : isItalian ? copy.it : isDutch ? copy.nl : isChinese ? copy.zh : copy.tr;
-  const localizedPage = getLocalizedLandingPage(page, locale);
-  const localizedServices = getLocalizedServices(servicesData, locale);
-  const service = localizedServices.find((item) => item.slug === localizedPage.serviceSlug)
-    ?? localizedServices.find((item) => item.categorySlug === localizedPage.serviceSlug);
-  const faqs = getLocalizedLandingFaqs(page, locale);
-  const relatedBlogs = isEnglish || isGerman || isSpanish || isArabic || isRussian || isPortuguese || isItalian || isDutch || isChinese ? [] : localizedPage.relatedBlogSlugs
-    ?.map((blogSlug) => blogPosts.find((post) => post.slug === blogSlug))
-    .filter((post): post is NonNullable<typeof post> => Boolean(post)) ?? [];
-  const relatedProjects = isEnglish || isGerman || isSpanish || isArabic || isRussian || isPortuguese || isItalian || isDutch || isChinese ? [] : localizedPage.relatedProjectSlugs
-    ?.map((projectSlug) => projectsData.find((project) => project.slug === projectSlug))
-    .filter((project): project is NonNullable<typeof project> => Boolean(project)) ?? [];
+  const localizedPage = page;
+  const service = relatedContent.service;
   const heroPoints = localizedPage.heroPoints?.length ? localizedPage.heroPoints : [
     isEnglish ? "Scope is clarified during the discussion" : isGerman ? "Der Umfang wird im Gespräch geklärt" : isFrench ? "Le périmètre est clarifié pendant l'échange" : isSpanish ? "El alcance se aclara durante la conversación" : isArabic ? "يتم توضيح النطاق أثناء النقاش" : isRussian ? "Объем уточняется во время обсуждения" : isPortuguese ? "O escopo e esclarecido durante a conversa" : isItalian ? "L'ambito viene chiarito durante il confronto" : isDutch ? "De scope wordt tijdens het gesprek verduidelijkt" : isChinese ? "范围会在沟通中明确" : "Kapsam görüşmede netleştirilir",
     isEnglish ? "First version and growth phases are separated" : isGerman ? "Erste Version und Wachstumsphasen werden getrennt" : isFrench ? "La première version et les phases de croissance sont séparées" : isSpanish ? "Primera versión y fases de crecimiento se separan" : isArabic ? "يتم فصل النسخة الأولى عن مراحل النمو" : isRussian ? "Первая версия и фазы роста разделяются" : isPortuguese ? "A primeira versao e as fases de crescimento sao separadas" : isItalian ? "La prima versione e le fasi di crescita vengono separate" : isDutch ? "Eerste versie en groeifasen worden gescheiden" : isChinese ? "第一版和增长阶段分开规划" : "İlk sürüm ve büyüme fazları ayrılır",
-    isEnglish ? "Module and process boundaries are discussed before the quote" : isGerman ? "Modul- und Prozessgrenzen werden vor dem Angebot besprochen" : isFrench ? "Les limites des modules et processus sont discutées avant le devis" : isSpanish ? "Límites de módulos y proceso se hablan antes de la propuesta" : isArabic ? "تتم مناقشة حدود الوحدات والعملية قبل العرض" : isRussian ? "Границы модулей и процесса обсуждаются до предложения" : isPortuguese ? "Limites de modulos e processo sao discutidos antes da proposta" : isItalian ? "Confini di moduli e processo vengono discussi prima del preventivo" : isDutch ? "Module- en procesgrenzen worden voor de offerte besproken" : isChinese ? "报价前会讨论模块和流程边界" : "Teklif öncesi modül ve süreç sınırları konuşulur",
+    isEnglish ? "Module and process boundaries are discussed before the quote" : isGerman ? "Modul- und Prozessgrenzen werden vor dem Angebot besprochen" : isFrench ? "Les limites des modules et processus sont discutées avant le devis" : isSpanish ? "Límites de módulos y proceso se hablan antes de la propuesta" : isArabic ? "تتم مناقشة حدود الوحدات والعملية قبل العرض" : isRussian ? "Границы модулей и процесса обсуждаются до предложения" : isPortuguese ? "Limites de módulos e processo são discutidos antes da proposta" : isItalian ? "Confini di moduli e processo vengono discussi prima del preventivo" : isDutch ? "Module- en procesgrenzen worden voor de offerte besproken" : isChinese ? "报价前会讨论模块和流程边界" : "Teklif öncesi modül ve süreç sınırları konuşulur",
   ];
   const audience = localizedPage.audience?.length ? localizedPage.audience : [];
   const outcomes = localizedPage.outcomes?.length ? localizedPage.outcomes : [];
@@ -433,7 +438,7 @@ export default function LandingPageView({ page }: { page: LandingPage }) {
             <LocalizedLink href={`/contact?service=${localizedPage.serviceSlug}&source=${localizedPage.slug}`} className="shimmer-button inline-flex items-center gap-2 bg-white px-6 py-3 font-bold text-black">
               {text.talk} <ArrowRight size={18} />
             </LocalizedLink>
-            {service && <LocalizedLink href={`/services/${service.slug}`} className="border border-white/20 px-6 py-3 font-medium text-white hover:bg-white/10">{text.mainService}</LocalizedLink>}
+            {service && <LocalizedLink href={service.path} className="border border-white/20 px-6 py-3 font-medium text-white hover:bg-white/10">{text.mainService}</LocalizedLink>}
           </div>
         </div>
 
@@ -511,13 +516,13 @@ export default function LandingPageView({ page }: { page: LandingPage }) {
         <div className="mt-6 grid gap-4">{faqs.map((faq) => <div key={faq.question} className="border border-white/10 bg-[#071225]/55 p-5"><h3 className="font-bold text-white">{faq.question}</h3><p className="mt-3 text-sm leading-7 text-gray-400">{faq.answer}</p></div>)}</div>
       </RevealItem>
 
-      {(relatedBlogs.length > 0 || relatedProjects.length > 0 || service) && (
+      {(relatedContent.blogs.length > 0 || relatedContent.projects.length > 0 || service) && (
         <RevealItem className="mt-8 border-t border-white/10 pt-8">
           <h2 className="text-2xl md:text-3xl font-medium">{text.resourcesTitle}</h2>
           <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {service && <LocalizedLink href={`/services/${service.slug}`} className="border border-white/10 bg-[#071225]/55 p-5 transition-colors hover:bg-white/10"><p className="text-xs font-bold uppercase tracking-[0.18em] text-gray-500">{text.service}</p><h3 className="mt-3 font-bold leading-6 text-white">{service.title}</h3><p className="mt-2 text-sm leading-6 text-gray-500">{service.shortDesc}</p></LocalizedLink>}
-            {relatedBlogs.slice(0, 2).map((post) => <LocalizedLink key={post.slug} href={`/blog/${post.slug}`} className="border border-white/10 bg-[#071225]/55 p-5 transition-colors hover:bg-white/10"><p className="text-xs font-bold uppercase tracking-[0.18em] text-gray-500">{text.blog}</p><h3 className="mt-3 font-bold leading-6 text-white">{post.title}</h3><p className="mt-2 text-sm leading-6 text-gray-500">{post.description}</p></LocalizedLink>)}
-            {relatedProjects.slice(0, 2).map((project) => <LocalizedLink key={project.slug} href={`/projects/${project.slug}`} className="border border-white/10 bg-[#071225]/55 p-5 transition-colors hover:bg-white/10"><p className="text-xs font-bold uppercase tracking-[0.18em] text-gray-500">{project.projectKind === "client" ? text.portfolio : text.liveExample}</p><h3 className="mt-3 font-bold leading-6 text-white">{project.title}</h3><p className="mt-2 text-sm leading-6 text-gray-500">{project.shortDesc}</p></LocalizedLink>)}
+            {service && <LocalizedLink href={service.path} className="border border-white/10 bg-[#071225]/55 p-5 transition-colors hover:bg-white/10"><p className="text-xs font-bold uppercase tracking-[0.18em] text-gray-500">{text.service}</p><h3 className="mt-3 font-bold leading-6 text-white">{service.title}</h3><p className="mt-2 text-sm leading-6 text-gray-500">{service.description}</p></LocalizedLink>}
+            {relatedContent.blogs.map((post) => <LocalizedLink key={post.path} href={post.path} className="border border-white/10 bg-[#071225]/55 p-5 transition-colors hover:bg-white/10"><p className="text-xs font-bold uppercase tracking-[0.18em] text-gray-500">{text.blog}</p><h3 className="mt-3 font-bold leading-6 text-white">{post.title}</h3><p className="mt-2 text-sm leading-6 text-gray-500">{post.description}</p></LocalizedLink>)}
+            {relatedContent.projects.map((project) => <LocalizedLink key={project.path} href={project.path} className="border border-white/10 bg-[#071225]/55 p-5 transition-colors hover:bg-white/10"><p className="text-xs font-bold uppercase tracking-[0.18em] text-gray-500">{project.projectKind === "client" ? text.portfolio : text.liveExample}</p><h3 className="mt-3 font-bold leading-6 text-white">{project.title}</h3><p className="mt-2 text-sm leading-6 text-gray-500">{project.description}</p></LocalizedLink>)}
           </div>
         </RevealItem>
       )}

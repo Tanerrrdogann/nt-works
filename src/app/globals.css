@@ -645,9 +645,10 @@ header,
   .mobile-compact-card .mobile-actions a,
   .mobile-compact-card .mobile-actions button {
     width: 100%;
+    min-height: 2.75rem;
     padding: 0.55rem 0.6rem !important;
-    font-size: 0.68rem !important;
-    line-height: 1 !important;
+    font-size: 0.75rem !important;
+    line-height: 1.25 !important;
     text-align: center;
   }
 

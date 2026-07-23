@@ -1,13 +1,12 @@
 "use client";
 
 import { ArrowRight, CheckCircle2 } from "lucide-react";
-import { usePathname } from "next/navigation";
 import RatingStars from "@/components/RatingStars";
 import { bionlukStats, testimonials } from "@/data/testimonials";
 import { techStack } from "@/data/tech-stack";
 import { homepageServiceSlugs, servicesData } from "@/data/services";
 import LocalizedLink from "@/components/i18n/LocalizedLink";
-import { getLocaleFromPath } from "@/lib/i18n";
+import { useCurrentLocale } from "@/components/i18n/LocaleProvider";
 
 const processSteps = ["İhtiyacınızı yazarsınız", "Uygun yapı seçilir", "Kapsam belirlenir", "Önizleme paylaşılır", "Yayına alınır"];
 
@@ -1317,8 +1316,7 @@ const homeCopy = {
 };
 
 export default function Home() {
-  const pathname = usePathname() ?? "/";
-  const locale = getLocaleFromPath(pathname);
+  const locale = useCurrentLocale();
   const copy = locale === "en" ? homeCopy.en : locale === "de" ? homeCopy.de : locale === "fr" ? homeCopy.fr : locale === "es" ? homeCopy.es : locale === "ar" ? homeCopy.ar : locale === "ru" ? homeCopy.ru : locale === "pt" ? homeCopy.pt : locale === "it" ? homeCopy.it : locale === "nl" ? homeCopy.nl : locale === "zh" ? homeCopy.zh : homeCopy.tr;
   return (
     <main className="premium-stage relative text-white overflow-hidden pt-20">
@@ -1344,7 +1342,7 @@ export default function Home() {
             <LocalizedLink href="/services" className="shimmer-button magnetic-button flex items-center gap-2 bg-white text-black px-8 py-4 rounded-sm font-bold transition-all">
               {copy.servicesCta} <ArrowRight size={18} />
             </LocalizedLink>
-            <LocalizedLink href="/contact" className="magnetic-button flex items-center gap-2 bg-transparent border border-white/20 text-white px-8 py-4 rounded-sm font-medium hover:bg-slate-200/8 transition-all">
+            <LocalizedLink href="/contact?source=home-hero" className="magnetic-button flex items-center gap-2 bg-transparent border border-white/20 text-white px-8 py-4 rounded-sm font-medium hover:bg-slate-200/8 transition-all">
               {copy.quoteCta}
             </LocalizedLink>
             <LocalizedLink href="/about" className="flex items-center gap-2 text-gray-400 px-4 py-4 font-medium hover:text-white transition-all underline-offset-4 hover:underline">
@@ -1376,7 +1374,7 @@ export default function Home() {
               <h2 className="text-2xl md:text-4xl font-medium mb-4">{copy.quickTitle}</h2>
               <p className="mobile-compact-text text-gray-400">{copy.quickDesc}</p>
             </div>
-            <LocalizedLink href="/contact" className="w-fit border border-white/20 px-5 py-3 text-sm font-bold text-white hover:bg-white/10">
+            <LocalizedLink href="/contact?source=home-needs" className="w-fit border border-white/20 px-5 py-3 text-sm font-bold text-white hover:bg-white/10">
               {copy.unsureCta}
             </LocalizedLink>
           </div>
@@ -1559,7 +1557,7 @@ export default function Home() {
         <div className="max-w-4xl mx-auto relative z-10">
           <h2 className="text-4xl md:text-5xl font-medium mb-6 tracking-tight">{copy.finalTitle}</h2>
           <p className="text-gray-600 text-lg mb-10 max-w-2xl mx-auto">{copy.finalDesc}</p>
-          <LocalizedLink href="/contact" className="shimmer-button cta-static-button inline-flex items-center gap-2 px-8 py-4 rounded-sm font-bold transition-all shadow-xl">
+          <LocalizedLink href="/contact?source=home-final" className="shimmer-button cta-static-button inline-flex items-center gap-2 px-8 py-4 rounded-sm font-bold transition-all shadow-xl">
             {copy.finalCta} <ArrowRight size={18} />
           </LocalizedLink>
         </div>

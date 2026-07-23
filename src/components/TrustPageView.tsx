@@ -2,10 +2,9 @@
 
 import type React from "react";
 import { ArrowRight } from "lucide-react";
-import { usePathname } from "next/navigation";
 import { getTrustPage, type TrustPage } from "@/data/trust-pages";
 import LocalizedLink from "@/components/i18n/LocalizedLink";
-import { getLocaleFromPath } from "@/lib/i18n";
+import { useCurrentLocale } from "@/components/i18n/LocaleProvider";
 
 export function MarkdownBody({ content }: { content: string }) {
   const lines = content.split(/\r?\n/);
@@ -94,7 +93,7 @@ export function MarkdownBody({ content }: { content: string }) {
 }
 
 export default function TrustPageView({ page }: { page: TrustPage }) {
-  const locale = getLocaleFromPath(usePathname() ?? "/");
+  const locale = useCurrentLocale();
   const localizedPage = getTrustPage(page.slug, locale === "en" || locale === "de" || locale === "fr" || locale === "es" || locale === "ar" || locale === "ru" || locale === "pt" || locale === "it" || locale === "nl" || locale === "zh" ? locale : "tr");
   const ctaMap = {
     tr: {
@@ -198,7 +197,7 @@ export default function TrustPageView({ page }: { page: TrustPage }) {
         <p className="mt-4 max-w-3xl text-gray-400 leading-8">
           {cta.desc}
         </p>
-        <LocalizedLink href="/contact" className="shimmer-button mt-6 inline-flex items-center gap-2 bg-white px-7 py-3 text-sm font-bold text-black">
+        <LocalizedLink href={`/contact?source=trust-page&topic=${page.slug}`} className="shimmer-button mt-6 inline-flex items-center gap-2 bg-white px-7 py-3 text-sm font-bold text-black">
           {cta.button} <ArrowRight size={16} />
         </LocalizedLink>
       </div>
