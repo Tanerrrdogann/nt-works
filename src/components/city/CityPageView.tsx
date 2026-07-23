@@ -24,7 +24,7 @@ export default function CityPageView({ page }: { page: CityPage }) {
       <section className="grid gap-8 lg:grid-cols-[1.05fr_0.75fr] lg:items-end">
         <div>
           <p className="inline-flex items-center gap-2 border border-white/15 px-3 py-2 text-xs font-bold uppercase tracking-[0.18em] text-gray-400">
-            <MapPin size={15} /> Şehir SEO / Türkiye
+            <MapPin size={15} /> Türkiye • Web ve Yazılım
           </p>
           <h1 className="mt-5 max-w-5xl text-4xl font-medium leading-tight tracking-tight md:text-6xl">
             {page.title}
@@ -109,7 +109,7 @@ export default function CityPageView({ page }: { page: CityPage }) {
             <div className="border-t border-white/10 pt-8">
               <h2 className="text-2xl font-medium md:text-3xl">Bölge ve lokasyon odağı</h2>
               <p className="mt-4 text-sm leading-7 text-gray-400">
-                Hizmet uzaktan yürütülebilir; ancak İstanbul içinde arama yapan işletmelerin lokasyon niyetini karşılamak için sayfa şehir bağlamını net taşır.
+                Hizmet uzaktan yürütülebilir; ancak {page.city} içinde arama yapan işletmelerin lokasyon niyetini karşılamak için sayfa şehir ve ilçe bağlamını net taşır.
               </p>
               <div className="mt-6 flex flex-wrap gap-2">
                 {districtFocus.map((district) => (
@@ -162,11 +162,11 @@ export default function CityPageView({ page }: { page: CityPage }) {
 
       <section className="mt-10 grid gap-6 lg:grid-cols-2">
         <div className="border-t border-white/10 pt-8">
-          <h2 className="text-2xl font-medium md:text-3xl">Bu şehirle ilgili landing sayfaları</h2>
+          <h2 className="text-2xl font-medium md:text-3xl">{page.city} için ilgili çözüm sayfaları</h2>
           <div className="mt-6 grid gap-4">
             {landings.map((landing) => (
               <Link key={landing.slug} href={`/${landing.slug}`} className="border border-white/10 bg-[#071225]/55 p-5 transition-colors hover:bg-white/10">
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-gray-500">Landing</p>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-gray-500">Çözüm</p>
                 <h3 className="mt-3 font-bold leading-6 text-white">{landing.title}</h3>
                 <p className="mt-2 text-sm leading-6 text-gray-500">{landing.description}</p>
               </Link>

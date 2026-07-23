@@ -2,13 +2,23 @@
 
 import { PageReveal, RevealItem } from "@/components/animations/PageReveal";
 import LocalizedLink from "@/components/i18n/LocalizedLink";
+import { useCurrentLocale } from "@/components/i18n/LocaleProvider";
 import RatingStars from "@/components/RatingStars";
-import { getProjectMeta } from "@/data/project-meta";
-import { projectsData } from "@/data/projects";
-import { bionlukStats } from "@/data/testimonials";
-import { getLocalizedProjectMeta, getLocalizedProjects, getLocalizedTestimonials } from "@/data/i18n/projects-en";
-import { getLocaleFromPath } from "@/lib/i18n";
-import { usePathname } from "next/navigation";
+import type { ProjectType, TestimonialType } from "@/types";
+
+export type PortfolioProject = Pick<ProjectType, "slug" | "title" | "category" | "shortDesc"> & {
+  result?: string;
+};
+
+type PortfolioPageViewProps = {
+  projects: PortfolioProject[];
+  testimonials: TestimonialType[];
+  stats: {
+    rating: number;
+    reviewCount: number;
+    completedOrders: number;
+  };
+};
 
 const copy = {
   tr: {
@@ -182,15 +192,49 @@ const copy = {
     score: "Beoordeling",
     related: "Bekijk gerelateerd werk",
   },
+  it: {
+    eyebrow: "Lavori completati",
+    title: "Portfolio, progetti completati e",
+    muted: "soddisfazione dei clienti",
+    intro: "Questa pagina riunisce lavori reali completati, risultati di progetto e recensioni dei clienti. I dettagli sono mostrati apertamente o in forma anonima in base alle autorizzazioni e alla privacy.",
+    rating: "valutazione media",
+    reviews: "recensioni dei clienti",
+    completed: "lavori completati",
+    blockTitle: "Lavori realizzati e soddisfazione dei clienti",
+    p1: "Ogni elemento del portfolio mostra il problema affrontato, l'ambito consegnato e, quando condivisibile, il feedback del cliente. L'obiettivo è spiegare come è stato gestito il lavoro, non mostrare soltanto un riferimento visivo.",
+    p2: "In alcuni progetti nomi, schermate o dettagli tecnici possono essere limitati per autorizzazione e privacy. In questi casi l'ambito e il risultato vengono descritti in modo più generale.",
+    result: "Risultato",
+    fallback: "Lavoro reale per un cliente completato.",
+    inspect: "Esamina il progetto",
+    testimonials: "Recensioni dei clienti",
+    testimonialsIntro: "Le recensioni seguenti provengono da lavori completati. Quando possibile, ogni recensione è collegata al relativo progetto nel portfolio.",
+    score: "Valutazione",
+    related: "Vedi il lavoro correlato",
+  },
+  zh: {
+    eyebrow: "已完成项目",
+    title: "作品集、已完成项目与",
+    muted: "客户满意度",
+    intro: "本页汇总真实完成的客户项目、项目成果和客户评价。具体信息会根据授权和隐私要求公开展示或匿名处理。",
+    rating: "平均评分",
+    reviews: "客户评价",
+    completed: "已完成项目",
+    blockTitle: "已完成工作与客户满意度",
+    p1: "每个作品集项目都会说明所解决的问题、交付范围以及可公开的客户反馈。重点不仅是展示画面，更是说明项目如何被规划和完成。",
+    p2: "部分项目因授权和隐私要求，客户名称、截图或技术细节可能受到限制。在这种情况下，项目范围和结果会以更概括的方式说明。",
+    result: "成果",
+    fallback: "已完成的真实客户项目。",
+    inspect: "查看项目详情",
+    testimonials: "客户评价",
+    testimonialsIntro: "以下评价来自已完成项目；在条件允许时，每条评价都会链接到对应的作品集项目。",
+    score: "评分",
+    related: "查看相关项目",
+  },
 };
 
-export default function PortfolioPageView() {
-  const pathname = usePathname();
-  const locale = getLocaleFromPath(pathname ?? "/");
-  const text = locale === "en" ? copy.en : locale === "de" ? copy.de : locale === "fr" ? copy.fr : locale === "es" ? copy.es : locale === "ar" ? copy.ar : locale === "ru" ? copy.ru : locale === "pt" ? copy.pt : locale === "nl" ? copy.nl : copy.tr;
-  const localizedProjects = getLocalizedProjects(projectsData, locale);
-  const localizedTestimonials = getLocalizedTestimonials(locale);
-  const clientProjects = localizedProjects.filter((project) => getProjectMeta(project.slug).projectKind === "client");
+export default function PortfolioPageView({ projects, testimonials, stats }: PortfolioPageViewProps) {
+  const locale = useCurrentLocale();
+  const text = locale === "en" ? copy.en : locale === "de" ? copy.de : locale === "fr" ? copy.fr : locale === "es" ? copy.es : locale === "ar" ? copy.ar : locale === "ru" ? copy.ru : locale === "pt" ? copy.pt : locale === "it" ? copy.it : locale === "nl" ? copy.nl : locale === "zh" ? copy.zh : copy.tr;
 
   return (
     <PageReveal className="content-page pt-32 pb-24 px-6 text-white max-w-7xl mx-auto">
@@ -204,15 +248,15 @@ export default function PortfolioPageView() {
 
       <RevealItem className="mb-10 grid grid-cols-3 gap-3 md:gap-5">
         <div className="border border-white/10 bg-[#071225]/70 p-5 text-center">
-          <div className="flex justify-center"><RatingStars rating={bionlukStats.rating} /></div>
+          <div className="flex justify-center"><RatingStars rating={stats.rating} /></div>
           <p className="mt-2 text-xs md:text-sm text-gray-500">{text.rating}</p>
         </div>
         <div className="border border-white/10 bg-[#071225]/70 p-5 text-center">
-          <p className="text-3xl md:text-5xl font-light">{bionlukStats.reviewCount}</p>
+          <p className="text-3xl md:text-5xl font-light">{stats.reviewCount}</p>
           <p className="mt-2 text-xs md:text-sm text-gray-500">{text.reviews}</p>
         </div>
         <div className="border border-white/10 bg-[#071225]/70 p-5 text-center">
-          <p className="text-3xl md:text-5xl font-light">{bionlukStats.completedOrders}</p>
+          <p className="text-3xl md:text-5xl font-light">{stats.completedOrders}</p>
           <p className="mt-2 text-xs md:text-sm text-gray-500">{text.completed}</p>
         </div>
       </RevealItem>
@@ -224,31 +268,27 @@ export default function PortfolioPageView() {
       </RevealItem>
 
       <RevealItem className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-        {clientProjects.map((project) => {
-          const meta = getLocalizedProjectMeta(project.slug, locale);
-
-          return (
+        {projects.map((project) => (
             <div key={project.slug} className="portfolio-card relative overflow-hidden border border-white/10 bg-[#071225]/88 p-6 shadow-[0_20px_70px_rgba(0,0,0,0.24)] backdrop-blur-xl">
               <span className="text-xs font-bold uppercase tracking-widest text-gray-500">{project.category}</span>
               <h2 className="mt-3 text-2xl font-medium text-white">{project.title}</h2>
               <p className="mt-4 text-sm leading-7 text-gray-400">{project.shortDesc}</p>
               <div className="mt-5 border-t border-white/10 pt-5">
                 <h3 className="text-xs font-bold uppercase tracking-widest text-white">{text.result}</h3>
-                <p className="mt-2 text-sm leading-7 text-gray-500">{meta.result ?? text.fallback}</p>
+                <p className="mt-2 text-sm leading-7 text-gray-500">{project.result ?? text.fallback}</p>
               </div>
               <LocalizedLink href={`/projects/${project.slug}`} className="shimmer-button mt-6 inline-block bg-white px-5 py-2.5 text-sm font-bold text-black">
                 {text.inspect}
               </LocalizedLink>
             </div>
-          );
-        })}
+          ))}
       </RevealItem>
 
       <RevealItem className="mt-12 border-t border-white/10 pt-10">
         <h2 className="text-2xl md:text-3xl font-medium text-white">{text.testimonials}</h2>
         <p className="mt-4 max-w-4xl text-gray-400 leading-8">{text.testimonialsIntro}</p>
         <div className="mt-6 grid gap-5 md:grid-cols-2">
-          {localizedTestimonials.map((testimonial) => (
+          {testimonials.map((testimonial) => (
             <div key={testimonial.slug} className="border border-white/10 bg-[#071225]/70 p-5">
               <div className="flex items-start justify-between gap-3">
                 <div>

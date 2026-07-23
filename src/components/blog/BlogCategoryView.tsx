@@ -1,14 +1,21 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import LocalizedLink from "@/components/i18n/LocalizedLink";
-import { blogCategories, blogPosts } from "@/data/blog";
-import { normalizeBlogPath } from "@/data/blog-content-system";
-import { getLocalizedBlogCategory, getLocalizedBlogPosts } from "@/data/i18n/blog-en";
-import { getLocaleFromPath } from "@/lib/i18n";
+import { useCurrentLocale } from "@/components/i18n/LocaleProvider";
+import type { BlogPostType } from "@/types";
 
-export default function BlogCategoryView({ categorySlug }: { categorySlug: string }) {
-  const locale = getLocaleFromPath(usePathname() ?? "/");
+export default function BlogCategoryView({
+  categorySlug,
+  current,
+  posts,
+  tagLinks,
+}: {
+  categorySlug: string;
+  current: string;
+  posts: BlogPostType[];
+  tagLinks: Array<{ label: string; slug: string }>;
+}) {
+  const locale = useCurrentLocale();
   const isEnglish = locale === "en";
   const isGerman = locale === "de";
   const isFrench = locale === "fr";
@@ -19,14 +26,7 @@ export default function BlogCategoryView({ categorySlug }: { categorySlug: strin
   const isItalian = locale === "it";
   const isDutch = locale === "nl";
   const isChinese = locale === "zh";
-  const originalCategory = blogCategories.find((item) => normalizeBlogPath(item) === categorySlug);
-  if (!originalCategory) return null;
-
-  const originalPosts = blogPosts.filter((post) => post.category === originalCategory);
-  const posts = getLocalizedBlogPosts(originalPosts, locale);
-  const current = getLocalizedBlogCategory(originalCategory, locale);
   const featuredPosts = posts.slice(0, 2);
-  const tags = Array.from(new Set(posts.flatMap((post) => post.tags))).slice(0, 12);
 
   const text = isEnglish ? {
     back: "← Back to Blog",
@@ -203,7 +203,7 @@ export default function BlogCategoryView({ categorySlug }: { categorySlug: strin
         </section>
       )}
 
-      {tags.length > 0 && <section className="mb-12 border-t border-white/10 pt-8"><p className="text-xs font-bold uppercase tracking-[0.22em] text-gray-500">{text.relatedTags}</p><div className="mt-4 flex flex-wrap gap-2">{tags.map((tag, index) => <LocalizedLink key={tag} href={`/blog/tag/${normalizeBlogPath(originalPosts[0]?.tags[index] ?? tag)}`} className="border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-semibold text-gray-400 hover:bg-white/10 hover:text-white">{tag}</LocalizedLink>)}</div></section>}
+      {tagLinks.length > 0 && <section className="mb-12 border-t border-white/10 pt-8"><p className="text-xs font-bold uppercase tracking-[0.22em] text-gray-500">{text.relatedTags}</p><div className="mt-4 flex flex-wrap gap-2">{tagLinks.map((tag) => <LocalizedLink key={tag.slug} href={`/blog/tag/${tag.slug}`} className="border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-semibold text-gray-400 hover:bg-white/10 hover:text-white">{tag.label}</LocalizedLink>)}</div></section>}
 
       <section className="border-t border-white/10 pt-8">
         <div className="mb-6"><p className="text-xs font-bold uppercase tracking-[0.22em] text-gray-500">{text.all}</p><h2 className="mt-3 text-2xl md:text-3xl font-medium text-white">{current} {isEnglish ? "articles" : isGerman ? "Artikel" : isFrench ? "articles" : isSpanish ? "artículos" : isArabic ? "مقالات" : isRussian ? "статьи" : isPortuguese ? "artigos" : isItalian ? "articoli" : isDutch ? "artikelen" : isChinese ? "文章" : "rehberleri"}</h2></div>

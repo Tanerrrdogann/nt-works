@@ -886,6 +886,24 @@ export function getLocalizedServiceCategories(categories: ServiceCategory[], loc
   }));
 }
 
+function contextualizeFirst(title: string, items: string[], locale: string) {
+  if (items.length === 0) return items;
+  const separator = locale === "zh" ? "：" : ": ";
+  return [`${title}${separator}${items[0]}`, ...items.slice(1)];
+}
+
+function makeLocalizedServiceSpecific(service: ServiceType, locale: string): ServiceType {
+  return {
+    ...service,
+    features: contextualizeFirst(service.title, service.features, locale),
+    examples: contextualizeFirst(service.title, service.examples, locale),
+    modules: contextualizeFirst(service.title, service.modules, locale),
+    priceFactors: contextualizeFirst(service.title, service.priceFactors, locale),
+    suitableFor: contextualizeFirst(service.title, service.suitableFor, locale),
+    problemSolved: `${service.shortDesc} ${service.problemSolved}`,
+  };
+}
+
 export function getLocalizedServices(services: ServiceItem[], locale: string): ServiceType[] {
   if (locale !== "en" && locale !== "de" && locale !== "fr" && locale !== "es" && locale !== "ar" && locale !== "ru" && locale !== "pt" && locale !== "it" && locale !== "nl" && locale !== "zh") return services;
 
@@ -903,30 +921,30 @@ export function getLocalizedServices(services: ServiceItem[], locale: string): S
     const categoryDictionary = isGerman ? categoryTextDe : isFrench ? categoryTextFr : isSpanish ? categoryTextEs : isArabic ? categoryTextAr : isRussian ? categoryTextRu : isPortuguese ? categoryTextPt : isItalian ? categoryTextIt : isDutch ? categoryTextNl : isChinese ? categoryTextZh : categoryText;
     const text = titleDictionary[service.slug] ?? { title: service.title, shortDesc: service.shortDesc };
     const category = categoryDictionary[service.categorySlug];
-    return {
+    const localizedService: ServiceType = {
       ...service,
       category: category?.title ?? service.category,
       title: text.title,
       shortDesc: text.shortDesc,
       longDesc: isFrench
-        ? `${text.title} aide votre entreprise à transformer des demandes, enregistrements et échanges client dispersés en un workflow numérique plus clair.`
+        ? `${text.shortDesc} La solution est adaptée au flux réel de l’entreprise, avec un périmètre, des intégrations et un support définis avant le développement.`
         : isSpanish
-        ? `${text.title} ayuda a tu empresa a convertir solicitudes, registros e interacciones dispersas en un flujo digital más claro.`
+        ? `${text.shortDesc} La solución se adapta al flujo real del negocio y define alcance, integraciones, entrega y soporte antes del desarrollo.`
         : isArabic
-        ? `${text.title} يساعد شركتك على تحويل الطلبات والسجلات وتفاعلات العملاء المتفرقة إلى تدفق رقمي أوضح.`
+        ? `${text.shortDesc} يتم تكييف الحل مع سير العمل الحقيقي، مع توضيح النطاق والتكاملات والتسليم والدعم قبل التطوير.`
         : isRussian
-        ? `${text.title} помогает вашему бизнесу превратить разрозненные запросы, записи и взаимодействия с клиентами в более понятный цифровой workflow.`
+        ? `${text.shortDesc} Решение адаптируется к реальному процессу бизнеса, а объем, интеграции, сдача и поддержка уточняются до разработки.`
         : isPortuguese
-        ? `${text.title} ajuda sua empresa a transformar solicitações, registros e interações dispersas em um fluxo digital mais claro.`
+        ? `${text.shortDesc} A solução é adaptada ao fluxo real do negócio, com escopo, integrações, entrega e suporte definidos antes do desenvolvimento.`
         : isItalian
-        ? `${text.title} aiuta la tua azienda a trasformare richieste, registri e interazioni sparse in un flusso digitale più chiaro.`
+        ? `${text.shortDesc} La soluzione viene adattata al flusso reale dell’azienda, chiarendo ambito, integrazioni, consegna e supporto prima dello sviluppo.`
         : isDutch
-        ? `${text.title} helpt je bedrijf om verspreide aanvragen, registraties en klantinteracties om te zetten in een duidelijkere digitale workflow.`
+        ? `${text.shortDesc} De oplossing wordt afgestemd op de echte bedrijfsworkflow; scope, integraties, oplevering en support worden vooraf vastgelegd.`
         : isChinese
-        ? `${text.title}帮助企业把分散的请求、记录和客户互动转化为更清晰的数字化工作流。`
+        ? `${text.shortDesc} 方案会结合企业真实流程定制，并在开发前明确功能范围、系统集成、交付标准和后续支持。`
         : isGerman
-        ? `${text.title} hilft Ihrem Unternehmen, verstreute Anfragen, Einträge und Kundenkontakte in einen klareren digitalen Workflow zu verwandeln.`
-        : `${text.title} helps your business turn scattered requests, records, and customer interactions into a clearer digital workflow.`,
+        ? `${text.shortDesc} Die Lösung wird an den echten Geschäftsablauf angepasst; Umfang, Integrationen, Lieferung und Support werden vor der Entwicklung geklärt.`
+        : `${text.shortDesc} The solution is adapted to the real business workflow, with scope, integrations, delivery, and support clarified before development.`,
       detail: isFrench ? [
         `Ce service est planifié autour du vrai workflow métier, pas seulement autour de l'écran visible. L'objectif est de rendre ${text.title.toLowerCase()} pratique, compréhensible et utile après livraison.`,
         "Pages, formulaires, zones d'administration, champs de données, intégrations, permissions et attentes de support sont clarifiés avant le développement.",
@@ -1015,5 +1033,7 @@ export function getLocalizedServices(services: ServiceItem[], locale: string): S
           : "Legal, financial, medical, tax, payment, personal data, and regulated-sector responsibilities should be reviewed by the customer with the relevant experts."
         : undefined,
     };
+
+    return makeLocalizedServiceSpecific(localizedService, locale);
   });
 }

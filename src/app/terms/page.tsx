@@ -1,15 +1,12 @@
-import type { Metadata } from "next";
 import TrustPageView from "@/components/TrustPageView";
 import { getTrustPage } from "@/data/trust-pages";
-import { pageMetadata } from "@/lib/seo";
+import { localizedTrustPageMetadata } from "@/lib/localized-metadata";
 
 const page = getTrustPage("terms");
 
-export const metadata: Metadata = pageMetadata({
-  title: page.title,
-  description: page.description,
-  path: "/terms",
-});
+export function generateMetadata() {
+  return localizedTrustPageMetadata({ path: "/terms" });
+}
 
 export default function TermsPage() {
   return <TrustPageView page={page} />;

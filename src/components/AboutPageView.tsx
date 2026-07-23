@@ -1,9 +1,8 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
-import { usePathname } from "next/navigation";
 import { techStack } from "@/data/tech-stack";
-import { getLocaleFromPath } from "@/lib/i18n";
+import { useCurrentLocale } from "@/components/i18n/LocaleProvider";
 import LocalizedLink from "@/components/i18n/LocalizedLink";
 import { PageReveal, RevealItem } from "@/components/animations/PageReveal";
 
@@ -726,7 +725,7 @@ const aboutCopy = {
 };
 
 export default function AboutPageView() {
-  const locale = getLocaleFromPath(usePathname() ?? "/");
+  const locale = useCurrentLocale();
   const copy = locale === "en" ? aboutCopy.en : locale === "de" ? aboutCopy.de : locale === "fr" ? aboutCopy.fr : locale === "es" ? aboutCopy.es : locale === "ar" ? aboutCopy.ar : locale === "ru" ? aboutCopy.ru : locale === "pt" ? aboutCopy.pt : locale === "it" ? aboutCopy.it : locale === "nl" ? aboutCopy.nl : locale === "zh" ? aboutCopy.zh : aboutCopy.tr;
 
   return (
@@ -737,7 +736,7 @@ export default function AboutPageView() {
         <p className="mt-6 max-w-4xl text-lg md:text-xl leading-8 text-gray-400">{copy.desc}</p>
         <div className="mt-8 flex flex-wrap gap-4">
           <LocalizedLink href="/projects" className="shimmer-button bg-white text-black px-7 py-3 rounded-sm text-sm font-bold transition-colors">{copy.examplesCta}</LocalizedLink>
-          <LocalizedLink href="/contact" className="border border-white/20 text-white px-7 py-3 rounded-sm text-sm font-medium hover:bg-white/10 transition-colors">{copy.contactCta}</LocalizedLink>
+          <LocalizedLink href="/contact?source=about" className="border border-white/20 text-white px-7 py-3 rounded-sm text-sm font-medium hover:bg-white/10 transition-colors">{copy.contactCta}</LocalizedLink>
         </div>
       </RevealItem>
 

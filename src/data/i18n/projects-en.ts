@@ -2,6 +2,7 @@ import { getProjectMeta } from "@/data/project-meta";
 import { projectsData } from "@/data/projects";
 import { testimonials } from "@/data/testimonials";
 import type { Locale } from "@/lib/i18n";
+import { getProjectPresentationStatus, getProjectSeoCopy } from "@/lib/project-presentation";
 import type { ProjectType, TestimonialType } from "@/types";
 
 type ProjectMeta = ReturnType<typeof getProjectMeta>;
@@ -1399,12 +1400,20 @@ export function getLocalizedProject(project: ProjectType, locale: Locale): Proje
   const category = (isGerman ? categoryMapDe : isFrench ? categoryMapFr : isSpanish ? categoryMapEs : isArabic ? categoryMapAr : isRussian ? categoryMapRu : isPortuguese ? categoryMapPt : isItalian ? categoryMapIt : isDutch ? categoryMapNl : isChinese ? categoryMapZh : categoryMap)[project.category] ?? (isGerman ? "Individuelle Software" : isFrench ? "Logiciel sur mesure" : isSpanish ? "Software a medida" : isArabic ? "برمجية مخصصة" : isRussian ? "Индивидуальная разработка" : isPortuguese ? "Software sob medida" : isItalian ? "Software su misura" : isDutch ? "Software op maat" : isChinese ? "定制软件" : "Custom Software");
   const isClient = getProjectMeta(project.slug).projectKind === "client";
   const localizedDemoAccounts = localizeDemoAccounts(project as ProjectWithDemoAccounts, locale);
+  const presentationStatus = getProjectPresentationStatus(project);
+  const statusDescription = getProjectSeoCopy({
+    ...project,
+    title,
+    category,
+  }, locale).description;
 
   return {
     ...project,
     title,
     category,
-    shortDesc: isGerman
+    shortDesc: presentationStatus === "planned" || presentationStatus === "maintenance"
+      ? statusDescription
+      : isGerman
       ? isClient
         ? `${title} ist ein abgeschlossener Kundenarbeitsnachweis. Die Seite erklärt Bedarf, Umfang, Ergebnis und Bewertungskontext, ohne private Kundendetails offenzulegen.`
         : `${title} zeigt, wie ein ${category.toLowerCase()} als anpassbares Live-Beispiel für ähnliche Geschäftsanforderungen strukturiert werden kann.`

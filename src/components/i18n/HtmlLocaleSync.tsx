@@ -1,18 +1,17 @@
 "use client";
 
 import { useEffect } from "react";
-import { usePathname } from "next/navigation";
-import { getLocaleConfig, getLocaleFromPath } from "@/lib/i18n";
+import { useCurrentLocale } from "@/components/i18n/LocaleProvider";
+import { getLocaleConfig } from "@/lib/i18n";
 
 export default function HtmlLocaleSync() {
-  const pathname = usePathname() ?? "/";
+  const locale = useCurrentLocale();
 
   useEffect(() => {
-    const locale = getLocaleFromPath(pathname);
     const localeConfig = getLocaleConfig(locale);
     document.documentElement.lang = localeConfig.languageTag;
     document.documentElement.dir = localeConfig.dir;
-  }, [pathname]);
+  }, [locale]);
 
   return null;
 }

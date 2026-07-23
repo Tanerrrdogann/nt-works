@@ -1,15 +1,26 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import LocalizedLink from "@/components/i18n/LocalizedLink";
-import { blogCategories, blogPosts } from "@/data/blog";
-import { featuredBlogSlugs, normalizeBlogPath } from "@/data/blog-content-system";
-import { getLocalizedBlogCategories, getLocalizedBlogPosts } from "@/data/i18n/blog-en";
-import { getLocaleFromPath } from "@/lib/i18n";
+import { useCurrentLocale } from "@/components/i18n/LocaleProvider";
+import { normalizeBlogPath } from "@/data/blog-content-system";
+import type { BlogPostType } from "@/types";
 
-function postsBySlugs(slugs: string[], posts: typeof blogPosts) {
-  return slugs.map((slug) => posts.find((post) => post.slug === slug)).filter((post): post is NonNullable<typeof post> => Boolean(post));
-}
+export type BlogIndexPost = Pick<
+  BlogPostType,
+  "slug" | "title" | "description" | "category" | "readingMinutes" | "relatedServices"
+>;
+
+export type BlogIndexCategory = {
+  originalCategory: string;
+  localizedCategory: string;
+  count: number;
+};
+
+type BlogIndexViewProps = {
+  posts: BlogIndexPost[];
+  featuredPosts: BlogIndexPost[];
+  categories: BlogIndexCategory[];
+};
 
 const compactBlogCategoryDescTr: Record<string, string> = {
   "Admin Panel": "Panel kapsamı ve işletme yönetimi.",
@@ -38,8 +49,8 @@ function compactBlogCategoryDesc(originalCategory: string, localizedCategory: st
   return `${localizedCategory} guides.`;
 }
 
-export default function BlogIndexView() {
-  const locale = getLocaleFromPath(usePathname() ?? "/");
+export default function BlogIndexView({ posts, featuredPosts, categories }: BlogIndexViewProps) {
+  const locale = useCurrentLocale();
   const isEnglish = locale === "en";
   const isGerman = locale === "de";
   const isFrench = locale === "fr";
@@ -50,10 +61,6 @@ export default function BlogIndexView() {
   const isItalian = locale === "it";
   const isDutch = locale === "nl";
   const isChinese = locale === "zh";
-  const posts = getLocalizedBlogPosts(blogPosts, locale);
-  const categories = getLocalizedBlogCategories(blogCategories, locale);
-  const featuredPosts = postsBySlugs(featuredBlogSlugs, posts);
-
   const text = isEnglish ? {
     kicker: "Knowledge Center",
     title: "Guides that clarify scope before starting a project",
@@ -266,9 +273,7 @@ export default function BlogIndexView() {
         <p className="text-xs font-bold uppercase tracking-[0.22em] text-gray-500">{text.categories}</p>
         <h2 className="mt-3 text-2xl md:text-3xl font-medium text-white">{text.categoryTitle}</h2>
         <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
-          {blogCategories.map((originalCategory, index) => {
-            const localizedCategory = categories[index];
-            const count = blogPosts.filter((post) => post.category === originalCategory).length;
+          {categories.map(({ originalCategory, localizedCategory, count }) => {
             return (
               <article key={originalCategory} className="border border-white/10 bg-[#071225]/65 p-3 md:p-5">
                 <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between md:gap-4">

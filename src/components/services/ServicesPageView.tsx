@@ -1,11 +1,10 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import { RevealItem } from "@/components/animations/PageReveal";
 import LocalizedLink from "@/components/i18n/LocalizedLink";
+import { useCurrentLocale } from "@/components/i18n/LocaleProvider";
 import { featuredServiceSlugs, serviceCategories, servicesData } from "@/data/services";
 import { getLocalizedServiceCategories, getLocalizedServices } from "@/data/i18n/services-en";
-import { getLocaleFromPath } from "@/lib/i18n";
 
 function getServicesBySlugs(slugs: string[], services: typeof servicesData) {
   return slugs
@@ -336,7 +335,7 @@ const pageCopy = {
 };
 
 export default function ServicesPageView() {
-  const locale = getLocaleFromPath(usePathname() ?? "/");
+  const locale = useCurrentLocale();
   const copy = locale === "en" ? pageCopy.en : locale === "de" ? pageCopy.de : locale === "fr" ? pageCopy.fr : locale === "es" ? pageCopy.es : locale === "ar" ? pageCopy.ar : locale === "ru" ? pageCopy.ru : locale === "pt" ? pageCopy.pt : locale === "it" ? pageCopy.it : locale === "nl" ? pageCopy.nl : locale === "zh" ? pageCopy.zh : pageCopy.tr;
   const localizedServices = getLocalizedServices(servicesData, locale);
   const localizedCategories = getLocalizedServiceCategories(serviceCategories, locale);
@@ -380,7 +379,7 @@ export default function ServicesPageView() {
                 <div className="relative z-10 mt-auto grid grid-cols-1 gap-2 border-t border-white/10 pt-4 md:flex md:flex-wrap md:pt-5">
                   <LocalizedLink href={`/services/${service.slug}`} className="bg-white px-3 py-2 text-center text-xs font-bold text-black hover:bg-gray-200 md:px-4">{copy.detail}</LocalizedLink>
                   <LocalizedLink href={service.relatedProjects[0] ? `/projects/${service.relatedProjects[0]}` : "/projects"} className="hidden border border-white/20 px-4 py-2 text-xs font-bold text-white hover:bg-white/10 md:inline-block">{copy.example}</LocalizedLink>
-                  <LocalizedLink href={`/contact?service=${service.slug}`} className="border border-white/20 px-3 py-2 text-center text-xs font-bold text-white hover:bg-white/10 md:px-4">{copy.quote}</LocalizedLink>
+                  <LocalizedLink href={`/contact?service=${service.slug}&source=services-grid`} className="border border-white/20 px-3 py-2 text-center text-xs font-bold text-white hover:bg-white/10 md:px-4">{copy.quote}</LocalizedLink>
                 </div>
               </RevealItem>
             ))}
@@ -435,7 +434,7 @@ export default function ServicesPageView() {
                   <div className="mt-6 flex flex-wrap gap-2 border-t border-white/10 pt-5">
                     <LocalizedLink href={`/services/${service.slug}`} className="bg-white px-4 py-2 text-xs font-bold text-black hover:bg-gray-200">{copy.inspect}</LocalizedLink>
                     <LocalizedLink href={service.relatedProjects[0] ? `/projects/${service.relatedProjects[0]}` : "/projects"} className="border border-white/20 px-4 py-2 text-xs font-bold text-white hover:bg-white/10">{copy.liveExample}</LocalizedLink>
-                    <LocalizedLink href={`/contact?service=${service.slug}`} className="border border-white/20 px-4 py-2 text-xs font-bold text-white hover:bg-white/10">{copy.explain}</LocalizedLink>
+                    <LocalizedLink href={`/contact?service=${service.slug}&source=services-category`} className="border border-white/20 px-4 py-2 text-xs font-bold text-white hover:bg-white/10">{copy.explain}</LocalizedLink>
                   </div>
                 </RevealItem>
               ))}

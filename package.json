@@ -11,7 +11,9 @@
     "build:prod": "NTWORKS_DEMO_AUTOSTART=0 NTWORKS_STATIC_DEMOS=1 next build --webpack && npm run build:ecommerce-demo && npm run build:static-demos",
     "start": "next start",
     "start:prod": "NTWORKS_DEMO_AUTOSTART=0 NTWORKS_STATIC_DEMOS=1 next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "seo:audit": "tsx scripts/seo-audit.ts",
+    "seo:audit:strict": "tsx scripts/seo-audit.ts --strict"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -31,6 +33,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.7",
     "tailwindcss": "^4",
+    "tsx": "^4.23.1",
     "typescript": "^5"
   }
 }

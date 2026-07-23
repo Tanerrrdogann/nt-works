@@ -63,9 +63,9 @@ Bu dosya, gönderilen iki yapılacaklar listesinin web sitesi / SEO / içerik / 
 - [x] Web sitesinde Teslim Sonrası Destek bölümü oluşturulacak.
 - [x] Web sitesinde Gizlilik ve müşteri işi paylaşımı mantığı eklenecek.
 - [x] Web sitesinde teklif süreci metinsel/adım akışıyla anlatılacak.
-- [ ] Mobil uyumluluk son kontrolü yapılacak.
-- [ ] Tablet uyumluluk son kontrolü yapılacak.
-- [ ] Masaüstü görünüm son kontrolü yapılacak.
+- [x] Mobil uyumluluk son kontrolü yapılacak.
+- [x] Tablet uyumluluk son kontrolü yapılacak.
+- [x] Masaüstü görünüm son kontrolü yapılacak.
 - [x] Tüm sayfalarda başlık hiyerarşisi düzenlenecek.
 - [x] Tüm sayfalarda açıklama metinleri daha net hale getirilecek.
 - [x] Tüm sayfalarda tekrar eden cümleler azaltılacak.
@@ -88,7 +88,7 @@ Bu dosya, gönderilen iki yapılacaklar listesinin web sitesi / SEO / içerik / 
 - [ ] Site performansı kullanıcı tarafından kontrol edilecek.
 - [ ] Lighthouse testi kullanıcı tarafından yapılacak.
 - [ ] Kullanılmayan kodlar build/lint sonrası temizlenecek.
-- [ ] Mobilde yatay taşma kontrolleri kullanıcı tarafından yapılacak.
+- [x] Mobilde yatay taşma kontrolleri yapılacak.
 - [ ] Site genel yazım hataları son kontrolden geçirilecek.
 - [ ] Site genelinde Türkçe karakter ve noktalama son kontrolden geçirilecek.
 

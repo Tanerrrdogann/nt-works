@@ -614,7 +614,7 @@ const russianTitles: Record<string, { title: string; description: string; eyebro
   },
   "yapay-zeka-otomasyonlari": {
     title: "AI-автоматизация",
-    description: "AI-поддержанная автоматизация для клиентских сообщений, классификации лидов, резюме документов, комментариев к отчетам и внутренних workflow.",
+    description: "Автоматизация с поддержкой ИИ для сообщений клиентов, классификации лидов, резюме документов, комментариев к отчетам и внутренних процессов.",
     eyebrow: "Подключить AI к правильной задаче",
   },
   "bakim-destek-hizmeti": {
@@ -624,8 +624,8 @@ const russianTitles: Record<string, { title: string; description: string; eyebro
   },
   "saas-mvp-gelistirme": {
     title: "Разработка SaaS MVP",
-    description: "Первый usable SaaS-продукт с ключевыми экранами, пользовательскими потоками, subscription logic и масштабируемой основой.",
-    eyebrow: "От идеи к первому usable продукту",
+    description: "Первый рабочий SaaS-продукт с ключевыми экранами, пользовательскими сценариями, логикой подписки и масштабируемой основой.",
+    eyebrow: "От идеи к первому рабочему продукту",
   },
   "teknik-seo-audit": {
     title: "Технический SEO-аудит",
@@ -689,7 +689,7 @@ const russianTitles: Record<string, { title: string; description: string; eyebro
   },
   "whatsapp-ai-asistan": {
     title: "WhatsApp AI-ассистент",
-    description: "AI-поддержанный WhatsApp workflow для вопросов клиентов, первых ответов, маршрутизации, квалификации лидов и черновиков поддержки.",
+    description: "Процесс WhatsApp с поддержкой ИИ для вопросов клиентов, первых ответов, маршрутизации, квалификации лидов и черновиков поддержки.",
     eyebrow: "Быстрее отвечать клиентам, сохраняя контроль",
   },
   "entegrasyon-hizmetleri": {
@@ -714,12 +714,12 @@ const russianTitles: Record<string, { title: string; description: string; eyebro
   },
   "bayi-paneli-gelistirme": {
     title: "Разработка дилерской панели",
-    description: "Дилерская панель для видимости товаров, индивидуальных цен, запросов заказов, информации аккаунта и approval workflow.",
+    description: "Дилерская панель для отображения товаров, индивидуальных цен, заявок на заказы, данных аккаунта и процесса согласования.",
     eyebrow: "Контролируемая система для дилерских операций",
   },
   "portal-gelistirme": {
     title: "Разработка портала",
-    description: "Портал с входом для клиентов, участников, дилеров, команд, документов, запросов и role-based workflow.",
+    description: "Портал с входом для клиентов, участников, дилеров и команд, с документами, заявками и ролевым доступом.",
     eyebrow: "Центральное место для пользователей и записей",
   },
   "raporlama-dashboard-sistemi": {
@@ -789,7 +789,7 @@ const russianTitles: Record<string, { title: string; description: string; eyebro
   },
   "power-apps-gelistirme": {
     title: "Разработка Power Apps",
-    description: "Low-code решения Power Apps для цифровизации форм, approvals, списков и операционных workflow внутри Microsoft 365.",
+    description: "Решения Power Apps с малым объемом кода для цифровизации форм, согласований, списков и операционных процессов в Microsoft 365.",
     eyebrow: "Операционные экраны в экосистеме Microsoft 365",
   },
   "guzellik-merkezi-randevu-sistemi": {
@@ -844,7 +844,7 @@ const russianTitles: Record<string, { title: string; description: string; eyebro
   },
   "ajanslar-icin-musteri-paneli": {
     title: "Клиентский кабинет для агентств",
-    description: "Клиентский panel для агентств: проекты, задачи, файлы, approvals, отчеты и support requests в одном месте.",
+    description: "Клиентский портал для агентств: проекты, задачи, файлы, согласования, отчеты и запросы поддержки в одном месте.",
     eyebrow: "Перенести клиентскую коммуникацию из сообщений в panel",
   },
   "ureticiler-icin-siparis-uretim-takip-sistemi": {
@@ -858,7 +858,7 @@ const russianTitles: Record<string, { title: string; description: string; eyebro
     eyebrow: "Сделать складские движения измеримыми",
   },
   "hizmet-verenler-icin-talep-teklif-platformu": {
-    title: "Платформа заявок и предложений для service providers",
+    title: "Платформа заявок и предложений для исполнителей",
     description: "Платформа, объединяющая клиентские заявки, категории, предложения, статусы и управление исполнителями услуг.",
     eyebrow: "Направить запрос правильному поставщику услуги",
   },
@@ -913,8 +913,8 @@ const russianTitles: Record<string, { title: string; description: string; eyebro
     eyebrow: "Собрать взносы, заявки и объявления в один panel",
   },
   "muhasebe-mali-musavir-musteri-paneli": {
-    title: "Клиентский panel для бухгалтерии и финансовых консультантов",
-    description: "Клиентский panel для бухгалтерских офисов: клиенты, документы, периоды, задачи, уведомления и обмен файлами.",
+    title: "Клиентский портал для бухгалтерии и финансовых консультантов",
+    description: "Клиентский портал для бухгалтерских офисов: клиенты, документы, периоды, задачи, уведомления и обмен файлами.",
     eyebrow: "Перенести документы и клиентскую коммуникацию в panel",
   },
   "hukuk-burolari-icin-dosya-takip-paneli": {
@@ -4938,7 +4938,7 @@ const moduleDictionaryAr: Record<string, string> = {
   "Temel panel": "لوحة أساسية",
   "Rol yapısı": "بنية الأدوار",
   "Ödeme planı": "خطة دفع",
-  "Geri bildirim döngüsü": "حلقة feedback",
+  "Geri bildirim döngüsü": "دورة الملاحظات",
   "Sitemap kontrolü": "فحص sitemap",
   "Robots kontrolü": "فحص robots",
   "Canonical analizi": "تحليل canonical",
@@ -6256,7 +6256,7 @@ function translateList(items: string[], dictionary: Record<string, string>, fall
 }
 
 const moduleDictionaryRu: Record<string, string> = {
-  "İş akışı analizi": "Анализ workflow",
+  "İş akışı analizi": "Анализ рабочего процесса",
   "Admin panel": "Админ-панель",
   "Kullanıcı rolleri": "Роли пользователей",
   "Veri modeli": "Модель данных",
@@ -6301,7 +6301,7 @@ const moduleDictionaryRu: Record<string, string> = {
   "Temel panel": "Базовая панель",
   "Rol yapısı": "Структура ролей",
   "Ödeme planı": "План оплаты",
-  "Geri bildirim döngüsü": "Цикл feedback",
+  "Geri bildirim döngüsü": "Цикл обратной связи",
   "Sitemap kontrolü": "Проверка sitemap",
   "Robots kontrolü": "Проверка robots",
   "Canonical analizi": "Анализ canonical",
@@ -6683,7 +6683,7 @@ const factorDictionaryRu: Record<string, string> = {
   "Mobil kullanım beklentisi": "Ожидание мобильного использования",
   "Bakım planı": "План обслуживания",
   "Rapor ve çıktı ihtiyacı": "Потребность в отчетах и выводах",
-  "İş akışı karmaşıklığı": "Сложность workflow",
+  "İş akışı karmaşıklığı": "Сложность рабочего процесса",
   "Teslim süresi": "Срок сдачи",
   "Pazaryeri sayısı": "Количество marketplaces",
   "Ürün sayısı": "Количество товаров",
@@ -9775,7 +9775,7 @@ function arabicDefaults(page: LandingPage): LandingPage {
       { title: "بنية متقدمة", text: "يمكن إضافة الأدوار والتقارير والتكاملات والوحدات الإضافية عندما تصبح الحاجة أوضح." },
       { title: "صيانة ونمو", text: "بعد الإطلاق يمكن تخطيط الإصلاحات والتحسينات الصغيرة والمراحل الجديدة." },
     ],
-    closingNote: "الهدف ليس بناء نظام ضخم بلا وضوح؛ الهدف هو حل العائق التجاري الأهم أولاً، ثم تطوير النظام بناءً على feedback حقيقي.",
+    closingNote: "الهدف ليس بناء نظام ضخم بلا وضوح؛ بل حل العائق التجاري الأهم أولاً، ثم تطوير النظام بناءً على ملاحظات الاستخدام الفعلية.",
     faqs: [
       {
         question: `كيف يتم تسعير ${text.title}؟`,
@@ -9787,7 +9787,7 @@ function arabicDefaults(page: LandingPage): LandingPage {
       },
       {
         question: "هل يمكن ربطه بأمثلة حية أو أعمال بورتفوليو؟",
-        answer: "عندما يكون مناسباً، يمكن أن تساعد demos مشابهة أو أعمال مكتملة أو شاشات تمثيلية في جعل النطاق أسهل للفهم.",
+        answer: "عندما يكون ذلك مناسباً، تساعد النماذج الحية المشابهة أو الأعمال المكتملة أو الشاشات التوضيحية على فهم النطاق بسهولة.",
       },
     ],
   };
@@ -9802,30 +9802,30 @@ function russianDefaults(page: LandingPage): LandingPage {
     title: text.title,
     description: text.description,
     eyebrow: text.eyebrow,
-    problem: `${text.title} полезен, когда ручное отслеживание, разрозненные инструменты, неясная ответственность и повторный ввод данных замедляют бизнес.`,
+    problem: `Когда ручное отслеживание, разрозненные инструменты, неясная ответственность и повторный ввод данных замедляют бизнес, ${text.title} помогает выстроить понятный цифровой процесс.`,
     modules: translateList(page.modules, moduleDictionaryRu, "Модуль проекта"),
     priceFactors: translateList(page.priceFactors, factorDictionaryRu, "Фактор объема"),
     heroPoints: [
       "Объем уточняется до начала разработки",
-      "Первая usable версия отделяется от фаз роста",
+      "Первая рабочая версия отделяется от этапов развития",
       "Модули, поток данных и ожидания по поддержке обсуждаются до предложения",
     ],
     audience: [
       "Компании, которые отслеживают работу вручную или в разрозненных инструментах",
-      "Команды, которым нужен более понятный цифровой workflow",
+      "Команды, которым нужен более понятный цифровой процесс",
       "Бизнесы, которым нужна поддерживаемая система, способная расти со временем",
     ],
     outcomes: [
-      "Основной workflow становится проще видеть и управлять",
+      "Основной рабочий процесс становится прозрачнее и проще в управлении",
       "Объем, модули и ожидания по сдаче становятся понятнее",
       "Будущие улучшения можно планировать на более прочной основе",
     ],
     scenarios: [
-      { title: "Первая usable версия", text: "Самые критичные экраны и поток данных готовятся как чистая отправная точка." },
+      { title: "Первая рабочая версия", text: "Самые важные экраны и поток данных готовятся как понятная отправная точка." },
       { title: "Расширенная структура", text: "Роли, отчеты, интеграции и дополнительные модули можно добавить, когда потребность станет яснее." },
       { title: "Обслуживание и рост", text: "После запуска можно планировать исправления, небольшие улучшения и новые фазы." },
     ],
-    closingNote: "Цель не в том, чтобы вслепую строить огромную систему; сначала решается главный бизнес-узел, а затем система растет на основе реального feedback.",
+    closingNote: "Цель не в том, чтобы вслепую строить огромную систему; сначала решается главное ограничение бизнеса, затем система развивается по результатам реального использования.",
     faqs: [
       {
         question: `Как оценивается ${text.title}?`,
@@ -9837,7 +9837,7 @@ function russianDefaults(page: LandingPage): LandingPage {
       },
       {
         question: "Можно ли связать это с живыми примерами или портфолио?",
-        answer: "Когда это уместно, похожие demo, завершенные работы или репрезентативные экраны помогают лучше понять объем.",
+        answer: "Когда это уместно, похожие живые примеры, завершенные работы или наглядные экраны помогают лучше понять объем.",
       },
     ],
   };
@@ -9852,42 +9852,42 @@ function portugueseDefaults(page: LandingPage): LandingPage {
     title: text.title,
     description: text.description,
     eyebrow: text.eyebrow,
-    problem: `${text.title} e util quando acompanhamento manual, ferramentas desconectadas, responsabilidades pouco claras e entrada repetida de dados desaceleram a empresa.`,
-    modules: translateList(page.modules, moduleDictionaryPt, "Modulo do projeto"),
+    problem: `${text.title} é útil quando o acompanhamento manual, as ferramentas desconectadas, as responsabilidades pouco claras e a entrada repetida de dados desaceleram a empresa.`,
+    modules: translateList(page.modules, moduleDictionaryPt, "Módulo do projeto"),
     priceFactors: translateList(page.priceFactors, factorDictionaryPt, "Fator de escopo"),
     heroPoints: [
-      "O escopo e esclarecido antes do inicio do desenvolvimento",
-      "A primeira versao utilizavel e as fases de crescimento sao separadas",
-      "Modulos, fluxo de dados e expectativas de suporte sao discutidos antes da proposta",
+      "O escopo é esclarecido antes do início do desenvolvimento",
+      "A primeira versão utilizável e as fases de crescimento são separadas",
+      "Módulos, fluxo de dados e expectativas de suporte são discutidos antes da proposta",
     ],
     audience: [
       "Empresas que acompanham trabalho manualmente ou em ferramentas dispersas",
       "Equipes que precisam de um fluxo digital mais claro",
-      "Empresas que querem um sistema sustentavel que possa crescer com o tempo",
+      "Empresas que querem um sistema sustentável que possa crescer com o tempo",
     ],
     outcomes: [
-      "O fluxo principal fica mais facil de visualizar e gerenciar",
-      "Escopo, modulos e expectativas de entrega ficam mais claros",
+      "O fluxo principal fica mais fácil de visualizar e gerenciar",
+      "Escopo, módulos e expectativas de entrega ficam mais claros",
       "Melhorias futuras podem ser planejadas sobre uma base mais forte",
     ],
     scenarios: [
-      { title: "Primeira versao utilizavel", text: "As telas mais criticas e o fluxo de dados sao preparados como ponto de partida limpo." },
-      { title: "Estrutura avancada", text: "Papeis, relatorios, integracoes e modulos extras podem ser adicionados conforme a necessidade fica mais clara." },
-      { title: "Manutencao e crescimento", text: "Apos o lancamento, correcoes, pequenas melhorias e novas fases podem ser planejadas." },
+      { title: "Primeira versão utilizável", text: "As telas mais críticas e o fluxo de dados são preparados como ponto de partida limpo." },
+      { title: "Estrutura avançada", text: "Papéis, relatórios, integrações e módulos extras podem ser adicionados conforme a necessidade fica mais clara." },
+      { title: "Manutenção e crescimento", text: "Após o lançamento, correções, pequenas melhorias e novas fases podem ser planejadas." },
     ],
-    closingNote: "O objetivo nao e construir um sistema enorme as cegas; e resolver primeiro o principal gargalo do negocio e depois evoluir com feedback real.",
+    closingNote: "O objetivo não é construir um sistema enorme às cegas; é resolver primeiro o principal gargalo do negócio e depois evoluir com retorno do uso real.",
     faqs: [
       {
-        question: `Como ${text.title} e precificado?`,
-        answer: "O preco depende da quantidade de telas, escopo dos modulos, estrutura de dados, integracoes, prontidao do conteudo, expectativas de entrega e necessidade de suporte.",
+        question: `Como é definido o preço de ${text.title}?`,
+        answer: "O preço depende da quantidade de telas, escopo dos módulos, estrutura de dados, integrações, prontidão do conteúdo, expectativas de entrega e necessidade de suporte.",
       },
       {
         question: "Todos os detalhes precisam estar prontos antes da primeira conversa?",
-        answer: "Nao. Descrever a situacao atual, o objetivo e exemplos semelhantes e suficiente. O escopo pode ser simplificado durante a conversa.",
+        answer: "Não. Descrever a situação atual, o objetivo e exemplos semelhantes é suficiente. O escopo pode ser simplificado durante a conversa.",
       },
       {
-        question: "Isso pode ser conectado a exemplos ao vivo ou trabalhos de portfolio?",
-        answer: "Quando adequado, demos semelhantes, trabalhos concluidos ou telas representativas podem tornar o escopo mais facil de entender.",
+        question: "Isso pode ser conectado a exemplos ao vivo ou trabalhos de portfólio?",
+        answer: "Quando adequado, demonstrações semelhantes, trabalhos concluídos ou telas representativas podem tornar o escopo mais fácil de entender.",
       },
     ],
   };
@@ -10043,18 +10043,132 @@ function chineseDefaults(page: LandingPage): LandingPage {
   };
 }
 
+function contextualizeLandingList(title: string, items: string[] | undefined, locale: string) {
+  if (!items?.length) return items;
+  const separator = locale === "zh" ? "：" : ": ";
+  return [`${title}${separator}${items[0]}`, ...items.slice(1)];
+}
+
+function normalizePortugueseText(value: string) {
+  const replacements: Array<[RegExp, string]> = [
+    [/\bprecos\b/gi, "preços"],
+    [/\bpreco\b/gi, "preço"],
+    [/\bmodulos\b/gi, "módulos"],
+    [/\bmodulo\b/gi, "módulo"],
+    [/\bintegracoes\b/gi, "integrações"],
+    [/\bintegracao\b/gi, "integração"],
+    [/\bsolicitacoes\b/gi, "solicitações"],
+    [/\bsolicitacao\b/gi, "solicitação"],
+    [/\batualizacao\b/gi, "atualização"],
+    [/\bgestao\b/gi, "gestão"],
+    [/\brelatorios\b/gi, "relatórios"],
+    [/\brelatorio\b/gi, "relatório"],
+    [/\bconversao\b/gi, "conversão"],
+    [/\bsituacao\b/gi, "situação"],
+    [/\bconfiguracao\b/gi, "configuração"],
+    [/\banalise\b/gi, "análise"],
+    [/\bsincronizacao\b/gi, "sincronização"],
+    [/\boperacao\b/gi, "operação"],
+    [/\bautenticacao\b/gi, "autenticação"],
+    [/\bmanutencao\b/gi, "manutenção"],
+    [/\busuario\b/gi, "usuário"],
+    [/\bcomunicacao\b/gi, "comunicação"],
+    [/\binformacao\b/gi, "informação"],
+    [/\bopcao\b/gi, "opção"],
+    [/\borganizacao\b/gi, "organização"],
+    [/\bparticipacao\b/gi, "participação"],
+    [/\bassociacoes\b/gi, "associações"],
+    [/\bassociacao\b/gi, "associação"],
+    [/\bproducao\b/gi, "produção"],
+    [/\bselecao\b/gi, "seleção"],
+    [/\bdescricao\b/gi, "descrição"],
+    [/\bcorrespondencia\b/gi, "correspondência"],
+    [/\bnecessarios\b/gi, "necessários"],
+    [/\bnecessario\b/gi, "necessário"],
+    [/\bnecessarias\b/gi, "necessárias"],
+    [/\bnecessaria\b/gi, "necessária"],
+    [/\bservicos\b/gi, "serviços"],
+    [/\bservico\b/gi, "serviço"],
+    [/\bbasico\b/gi, "básico"],
+    [/\blogica\b/gi, "lógica"],
+    [/\bhistorico\b/gi, "histórico"],
+    [/\btecnico\b/gi, "técnico"],
+    [/\btecnica\b/gi, "técnica"],
+    [/\bcodigo\b/gi, "código"],
+    [/\bperiodo\b/gi, "período"],
+    [/\bcritico\b/gi, "crítico"],
+    [/\bapos\b/gi, "após"],
+    [/\bconteudo\b/gi, "conteúdo"],
+    [/\bportfolio\b/gi, "portfólio"],
+    [/\bnao\b/gi, "não"],
+    [/\bsao\b/gi, "são"],
+  ];
+
+  return replacements.reduce(
+    (text, [pattern, replacement]) => text.replace(pattern, replacement),
+    value,
+  );
+}
+
+function normalizePortugueseLanding(page: LandingPage): LandingPage {
+  const normalizeList = (items: string[] | undefined) => items?.map(normalizePortugueseText);
+
+  return {
+    ...page,
+    title: normalizePortugueseText(page.title),
+    description: normalizePortugueseText(page.description),
+    eyebrow: page.eyebrow ? normalizePortugueseText(page.eyebrow) : page.eyebrow,
+    problem: normalizePortugueseText(page.problem),
+    modules: normalizeList(page.modules) ?? [],
+    priceFactors: normalizeList(page.priceFactors) ?? [],
+    heroPoints: normalizeList(page.heroPoints),
+    audience: normalizeList(page.audience),
+    outcomes: normalizeList(page.outcomes),
+    scenarios: page.scenarios?.map((scenario) => ({
+      title: normalizePortugueseText(scenario.title),
+      text: normalizePortugueseText(scenario.text),
+    })),
+    closingNote: page.closingNote
+      ? normalizePortugueseText(page.closingNote)
+      : page.closingNote,
+    faqs: page.faqs?.map((faq) => ({
+      question: normalizePortugueseText(faq.question),
+      answer: normalizePortugueseText(faq.answer),
+    })),
+  };
+}
+
+function makeLocalizedLandingSpecific(page: LandingPage, locale: string): LandingPage {
+  const separator = locale === "zh" ? "：" : ": ";
+
+  return {
+    ...page,
+    modules: contextualizeLandingList(page.title, page.modules, locale) ?? [],
+    priceFactors: contextualizeLandingList(page.title, page.priceFactors, locale) ?? [],
+    heroPoints: contextualizeLandingList(page.title, page.heroPoints, locale),
+    audience: contextualizeLandingList(page.title, page.audience, locale),
+    outcomes: contextualizeLandingList(page.title, page.outcomes, locale),
+    scenarios: page.scenarios?.map((scenario, index) => index === 0
+      ? { ...scenario, title: `${page.title}${separator}${scenario.title}` }
+      : scenario),
+    closingNote: page.closingNote
+      ? `${page.title}${separator}${page.closingNote}`
+      : page.closingNote,
+  };
+}
+
 export function getLocalizedLandingPage(page: LandingPage, locale: string): LandingPage {
-  if (locale === "de") return germanTranslatedLandingSlugs.includes(page.slug) ? germanDefaults(page) : page;
-  if (locale === "fr") return frenchTranslatedLandingSlugs.includes(page.slug) ? frenchDefaults(page) : page;
-  if (locale === "es") return spanishTranslatedLandingSlugs.includes(page.slug) ? spanishDefaults(page) : page;
-  if (locale === "ar") return arabicMainLandingSlugs.includes(page.slug) ? arabicDefaults(page) : page;
-  if (locale === "ru") return russianMainLandingSlugs.includes(page.slug) ? russianDefaults(page) : page;
-  if (locale === "pt") return portugueseMainLandingSlugs.includes(page.slug) ? portugueseDefaults(page) : page;
-  if (locale === "it") return italianMainLandingSlugs.includes(page.slug) ? italianDefaults(page) : page;
-  if (locale === "nl") return dutchMainLandingSlugs.includes(page.slug) ? dutchDefaults(page) : page;
-  if (locale === "zh") return chineseMainLandingSlugs.includes(page.slug) ? chineseDefaults(page) : page;
+  if (locale === "de") return makeLocalizedLandingSpecific(germanTranslatedLandingSlugs.includes(page.slug) ? germanDefaults(page) : page, locale);
+  if (locale === "fr") return makeLocalizedLandingSpecific(frenchTranslatedLandingSlugs.includes(page.slug) ? frenchDefaults(page) : page, locale);
+  if (locale === "es") return makeLocalizedLandingSpecific(spanishTranslatedLandingSlugs.includes(page.slug) ? spanishDefaults(page) : page, locale);
+  if (locale === "ar") return makeLocalizedLandingSpecific(arabicMainLandingSlugs.includes(page.slug) ? arabicDefaults(page) : page, locale);
+  if (locale === "ru") return makeLocalizedLandingSpecific(russianMainLandingSlugs.includes(page.slug) ? russianDefaults(page) : page, locale);
+  if (locale === "pt") return normalizePortugueseLanding(makeLocalizedLandingSpecific(portugueseMainLandingSlugs.includes(page.slug) ? portugueseDefaults(page) : page, locale));
+  if (locale === "it") return makeLocalizedLandingSpecific(italianMainLandingSlugs.includes(page.slug) ? italianDefaults(page) : page, locale);
+  if (locale === "nl") return makeLocalizedLandingSpecific(dutchMainLandingSlugs.includes(page.slug) ? dutchDefaults(page) : page, locale);
+  if (locale === "zh") return makeLocalizedLandingSpecific(chineseMainLandingSlugs.includes(page.slug) ? chineseDefaults(page) : page, locale);
   if (locale !== "en") return page;
-  return englishMainLandingSlugs.includes(page.slug) ? englishDefaults(page) : page;
+  return makeLocalizedLandingSpecific(englishMainLandingSlugs.includes(page.slug) ? englishDefaults(page) : page, locale);
 }
 
 export function getLocalizedLandingFaqs(page: LandingPage, locale: string) {
@@ -10136,7 +10250,7 @@ export function getLocalizedLandingFaqs(page: LandingPage, locale: string) {
       },
       {
         question: "Может ли система расти после первой версии?",
-        answer: "Да. Сначала можно сдать первую usable версию, а новые модули планировать после реального использования.",
+        answer: "Да. Сначала можно сдать первую рабочую версию, а новые модули планировать после реального использования.",
       },
     ];
   }

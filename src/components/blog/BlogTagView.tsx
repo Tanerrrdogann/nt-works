@@ -1,18 +1,23 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import LocalizedLink from "@/components/i18n/LocalizedLink";
-import { blogPosts } from "@/data/blog";
-import { normalizeBlogPath } from "@/data/blog-content-system";
-import { servicesData } from "@/data/services";
-import { getLocalizedBlogPost, getLocalizedBlogPosts } from "@/data/i18n/blog-en";
-import { getLocalizedServices } from "@/data/i18n/services-en";
-import { getLocaleFromPath } from "@/lib/i18n";
+import { useCurrentLocale } from "@/components/i18n/LocaleProvider";
+import type { BlogPostType, ServiceType } from "@/types";
 
-const originalTags = Array.from(new Set(blogPosts.flatMap((post) => post.tags)));
-
-export default function BlogTagView({ tagSlug }: { tagSlug: string }) {
-  const locale = getLocaleFromPath(usePathname() ?? "/");
+export default function BlogTagView({
+  tagSlug,
+  current,
+  posts,
+  categories,
+  relatedServices,
+}: {
+  tagSlug: string;
+  current: string;
+  posts: BlogPostType[];
+  categories: string[];
+  relatedServices: ServiceType[];
+}) {
+  const locale = useCurrentLocale();
   const isEnglish = locale === "en";
   const isGerman = locale === "de";
   const isFrench = locale === "fr";
@@ -23,24 +28,6 @@ export default function BlogTagView({ tagSlug }: { tagSlug: string }) {
   const isItalian = locale === "it";
   const isDutch = locale === "nl";
   const isChinese = locale === "zh";
-  const originalTag = originalTags.find((item) => normalizeBlogPath(item) === tagSlug);
-  if (!originalTag) return null;
-
-  const originalPosts = blogPosts.filter((post) => post.tags.includes(originalTag));
-  const posts = getLocalizedBlogPosts(originalPosts, locale);
-  const localizedServices = getLocalizedServices(servicesData, locale);
-  const originalTagIndex = originalPosts[0]?.tags.indexOf(originalTag) ?? -1;
-  const localizedTag =
-    originalTagIndex >= 0 && (isEnglish || isGerman || isFrench || isSpanish || isArabic || isRussian || isPortuguese || isItalian || isDutch || isChinese)
-      ? getLocalizedBlogPost(originalPosts[0], locale).tags[originalTagIndex + 1]
-      : undefined;
-  const current = localizedTag ?? originalTag;
-  const categories = Array.from(new Set(posts.map((post) => post.category)));
-  const relatedServices = Array.from(new Set(originalPosts.flatMap((post) => post.relatedServices)))
-    .map((serviceSlug) => localizedServices.find((service) => service.slug === serviceSlug))
-    .filter((service): service is NonNullable<typeof service> => Boolean(service))
-    .slice(0, 4);
-
   const text = isEnglish ? {
     back: "← Back to Blog",
     kicker: "Blog Tag",

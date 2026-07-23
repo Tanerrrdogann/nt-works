@@ -1,82 +1,82 @@
 "use client";
 
 import { RevealItem } from "@/components/animations/PageReveal";
+import { useCurrentLocale } from "@/components/i18n/LocaleProvider";
 import ProjectDemoGrid from "@/components/projects/ProjectDemoGrid";
-import { getProjectMeta } from "@/data/project-meta";
-import { projectsData } from "@/data/projects";
-import { getLocalizedProjects } from "@/data/i18n/projects-en";
-import { getLocaleFromPath } from "@/lib/i18n";
-import { usePathname } from "next/navigation";
+import type { ProjectType } from "@/types";
 
 const copy = {
   tr: {
-    title: "Canlı Örnekler ve",
+    title: "Proje Örnekleri ve",
     muted: "Uyarlanabilir Sistem Kapsamları",
-    intro: "Canlı inceleyebileceğiniz uyarlanabilir web sitesi ve yazılım örnekleri. Gerçek müşteri işleri ayrı Portföy sayfasında gösterilir.",
-    note: "Bu sayfadaki sistemler demo/önizleme amaçlıdır ve gerçek müşteri işi gibi gösterilmez. Tamamlanan işler ve müşteri değerlendirmeleri Portföy sayfasında yer alır.",
+    intro: "Canlı demoları, bakımdaki örnekleri ve henüz geliştirilmesi planlanan sistem kapsamlarını durum etiketleriyle karşılaştırın.",
+    note: "Her kart gerçek yayın durumunu açıkça gösterir. Planlanan kartlar canlı demo değildir; tamamlanan müşteri işleri ve değerlendirmeler ayrı Portföy sayfasında yer alır.",
   },
   en: {
-    title: "Live Examples and",
+    title: "Project Examples and",
     muted: "Adaptable System Scopes",
-    intro: "Adaptable website and software examples you can review live. Completed client work is shown separately on the Portfolio page.",
-    note: "The systems on this page are demo and preview examples. They are not presented as completed client projects. Completed work and customer reviews are listed on the Portfolio page.",
+    intro: "Compare live demos, examples under maintenance, and planned system scopes using clear availability labels.",
+    note: "Every card states its real publication status. Planned cards are not live demos; completed client work and reviews are listed separately on the Portfolio page.",
   },
   de: {
-    title: "Live-Beispiele und",
+    title: "Projektbeispiele und",
     muted: "anpassbare Systemumfänge",
-    intro: "Anpassbare Website- und Softwarebeispiele, die Sie live prüfen können. Abgeschlossene Kundenarbeiten werden separat auf der Portfolio-Seite gezeigt.",
-    note: "Die Systeme auf dieser Seite sind Demo- und Vorschaubeispiele. Sie werden nicht als abgeschlossene Kundenprojekte dargestellt. Abgeschlossene Arbeiten und Kundenbewertungen stehen im Portfolio.",
+    intro: "Vergleichen Sie Live-Demos, Beispiele in Wartung und geplante Systemumfänge anhand klarer Statusangaben.",
+    note: "Jede Karte zeigt den tatsächlichen Veröffentlichungsstatus. Geplante Karten sind keine Live-Demos; abgeschlossene Kundenarbeiten stehen separat im Portfolio.",
   },
   fr: {
-    title: "Exemples live et",
+    title: "Exemples de projets et",
     muted: "périmètres système adaptables",
-    intro: "Exemples de sites web et logiciels adaptables que vous pouvez consulter en live. Les travaux client terminés sont présentés séparément sur la page Portfolio.",
-    note: "Les systèmes de cette page sont des exemples de démonstration et de prévisualisation. Ils ne sont pas présentés comme des projets client terminés. Les travaux terminés et avis clients sont listés sur la page Portfolio.",
+    intro: "Comparez les démos live, les exemples en maintenance et les périmètres planifiés grâce à des statuts clairs.",
+    note: "Chaque carte indique son état réel de publication. Les cartes planifiées ne sont pas des démos live ; les travaux clients terminés sont présentés dans le Portfolio.",
   },
   es: {
-    title: "Ejemplos en vivo y",
+    title: "Ejemplos de proyectos y",
     muted: "alcances de sistema adaptables",
-    intro: "Ejemplos adaptables de sitios web y software que puedes revisar en vivo. Los trabajos reales de clientes se muestran por separado en la página de Portafolio.",
-    note: "Los sistemas de esta página son ejemplos demo o de vista previa. No se presentan como proyectos de cliente terminados. Los trabajos completados y las reseñas de clientes están en Portafolio.",
+    intro: "Compara demos en vivo, ejemplos en mantenimiento y alcances planificados mediante etiquetas de estado claras.",
+    note: "Cada tarjeta muestra su estado real de publicación. Las tarjetas planificadas no son demos en vivo; los trabajos de clientes terminados están en el Portafolio.",
   },
   ar: {
-    title: "أمثلة حية و",
+    title: "أمثلة المشاريع و",
     muted: "نطاقات أنظمة قابلة للتكييف",
-    intro: "أمثلة قابلة للتكييف لمواقع وأنظمة برمجية يمكن مراجعتها مباشرة. أعمال العملاء المكتملة تظهر بشكل منفصل في صفحة البورتفوليو.",
-    note: "الأنظمة في هذه الصفحة هي أمثلة demo ومعاينة، ولا تعرض كأنها مشاريع عملاء مكتملة. الأعمال المكتملة وتقييمات العملاء موجودة في صفحة البورتفوليو.",
+    intro: "قارن بين النماذج الحية والأمثلة قيد الصيانة ونطاقات الأنظمة المخطط لها عبر حالات واضحة.",
+    note: "تعرض كل بطاقة حالة النشر الحقيقية. البطاقات المخططة ليست نماذج حية، وتوجد أعمال العملاء المكتملة في صفحة البورتفوليو.",
   },
   ru: {
-    title: "Live examples и",
-    muted: "адаптируемые system scopes",
-    intro: "Адаптируемые примеры web-сайтов и software systems, которые можно изучить live. Завершенные клиентские работы отдельно показаны на странице Portfolio.",
-    note: "Системы на этой странице являются demo и preview examples. Они не показываются как завершенные клиентские проекты. Завершенные работы и отзывы клиентов находятся на странице Portfolio.",
+    title: "Примеры проектов и",
+    muted: "адаптируемые объемы систем",
+    intro: "Сравните живые демо, примеры на обслуживании и запланированные системы по понятным статусам.",
+    note: "Каждая карточка показывает реальный статус публикации. Запланированные карточки не являются живыми демо; завершенные клиентские работы находятся в Портфолио.",
   },
   pt: {
-    title: "Exemplos ao vivo e",
+    title: "Exemplos de projetos e",
     muted: "escopos de sistema adaptáveis",
-    intro: "Exemplos adaptáveis de sites e sistemas que você pode revisar ao vivo. Trabalhos reais de clientes aparecem separadamente na página de Portfólio.",
-    note: "Os sistemas desta página são exemplos demo e prévia. Eles não são apresentados como projetos de cliente concluídos. Trabalhos concluídos e avaliações de clientes ficam no Portfólio.",
+    intro: "Compare demos ao vivo, exemplos em manutenção e escopos planejados por meio de etiquetas de status claras.",
+    note: "Cada cartão mostra seu estado real de publicação. Cartões planejados não são demos ao vivo; trabalhos de clientes concluídos ficam no Portfólio.",
+  },
+  it: {
+    title: "Esempi di progetto e",
+    muted: "ambiti di sistema adattabili",
+    intro: "Confronta demo live, esempi in manutenzione e ambiti pianificati tramite etichette di stato chiare.",
+    note: "Ogni scheda mostra il reale stato di pubblicazione. Le schede pianificate non sono demo live; i lavori cliente completati sono nel Portfolio.",
   },
   nl: {
-    title: "Live voorbeelden en",
+    title: "Projectvoorbeelden en",
     muted: "aanpasbare systeemscopes",
-    intro: "Aanpasbare website- en softwarevoorbeelden die je live kunt bekijken. Afgeronde klantprojecten staan apart op de portfoliopagina.",
-    note: "De systemen op deze pagina zijn demo- en previewvoorbeelden. Ze worden niet gepresenteerd als afgeronde klantprojecten. Afgerond werk en klantbeoordelingen staan in het portfolio.",
+    intro: "Vergelijk live demo’s, voorbeelden in onderhoud en geplande systeemscopes met duidelijke statuslabels.",
+    note: "Elke kaart toont de echte publicatiestatus. Geplande kaarten zijn geen live demo’s; afgeronde klantprojecten staan apart in het Portfolio.",
   },
   zh: {
-    title: "在线示例与",
+    title: "项目案例与",
     muted: "可定制系统范围",
-    intro: "可在线查看的网站与软件系统示例。已完成的真实客户项目会单独展示在作品集页面。",
-    note: "本页系统用于演示和预览，不会被包装成已完成客户项目。真实交付案例和客户评价位于作品集页面。",
+    intro: "通过清晰状态标签比较在线演示、维护中案例和计划中的系统范围。",
+    note: "每张卡片都会标明真实发布状态。计划中的卡片不是在线演示；已完成客户项目会单独展示在作品集页面。",
   },
 };
 
-export default function ProjectsPageView() {
-  const pathname = usePathname();
-  const locale = getLocaleFromPath(pathname ?? "/");
-  const text = locale === "en" ? copy.en : locale === "de" ? copy.de : locale === "fr" ? copy.fr : locale === "es" ? copy.es : locale === "ar" ? copy.ar : locale === "ru" ? copy.ru : locale === "pt" ? copy.pt : locale === "nl" ? copy.nl : locale === "zh" ? copy.zh : copy.tr;
-  const localizedProjects = getLocalizedProjects(projectsData, locale);
-  const demoProjects = localizedProjects.filter((project) => getProjectMeta(project.slug).projectKind !== "client");
+export default function ProjectsPageView({ projects }: { projects: ProjectType[] }) {
+  const locale = useCurrentLocale();
+  const text = copy[locale];
 
   return (
     <main className="content-page pt-32 pb-24 px-6 text-white max-w-7xl mx-auto">
@@ -90,7 +90,7 @@ export default function ProjectsPageView() {
         </div>
       </RevealItem>
 
-      <ProjectDemoGrid projects={demoProjects} />
+      <ProjectDemoGrid projects={projects} />
     </main>
   );
 }

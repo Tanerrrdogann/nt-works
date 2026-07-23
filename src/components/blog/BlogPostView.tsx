@@ -1,19 +1,113 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
-import { usePathname } from "next/navigation";
 import LocalizedLink from "@/components/i18n/LocalizedLink";
+import { useCurrentLocale } from "@/components/i18n/LocaleProvider";
 import { normalizeBlogPath } from "@/data/blog-content-system";
-import { blogPosts, getBlogPost } from "@/data/blog";
-import { landingPages } from "@/data/landing-pages";
-import { servicesData } from "@/data/services";
-import { getLocalizedBlogPost, getLocalizedBlogPosts } from "@/data/i18n/blog-en";
-import { getLocalizedLandingPage } from "@/data/i18n/landing-pages-en";
-import { getLocalizedServices } from "@/data/i18n/services-en";
-import { getLocaleFromPath } from "@/lib/i18n";
+import type { BlogPostType, ProjectType, ServiceType } from "@/types";
 
-export default function BlogPostView({ slug }: { slug: string }) {
-  const locale = getLocaleFromPath(usePathname() ?? "/");
+type RelatedLandingPage = {
+  slug: string;
+  title: string;
+  description: string;
+};
+
+const editorialCopy = {
+  tr: {
+    label: "İçerik yaklaşımı",
+    note: "Bu rehber; gerçek proje kapsamları, uygulama kararları ve teslim deneyimlerinden yararlanılarak hazırlanır. Fiyat ve teknik kapsam, işletmenin verisi incelendikten sonra netleşir.",
+    projects: "İlgili proje örnekleri",
+    projectNote: "Rehberde anlatılan kararların proje veya demo kapsamındaki karşılıklarını inceleyin.",
+    projectView: "Projeyi incele",
+  },
+  en: {
+    label: "Editorial approach",
+    note: "This guide draws on real project scopes, implementation decisions, and delivery experience. Pricing and technical scope are confirmed after reviewing the business data.",
+    projects: "Related project examples",
+    projectNote: "Review how the decisions discussed in this guide appear in a project or demo scope.",
+    projectView: "Review project",
+  },
+  de: {
+    label: "Redaktioneller Ansatz",
+    note: "Dieser Leitfaden basiert auf realen Projektumfängen, Umsetzungsentscheidungen und Liefererfahrung. Preis und Technik werden nach Prüfung der Geschäftsdaten geklärt.",
+    projects: "Verwandte Projektbeispiele",
+    projectNote: "Sehen Sie, wie die beschriebenen Entscheidungen in einem Projekt- oder Demo-Umfang umgesetzt werden.",
+    projectView: "Projekt ansehen",
+  },
+  fr: {
+    label: "Approche éditoriale",
+    note: "Ce guide s’appuie sur des périmètres réels, des décisions d’implémentation et l’expérience de livraison. Prix et technique sont confirmés après examen des données métier.",
+    projects: "Exemples de projets liés",
+    projectNote: "Voyez comment les décisions du guide se traduisent dans un projet ou une démo.",
+    projectView: "Voir le projet",
+  },
+  es: {
+    label: "Enfoque editorial",
+    note: "Esta guía se basa en alcances reales, decisiones de implementación y experiencia de entrega. El precio y el alcance técnico se confirman tras revisar los datos del negocio.",
+    projects: "Ejemplos de proyectos relacionados",
+    projectNote: "Revisa cómo las decisiones de esta guía aparecen en el alcance de un proyecto o demo.",
+    projectView: "Revisar proyecto",
+  },
+  ar: {
+    label: "منهج إعداد المحتوى",
+    note: "يستند هذا الدليل إلى نطاقات مشاريع حقيقية وقرارات تنفيذ وخبرة تسليم. يحدد السعر والنطاق التقني بعد مراجعة بيانات العمل.",
+    projects: "أمثلة مشاريع مرتبطة",
+    projectNote: "راجع كيف تظهر القرارات المذكورة في نطاق مشروع أو نموذج تجريبي.",
+    projectView: "راجع المشروع",
+  },
+  ru: {
+    label: "Редакционный подход",
+    note: "Руководство основано на реальных объемах проектов, решениях по реализации и опыте сдачи. Цена и технический объем уточняются после анализа бизнес-данных.",
+    projects: "Связанные примеры проектов",
+    projectNote: "Посмотрите, как описанные решения отражены в проекте или демо.",
+    projectView: "Посмотреть проект",
+  },
+  pt: {
+    label: "Abordagem editorial",
+    note: "Este guia usa escopos reais, decisões de implementação e experiência de entrega. Preço e escopo técnico são confirmados após revisar os dados do negócio.",
+    projects: "Exemplos de projetos relacionados",
+    projectNote: "Veja como as decisões discutidas aparecem no escopo de um projeto ou demo.",
+    projectView: "Revisar projeto",
+  },
+  it: {
+    label: "Approccio editoriale",
+    note: "Questa guida si basa su ambiti reali, decisioni di implementazione ed esperienza di consegna. Prezzo e ambito tecnico sono confermati dopo l’analisi dei dati aziendali.",
+    projects: "Esempi di progetti correlati",
+    projectNote: "Scopri come le decisioni descritte compaiono nell’ambito di un progetto o di una demo.",
+    projectView: "Vedi progetto",
+  },
+  nl: {
+    label: "Redactionele aanpak",
+    note: "Deze gids gebruikt echte projectscopes, implementatiekeuzes en opleverervaring. Prijs en technische scope worden bevestigd na beoordeling van de bedrijfsgegevens.",
+    projects: "Gerelateerde projectvoorbeelden",
+    projectNote: "Bekijk hoe de besproken keuzes terugkomen in een project- of demoscope.",
+    projectView: "Bekijk project",
+  },
+  zh: {
+    label: "内容编写方式",
+    note: "本指南参考真实项目范围、实施决策与交付经验。价格和技术范围会在审查业务数据后确定。",
+    projects: "相关项目案例",
+    projectNote: "查看本指南讨论的决策如何体现在项目或演示范围中。",
+    projectView: "查看项目",
+  },
+};
+
+export default function BlogPostView({
+  post,
+  tagLinks,
+  relatedBlogPosts,
+  relatedServices,
+  relatedLandingPages,
+  relatedProjects,
+}: {
+  post: BlogPostType;
+  tagLinks: Array<{ label: string; slug: string }>;
+  relatedBlogPosts: BlogPostType[];
+  relatedServices: ServiceType[];
+  relatedLandingPages: RelatedLandingPage[];
+  relatedProjects: ProjectType[];
+}) {
+  const locale = useCurrentLocale();
   const isEnglish = locale === "en";
   const isGerman = locale === "de";
   const isFrench = locale === "fr";
@@ -24,24 +118,8 @@ export default function BlogPostView({ slug }: { slug: string }) {
   const isItalian = locale === "it";
   const isDutch = locale === "nl";
   const isChinese = locale === "zh";
-  const original = getBlogPost(slug);
-  if (!original) return null;
-
-  const post = getLocalizedBlogPost(original, locale);
-  const localizedPosts = getLocalizedBlogPosts(blogPosts, locale);
-  const localizedServices = getLocalizedServices(servicesData, locale);
-  const relatedServices = post.relatedServices
-    .map((serviceSlug) => localizedServices.find((service) => service.slug === serviceSlug))
-    .filter((service): service is NonNullable<typeof service> => Boolean(service));
-  const relatedLandingPages = landingPages
-    .filter((page) => page.relatedBlogSlugs?.includes(post.slug) || post.relatedServices.includes(page.serviceSlug))
-    .map((page) => getLocalizedLandingPage(page, locale))
-    .filter((page) => !(isEnglish || isGerman || isFrench || isSpanish || isArabic || isRussian || isPortuguese || isItalian || isDutch || isChinese) || page.title !== landingPages.find((item) => item.slug === page.slug)?.title)
-    .slice(0, 4);
-  const relatedBlogPosts = localizedPosts
-    .filter((candidate) => candidate.slug !== post.slug && (candidate.category === post.category || candidate.tags.some((tag) => post.tags.includes(tag))))
-    .slice(0, 4);
   const tableOfContents = post.sections.map((section) => ({ id: normalizeBlogPath(section.heading), heading: section.heading }));
+  const editorial = editorialCopy[locale];
 
   const text = isEnglish ? {
     back: "← Back to Blog",
@@ -200,9 +278,13 @@ export default function BlogPostView({ slug }: { slug: string }) {
         <h1 className="text-4xl md:text-6xl font-medium leading-tight tracking-tight">{post.title}</h1>
         <p className="mt-6 max-w-4xl text-lg md:text-xl leading-8 text-gray-400">{post.description}</p>
         <div className="mt-5 flex flex-wrap gap-2">
-          {post.tags.slice(0, 6).map((tag) => <LocalizedLink key={tag} href={`/blog/tag/${normalizeBlogPath(original.tags[post.tags.indexOf(tag)] ?? tag)}`} className="border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-semibold text-gray-400 hover:bg-white/10 hover:text-white">{tag}</LocalizedLink>)}
+          {tagLinks.map((tag) => <LocalizedLink key={tag.slug} href={`/blog/tag/${tag.slug}`} className="border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-semibold text-gray-400 hover:bg-white/10 hover:text-white">{tag.label}</LocalizedLink>)}
         </div>
         <p className="mt-5 text-sm text-gray-500">{text.updated}: {post.updatedAt}</p>
+        <div className="mt-6 max-w-4xl border border-white/10 bg-white/5 p-5">
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-gray-500">{editorial.label}</p>
+          <p className="mt-3 text-sm leading-7 text-gray-400">{editorial.note}</p>
+        </div>
       </div>
 
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_320px]">
@@ -219,6 +301,23 @@ export default function BlogPostView({ slug }: { slug: string }) {
               <h2 className="text-2xl md:text-3xl font-medium text-white">{text.faq}</h2>
               <div className="mt-6 grid gap-4">
                 {post.faqs.map((faq) => <div key={faq.question} className="border border-white/10 bg-[#071225]/55 p-5"><h3 className="font-bold text-white">{faq.question}</h3><p className="mt-3 text-sm leading-7 text-gray-400">{faq.answer}</p></div>)}
+              </div>
+            </section>
+          )}
+
+          {relatedProjects.length > 0 && (
+            <section className="mb-8 border-t border-white/10 pt-8">
+              <h2 className="text-2xl md:text-3xl font-medium text-white">{editorial.projects}</h2>
+              <p className="mt-4 max-w-3xl text-sm leading-7 text-gray-400">{editorial.projectNote}</p>
+              <div className="mt-6 grid gap-4 md:grid-cols-2">
+                {relatedProjects.map((project) => (
+                  <LocalizedLink key={project.slug} href={`/projects/${project.slug}`} className="group border border-white/10 bg-[#071225]/55 p-5 hover:bg-white/10">
+                    <span className="text-xs font-bold uppercase tracking-widest text-gray-500">{project.category}</span>
+                    <span className="mt-3 block text-base font-semibold leading-7 text-white">{project.title}</span>
+                    <span className="mt-3 line-clamp-3 block text-sm leading-6 text-gray-400">{project.shortDesc}</span>
+                    <span className="mt-4 inline-block text-sm font-bold text-gray-300 group-hover:text-white">{editorial.projectView} →</span>
+                  </LocalizedLink>
+                ))}
               </div>
             </section>
           )}
@@ -245,7 +344,7 @@ export default function BlogPostView({ slug }: { slug: string }) {
           <div className="border border-white/10 bg-[#071225]/78 p-6">
             <h2 className="text-xl font-medium text-white">{text.support}</h2>
             <p className="mt-3 text-sm leading-7 text-gray-400">{text.supportDesc}</p>
-            <LocalizedLink href={`/contact?source=blog&topic=${post.slug}`} className="mt-5 inline-flex items-center gap-2 bg-white px-5 py-3 text-sm font-bold text-black hover:bg-gray-200">{text.quote} <ArrowRight size={16} /></LocalizedLink>
+            <LocalizedLink href={`/contact?source=blog&topic=${post.slug}${relatedServices[0] ? `&service=${relatedServices[0].slug}` : ""}`} className="mt-5 inline-flex items-center gap-2 bg-white px-5 py-3 text-sm font-bold text-black hover:bg-gray-200">{text.quote} <ArrowRight size={16} /></LocalizedLink>
           </div>
 
           {relatedServices.length > 0 && <div className="mt-5 border border-white/10 bg-[#071225]/65 p-6"><h2 className="text-sm font-bold uppercase tracking-widest text-gray-500">{text.services}</h2><div className="mt-4 grid gap-3">{relatedServices.map((service) => <LocalizedLink key={service.slug} href={`/services/${service.slug}`} className="block border border-white/10 bg-white/5 p-4 text-sm font-semibold leading-6 text-gray-200 hover:bg-white/10">{service.title}</LocalizedLink>)}</div></div>}

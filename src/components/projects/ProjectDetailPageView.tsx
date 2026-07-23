@@ -2,22 +2,22 @@
 
 import { PageReveal, RevealItem } from "@/components/animations/PageReveal";
 import LocalizedLink from "@/components/i18n/LocalizedLink";
+import { useCurrentLocale } from "@/components/i18n/LocaleProvider";
 import ProjectImageGallery from "@/components/projects/ProjectImageGallery";
-import { getProjectMeta } from "@/data/project-meta";
-import { getLocalizedProjectBySlug, getLocalizedProjectMeta, getLocalizedTestimonial } from "@/data/i18n/projects-en";
-import { getLocaleFromPath } from "@/lib/i18n";
-import type { ProjectType } from "@/types";
+import type { ProjectType, TestimonialType } from "@/types";
 import { CheckCircle2, Code2 } from "lucide-react";
-import { usePathname } from "next/navigation";
+
+type ProjectMeta = {
+  projectKind: "demo" | "client";
+  clientDisplayName?: string;
+  result?: string;
+  testimonialSlug?: string;
+};
 
 type RichProject = ProjectType & {
   descriptionTr?: string;
   demoIncludesTr?: string[];
   demoLimitationsTr?: string[];
-  demoAccounts?: Array<{ role: string; email: string; password: string }>;
-  status?: string;
-  isDemoEnabled?: boolean;
-  demoUrl?: string;
 };
 
 const copy = {
@@ -480,18 +480,115 @@ const chineseDemoInfo = {
   limitations: ["不会展示付款、私人凭据或生产数据", "最终模块会在范围确认后确定"],
 };
 
-export default function ProjectDetailPageView({ slug }: { slug: string }) {
-  const pathname = usePathname();
-  const locale = getLocaleFromPath(pathname ?? "/");
-  const project = getLocalizedProjectBySlug(slug, locale) as RichProject | undefined;
-  if (!project) return null;
+const projectStateCopy = {
+  tr: {
+    maintenance: "Demo bakımda",
+    maintenanceNote: "Bu örnek daha önce yayına alınmıştır; canlı bağlantı şu anda bakım sürecinde olabilir. Kapsam ve uyarlama bilgileri günceldir.",
+    plannedNote: "Bu sayfa henüz canlı bir demo değil; hazırlanması planlanan kapsamı, modülleri ve uyarlama seçeneklerini açıklar.",
+    relatedTitle: "Benzer proje örnekleri",
+    relatedIntro: "Aynı ihtiyacın farklı kapsam ve teknoloji seçeneklerini karşılaştırın.",
+    relatedView: "Projeyi incele",
+  },
+  en: {
+    maintenance: "Demo under maintenance",
+    maintenanceNote: "This example has been published before; its live link may currently be under maintenance. Scope and adaptation details remain current.",
+    plannedNote: "This page is not a live demo yet. It documents the planned scope, modules, and adaptation options.",
+    relatedTitle: "Related project examples",
+    relatedIntro: "Compare different scope and technology approaches for a similar need.",
+    relatedView: "Review project",
+  },
+  de: {
+    maintenance: "Demo in Wartung",
+    maintenanceNote: "Dieses Beispiel war bereits veröffentlicht; der Live-Link kann derzeit gewartet werden. Umfang und Anpassungsdetails sind aktuell.",
+    plannedNote: "Diese Seite ist noch keine Live-Demo. Sie dokumentiert den geplanten Umfang, Module und Anpassungsoptionen.",
+    relatedTitle: "Ähnliche Projektbeispiele",
+    relatedIntro: "Vergleichen Sie unterschiedliche Umfangs- und Technologieansätze für einen ähnlichen Bedarf.",
+    relatedView: "Projekt ansehen",
+  },
+  fr: {
+    maintenance: "Démo en maintenance",
+    maintenanceNote: "Cet exemple a déjà été publié ; son lien live peut être en maintenance. Le périmètre et les adaptations restent à jour.",
+    plannedNote: "Cette page n’est pas encore une démo live. Elle documente le périmètre, les modules et les adaptations planifiés.",
+    relatedTitle: "Exemples de projets similaires",
+    relatedIntro: "Comparez différents périmètres et choix technologiques pour un besoin similaire.",
+    relatedView: "Voir le projet",
+  },
+  es: {
+    maintenance: "Demo en mantenimiento",
+    maintenanceNote: "Este ejemplo ya fue publicado; su enlace puede estar en mantenimiento. El alcance y las opciones de adaptación siguen vigentes.",
+    plannedNote: "Esta página todavía no es una demo en vivo. Documenta el alcance, los módulos y las opciones de adaptación planificados.",
+    relatedTitle: "Ejemplos de proyectos relacionados",
+    relatedIntro: "Compara distintos alcances y enfoques tecnológicos para una necesidad similar.",
+    relatedView: "Revisar proyecto",
+  },
+  ar: {
+    maintenance: "النموذج قيد الصيانة",
+    maintenanceNote: "سبق نشر هذا المثال وقد يكون الرابط الحي قيد الصيانة حاليا. تبقى معلومات النطاق والتخصيص محدثة.",
+    plannedNote: "هذه الصفحة ليست نموذجا حيا بعد؛ بل توثق النطاق والوحدات وخيارات التخصيص المخطط لها.",
+    relatedTitle: "أمثلة مشاريع مشابهة",
+    relatedIntro: "قارن بين نطاقات وخيارات تقنية مختلفة لاحتياج مشابه.",
+    relatedView: "راجع المشروع",
+  },
+  ru: {
+    maintenance: "Демо на обслуживании",
+    maintenanceNote: "Этот пример уже публиковался; сейчас живая ссылка может быть на обслуживании. Объем и варианты адаптации актуальны.",
+    plannedNote: "Эта страница пока не является живым демо. Здесь описаны планируемые функции, модули и варианты адаптации.",
+    relatedTitle: "Похожие примеры проектов",
+    relatedIntro: "Сравните разные варианты объема и технологий для похожей задачи.",
+    relatedView: "Посмотреть проект",
+  },
+  pt: {
+    maintenance: "Demo em manutenção",
+    maintenanceNote: "Este exemplo já foi publicado; o link ao vivo pode estar em manutenção. O escopo e as opções de adaptação continuam atuais.",
+    plannedNote: "Esta página ainda não é uma demo ao vivo. Ela documenta o escopo, os módulos e as opções de adaptação planejados.",
+    relatedTitle: "Exemplos de projetos relacionados",
+    relatedIntro: "Compare diferentes escopos e abordagens tecnológicas para uma necessidade semelhante.",
+    relatedView: "Revisar projeto",
+  },
+  it: {
+    maintenance: "Demo in manutenzione",
+    maintenanceNote: "Questo esempio è già stato pubblicato; il link live può essere in manutenzione. Ambito e opzioni di adattamento restano aggiornati.",
+    plannedNote: "Questa pagina non è ancora una demo live. Documenta ambito, moduli e opzioni di adattamento pianificati.",
+    relatedTitle: "Esempi di progetti correlati",
+    relatedIntro: "Confronta diversi ambiti e approcci tecnologici per un’esigenza simile.",
+    relatedView: "Vedi progetto",
+  },
+  nl: {
+    maintenance: "Demo in onderhoud",
+    maintenanceNote: "Dit voorbeeld is eerder gepubliceerd; de live link kan nu in onderhoud zijn. Scope en aanpassingsopties blijven actueel.",
+    plannedNote: "Deze pagina is nog geen live demo. Ze beschrijft de geplande scope, modules en aanpassingsopties.",
+    relatedTitle: "Vergelijkbare projectvoorbeelden",
+    relatedIntro: "Vergelijk verschillende scopes en technologiekeuzes voor een soortgelijke behoefte.",
+    relatedView: "Bekijk project",
+  },
+  zh: {
+    maintenance: "演示维护中",
+    maintenanceNote: "该案例此前已上线，在线链接目前可能处于维护状态；项目范围和定制说明仍保持更新。",
+    plannedNote: "本页目前还不是在线演示，而是说明计划中的范围、模块与定制方式。",
+    relatedTitle: "相关项目案例",
+    relatedIntro: "比较相似需求下不同的项目范围和技术方案。",
+    relatedView: "查看项目",
+  },
+};
 
+export default function ProjectDetailPageView({
+  project,
+  meta,
+  testimonial,
+  relatedProjects,
+}: {
+  project: RichProject;
+  meta: ProjectMeta;
+  testimonial?: TestimonialType;
+  relatedProjects: ProjectType[];
+}) {
+  const locale = useCurrentLocale();
   const text = locale === "en" ? copy.en : locale === "de" ? copy.de : locale === "fr" ? copy.fr : locale === "es" ? copy.es : locale === "ar" ? copy.ar : locale === "ru" ? copy.ru : locale === "pt" ? copy.pt : locale === "it" ? copy.it : locale === "nl" ? copy.nl : locale === "zh" ? copy.zh : copy.tr;
-  const originalMeta = getProjectMeta(project.slug);
-  const meta = getLocalizedProjectMeta(project.slug, locale);
-  const testimonial = getLocalizedTestimonial(meta.testimonialSlug, locale);
+  const stateText = projectStateCopy[locale];
+  const originalMeta = meta;
   const demoEnabled = project.isDemoEnabled !== false && Boolean(project.demoUrl);
   const isPlannedDemo = originalMeta.projectKind !== "client" && (project.status === "planned" || !demoEnabled);
+  const isMaintenance = originalMeta.projectKind !== "client" && project.status === "maintenance";
   const demoIncludes = locale === "en" ? englishDemoInfo.includes : locale === "de" ? germanDemoInfo.includes : locale === "fr" ? frenchDemoInfo.includes : locale === "es" ? spanishDemoInfo.includes : locale === "ar" ? arabicDemoInfo.includes : locale === "ru" ? russianDemoInfo.includes : locale === "pt" ? portugueseDemoInfo.includes : locale === "it" ? italianDemoInfo.includes : locale === "nl" ? dutchDemoInfo.includes : locale === "zh" ? chineseDemoInfo.includes : project.demoIncludesTr ?? [];
   const demoLimitations = locale === "en" ? englishDemoInfo.limitations : locale === "de" ? germanDemoInfo.limitations : locale === "fr" ? frenchDemoInfo.limitations : locale === "es" ? spanishDemoInfo.limitations : locale === "ar" ? arabicDemoInfo.limitations : locale === "ru" ? russianDemoInfo.limitations : locale === "pt" ? portugueseDemoInfo.limitations : locale === "it" ? italianDemoInfo.limitations : locale === "nl" ? dutchDemoInfo.limitations : locale === "zh" ? chineseDemoInfo.limitations : project.demoLimitationsTr ?? [];
   const hasDemoInfo = originalMeta.projectKind !== "client" && (demoIncludes.length > 0 || demoLimitations.length > 0 || Boolean(project.demoAccounts?.length));
@@ -513,7 +610,7 @@ export default function ProjectDetailPageView({ slug }: { slug: string }) {
           <div className="mb-4 flex flex-wrap items-center gap-3">
             <span className="border border-white/10 bg-white/5 px-3 py-1 text-xs font-bold uppercase tracking-widest text-gray-400">{project.category}</span>
             <span className="border border-white/10 bg-[#071225]/70 px-3 py-1 text-xs font-bold uppercase tracking-widest text-gray-500">
-              {originalMeta.projectKind === "client" ? text.client : text.demo}
+              {originalMeta.projectKind === "client" ? text.client : isMaintenance ? stateText.maintenance : isPlannedDemo ? text.planned : text.demo}
             </span>
           </div>
           <h1 className="text-4xl md:text-6xl font-medium mb-6 leading-tight">{project.title}</h1>
@@ -529,10 +626,15 @@ export default function ProjectDetailPageView({ slug }: { slug: string }) {
                 {isPlannedDemo ? text.planned : text.live}
               </button>
             )}
-            <LocalizedLink href={`/contact?project=${project.slug}`} className="border border-white/20 text-white px-6 py-3 font-medium hover:bg-white/10 transition-colors">
+            <LocalizedLink href={`/contact?project=${project.slug}&source=project-detail`} className="border border-white/20 text-white px-6 py-3 font-medium hover:bg-white/10 transition-colors">
               {text.request}
             </LocalizedLink>
           </div>
+          {(isPlannedDemo || isMaintenance) && (
+            <p className="mt-5 max-w-3xl border-l-2 border-white/20 pl-4 text-sm leading-6 text-gray-500">
+              {isPlannedDemo ? stateText.plannedNote : stateText.maintenanceNote}
+            </p>
+          )}
         </div>
       </RevealItem>
 
@@ -713,6 +815,27 @@ export default function ProjectDetailPageView({ slug }: { slug: string }) {
           ))}
         </div>
       </RevealItem>
+
+      {relatedProjects.length > 0 && (
+        <RevealItem className="mt-10 border-t border-white/10 pt-8">
+          <h2 className="text-2xl md:text-3xl font-medium">{stateText.relatedTitle}</h2>
+          <p className="mt-3 max-w-3xl text-sm leading-7 text-gray-500">{stateText.relatedIntro}</p>
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            {relatedProjects.map((relatedProject) => (
+              <LocalizedLink
+                key={relatedProject.slug}
+                href={`/projects/${relatedProject.slug}`}
+                className="group border border-white/10 bg-[#071225]/55 p-5 transition-colors hover:border-white/30"
+              >
+                <p className="text-xs font-bold uppercase tracking-widest text-gray-500">{relatedProject.category}</p>
+                <h3 className="mt-3 text-lg font-medium text-white">{relatedProject.title}</h3>
+                <p className="mt-3 line-clamp-3 text-sm leading-6 text-gray-500">{relatedProject.shortDesc}</p>
+                <span className="mt-5 inline-block text-sm font-bold text-gray-300 group-hover:text-white">{stateText.relatedView} →</span>
+              </LocalizedLink>
+            ))}
+          </div>
+        </RevealItem>
+      )}
     </PageReveal>
   );
 }
